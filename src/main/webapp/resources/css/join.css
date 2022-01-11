@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+html,body{
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+main{
+    height: 100vh;
+    font-family: 'OTWelcomeRA';
+    padding-bottom: 10%;
+    padding: 7%;
+}
+
+main .join-wrap{
+    width: 68%;
+    margin:auto;
+    /* border: 1px solid black; */
+    padding: 50px;
+    height: 100%;
+  
+}
+
+main .join-wrap .join-title{
+    font-family: OTWelcomeBA;
+    font-size: 30px;
+}
+
+main .join-wrap .addressDiv label{
+    display: block;
+}
+main .join-wrap .addressDiv #inputAddress1{
+    width:90%;
+    display: inline;
+}
+
+main .join-wrap #findAddress{
+    background-color: #24a6a4;
+    border: 1px solid #fff;
+}
+.btnDiv{
+    display: flex;
+    height: 200px;
+    justify-content: center;  
+    align-items: center;
+
+}
+.btnDiv #joinBtn{
+    width:30%;
+    background-color: #24a6a4;
+    height: 70px;
+    border-radius: 10px 10px 10px 10px;
+    color: #fff;
+    
+}
+
+.btnDiv #backBtn{
+    width:30%;
+    height: 70px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid gray;
+    
+}

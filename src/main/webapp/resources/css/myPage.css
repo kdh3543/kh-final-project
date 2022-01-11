@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    height : auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+/* 메인  */
+main {
+    height: 1000px;
+    margin-top: 10%;
+    width:100%;
+}
+
+main div {
+    border:1px solid black;
+}
+.section1{
+    height: 30%;
+}
+.section2{
+    height: 70%;
+}
+.top-Conatiner {
+    height: 50%;
+}
+.top-Container .left-Container {
+    height: 30%;
+}
+.img-Container i {
+    border: 1px solid black;
+}

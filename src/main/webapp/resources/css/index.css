@@ -1,0 +1,252 @@
+* {
+    box-sizing: border-box;
+}
+
+html,body{
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+/* header */
+header{
+    width: 100%; 
+    height: 200px; 
+    justify-content: flex-end;
+    background-color: #24a6a4;
+    top:0;
+    z-index: 2;
+    position: fixed;
+    border-bottom-right-radius: 100px;
+}
+header .header_Container{
+    display: flex;
+    justify-content: flex-end;
+}
+header .header_list {
+    list-style: none;
+    display: flex;
+    padding-left: 0;
+  
+}
+
+header .header_list li {
+    padding: 12px 12px;
+    
+}
+header .header_list li:nth-child(1) a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+header .header_list li:nth-child(2) a{
+    text-decoration: none;
+    color: #f8d200;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+
+header .div-wrap{
+    display: flex;
+    justify-content:center;
+
+}
+
+header .nav_div{
+    width: 80%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-family: 'SBAggroB';
+    font-size: 35px;
+    color: #fff;
+    display: flex;
+
+}
+header .logo a {
+    text-decoration: none;
+    color: #fff;
+}
+.searchContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+.searchContainer .div-wrap2 {
+    display: flex;
+    justify-content: flex-start;
+    width: 52%;
+}
+
+.pContainer{
+    display: flex;
+    justify-content: center;
+}
+.pContainer p{
+    font-size: 20px;
+    font-family: 'OTWelcomeRA' ;
+    font-weight: 800;
+    padding-top: 10px;
+}
+.searchBar{
+    text-align: center; 
+    height: 55px;
+    width: 60%;
+    margin-left: 10px;
+    display: flex;
+}
+ .searchBar div:first-child{
+    width: 85%;
+    height: 60px;
+}
+
+.searchBar div:last-child button{
+    border: none;
+    background-color: transparent;
+}
+.searchBar div:last-child button .fas{
+    height: 5px;
+    color: #fff;
+}
+.searchBar .seacrh { 
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+}
+/* 카테고리 */
+.c01-content,.c02-content,.c03-content{
+    display: none;
+    width: 100px;
+    height: 100px;
+    translate:(157px, -1px);
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    z-index: 1000;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+}
+
+ .rightList .btn-sell, .btn-myshop, .btn-talk{
+    font-family:'OTWelcomeRA';
+    font-size: 17px;
+    font-weight: 500;
+    color:  rgb(33, 33, 33);
+    padding-right: 15px;
+    padding-left: 10px;
+    text-decoration: none;
+}
+/* 메인  */
+main{
+    /* height: 100vh; */
+    min-height: 100%;
+    margin-top: 10%;
+    padding-bottom: 220px;
+
+    
+}
+main .container {
+    padding: 0px;
+    height: 200px;
+    margin: 0px;
+
+}
+
+main .container .div-wrap2{
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    justify-content:flex-start;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+main .container .div-wrap2 .rightList{
+    margin-left: 20px;
+    line-height: 38px;
+}
+main .container section{
+    width:90%;
+}
+main .middle-div {
+    display: flex;
+    height: 100%;
+    padding: 25px;
+}
+section article{
+    height: 100%;
+    padding-top: 50px;
+    width: 100%;
+}
+section article .article_title{
+    font-size: 30px;
+    font-family: "OTWelcomeRA";
+    font-weight: 800;
+    padding: 8px 12px;
+}
+
+/* 메인 - 상품섹션  */
+.imgBox{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 1%;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    margin: auto;
+    flex-direction: row;
+}
+
+.imgBox a {
+    border: 1px solid gray;
+    padding: 1%;
+    margin:1%;
+    
+}
+.imgBox .date {
+    text-align: right;
+    color: #aaa69d;
+}
+/* 메인 - 플로팅바  */
+aside {
+    border: 1px solid black; 
+    width: 20%;
+    height: 500px;
+    margin-left: 10px;
+    position: sticky;
+    top:0;
+}
+aside .upTop{
+    width: 100%;
+    height: 100px;
+}
+/* footer */
+footer{
+    border-top: 1px solid #aaa69d; 
+    height:150px;
+    background-color: #f0f0f0;
+    font-family: 'OTWelcomeRA';
+    text-align: center;
+    color:#aaa69d;
+    position: absolute;
+    width: 100%;
+}
+footer .footer-box {
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 10px 0px 3px 1px #aaa69d;
+    height: 100%;
+}

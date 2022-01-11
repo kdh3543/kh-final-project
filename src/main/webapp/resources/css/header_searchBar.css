@@ -1,0 +1,110 @@
+
+/* header - 검색이 같이 있는 */
+header{
+    width: 100%; 
+    height: 200px; 
+    justify-content: flex-end;
+    background-color: #24a6a4;
+    top:0;
+    border-bottom-right-radius: 100px;
+}
+header .header_Container{
+    display: flex;
+    justify-content: flex-end;
+}
+header .header_list {
+    list-style: none;
+    display: flex;
+    padding-left: 0;
+  
+}
+
+header .header_list li {
+    padding: 12px 12px;
+    
+}
+header .header_list li:nth-child(1) a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+header .header_list li:nth-child(2) a{
+    text-decoration: none;
+    color: #f8d200;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+
+header .div-wrap{
+    display: flex;
+    justify-content:center;
+
+}
+
+header .nav_div{
+    width: 80%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-family: 'SBAggroB';
+    font-size: 35px;
+    color: #fff;
+    display: flex;
+
+}
+header .logo a {
+    text-decoration: none;
+    color: #fff;
+}
+.searchContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+.searchContainer .div-wrap2 {
+    display: flex;
+    justify-content: flex-start;
+    width: 52%;
+}
+
+.pContainer{
+    display: flex;
+    justify-content: center;
+}
+.pContainer p{
+    font-size: 20px;
+    font-family: 'OTWelcomeRA' ;
+    font-weight: 800;
+    padding-top: 10px;
+}
+.searchBar{
+    text-align: center; 
+    height: 55px;
+    width: 60%;
+    margin-left: 10px;
+    display: flex;
+}
+ .searchBar div:first-child{
+    width: 85%;
+    height: 60px;
+}
+
+.searchBar div:last-child button{
+    border: none;
+    background-color: transparent;
+}
+.searchBar div:last-child button .fas{
+    height: 5px;
+    color: #fff;
+}
+.searchBar .seacrh { 
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 10px 10px;
+    border: none;
+}
