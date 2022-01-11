@@ -19,22 +19,23 @@
         crossorigin="anonymous"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="/css/font.css">
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/header_searchBar.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
        <!--  Header -->
        <header>
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signin.jsp">로그인</a></li>
-                <li><a href="join.jsp">회원가입</a></li>
+                <li><a href="signIn">로그인</a></li>
+                <li><a href="join">회원가입</a></li>
             </ul>
         </div>
         <div class="div-wrap">
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="#">00마켓</a>
+                    <a href="/">00마켓</a>
                 </div>
                 <div class="searchBar">
                     <div class="input-group mb-3">

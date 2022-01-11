@@ -32,15 +32,15 @@
     <header>
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signin.jsp">로그인</a></li>
-                <li><a href="join.jsp">회원가입</a></li>
+                <li><a href="signIn">로그인</a></li>
+                <li><a href="join">회원가입</a></li>
             </ul>
         </div>
         <div class="div-wrap">
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="index.jsp">00마켓</a>
+                    <a href="/">00마켓</a>
                 </div>
                 <div class="searchBar">
                     <div class="input-group mb-3">
@@ -102,7 +102,7 @@
                 <a href="#" class="btn-sell">
                     <i class="fas fa-dollar-sign fa-2x"></i> 판매하기 </a>
                 |
-                <a href="myPage.jsp" class="btn-myshop">
+                <a href="myPage" class="btn-myshop">
                     <i class="fas fa-store fa-2x"></i> 내상점 </a>
                 |
                 <a href="#" class="btn-talk">
@@ -115,13 +115,13 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner" style="height: 30vh;">
                         <div class="carousel-item active">
-                            <img src="/image/banner4.png" class="d-block w-100" alt="...">
+                            <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/image/banner4.png" class="d-block w-100" alt="...">
+                            <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/image/banner4.png" class="d-block w-100" alt="...">
+                            <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -144,7 +144,7 @@
                     <div class="imgBox">
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -155,7 +155,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -166,7 +166,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -177,7 +177,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -188,7 +188,7 @@
 
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -199,7 +199,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -212,7 +212,7 @@
                         <!-- imgBox 2 구간 -->
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -223,7 +223,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -233,7 +233,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>
@@ -244,7 +244,7 @@
                         </a>
                         <a href="#">
                             <div>
-                                <img src="image/200Pic.png">
+                                <img src="/imgs/200Pic.png">
                             </div>
                             <div>
                                 <div class="title">상품명</div>

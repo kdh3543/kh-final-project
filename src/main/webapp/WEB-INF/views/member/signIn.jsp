@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
-        <link href="/css/signin.css" rel="stylesheet">
+        <link href="/css/signIn.css" rel="stylesheet">
 
 </head>
 
@@ -31,15 +31,15 @@
     <header>
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signin.jsp">로그인</a></li>
-                <li><a href="join.jsp">회원가입</a></li>
+                <li><a href="signIn">로그인</a></li>
+                <li><a href="join">회원가입</a></li>
             </ul>
         </div>
         <div class="div-wrap">
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="index.jsp">00마켓</a>
+                    <a href="home">00마켓</a>
                 </div>
             </div>
         </div>
@@ -81,8 +81,9 @@
     <script>
 
         $("#findMyInfo").on("click",function(){
-            location.href="findInfo.jsp";
+            location.href="findInfo";
         });
+        
     </script>
 </body>
 

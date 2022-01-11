@@ -28,15 +28,15 @@
     <header>
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signin.jsp">로그인</a></li>
-                <li><a href="join.jsp">회원가입</a></li>
+                <li><a href="signIn">로그인</a></li>
+                <li><a href="join">회원가입</a></li>
             </ul>
         </div>
         <div class="div-wrap">
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="index.jsp">00마켓</a>
+                    <a href="/">00마켓</a>
                 </div>
             </div>
         </div>
