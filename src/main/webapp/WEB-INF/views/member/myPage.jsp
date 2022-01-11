@@ -32,15 +32,15 @@
           <!-- 로그인 했을 때만 진입 가능 -->
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signin.jsp" hidden>로그인</a></li>
-                <li><a href="join.jsp">로그아웃</a></li>
+                <li><a href="signIn" hidden>로그인</a></li>
+                <li><a href="join">로그아웃</a></li>
             </ul>
         </div>
         <div class="div-wrap">
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="index.jsp">00마켓</a>
+                    <a href="/">00마켓</a>
                 </div>
                 <div class="searchBar">
                     <div class="input-group mb-3">

@@ -20,4 +20,33 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping("signIn")
+	public String login() {
+		
+		return "/member/signIn";
+	}
+	
+	@RequestMapping("join")
+	public String join() {
+		
+		return "/member/join";
+	}
+	
+	@RequestMapping("myPage")
+	public String myPage() {
+		
+		return "/member/myPage";
+	}
+	
+	@RequestMapping("findInfo")
+	public String findInfo() {
+		
+		return "/member/findInfo";
+	}
+	@RequestMapping("productDetail")
+	public String productDetail() {
+		
+		return "/product/productDetail";
+	}
+	
 }
