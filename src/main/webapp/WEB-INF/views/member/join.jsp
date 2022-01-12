@@ -186,12 +186,6 @@
             $("#checkpw").text("비밀번호가 틀립니다.");
          }
       })
-        $("#input-file").on("change",function(){
-        let file = this.files[0];
-        if (file) {
-            $("#pho").html("<img class='w-20 h-20' viewBox='0 0 20 20' src = "+URL.createObjectURL(file)+">");
-          }
-        })
 
     
 </script>
