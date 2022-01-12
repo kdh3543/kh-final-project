@@ -39,7 +39,7 @@
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="home">00마켓</a>
+                    <a href="/">00마켓</a>
                 </div>
             </div>
         </div>
