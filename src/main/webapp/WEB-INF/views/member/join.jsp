@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="/css/font.css">
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
+          <!-- Custom styles for this template -->
         <link rel="stylesheet" href="/css/join.css">
         <!-- 주소 API -->
          <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
