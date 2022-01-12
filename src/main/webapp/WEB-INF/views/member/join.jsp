@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="/css/font.css">
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
+          <!-- Custom styles for this template -->
         <link rel="stylesheet" href="/css/join.css">
 
 </head>
