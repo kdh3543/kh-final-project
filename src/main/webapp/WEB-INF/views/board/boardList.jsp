@@ -52,10 +52,10 @@
 	</header>
 
 	<main>
-		<div class="contents">
-			<h1 class="h3 mb-3 fw-normal">주제</h1>
+		<div class="contents-box">
+			<h1 class="h3 mb-3 fw-normal">주제(ex 동네질문)</h1>
 
-			<div class="form-floating">
+			<div class="content">
 				<div>Contents</div>
 				<span>작성자</span> <span>댓글</span> <span>작성시간</span>
 			</div>
