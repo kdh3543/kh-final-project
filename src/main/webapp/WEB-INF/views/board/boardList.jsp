@@ -4,6 +4,8 @@
 <head>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!-- JSTL -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,17 +54,19 @@
 	</header>
 
 	<main>
-		<div class="contents">
-			<h1 class="h3 mb-3 fw-normal">주제</h1>
-
-			<div class="form-floating">
-				<div>Contents</div>
-				<span>작성자</span> <span>댓글</span> <span>작성시간</span>
-			</div>
-
-			<div class="form-floating">
-				<span>좋아요</span> <span>댓글</span>
-			</div>
+		<div class="contents-box">
+			<c:forEach var="dto" items="${list}">
+				<h1 class="h3 mb-3 fw-normal">${dto.subject}</h1>
+	
+				<div class="content">
+					<div>${dto.contents}</div>
+					<span>${dto.writer}</span> <span>위치</span> <span>${dto.write_date}</span>
+				</div>
+	
+				<div class="form-floating">
+					<span>좋아요 하기</span> <span>댓글</span> <span>${dto.like_count}</span>
+				</div>
+			</c:forEach>
 		</div>
 	</main>
 	<footer>
