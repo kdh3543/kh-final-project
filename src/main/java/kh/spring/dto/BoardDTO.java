@@ -2,36 +2,32 @@ package kh.spring.dto;
 
 import java.sql.Timestamp;
 
-public class CommentDTO {
-	private int comment_seq; // 시퀀스
-	private int board_seq; // 게시물 시퀀스
+public class BoardDTO {
+	private int board_seq; // 시퀀스
 	private String writer; // 작성자
+	private String title; // 제목
 	private String contents; // 내용
+	private String subject; // 주제(동네질문, 동네맛집, 동네소식 ...)
 	private Timestamp write_date; // 작성일
+	private int view_count; // 조회 수
 	private int like_count; // 좋아요 수
 
-	public CommentDTO() {
+	public BoardDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CommentDTO(int comment_seq, int board_seq, String writer, String contents, Timestamp write_date,
-			int like_count) {
+	public BoardDTO(int board_seq, String writer, String title, String contents, String subject, Timestamp write_date,
+			int view_count, int like_count) {
 		super();
-		this.comment_seq = comment_seq;
 		this.board_seq = board_seq;
 		this.writer = writer;
+		this.title = title;
 		this.contents = contents;
+		this.subject = subject;
 		this.write_date = write_date;
+		this.view_count = view_count;
 		this.like_count = like_count;
-	}
-
-	public int getComment_seq() {
-		return comment_seq;
-	}
-
-	public void setComment_seq(int comment_seq) {
-		this.comment_seq = comment_seq;
 	}
 
 	public int getBoard_seq() {
@@ -50,6 +46,14 @@ public class CommentDTO {
 		this.writer = writer;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getContents() {
 		return contents;
 	}
@@ -58,12 +62,28 @@ public class CommentDTO {
 		this.contents = contents;
 	}
 
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
 	public Timestamp getWrite_date() {
 		return write_date;
 	}
 
 	public void setWrite_date(Timestamp write_date) {
 		this.write_date = write_date;
+	}
+
+	public int getView_count() {
+		return view_count;
+	}
+
+	public void setView_count(int view_count) {
+		this.view_count = view_count;
 	}
 
 	public int getLike_count() {
