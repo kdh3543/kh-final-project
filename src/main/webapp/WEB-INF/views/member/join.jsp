@@ -25,12 +25,12 @@
         <link rel="stylesheet" href="/css/join.css">
         <!-- 주소 API -->
          <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		 <style>
-		 	img{
-		 		width:100px;
-		 		height:100px;
-		 	}
-		 </style>
+		<style>
+			img{
+			width:100px;
+			height:100px;
+			}
+		</style>
 </head>
 <body>
     <header>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
+	
 	@RequestMapping("idCheck")
 	public String idCheck() {
 		return "";
