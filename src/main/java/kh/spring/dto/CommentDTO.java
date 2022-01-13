@@ -3,12 +3,12 @@ package kh.spring.dto;
 import java.sql.Timestamp;
 
 public class CommentDTO {
-	private int comment_seq;
-	private int board_seq;
-	private String writer;
-	private String contents;
-	private Timestamp write_date;
-	private int like_count;
+	private int comment_seq; // 시퀀스
+	private int board_seq; // 게시물 시퀀스
+	private String writer; // 작성자
+	private String contents; // 내용
+	private Timestamp write_date; // 작성일
+	private int like_count; // 좋아요 수
 
 	public CommentDTO() {
 		super();
