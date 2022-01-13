@@ -52,7 +52,7 @@
 	</header>
 
 	<main>
-		<div class="form-signin">
+		<div class="contents">
 			<h1 class="h3 mb-3 fw-normal">주제</h1>
 
 			<div class="form-floating">
