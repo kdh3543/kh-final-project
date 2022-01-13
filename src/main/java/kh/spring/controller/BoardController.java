@@ -26,8 +26,8 @@ public class BoardController {
 	public String boardList(Model model) {
 		System.out.println("boardList 로 들어온 요청은 이 메서드를 실행합니다.");
 
-//		List<BoardDTO> list = service.selectAll();
-//		model.addAttribute("list", list);
+		List<BoardDTO> list = service.selectAll();
+		model.addAttribute("list", list);
 		return "board/boardList";
 	}
 
