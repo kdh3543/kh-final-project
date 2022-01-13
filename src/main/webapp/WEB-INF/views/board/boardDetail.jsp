@@ -61,9 +61,10 @@
 				<span>주제(ex 동네소식)</span>
 				<h3>${dto.writer}</h3>
 				<h6>위치 / ${dto.write_date}</h6>
+
+				<div>${dto.contents}</div>
+				<div>댓글 상자</div>
 			</div>
-			<div class="contents">${dto.contents}</div>
-			<div class="contents">댓글 상자</div>
 		</div>
 	</main>
 	<footer>

@@ -69,7 +69,7 @@
 			</div>
 			<c:forEach var="dto" items="${list}">
 				<div class="contents">
-					<h1 class="h3 mb-3 fw-normal">${dto.subject}</h1>
+					<h6>${dto.subject}</h6>
 					<div>
 						<div><a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a></div>
 						<span>${dto.writer}</span> <span>위치</span> <span id="write-date">${dto.write_date}</span>
