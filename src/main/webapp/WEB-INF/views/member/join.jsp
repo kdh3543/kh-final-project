@@ -25,7 +25,12 @@
         <link rel="stylesheet" href="/css/join.css">
         <!-- 주소 API -->
          <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+		<style>
+			img{
+			width:100px;
+			height:100px;
+			}
+		</style>
 </head>
 <body>
     <header>
@@ -47,50 +52,73 @@
         </div>
     </header>
     <main>
-    <form action="/" method="get">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="join-wrap">
             <div class="join-title">회원가입</div>
             <hr>
+          <div class="mb-3">
+           <label for="imgfile" class="del-button img-up">
+         		<input type="file" id=imgfile name="profile_image" accept=".jpg, .png, .jpeg, .gif" style="display:none;">
+         		<img src="/imgs/회원가입2 (2).png" id="profile">
+         		프로필 사진 등록
+           </label>
+          </div>
+          </form>
+
+            
+            <form action="/member/signup" method="get">
         <div class="mb-3">
             <label for="inputId" class="form-label">아이디</label>
-            <input type="text" class="form-control" id="inputId" placeholder="영문대소문자,숫자 조합의 6~15자리" pattern="^([A-Za-z0-9]){6,15}$" required>
+            <input type="text" class="form-control" id="inputId" name="id" placeholder="영문대소문자,숫자 조합의 6~15자리" pattern="^([A-Za-z0-9]){6,15}$" required>
             <span id="checkid"></span>
           </div>
           <div class="mb-3">
             <label for="inputPw" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" id="inputPw" placeholder="최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자를 포함한 8~20자리"pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" required>
+            <input type="text" class="form-control" id="inputPw" name="pw" placeholder="최소 한개의 문자, 한개의 숫자 , 한개의 특수 문자를 포함한 8~20자리"pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" required>
           </div>
-          <form class="row g-3">
+          
             <div class="mb-3">
             <label for="inputPwAgain" class="form-label">비밀번호 확인</label>
-              <input type="password" class="form-control" id="inputPwAgain" placeholder="비밀번호를 다시 입력하세요" required>
+              <input type="text" class="form-control" id="inputPwAgain" placeholder="비밀번호를 다시 입력하세요" required>
+              <span id="checkpw"></span>
             </div>
-          </form>
+          
           <div class="mb-3">
             <label for="inputName" class="form-label">이름</label>
-            <input type="text" class="form-control" id="inputName" placeholder="이름을 입력하세요" pattern="^[가-힣]{2,5}$" required>
+            <input type="text" class="form-control" id="inputName" name="name" placeholder="이름을 입력하세요" pattern="^[가-힣]{2,5}$" required>
           </div>
+      
           <div class="mb-3">
             <label for="inputZipcode" class="form-label">우편번호</label>
-            <input type="text" class="form-control" id="inputZipcode" placeholder="우편번호를 검색하세요." required>
+            <input type="text" class="form-control" id="inputZipcode" name="zipcode" placeholder="우편번호를 검색하세요." required>
           </div>
           <div class="addressDiv mb-3">
             <label for="inputAddress1" class="form-label">주소</label>
-            <input type="text" class="form-control mb-2" id="inputAddress1" placeholder="" required>
+            <input type="text" class="form-control mb-2" id="inputAddress1" name="address1" placeholder="" required>
             <button type="button" class="btn btn-primary mb-1" id="findAddress">주소찾기</button>
         </div>
           <div class="mb-3">
             <label for="inputAddress2" class="form-label">상세주소</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="상세주소를 입력하세요" required>
+            <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="상세주소를 입력하세요" required>
           </div>
           <div class="mb-3">
             <label for="inputPhone" class="form-label">연락처</label>
-            <input type="text" class="form-control" id="inputPhone" placeholder="연락처를 입력하세요 01x-xxxx-xxxx" pattern="^01(0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$" required>
+            <input type="text" class="form-control" id="inputPhone" name="phone" placeholder="연락처를 입력하세요 01x-xxxx-xxxx" pattern="^01(0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$" required>
           </div>
           <div class="mb-3">
             <label for="inputEmail" class="form-label">이메일</label>
-            <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" pattern="^[a-z0-9_+.-]+@([a-z0-9-]+\.)+com$" required>
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="example@xxxxx.com" pattern="^[a-z0-9_+.-]+@([a-z0-9-]+\.)+com$" required>
           </div>
+          <div class="mb-3">
+            <label for="deallocation" class="form-label">거래희망지역</label>
+            <input type="text" class="form-control" id="location" name="prefer_location" placeholder="선호하는 거래 지역이 있다면 선택해주세요">
+          </div>
+            <hr class="mb-4">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="aggrement" required>
+            <label class="custom-control-label" for="aggrement" >개인정보 수집 및 이용에 동의합니다.</label>
+          </div>
+          
           <div class="btnDiv">
             <button id="joinBtn" class="btn btn-lg btn-light" type="submit">회원가입</button>
             <button id="backBtn" class="btn btn-lg btn-light" type="button">뒤로가기</button>
@@ -119,7 +147,7 @@
             }  
         }).open();
     }
-    
+    //id 중복 확인 & 사용가능 여부 확인
     $(function(){
         $("#inputId").on("input",function(){
              let id = document.getElementById("inputId").value;
@@ -130,12 +158,16 @@
                  $("#checkid").text("잘못된 ID 입니다.");
                    
                    return false;
+                }else{
+                	  $("#checkid").css("color","blue");
+                      $("#checkid").text("사용가능한 ID형식 입니다.");
                 }
            $.ajax({
               url:"/member/idCheck",
               data:{id:$("#inputId").val()}
            }).done(function(resp){
-              if(resp == "true"){
+        	   console.log(resp);
+              if(resp == "1"){
                  $("#checkid").css("color","pink");
                  $("#checkid").text("이미 사용중인 ID 입니다.");
               }else{
@@ -146,39 +178,13 @@
         });
      })
       
-      //닉네임 중복확인
-      $(function(){
-        $("#nickname").on("input",function(){
-            let nickname = document.getElementById("nickname").value;
-                let nickregex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$/;
-                let result = nickregex.test(nickname);
-                if(!result){
-                   $("#checkResultN").css("color","red");
-                 $("#checkResultN").text("잘못된 닉네임 입니다.");
-                   
-                   return false;
-                }
-           $.ajax({
-              url:"/nicknameCheck.mem",
-              data:{nn:$("#nickname").val()}
-           }).done(function(resp){
-              if(resp == "true"){
-                 $("#checkResultN").css("color","pink");
-                 $("#checkResultN").text("이미 사용중인 닉네임 입니다.");
-              }else{
-                 $("#checkResultN").css("color","dodgerblue");
-                 $("#checkResultN").text("사용 가능한 닉네임 입니다.");
-              }
-           });
-        });
-     })
       
 
          
       
-     //비밀번호확인
-      $("#cpw").on("keyup",function(){
-         if($("#pw").val()==$("#cpw").val()){
+     //비밀번호 일치 확인
+      $("#inputPwAgain").on("keyup",function(){
+         if($("#inputPw").val()==$("#inputPwAgain").val()){
             $("#checkpw").css("color","green");
             $("#checkpw").text("비밀번호가 일치합니다");
          }else{
@@ -186,6 +192,24 @@
             $("#checkpw").text("비밀번호가 틀립니다.");
          }
       })
+       $("#inputPw").on("keyup",function(){
+         if($("#inputPw").val()==$("#inputPwAgain").val()){
+            $("#checkpw").css("color","green");
+            $("#checkpw").text("비밀번호가 일치합니다");
+         }else{
+            $("#checkpw").css("color","pink");
+            $("#checkpw").text("비밀번호가 틀립니다.");
+         }
+      })
+      
+      //이미지 삽입 후 바뀜
+$(document).ready(function(){
+	$("#imgfile").change(function(event){
+		var tmppath=URL.createObjectURL(event.target.files[0]);
+		$('#profile').attr('src',tmppath);
+	});
+});
+     
 
     
 </script>
