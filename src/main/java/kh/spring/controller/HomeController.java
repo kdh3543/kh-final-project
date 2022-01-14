@@ -49,4 +49,10 @@ public class HomeController {
 		return "/product/productDetail";
 	}
 	
+	@RequestMapping("talk")
+	public String talk() {
+		
+		return "/talk/talk";
+	}
+	
 }

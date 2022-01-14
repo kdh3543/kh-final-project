@@ -1,0 +1,217 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    height : auto;
+    min-height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+main {
+    height:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+    margin: auto;
+    width:90%;
+    flex-direction: column;
+    font-family: 'OTWelcomeRA';
+    padding: 5%;
+}
+.detail-top-div{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    padding: 1%;
+}
+.detail-left {
+    display: flex;
+    width: 30%;
+}
+.detail-left .left-img{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#carouselExampleIndicators {
+    width: 100%;
+}
+
+.detail-right{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2%;
+}
+.detail-right .productName {
+    font-family: 'OTWelcomeBA';
+    font-size: 30px;
+}
+
+.detail-right .productPrice {
+    font-family: 'OTWelcomeBA';
+    font-size: 32px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.detail-right .product-status {
+    font-family: 'OTWelcomeRA';
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+.detail-right .product-status div{
+    padding-right:30px;
+}
+.detail-right .product-detail{
+    padding: 2%;
+}
+.detail-right .product-detail div{
+    
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.detail-right .detail-btns{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.detail-right .detail-btns button{
+    width: 30%;
+    height: 60px;
+}
+#btn-like{
+    background-color: #b2bec3;
+    color:#fff;
+    width: 30%;
+    height: 70px;
+    line-height: 20px;
+    font-size: 17px;
+    font-family: 'OTWelcomeRA';
+}
+#btn-talk{
+    background-color: #f8d200;
+    color:#fff;
+    width: 30%;
+    height: 70px;
+    line-height: 20px;
+    font-size: 17px;
+    font-family: 'OTWelcomeRA';
+}
+#btn-buy{
+    background-color: #24a6a4;
+    color:#fff;
+    width: 30%;
+    height: 70px;
+    line-height: 20px;
+    font-size: 17px;
+    font-family: 'OTWelcomeRA';
+}
+.detail-bottom-div{
+    width: 100%;
+    height: 50%;
+}
+
+.detail-bottom-div .bottom-top{
+    height: 50%;
+}
+.bottom-top .bottom-top-title {
+    font-family: 'OTWelcomeBA';
+    font-size: 18px;
+    padding: 1%;
+}
+.bottom-top-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 1%;
+    flex-wrap: wrap;
+}
+.bottom-top-imglist {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+}
+
+.bottom-bottom{
+    padding-top: 30px;
+    height: 50%;
+}
+
+.nav {
+    height: 70px;
+}
+.nav button{
+    width: 16.5%;
+}
+.nav-link{
+    color:gray;
+}
+.nav-tabs .nav-link.active{
+    background-color: #24a6a4;
+    color: #fff;
+}
+.tab-content{
+    height: 90%;
+}
+
+.tab-content>.tab-pane {
+    display: none;
+}
+.tab-content>.active {
+    display: block;
+    height: 100%;
+    padding: 1%;
+}
+.product-section{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+}
+.product-section1{
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+}
+
+.product-section1 .product-info-title{
+    font-size: 30px;
+}
+
+.product-section1 .product-info{
+    width: 70%;
+}
+
+.product-section1 .shop-info{
+    width: 30%;
+}
+
+.product-section2{
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+}
+.product-section2 .shop-info{
+    font-size: 30px;
+}
+

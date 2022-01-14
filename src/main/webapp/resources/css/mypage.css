@@ -13,22 +13,33 @@ body{
   
 /* 메인  */
 main {
-    height: 1000px;
-    margin-top: 5%;
-    width:100%;
+    height: auto;
+    width: 100%;
     padding: 2%;
+    margin-bottom: 250px;
+    display: flex;
+    justify-content: center;
 }
 
+.mypage-container {
+    height: 100%;
+    width: 80%;
+}
 .section1{
-    height: 20%;
+    height: 300px;
+    width:100%;
     border:1px solid black;
+    margin:auto;
 }
 
 .section2{
-    height: 80%;
+    height: 500px;
+    width:100%;
+    margin:auto;
 }
 .section1 .top-Container {
     height: 100%;
+    width:80%;
     display: flex;
 }
 .top-Container .left-Container {
@@ -106,15 +117,14 @@ nav {
     display: none;
 }
 .tab-content>.active {
-    display: block;
-    height: 100%;
+    display: block; 
+    height: 600px;
     padding: 1%;
-    overflow-y: scroll;
 }
 
 /* 회원정보 수정*/
 .profile-top{
-    height: 10%;
+    height: 15%;
     line-height: 80px;
     border-bottom: 1px solid black;
     font-family: 'OTWelcomeBA';
@@ -235,7 +245,7 @@ nav {
 }
 /* 판매내역 */
 .sell-top{
-    height: 10%;
+    height: 15%;
     line-height: 80px;
     border-bottom: 1px solid black;
     font-family: 'OTWelcomeBA';
@@ -254,7 +264,7 @@ nav {
 
 /* 구매내역 */
 .purchase-top {
-    height: 10%;
+    height: 15%;
     line-height: 80px;
     border-bottom: 1px solid black;
     font-family: 'OTWelcomeBA';
@@ -297,7 +307,7 @@ nav {
 /* 찜내역 */
 
 .like-top{
-    height: 10%;
+    height: 15%;
     line-height: 80px;
     border-bottom: 1px solid black;
     font-family: 'OTWelcomeBA';
@@ -338,7 +348,7 @@ nav {
 
 /* 팦로잉 */
 .following-top{
-    height: 10%;
+    height: 15%;
     line-height: 80px;
     border-bottom: 1px solid black;
     font-family: 'OTWelcomeBA';
@@ -386,7 +396,7 @@ nav {
 
 /* 팔로워 */
 .follower-top{
-    height: 10%;
+   height: 15%;
     line-height: 80px;
     border-bottom: 1px solid black;
     font-family: 'OTWelcomeBA';
