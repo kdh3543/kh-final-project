@@ -56,7 +56,7 @@
 	</header>
 
 	<main>
-		<div class="contents-box">			
+		<div class="contents-box">
 			<div class="contents" id="subject-menu">
 				<button id="toWrite">새 글 등록</button>
 				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
@@ -71,7 +71,9 @@
 				<div class="contents">
 					<h6>${dto.subject}</h6>
 					<div>
-						<div><a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a></div>
+						<div>
+							<a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
+						</div>
 						<span>${dto.writer}</span> <span>위치</span> <span id="write-date">${dto.write_date}</span>
 					</div>
 
@@ -88,5 +90,11 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
+
+	<script>
+		$("#toWrite").on("click", function() {
+			location.href = "/board/writeForm";
+		})
+	</script>
 </body>
 </html>
