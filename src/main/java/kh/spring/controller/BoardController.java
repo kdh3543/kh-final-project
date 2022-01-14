@@ -50,9 +50,7 @@ public class BoardController {
 		BoardDTO dto = service.selectBySeq(seq);
 		model.addAttribute("dto", dto);
 		
-		System.out.println("board_seq : " + dto.getBoard_seq());
 		List<CommentDTO> list = cservice.selectBySeq(dto.getBoard_seq());
-		System.out.println("리스트 사이즈 : " + list.size());
 		model.addAttribute("list", list);
 		
 //		List<FilesDTO> list = fservice.selectBySeq(dto.getSeq());

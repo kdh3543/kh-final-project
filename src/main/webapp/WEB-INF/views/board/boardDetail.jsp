@@ -63,24 +63,25 @@
 				<h6>위치 / ${dto.write_date}</h6>
 
 				<div>${dto.contents}</div>
-				<div>
-					<span>등록순</span> / <span>최신순</span>
-					<c:forEach var="cdto" items="${list}">
-						<div class="contents">
-							<h3>${cdto.writer}</h3>
-							<span>위치</span> / <span>${cdto.write_date}</span>
-							<div>
-								<div>${cdto.contents}</div>
-								<span id="write-date">${cdto.write_date}</span>
-							</div>
 
-							<div class="form-floating">
-								<span>좋아요(좋아요 수)</span> <span>댓글</span>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
+				<span>등록순</span> / <span>최신순</span>
 			</div>
+			<c:forEach var="cdto" items="${list}">
+				<div class="contents">
+					<h3>${cdto.writer}</h3>
+					<span>위치</span> / <span>${cdto.write_date}</span>
+					<div>
+						<div>${cdto.contents}</div>
+						<span id="write-date">${cdto.write_date}</span>
+					</div>
+
+					<div class="form-floating">
+						<span>좋아요(좋아요 수)</span> <span>댓글</span>
+					</div>
+				</div>
+			</c:forEach>
+
+		</div>
 		</div>
 	</main>
 	<footer>
