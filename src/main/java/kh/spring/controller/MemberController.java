@@ -24,19 +24,13 @@ public class MemberController {
 	//아이디 중복체크
 	@ResponseBody
 	@RequestMapping(value = "idCheck",produces="text/html;charset=utf8")
-	public String idCheck(String id) throws Exception{
-		
+	public String idCheck(String id) throws Exception{	
 	int result = mservice.idCheck(id);
-		
-		
-		
-		
 		return String.valueOf(result);
 	}
 	//회원가입 정보 입력 
 	@RequestMapping("signup")
 	public String signup(MemberDTO dto) {
-	
 		try {
 			int result = mservice.insert(dto);
 		} catch (Exception e) {
