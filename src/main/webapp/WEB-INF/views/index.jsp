@@ -1,10 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>index</title>
@@ -102,16 +100,16 @@
                     </div>
                     <div class="rightList">
 
-                        <a href="#" class="btn-sell">
+                        <a href="productAdd" class="btn-sell">
                             <i class="fas fa-dollar-sign fa-2x"></i> 판매하기 </a>
                         |
                         <a href="myPage" class="btn-myshop">
                             <i class="fas fa-store fa-2x"></i> 내상점 </a>
                         |
-                        <a href="#" class="btn-talk">
+                        <a href="talk" class="btn-talk">
                             <i class="fas fa-comment fa-2x"></i> 00톡</a>
                         |
-                        <a href="#" class="btn-talk">
+                        <a href="board/boardList" class="btn-talk">
                             <i class="fas fa-edit fa-2x"></i>커뮤니티</a>
 
 
@@ -266,13 +264,19 @@
 
                     </article>
                 </section>
-                <aside class="d-none d-lg-block">
+               <!--  <aside class="d-none d-lg-block">
                     <div class="top">
                         <a href="#"><button class="upTop">Top</button></a>
                     </div>
-                </aside>
+                </aside> -->
             </div>
         </div>
+        </div>
+        <div class="d-none d-lg-block" id="sideBar">
+        	 <div class="sidebar-div">
+                 <a href="#"> <button class="btn btn-outline-secondary" type="button" id="likeProductBtn">찜한상품<br><i class="fas fa-heart">개수</i></button></a>
+                 <a href="#"><button class="btn btn-outline-secondary" id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
+             </div>
         </div>
     </main>
     <!-- footer -->

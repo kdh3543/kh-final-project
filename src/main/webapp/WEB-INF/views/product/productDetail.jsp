@@ -28,15 +28,15 @@
     <header>
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signin.jsp">로그인</a></li>
-                <li><a href="join.jsp">회원가입</a></li>
+                <li><a href="signIn">로그인</a></li>
+                <li><a href="join">회원가입</a></li>
             </ul>
         </div>
         <div class="div-wrap">
             <div class="nav_div">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    <a href="index.jsp">00마켓</a>
+                    <a href="/">00마켓</a>
                 </div>
                 <div class="searchBar">
                     <div class="input-group mb-3">
@@ -65,13 +65,13 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="image/testPic.png" class="d-block w-100" alt="...">
+                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="image/testPic.png" class="d-block w-100" alt="...">
+                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="image/testPic.png" class="d-block w-100" alt="...">
+                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
                             </div>
                         </div>
                     </div>
@@ -103,33 +103,30 @@
                 <div class="bottom-top-title">연관상품</div>
                 <div class="bottom-top-img">
                     <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
+                        <img src="/imgs/200Pic.png" alt="">
                         <a href="#">상품1</a>
                     </div>
                     <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
+                        <img src="/imgs/200Pic.png" alt="">
                         <a href="#">상품2</a>
                     </div>
                     <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
+                        <img src="/imgs/200Pic.png" alt="">
                         <a href="#">상품3</a>
                     </div>
                     <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
+                        <img src="/imgs/200Pic.png" alt="">
                         <a href="#">상품4</a>
                     </div>
                     <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
+                        <img src="/imgs/200Pic.png" alt="">
                         <a href="#">상품5</a>
                     </div>
                     <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
-                        <a href="#">상품5</a>
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품6</a>
                     </div>
-                    <div class="bottom-top-imglist">
-                        <img src="/image/200Pic.png" alt="">
-                        <a href="#">상품5</a>
-                    </div>
+ 
                 </div>
             </div>
             <div class="bottom-bottom">
@@ -167,7 +164,7 @@
                     <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
                         페이지3
                     </div>
-                    </section>
+       
                 </div>
             </div>
 
