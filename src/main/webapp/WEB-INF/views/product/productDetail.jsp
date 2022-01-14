@@ -21,10 +21,11 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/header_searchBar.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/productDetail.css">
 </head>
 <body>
-       <!--  Header -->
-       <header>
+    <!--  Header -->
+    <header>
         <div class="header_Container">
             <ul class="header_list">
                 <li><a href="signIn">로그인</a></li>
@@ -39,19 +40,138 @@
                 </div>
                 <div class="searchBar">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control"  placeholder="동네 이름, 물품명 등을 검색해 보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search fa-2x"></i></button>
-                      </div>
-                    <!-- <div><input type="text" class="seacrh" placeholder="동네 이름, 물품명 등을 검색해 보세요!">
-                        <button><i class="fas fa-search fa-2x"></i></button></div>
-                    <div><button><i class="fas fa-search fa-2x"></i></button></div> -->
+                        <input type="text" class="form-control" placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+                            aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                                class="fas fa-search fa-2x"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
-    <main></main>
-       <!-- footer -->
-       <footer>
+    <main>
+        <div class="detail-top-div">
+            <div class="detail-left">
+                <div class="left-img">
+                    <!-- <i class="fas fa-camera fa-2x"></i> -->
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-right">
+                <div class="productName">네모박스</div>
+                <div class="productPrice">3,000원</div>
+                <div class="product-status">
+                    <div class="status-like">좋아요</div>
+                    <div class="status-view">조회수</div>
+                    <div class="status-view">작성일</div>
+                </div>
+                <div class="product-detail">
+                    <div class="detail-product-status">배송비</div>
+                    <div class="detail-exchange">교환여부</div>
+                    <div class="detail-delivery">거래지역</div>
+                    <div class="detail-location">상품상태</div>
+                </div>
+                <div class="detail-btns">
+                    <button id="btn-like" class="btn btn-lg btn-light">찜</button>
+                    <button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
+                    <button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
+                </div>
+            </div>
+        </div>
+        <div class="detail-bottom-div">
+            <div class="bottom-top">
+                <div class="bottom-top-title">연관상품</div>
+                <div class="bottom-top-img">
+                    <div class="bottom-top-imglist">
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품1</a>
+                    </div>
+                    <div class="bottom-top-imglist">
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품2</a>
+                    </div>
+                    <div class="bottom-top-imglist">
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품3</a>
+                    </div>
+                    <div class="bottom-top-imglist">
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품4</a>
+                    </div>
+                    <div class="bottom-top-imglist">
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품5</a>
+                    </div>
+                    <div class="bottom-top-imglist">
+                        <img src="/imgs/200Pic.png" alt="">
+                        <a href="#">상품6</a>
+                    </div>
+ 
+                </div>
+            </div>
+            <div class="bottom-bottom">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                            aria-selected="true">상품정보</button>
+                        <button class="nav-link" id="nav-ask-tab" data-bs-toggle="tab" data-bs-target="#nav-ask"
+                            type="button" role="tab" aria-controls="nav-ask" aria-selected="false">상품문의</button>
+                        <button class="nav-link" id="nav-purchase-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-purchase" type="button" role="tab" aria-controls="nav-purchase"
+                            aria-selected="false">????</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- 상품정보 -->
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
+                        aria-labelledby="nav-profile-tab">
+                        <div class="product-section">
+                            <div class="product-section1">
+                                <div class="product-info-title">상품정보</div>
+                                <div class="product-info-contents">상품설명</div>
+                            </div>
+                            <div class="product-section2">
+                                <div class="shop-info">상점정보</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 판매내역-->
+                    <div class="tab-pane fade" id="nav-ask" role="tabpanel" aria-labelledby="nav-ask-tab">
+                        페이지2
+                    </div>
+                    <!-- 구매내역 -->
+                    <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
+                        페이지3
+                    </div>
+       
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <!-- footer -->
+    <footer>
         <div class="footer-box">
             <span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br>
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>

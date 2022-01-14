@@ -19,18 +19,18 @@ public class BoardDAO {
 		return mybatis.selectList("Board.selectAll");
 	}
 	
-	// 신규 게시글 삽입
+	// 시퀀스로 게시글 검색
 	public BoardDTO selectBySeq(int seq) {
 		return mybatis.selectOne("Board.selectBySeq", seq);
 	}
 	
-	// 시퀀스로 검색
+	// 신규 게시글 삽입
 	public int insert(BoardDTO dto) {
 		mybatis.insert("Board.insert", dto);
 		return dto.getBoard_seq();
 	}
 	
-	// 시퀀스로 삭제
+	// 시퀀스로 게시글 삭제
 	public int delete(int seq) {
 		return mybatis.delete("Board.delete", seq);
 	}

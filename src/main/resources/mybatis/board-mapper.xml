@@ -13,8 +13,8 @@
    </select>
    
    <insert id="insert">
-      INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{writer}, #{title}, #{contents}, DEFAULT, DEFAULT)
-      <selectKey resultType="int" order="AFTER" keyProperty="seq">
+      INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{writer}, #{contents}, #{subject}, DEFAULT, DEFAULT, DEFAULT)
+      <selectKey resultType="int" order="AFTER" keyProperty="board_seq">
          SELECT BOARD_SEQ.CURRVAL FROM DUAL
       </selectKey>
    </insert>
@@ -24,6 +24,6 @@
    </delete>
    
    <update id="modify">
-      UPDATE BOARD SET TITLE = #{title}, CONTENTS = #{contents} WHERE BOARD_SEQ = #{board_seq}
+      UPDATE BOARD SET CONTENTS = #{contents}, SUBJECT = #{subject} WHERE BOARD_SEQ = #{board_seq}
    </update>
 </mapper>

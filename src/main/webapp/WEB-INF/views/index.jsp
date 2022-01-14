@@ -1,10 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>index</title>
@@ -44,227 +42,242 @@
                 </div>
                 <div class="searchBar">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control"  placeholder="동네 이름, 물품명 등을 검색해 보세요!" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search fa-2x"></i></button>
-                      </div>
+                        <input type="text" class="form-control" placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+                            aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                                class="fas fa-search fa-2x"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
     <main>
-        <!-- 네비바 -->
-        <div class="container">
-            <div class="div-wrap2">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="fas fa-bars fa-2x"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                       
-                        <!-- Dropdown menu links -->
-                        <li>
-                            <h6 class="dropdown-header">전체 카테고리</h6>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"   href="#" id="c01">여성의류</a>
-                            <div class="c01-content">
-                                <a class="dropdown-item" href="#">여성 상의</a>
-                                <a class="dropdown-item" href="#">여성 하의</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#" id="c02">남성의류</a>
-                            <div class="c02-content">
-                                <a class="dropdown-item" href="#">남성 상의</a>
-                                <a class="dropdown-item" href="#">남성 하의</a>
-                            </div>
-                        </li>
-                        <li><a class="dropdown-item" href="#" id="c03">신발</a>
-                            <div class="c03-content">
-                                <a class="dropdown-item" href="#">운동화</a>
-                                <a class="dropdown-item" href="#">슬리퍼</a>
-                            </div>
-                        </li>
-                        <li><a class="dropdown-item" href="#" id="c04">가방</a></li>
-                        <li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
-                        <li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
-                        <li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
-                        <li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-                        <li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-                        <li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
-                        <li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
-                        <li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
-                    </ul>
-                </div>
-            <div class="rightList">
+        <div class="index-container">
+            <!-- 네비바 -->
+            <div class="top-div">
+                <div class="div-wrap2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-bars fa-2x"></i>
+                        </button>
+                        <ul class="dropdown-menu">
 
-                <a href="#" class="btn-sell">
-                    <i class="fas fa-dollar-sign fa-2x"></i> 판매하기 </a>
-                |
-                <a href="myPage" class="btn-myshop">
-                    <i class="fas fa-store fa-2x"></i> 내상점 </a>
-                |
-                <a href="#" class="btn-talk">
-                    <i class="fas fa-comment fa-2x"></i> 00톡</a>
-            </div>
-            </div>
-        </div>
-        <div class="middle-div">
-            <section>
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner" style="height: 30vh;">
-                        <div class="carousel-item active">
-                            <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
-                        </div>
+                            <!-- Dropdown menu links -->
+                            <li>
+                                <h6 class="dropdown-header">전체 카테고리</h6>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" id="c01">여성의류</a>
+                                <div class="c01-content">
+                                    <a class="dropdown-item" href="#">여성 상의</a>
+                                    <a class="dropdown-item" href="#">여성 하의</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" id="c02">남성의류</a>
+                                <div class="c02-content">
+                                    <a class="dropdown-item" href="#">남성 상의</a>
+                                    <a class="dropdown-item" href="#">남성 하의</a>
+                                </div>
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="c03">신발</a>
+                                <div class="c03-content">
+                                    <a class="dropdown-item" href="#">운동화</a>
+                                    <a class="dropdown-item" href="#">슬리퍼</a>
+                                </div>
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="c04">가방</a></li>
+                            <li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
+                            <li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
+                            <li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
+                            <li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
+                            <li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
+                            <li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
+                            <li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
+                            <li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
+                        </ul>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <article>
+                    <div class="rightList">
 
-                    <p class="article_title">
-                        오늘의 상품추천
-                    </p>
-                    <!-- imgBox 1 구간 -->
-                    <div class="imgBox">
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
+                        <a href="productAdd" class="btn-sell">
+                            <i class="fas fa-dollar-sign fa-2x"></i> 판매하기 </a>
+                        |
+                        <a href="myPage" class="btn-myshop">
+                            <i class="fas fa-store fa-2x"></i> 내상점 </a>
+                        |
+                        <a href="talk" class="btn-talk">
+                            <i class="fas fa-comment fa-2x"></i> 00톡</a>
+                        |
+                        <a href="board/boardList" class="btn-talk">
+                            <i class="fas fa-edit fa-2x"></i>커뮤니티</a>
 
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-                        </a>
-
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-
-                        </a>
-
-                        <!-- imgBox 2 구간 -->
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-
-                        </a>
-                        <a href="#">
-                            <div>
-                                <img src="/imgs/200Pic.png">
-                            </div>
-                            <div>
-                                <div class="title">상품명</div>
-                                <div class="price">0000원</div>
-                                <div class="date">0일전</div>
-                            </div>
-                        </a>
 
                     </div>
-
-
-                </article>
-            </section>
-            <aside class="d-none d-lg-block">
-                <div class="top">
-                    <a href="#"><button class="upTop">Top</button></a>
                 </div>
-            </aside>
+            </div>
+            <div class="middle-div">
+                <section>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" style="height: 30vh;">
+                            <div class="carousel-item active">
+                                <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <article>
+
+                        <p class="article_title">
+                            오늘의 상품추천
+                        </p>
+                        <!-- imgBox 1 구간 -->
+                        <div class="imgBox">
+                            <a href="productDetail">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+                            </a>
+
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+
+                            <!-- imgBox 2 구간 -->
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div>
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div>
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+                            </a>
+
+                        </div>
+
+
+                    </article>
+                </section>
+               <!--  <aside class="d-none d-lg-block">
+                    <div class="top">
+                        <a href="#"><button class="upTop">Top</button></a>
+                    </div>
+                </aside> -->
+            </div>
         </div>
-    </div>
+        </div>
+        <div class="d-none d-lg-block" id="sideBar">
+        	 <div class="sidebar-div">
+                 <a href="#"> <button class="btn btn-outline-secondary" type="button" id="likeProductBtn">찜한상품<br><i class="fas fa-heart">개수</i></button></a>
+                 <a href="#"><button class="btn btn-outline-secondary" id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
+             </div>
+        </div>
     </main>
     <!-- footer -->
     <footer>
@@ -274,4 +287,5 @@
         </div>
     </footer>
 </body>
+
 </html>

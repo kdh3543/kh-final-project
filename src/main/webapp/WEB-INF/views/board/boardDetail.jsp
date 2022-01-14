@@ -58,23 +58,21 @@
 	<main>
 		<div class="contents-box">
 			<div class="contents" id="subject-menu">
-				<button id="toWrite">새 글 등록</button>
-				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
-				<button>주제1</button>
-				<button>주제2</button>
-				<button>주제3</button>
-				<button>주제4</button>
-				<button>주제5</button>
-				<button>주제6</button>
+				<span>주제(ex 동네소식)</span>
+				<h3>${dto.writer}</h3>
+				<h6>위치 / ${dto.write_date}</h6>
+
+				<div>${dto.contents}</div>
+
+				<span>등록순</span> / <span>최신순</span>
 			</div>
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="cdto" items="${list}">
 				<div class="contents">
-					<h6>${dto.subject}</h6>
+					<h3>${cdto.writer}</h3>
+					<span>위치</span> / <span>${cdto.write_date}</span>
 					<div>
-						<div>
-							<a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
-						</div>
-						<span>${dto.writer}</span> <span>위치</span> <span id="write-date">${dto.write_date}</span>
+						<div>${cdto.contents}</div>
+						<span id="write-date">${cdto.write_date}</span>
 					</div>
 
 					<div class="form-floating">
@@ -82,6 +80,8 @@
 					</div>
 				</div>
 			</c:forEach>
+
+		</div>
 		</div>
 	</main>
 	<footer>
@@ -90,11 +90,5 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
-
-	<script>
-		$("#toWrite").on("click", function() {
-			location.href = "/board/writeForm";
-		})
-	</script>
 </body>
 </html>
