@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class BoardDTO {
 	private int board_seq; // 시퀀스
 	private String writer; // 작성자
-	private String title; // 제목
 	private String contents; // 내용
 	private String subject; // 주제(동네질문, 동네맛집, 동네소식 ...)
 	private Timestamp write_date; // 작성일
@@ -17,12 +16,11 @@ public class BoardDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BoardDTO(int board_seq, String writer, String title, String contents, String subject, Timestamp write_date,
-			int view_count, int like_count) {
+	public BoardDTO(int board_seq, String writer, String contents, String subject, Timestamp write_date, int view_count,
+			int like_count) {
 		super();
 		this.board_seq = board_seq;
 		this.writer = writer;
-		this.title = title;
 		this.contents = contents;
 		this.subject = subject;
 		this.write_date = write_date;
@@ -44,14 +42,6 @@ public class BoardDTO {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContents() {
