@@ -45,3 +45,23 @@ body{
   display: flex;
   justify-content: space-evenly;
 }
+
+/* 카테고리 */
+.c01-content,.c02-content,.c03-content{
+    display: none;
+    width: 100px;
+    height: 100px;
+    translate:(157px, -1px);
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    z-index: 1000;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+}

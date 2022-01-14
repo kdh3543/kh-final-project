@@ -1,6 +1,6 @@
 
 
 
-$("#toWrite").on("click", function() {
+/*$("#toWrite").on("click", function() {
 	location.href = "/board/writeForm";
-})
+})*/

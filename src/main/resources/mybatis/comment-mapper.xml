@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Comment">   
+   <select id="selectBySeq" resultType="kh.spring.dto.CommentDTO">
+      SELECT * FROM COMMENTS WHERE BOARD_SEQ = ${value}
+      <!-- SELECT * FROM COMMENTS ORDER BY COMMENT_SEQ DESC -->
+   </select>
+   
+   <insert id="insert">
+      INSERT INTO COMMENTS VALUES(COMMENT_SEQ.NEXTVAL, #{board_seq}, #{writer}, #{contents}, DEFAULT, DEFAULT)
+   </insert>
+   
+   <delete id="delete">
+      DELETE FROM COMMENTS WHERE COMMENT_SEQ = ${value}
+   </delete>
+   
+   <update id="modify">
+      UPDATE COMMENTS SET CONTENTS = #{contents} WHERE COMMENT_SEQ = #{comment_seq}
+   </update>
+</mapper>
