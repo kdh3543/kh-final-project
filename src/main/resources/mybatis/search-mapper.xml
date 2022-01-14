@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+   <mapper namespace="Search">
+   
+   	 <select id="selectAll" resultType="kh.spring.dto.SearchKeywordDTO">
+   	
+   			SELECT * FROM (SELECT * FROM SEARCH_KEYWORD ORDER BY SEQ DESC) WHERE ROWNUM &lt; 10
+   		
+   	</select>
+   
+   
+   <insert id="insert">
+   	
+   	INSERT INTO SEARCH_KEYWORD VALUES(SEARCH_KEYWORD_SEQ.NEXTVAL, #{keyword}, SYSDATE, #{user_id})
+   	
+   </insert>
+    </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
