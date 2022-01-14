@@ -76,7 +76,7 @@
 					</div>
 
 					<div class="form-floating">
-						<span>좋아요 하기</span> <span>댓글</span> <span>${dto.like_count}</span>
+						<span>좋아요(좋아요 수)</span> <span>댓글</span>
 					</div>
 				</div>
 			</c:forEach>

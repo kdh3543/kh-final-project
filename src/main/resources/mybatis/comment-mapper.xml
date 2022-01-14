@@ -5,7 +5,8 @@
 
 <mapper namespace="Comment">   
    <select id="selectBySeq" resultType="kh.spring.dto.CommentDTO">
-      SELECT * FROM COMMENTS WHERE COMMENT_SEQ = #{value}
+      SELECT * FROM COMMENTS WHERE BOARD_SEQ = ${value}
+      <!-- SELECT * FROM COMMENTS ORDER BY COMMENT_SEQ DESC -->
    </select>
    
    <insert id="insert">
