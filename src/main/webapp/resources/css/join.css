@@ -8,7 +8,8 @@ html,body{
     box-sizing: border-box;
 }
 main{
-    height: 100vh;
+    
+    height: auto;
     font-family: 'OTWelcomeRA';
     padding-bottom: 10%;
     padding: 7%;

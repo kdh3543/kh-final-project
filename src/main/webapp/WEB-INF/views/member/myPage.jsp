@@ -56,7 +56,8 @@
             </div>
         </div>
     </header>
-    <main>
+   <main>
+        <div class="mypage-container">
         <section class="section1">
             <div class="top-Container">
                 <div class="left-Container">
@@ -271,7 +272,7 @@
             </div>
             </div>
         </section>
-
+    </div>
     </main>
     <!-- footer -->
     <footer>
