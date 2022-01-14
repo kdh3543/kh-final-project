@@ -45,9 +45,13 @@ public class HomeController {
 	}
 	@RequestMapping("productDetail")
 	public String productDetail() {
-		
 		return "/product/productDetail";
 	}
+	@RequestMapping("productAdd")
+	public String productAdd() {
+		return "/product/productAdd";
+	}
+	
 	
 	@RequestMapping("talk")
 	public String talk() {

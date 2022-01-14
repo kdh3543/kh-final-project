@@ -152,6 +152,8 @@ main{
     height: auto;
     margin-top: 210px;
     margin-bottom: 150px;
+    display: flex;
+    flex-direction: row;
 }
 main .index-container {
     padding: 5%;
@@ -251,4 +253,41 @@ footer .footer-box {
     align-items: center;
     box-shadow: 10px 0px 3px 1px #aaa69d;
     height: 100%;
+}
+
+/* 사이드바 */
+#sideBar{
+	border: 1px solid #24a6a4;
+    width: 150px;
+    height: 200px;
+    position: fixed;
+    right: calc(50% - 47%);
+    z-index: 20;
+    top: 370px;
+}
+.sidebar-div {
+	display:flex;
+	flex-direction:column;
+}
+
+.sidebar-div a {
+	width:100%;
+	height:100px;
+}
+
+.sidebar-div a button {
+	width:100%;
+	height:100%;
+	cursor:pointer;
+}
+#likeProductBtn {
+	border:none;
+	color:black;
+	
+}
+#upTopBtn{
+	background-color:#24a6a4;
+	color:#fff;
+	border:none;
+
 }
