@@ -16,12 +16,22 @@ public class CommentService {
 	private CommentDAO dao;
 
 	// 해당 게시물 전체 댓글 리스트
-		public BoardDTO selectBySeq(int seq) {
-			return dao.selectBySeq(seq);
-		}
+	public List<CommentDTO> selectBySeq(int seq) {
+		return dao.selectBySeq(seq);
+	}
 
 	// 신규 댓글 삽입
 	public int insert(CommentDTO dto) {
 		return dao.insert(dto);
+	}
+
+	// 시퀀스로 댓글 삭제
+	public int delete(int seq) {
+		return dao.delete(seq);
+	}
+
+	// 댓글 수정
+	public int modify(CommentDTO dto) {
+		return dao.modify(dto);
 	}
 }

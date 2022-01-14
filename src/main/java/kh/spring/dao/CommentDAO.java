@@ -16,7 +16,7 @@ public class CommentDAO {
 	private SqlSessionTemplate mybatis;
 
 	// 해당 게시물 전체 댓글 리스트
-	public CommentDTO selectBySeq(int seq) {
+	public List<CommentDTO> selectBySeq(int seq) {
 		return mybatis.selectList("Comment.selectBySeq", seq);
 	}
 
@@ -24,5 +24,15 @@ public class CommentDAO {
 	public int insert(CommentDTO dto) {
 		mybatis.insert("Comment.insert", dto);
 		return dto.getComment_seq();
+	}
+
+	// 시퀀스로 댓글 삭제
+	public int delete(int seq) {
+		return mybatis.delete("Comment.delete", seq);
+	}
+
+	// 댓글 수정
+	public int modify(CommentDTO dto) {
+		return mybatis.update("Comment.modify", dto);
 	}
 }
