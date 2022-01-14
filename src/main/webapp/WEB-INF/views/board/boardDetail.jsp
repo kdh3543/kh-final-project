@@ -56,30 +56,15 @@
 	</header>
 
 	<main>
-		<div class="contents-box">			
+		<div class="contents-box">
 			<div class="contents" id="subject-menu">
-				<button id="toWrite">새 글 등록</button>
-				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
-				<button>주제1</button>
-				<button>주제2</button>
-				<button>주제3</button>
-				<button>주제4</button>
-				<button>주제5</button>
-				<button>주제6</button>
-			</div>
-			<c:forEach var="dto" items="${list}">
-				<div class="contents">
-					<h6>${dto.subject}</h6>
-					<div>
-						<div><a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a></div>
-						<span>${dto.writer}</span> <span>위치</span> <span id="write-date">${dto.write_date}</span>
-					</div>
+				<span>주제(ex 동네소식)</span>
+				<h3>${dto.writer}</h3>
+				<h6>위치 / ${dto.write_date}</h6>
 
-					<div class="form-floating">
-						<span>좋아요 하기</span> <span>댓글</span> <span>${dto.like_count}</span>
-					</div>
-				</div>
-			</c:forEach>
+				<div>${dto.contents}</div>
+				<div>댓글 상자</div>
+			</div>
 		</div>
 	</main>
 	<footer>
