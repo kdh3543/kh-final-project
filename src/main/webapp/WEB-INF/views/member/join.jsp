@@ -52,22 +52,21 @@
         </div>
     </header>
     <main>
-    <form action="/" method="get">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="join-wrap">
             <div class="join-title">회원가입</div>
             <hr>
           <div class="mb-3">
-           <form action="" method="post" enctype="multipart/form-data">
            <label for="imgfile" class="del-button img-up">
-         		<input type="file" id=imgfile name="imgfile" accept=".jpg, .png, .jpeg, .gif" style="display:none;">
+         		<input type="file" id=imgfile name="profile_image" accept=".jpg, .png, .jpeg, .gif" style="display:none;">
          		<img src="/imgs/회원가입2 (2).png" id="profile">
          		프로필 사진 등록
            </label>
-           </form>
           </div>
+          </form>
 
             
-            
+            <form action="/member/signup" method="get">
         <div class="mb-3">
             <label for="inputId" class="form-label">아이디</label>
             <input type="text" class="form-control" id="inputId" name="id" placeholder="영문대소문자,숫자 조합의 6~15자리" pattern="^([A-Za-z0-9]){6,15}$" required>
@@ -88,11 +87,7 @@
             <label for="inputName" class="form-label">이름</label>
             <input type="text" class="form-control" id="inputName" name="name" placeholder="이름을 입력하세요" pattern="^[가-힣]{2,5}$" required>
           </div>
-          <div class="mb-3">
-            <label for="inputnickname" class="form-label">닉네임</label>
-              <input type="text" class="form-control" id="inputnickname" name="nickname" placeholder="사용할 닉네임을 입력하세요" pattern="^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$" required>
-              <span id="checknickname"></span>
-            </div>
+      
           <div class="mb-3">
             <label for="inputZipcode" class="form-label">우편번호</label>
             <input type="text" class="form-control" id="inputZipcode" name="zipcode" placeholder="우편번호를 검색하세요." required>
@@ -116,7 +111,7 @@
           </div>
           <div class="mb-3">
             <label for="deallocation" class="form-label">거래희망지역</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="선호하는 거래 지역이 있다면 선택해주세요">
+            <input type="text" class="form-control" id="location" name="prefer_location" placeholder="선호하는 거래 지역이 있다면 선택해주세요">
           </div>
             <hr class="mb-4">
           <div class="custom-control custom-checkbox">
@@ -171,7 +166,8 @@
               url:"/member/idCheck",
               data:{id:$("#inputId").val()}
            }).done(function(resp){
-              if(resp == "true"){
+        	   console.log(resp);
+              if(resp == "1"){
                  $("#checkid").css("color","pink");
                  $("#checkid").text("이미 사용중인 ID 입니다.");
               }else{
@@ -182,32 +178,6 @@
         });
      })
       
-      //닉네임 중복확인 & 사용가능 여부 확인
-      $(function(){
-        $("#inputnickname").on("input",function(){
-            let nickname = document.getElementById("inputnickname").value;
-                let nickregex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$/;
-                let result = nickregex.test(nickname);
-                if(!result){
-                   $("#checkResultN").css("color","red");
-                 $("#checkResultN").text("잘못된 닉네임 입니다.");
-                   
-                   return false;
-                }
-           $.ajax({
-              url:"/nicknameCheck.mem",
-              data:{nn:$("#inputnickname").val()}
-           }).done(function(resp){
-              if(resp == "true"){
-                 $("#checknickname").css("color","pink");
-                 $("#checknickname").text("이미 사용중인 닉네임 입니다.");
-              }else{
-                 $("#checknickname").css("color","green");
-                 $("#checknickname").text("사용 가능한 닉네임 입니다.");
-              }
-           });
-        });
-     })
       
 
          
