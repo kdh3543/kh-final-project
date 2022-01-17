@@ -54,31 +54,36 @@
 			</div>
 		</div>
 	</header>
-
 	<main>
 		<div class="contents-box">
-			<div class="contents" id="subject-menu">
-				<button id="toWrite">새 글 등록</button>
+			<div class="contents-top-div">
 				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
-				<button>주제1</button>
-				<button>주제2</button>
-				<button>주제3</button>
-				<button>주제4</button>
-				<button>주제5</button>
-				<button>주제6</button>
+				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
+			</div>
+			<div class="subject-menu">
+				<button class="btn btn-primary" type="button">주제1</button>
+				<button class="btn btn-primary" type="button">주제2</button>
+				<button class="btn btn-primary" type="button">주제3</button>
+				<button class="btn btn-primary" type="button">주제4</button>
+				<button class="btn btn-primary" type="button">주제5</button>
+				<button class="btn btn-primary" type="button">주제6</button>
 			</div>
 			<c:forEach var="dto" items="${list}">
 				<div class="contents">
-					<h6>${dto.subject}</h6>
-					<div>
-						<div>
+					<div class="contents-title">${dto.subject}</div>
+					<div class="contents-div">
+						<div class="contents-div-contents">
 							<a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
 						</div>
-						<span>${dto.writer}</span> <span>위치</span> <span id="write-date">${dto.write_date}</span>
+						<div class="contents-container">
+							<div class="contents-div-writer">${dto.writer}</div>
+							<div class="contents-div-location">위치</div>
+							<div class="contents-div-writedate">${dto.write_date}</div>
+						</div>
 					</div>
-
 					<div class="form-floating">
-						<span>좋아요(좋아요 수)</span> <span>댓글</span>
+							<div class="floating-likes"><i class="fas fa-heart"></i>좋아요(좋아요 수)</div>
+							<div class="floating-comments"><i class="fas fa-comment"></i> 댓글</div>
 					</div>
 				</div>
 			</c:forEach>

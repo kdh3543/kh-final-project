@@ -4,44 +4,118 @@
 
 body{
   margin: 0;
+  width:100%;
   height : auto;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
+  font-family: OTWelcomeRA;
 }
-
+main {
+    height:auto;
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 200px;
+}
 .contents-box {
   width: 100%;
   margin: auto;
-  font-family: OTWelcomeRA;
-  /* height: 700px; */
   margin-bottom:160px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding:10%; */
-  padding-top: 2%;
-  padding-bottom: 2%;
-  padding-left: 10%;
-  padding-right: 10%;
-  /* margin-top: 200px; */
+  padding: 10%;
 
+}
+
+.contents-top-div{
+	width: 100%;
+	height:100px;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#toWrite{
+	width: 100px;
+    height: 50px;
+    background-color:#24a6a4;
+    color:#fff;
+    border:1px solid #24a6a4;
+}
+#toWrite:hover{
+
+    background-color:#fff;
+    color:#24a6a4;
+    border:1px solid #24a6a4;
 }
 .contents-box h1 {
   font-family: OTWelcomeBA;
 }
 
-.contents-box div {
-	border: 1px solid black;
+/* 주제 버튼 */
+.subject-menu{
+	display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-
-.contents {
-	width: 100%;
-	margin: 1%;
+.subject-menu button{
+	height:50px;
+    width: 15%;
+    border:2px solid #24a6a4;
+    color:black;
+    background-color:#fff;
 }
-
+.subject-menu button:hover{
+	height:50px;
+    width: 15%;
+    border:2px solid #fff;
+    color:#fff;
+    background-color:#24a6a4;
+}
 .buttons {
   display: flex;
   justify-content: space-evenly;
+}
+/* 게시글 */
+.contents {
+	width: 100%;
+	margin: 1%;
+	border:1px solid black;
+}
+.contents-title{
+	font-family: OTWelcomeBA;
+	font-size:30px;	
+	padding:1%;
+}
+.contents-div{
+	font-size:25px;	
+}
+.contents-div .contents-div-contents{
+	padding:2%;
+}
+.contents-container{
+	padding: 0% 2% 2%;
+	display:flex;
+}
+.contents-container div{
+	padding-right:10px;
+	font-size:20px;	
+}
+.form-floating{
+	width:100%;
+	display:flex;
+	padding: 0% 2% 2%;
+}
+.form-floating div{
+	padding-right:10px;
+	font-size:20px;	
+}
+.floating-likes i {
+	padding-right:10px;
+}
+.floating-comments i{
+	padding-right:10px;
 }
