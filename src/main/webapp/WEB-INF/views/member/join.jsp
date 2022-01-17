@@ -52,7 +52,7 @@
         </div>
     </header>
     <main>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="/member/profileimage" method="post" enctype="multipart/form-data">
         <div class="join-wrap">
             <div class="join-title">회원가입</div>
             <hr>
