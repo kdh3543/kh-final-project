@@ -33,4 +33,20 @@ public class MemberService {
 		dto.setPw(encPw);
 		return mdao.insert(dto);
 	}
+	//아이디로 찾기
+	public MemberDTO select(String id){
+		return mdao.select(id);
+	}
+	//아이디 삭제
+	public int delete(String id) {
+		return mdao.delete(id);
+	}
+	//로그인하기
+	public int login(String logid, String logpw) {
+		return mdao.login(logid, logpw);
+	}
+	//회원 정보 수정
+	public int modify(MemberDTO dto) {
+		return mdao.modify(dto);
+	}
 }
