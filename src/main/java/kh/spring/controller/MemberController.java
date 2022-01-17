@@ -58,6 +58,7 @@ public class MemberController {
 		System.out.println(profile_image);
 		return "redirect:/";
 	}
+	//로그인 기능
 	@RequestMapping("login")
 	public String login(String logid, String logpw) {
 		logpw = EncryptionUtils.getSHA512(logpw);
@@ -69,14 +70,14 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-
+	//로그아웃 기능
 	@RequestMapping("logout")
 	public String logout() {
 		session.invalidate();
 		System.out.println("로그아웃 되었습니다.");
 		return "redirect:/";
 	}
-
+	//회원탈퇴 기능
 	@RequestMapping("leave")
 	public String leave() {
 		String id = (String)session.getAttribute("loginId");
@@ -85,7 +86,7 @@ public class MemberController {
 		System.out.println("회원이 탈퇴되었습니다.");
 		return "redirect:/";
 	}
-
+	//마이페이지 이동기능
 	@RequestMapping("mypage")
 	public String mypage(Model model) {
 		String id = (String)session.getAttribute("loginId");
