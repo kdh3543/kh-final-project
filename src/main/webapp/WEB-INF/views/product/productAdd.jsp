@@ -29,6 +29,8 @@
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/css/productAdd.css">
+<!-- JS -->
+<script src="/js/index.js"></script>
 
 </head>
 <body>
@@ -49,158 +51,236 @@
 		<div class="div-wrap3"></div>
 	</header>
 	<main>
-		  <!-- 네비바 -->
-            <div class="top-div">
-                <div class="div-wrap2">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="fas fa-bars fa-2x"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-
-                            <!-- Dropdown menu links -->
-                            <li>
-                                <h6 class="dropdown-header">전체 카테고리</h6>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" id="c01">여성의류</a>
-                                <div class="c01-content">
-                                    <a class="dropdown-item" href="#">여성 상의</a>
-                                    <a class="dropdown-item" href="#">여성 하의</a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" id="c02">남성의류</a>
-                                <div class="c02-content">
-                                    <a class="dropdown-item" href="#">남성 상의</a>
-                                    <a class="dropdown-item" href="#">남성 하의</a>
-                                </div>
-                            </li>
-                            <li><a class="dropdown-item" href="#" id="c03">신발</a>
-                                <div class="c03-content">
-                                    <a class="dropdown-item" href="#">운동화</a>
-                                    <a class="dropdown-item" href="#">슬리퍼</a>
-                                </div>
-                            </li>
-                            <li><a class="dropdown-item" href="#" id="c04">가방</a></li>
-                            <li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
-                            <li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
-                            <li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
-                            <li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-                            <li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-                            <li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
-                            <li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
-                            <li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
-                        </ul>
-                    </div>
-                    <div class="rightList">
-
-                        <a href="productAdd" class="btn-sell">
-                            <i class="fas fa-dollar-sign fa-2x"></i> 판매하기 </a>
-                        |
-                        <a href="myPage" class="btn-myshop">
-                            <i class="fas fa-store fa-2x"></i> 내상점 </a>
-                        |
-                        <a href="talk" class="btn-talk">
-                            <i class="fas fa-comment fa-2x"></i> 00톡</a>
-                        |
-                        <a href="board/boardList" class="btn-talk">
-                            <i class="fas fa-edit fa-2x"></i>커뮤니티</a>
-
-
-                    </div>
-                </div>
-            </div>
 		<div class="container-div">
-			<nav>
-				<div class="nav nav-tabs" id="nav-tab" role="tablist">
-					<button class="nav-link active" id="nav-add-tab"
-						data-bs-toggle="tab" data-bs-target="#nav-add" type="button"
-						role="tab" aria-controls="nav-add" aria-selected="true">상품등록</button>
-					<button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
-						data-bs-target="#nav-control" type="button" role="tab"
-						aria-controls="nav-control" aria-selected="false">상품관리</button>
-					<button class="nav-link" id="nav-purchase-tab" data-bs-toggle="tab"
-						data-bs-target="#nav-purchase" type="button" role="tab"
-						aria-controls="nav-purchase" aria-selected="false">????</button>
-				</div>
-			</nav>
-			<div class="tab-content" id="nav-tabContent">
-				<!-- 상품정보 -->
-				<div class="tab-pane fade show active" id="nav-add" role="tabpanel"
-					aria-labelledby="nav-add-tab">
-					<div class="add-title">
-						<div class="left-title">기본정보</div>
-						<div class="right-title">*필수항목</div>
+			<!-- 네비바 -->
+			<div class="top-div">
+				<div class="div-wrap2">
+					<div class="btn-group">
+						<button type="button" class="btn btn-secondary-light"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-bars fa-2x"></i>
+						</button>
+						<ul class="dropdown-menu">
+
+							<!-- Dropdown menu links -->
+							<li>
+								<h6 class="dropdown-header">전체 카테고리</h6>
+							</li>
+							<li><a class="dropdown-item" href="#" id="c01">여성의류</a>
+								<div class="c01-content">
+									<a class="dropdown-item" href="#">여성 상의</a> <a
+										class="dropdown-item" href="#">여성 하의</a>
+								</div></li>
+							<li><a class="dropdown-item" href="#" id="c02">남성의류</a>
+								<div class="c02-content">
+									<a class="dropdown-item" href="#">남성 상의</a> <a
+										class="dropdown-item" href="#">남성 하의</a>
+								</div></li>
+							<li><a class="dropdown-item" href="#" id="c03">신발</a>
+								<div class="c03-content">
+									<a class="dropdown-item" href="#">운동화</a> <a
+										class="dropdown-item" href="#">슬리퍼</a>
+								</div></li>
+							<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
+							<li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
+							<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
+							<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
+							<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
+							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
+							<li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
+							<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
+							<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
+						</ul>
 					</div>
-					<div class="add-contents">
-						<table class="contents-table">
-							<tr>
-								<td>상품이미지</td>
-								<td>이미지넣기</td>
-							</tr>
-							<tr>
-								<td>제목</td>
-								<td><input type="text" placeholder="상품제목을 입력하세요." class="inputTitle"></td>
-							</tr>
-							<tr>
-								<td>카테고리</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>거래지역</td>
-								<td>
-									<button>내위치</button>
-									<button>최근지역</button>
-									<button>주소검색</button>
-									<button>지역설정안함</button>
-									<br>
-									<input type="text" placeholder="주소">
-								</td>
-							</tr>
-							<tr>
-								<td>상품 상태</td>
-								<td>
-									<input type="radio" value="중고상품">중고상품
-									<input type="radio" value="새상품">새상품
-								</td>
-							</tr>
-							<tr>
-								<td>교환</td>
-								<td>
-									<input type="radio" value="교환불가">교환불가
-									<input type="radio" value="교환가능">교환가능
-								</td>
-							</tr>
-							<tr>
-								<td>가격</td>
-								<td><input type="text" placeholder="숫자만 입력하세요">원	
-								<br><input type="radio" value="교환불가">배송비포함</td>
-							</tr>
-							<tr>
-								<td>기타 설명</td>
-								<td><textarea rows="5" cols="40" placeholder="상품설명을 입력해주세요."></textarea></td>
-							</tr>
-							<tr>
-								<td>연관태그</td>
-								<td><input type="text" placeholder="연관태그를 입력하세요."></td>
-							</tr>
-						</table>
-						<div class="add-bottom-title">
-						<div class="bottom-left-title">기타옵션</div>
-						<div class="bottom-right-title"></div>
+					<div class="rightList">
+
+						<a href="productAdd" class="btn-sell"> <i
+							class="fas fa-dollar-sign fa-2x"></i> 판매하기
+						</a> | <a href="myPage" class="btn-myshop"> <i
+							class="fas fa-store fa-2x"></i> 내상점
+						</a> | <a href="talk" class="btn-talk"> <i
+							class="fas fa-comment fa-2x"></i> 00톡
+						</a> | <a href="board/boardList" class="btn-talk"> <i
+							class="fas fa-edit fa-2x"></i>커뮤니티
+						</a>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="contents-div">
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<button class="nav-link active" id="nav-add-tab"
+							data-bs-toggle="tab" data-bs-target="#nav-add" type="button"
+							role="tab" aria-controls="nav-add" aria-selected="true">상품등록</button>
+						<button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
+							data-bs-target="#nav-control" type="button" role="tab"
+							aria-controls="nav-control" aria-selected="false">상품관리</button>
+						<button class="nav-link" id="nav-purchase-tab"
+							data-bs-toggle="tab" data-bs-target="#nav-purchase" type="button"
+							role="tab" aria-controls="nav-purchase" aria-selected="false">????</button>
+					</div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+					<!-- 상품정보 -->
+					<div class="tab-pane fade show active" id="nav-add" role="tabpanel"
+						aria-labelledby="nav-add-tab">
+						<div class="add-title">
+							<div class="left-title">기본정보</div>
+							<div class="right-title">*필수항목</div>
+						</div>
+						<div class="add-contents">
+							<table class="contents-table">
+								<tr>
+									<td>상품이미지</td>
+									<td>이미지넣기</td>
+								</tr>
+								<tr>
+									<td>제목</td>
+									<td><input type="text" placeholder="상품제목을 입력하세요."
+										class="inputTitle"></td>
+								</tr>
+								<tr>
+									<td>카테고리</td>
+									<td>
+										<ul class="category-menu">
+											<li>전체카테고리
+											<li><a href="#">여성의류</a>
+											<ul class="submenu-women">
+												<li><a href="#">여성 상의</a>
+												<li><a href="#">여성 하의</a>
+											</ul>
+											<li><a href="#">남성의류</a>
+											<ul class="submenu-men">
+												<li><a href="#">남성 상의</a>
+												<li><a href="#">남성 하의</a>
+											</ul>
+											<li><a href="#">남성의류</a>
+											<!-- <li>
+												<h6 class="dropdown-header">전체 카테고리</h6>
+											</li>
+											<li><a class="dropdown-item" href="#" id="c01">여성의류</a>
+												<div class="c01-content">
+													<a class="dropdown-item" href="#">여성 상의</a> <a
+														class="dropdown-item" href="#">여성 하의</a>
+												</div></li>
+											<li><a class="dropdown-item" href="#" id="c02">남성의류</a>
+												<div class="c02-content">
+													<a class="dropdown-item" href="#">남성 상의</a> <a
+														class="dropdown-item" href="#">남성 하의</a>
+												</div></li>
+											<li><a class="dropdown-item" href="#" id="c03">신발</a>
+												<div class="c03-content">
+													<a class="dropdown-item" href="#">운동화</a> <a
+														class="dropdown-item" href="#">슬리퍼</a>
+												</div></li>
+											<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
+											<li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
+											<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
+											<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
+											<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
+											<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
+											<li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
+											<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
+											<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li> -->
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>거래지역</td>
+									<td>
+										<button>내위치</button>
+										<button>최근지역</button>
+										<button>주소검색</button>
+										<button>지역설정안함</button> <br> <input type="text"
+										placeholder="주소">
+									</td>
+								</tr>
+								<tr>
+									<td>상품 상태</td>
+									<td><input type="radio" value="중고상품">중고상품 <input
+										type="radio" value="새상품">새상품</td>
+								</tr>
+								<tr>
+									<td>교환</td>
+									<td><input type="radio" value="교환불가">교환불가 <input
+										type="radio" value="교환가능">교환가능</td>
+								</tr>
+								<tr>
+									<td>가격</td>
+									<td><input type="text" placeholder="숫자만 입력하세요">원 <br>
+										<input type="radio" value="교환불가">배송비포함</td>
+								</tr>
+								<tr>
+									<td>기타 설명</td>
+									<td><textarea rows="5" cols="40"
+											placeholder="상품설명을 입력해주세요."></textarea></td>
+								</tr>
+								<tr>
+									<td>연관태그</td>
+									<td><input type="text" placeholder="연관태그를 입력하세요."></td>
+								</tr>
+							</table>
+							<div class="add-bottom-title">
+								<div class="bottom-left-title">기타옵션</div>
+							</div>
+							<div class="add-bottom-contents">
+								<div class="contents-div">기타옵션</div>
+							</div>
+							<div class="add-btns-div">
+								<button class="btn btn-outline-secondary" id="productAddBtn"
+									type="button">상품등록</button>
+								<button class="btn btn-outline-secondary" id="resetBtn"
+									type="reset">초기화</button>
+							</div>
 						</div>
 					</div>
+					<!-- 판매내역-->
+					<div class="tab-pane fade" id="nav-control" role="tabpanel"
+						aria-labelledby="nav-control-tab">
+						<div class="control-title">
+							<div class="left-title">상품관리</div>
+						</div>
+						<div class="control-contents">
+							<div class="control-search-input">
+								<input type="text" placeholder="상품명을 입력하세요">
+								<button type="button" class="searchBtn">검색</button>
+							</div>
+							<div class="control-search-div">
+								<table class="control-search-table">
+									<tr>
+										<th>사진
+										<th>판매상태
+										<th>상품명
+										<th>가격
+										<th>찜/댓글
+										<th>최근수정일
+										<th>기능
+									</tr>
+									<tr>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+									</tr>
+									<!-- 
+									<tr>
+										<td colsapn="7">표시할 내용이 없습니다.
+									</tr> 
+									-->
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- 구매내역 -->
+					<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+						aria-labelledby="nav-purchase-tab">페이지3</div>
 				</div>
-				<!-- 판매내역-->
-				<div class="tab-pane fade" id="nav-control" role="tabpanel"
-					aria-labelledby="nav-control-tab">상품관리</div>
-				<!-- 구매내역 -->
-				<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
-					aria-labelledby="nav-purchase-tab">페이지3</div>
 			</div>
-		</div>
 	</main>
 	<!-- footer -->
 	<footer>
