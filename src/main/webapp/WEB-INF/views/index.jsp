@@ -162,11 +162,11 @@
                         <div class="imgBox">
                             <a href="productDetail">
                                 <div>
-                                    <img src="imgs/200Pic.png">
+                                    <img src="imgs/t-shirt.jpeg">
                                 </div>
                                 <div>
-                                    <div class="title">상품명</div>
-                                    <div class="price">0000원</div>
+                                    <div class="title">티셔츠</div>
+                                    <div class="price">3000원</div>
                                     <div class="date">0일전</div>
                                 </div>
 
