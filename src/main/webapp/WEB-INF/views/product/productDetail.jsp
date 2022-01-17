@@ -65,7 +65,7 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="imgs/testPic.png" class="d-block w-100" alt="...">
+                                <img src="imgs/t-shirt.jpeg" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item">
                                 <img src="imgs/testPic.png" class="d-block w-100" alt="...">
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="detail-right">
-                <div class="productName">네모박스</div>
+                <div class="productName">300티셔츠</div>
                 <div class="productPrice">3,000원</div>
                 <div class="product-status">
                     <div class="status-like">좋아요</div>
@@ -103,7 +103,7 @@
                 <div class="bottom-top-title">연관상품</div>
                 <div class="bottom-top-img">
                     <div class="bottom-top-imglist">
-                        <img src="/imgs/200Pic.png" alt="">
+                        <img src="imgs/t-shirt.jpeg">
                         <a href="#">상품1</a>
                     </div>
                     <div class="bottom-top-imglist">
@@ -122,11 +122,7 @@
                         <img src="/imgs/200Pic.png" alt="">
                         <a href="#">상품5</a>
                     </div>
-                    <div class="bottom-top-imglist">
-                        <img src="/imgs/200Pic.png" alt="">
-                        <a href="#">상품6</a>
-                    </div>
- 
+           
                 </div>
             </div>
             <div class="bottom-bottom">
