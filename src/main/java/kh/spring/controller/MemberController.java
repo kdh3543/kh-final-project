@@ -7,12 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
+import kh.spring.utils.EncryptionUtils;
 
 @Controller
 @RequestMapping("/member/")
@@ -56,6 +58,39 @@ public class MemberController {
 		System.out.println(profile_image);
 		return "redirect:/";
 	}
+	@RequestMapping("login")
+	public String login(String logid, String logpw) {
+		logpw = EncryptionUtils.getSHA512(logpw);
 
+		int result = mservice.login(logid,logpw);
+		if(result>0) {
+			session.setAttribute("loginId", logid);
+		}
 
+		return "redirect:/";
+	}
+
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		System.out.println("로그아웃 되었습니다.");
+		return "redirect:/";
+	}
+
+	@RequestMapping("leave")
+	public String leave() {
+		String id = (String)session.getAttribute("loginId");
+		int result = mservice.delete(id);
+		session.invalidate();
+		System.out.println("회원이 탈퇴되었습니다.");
+		return "redirect:/";
+	}
+
+	@RequestMapping("mypage")
+	public String mypage(Model model) {
+		String id = (String)session.getAttribute("loginId");
+		MemberDTO dto = mservice.select(id);
+		model.addAttribute("dto", dto);
+		return "/member/myPage";
+	}
 }

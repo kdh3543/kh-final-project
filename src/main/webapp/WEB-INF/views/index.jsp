@@ -1,8 +1,9 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>index</title>
@@ -30,8 +31,19 @@
     <header>
         <div class="header_Container">
             <ul class="header_list">
-                <li><a href="signIn">로그인</a></li>
-                <li><a href="join">회원가입</a></li>
+              <c:choose>
+               <c:when test="${loginId != null}">
+            ${loginId} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+                  <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/member/leave" id="leavebtn" >회원 탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+               </c:when>
+               <c:otherwise>
+                  <li><a href="signIn">로그인</a></li>
+                  <li><a href="join">회원가입</a></li>
+               </c:otherwise>
+            </c:choose>
+                
             </ul>
         </div>
         <div class="div-wrap">
@@ -45,7 +57,7 @@
                         <input type="text" class="form-control" placeholder="동네 이름, 물품명 등을 검색해 보세요!"
                             aria-label="Recipient's username" aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                                class="fas fa-search fa-2x"></i></button>
+                                class="fas fa-search fa-2x"></i></button>    
                     </div>
                 </div>
             </div>
@@ -286,6 +298,16 @@
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>
         </div>
     </footer>
+    
+    <script>
+    	$("#logoutbtn").on("click",function(){
+    		confirm("정말 로그아웃하시겠습니까?");
+    		location.href = "/member/leave" 
+    	})
+    	$("#leavebtn").on("click",function(){
+    		confirm("정말 회원을 탈퇴하시겠습니까?")
+    	})
+    </script>
 </body>
 
 </html>

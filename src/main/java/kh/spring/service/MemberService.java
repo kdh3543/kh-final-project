@@ -33,4 +33,19 @@ public class MemberService {
 		dto.setPw(encPw);
 		return mdao.insert(dto);
 	}
+	public MemberDTO select(String id){
+		return mdao.select(id);
+	}
+	
+	public int delete(String id) {
+		return mdao.delete(id);
+	}
+
+	public int login(String logid, String logpw) {
+		return mdao.login(logid, logpw);
+	}
+
+	public int modify(MemberDTO dto) {
+		return mdao.modify(dto);
+	}
 }
