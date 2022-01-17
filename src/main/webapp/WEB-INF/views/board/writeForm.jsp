@@ -57,68 +57,34 @@
 
 	<main>
 		<div class="contents-box">
-			<div class="contents">
-				<select id="subject" name="subject">
-					<option>게시글의 주제를 선택해주세요</option>
-					<option>동네질문</option>
-					<option>동네사건사고</option>
-					<option>동네맛집</option>
-					<option>동네소식</option>
-					<option>분실/실종센터</option>
-					<option>해주세요</option>
-					<option>일상</option>
-					<option>취미생활</option>
-					<option>고양이</option>
-					<option>강아지</option>
-					<option>건강</option>
-					<option>살림</option>
-					<option>인테리어</option>
-					<option>교육/학원</option>
-					<option>동네사진전</option>
-					<option>출산/육아</option>
-					<option>기타</option>
-				</select>
-				<!-- <button type="button" class="btn btn-secondary-light"
-					data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="fas fa-bars fa-2x"></i>
-				</button>
-				<ul class="dropdown-menu">
-
-					Dropdown menu links
-					<li>
-						<h6 class="dropdown-header">전체 카테고리</h6>
-					</li>
-					<li><a class="dropdown-item" href="#" id="c01">여성의류</a>
-						<div class="c01-content">
-							<a class="dropdown-item" href="#">여성 상의</a> <a
-								class="dropdown-item" href="#">여성 하의</a>
-						</div></li>
-					<li><a class="dropdown-item" href="#" id="c02">남성의류</a>
-						<div class="c02-content">
-							<a class="dropdown-item" href="#">남성 상의</a> <a
-								class="dropdown-item" href="#">남성 하의</a>
-						</div></li>
-					<li><a class="dropdown-item" href="#" id="c03">신발</a>
-						<div class="c03-content">
-							<a class="dropdown-item" href="#">운동화</a> <a
-								class="dropdown-item" href="#">슬리퍼</a>
-						</div></li>
-					<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
-					<li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
-					<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
-					<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
-					<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-					<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-					<li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
-					<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
-					<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
-				</ul> -->
-			</div>
-			<div class="contents">
-
-				<textarea rows="20%" cols="100%" placeholder="우리 동네 관련 정보를 공유해주세요!"></textarea>
-
-			</div>
+			<form action="/board/writeProc" method="post" enctype="multipart/form-data">
+				<div class="contents">
+					<select id="subject" name="subject">
+						<option>게시글의 주제를 선택해주세요</option>
+						<option>동네질문</option>
+						<option>동네사건사고</option>
+						<option>동네맛집</option>
+						<option>동네소식</option>
+						<option>분실/실종센터</option>
+						<option>해주세요</option>
+						<option>일상</option>
+						<option>취미생활</option>
+						<option>고양이</option>
+						<option>강아지</option>
+						<option>건강</option>
+						<option>살림</option>
+						<option>인테리어</option>
+						<option>교육/학원</option>
+						<option>동네사진전</option>
+						<option>출산/육아</option>
+						<option>기타</option>
+					</select>
+					<button type="submit" id="submit">완료</button>
+				</div>
+				<div class="contents">
+					<textarea rows="20%" cols="100%" placeholder="우리 동네 관련 정보를 공유해주세요!" name="contents"></textarea>
+				</div>
+			</form>
 		</div>
 	</main>
 	<footer>
