@@ -58,6 +58,26 @@
 	<main>
 		<div class="contents-box">
 			<div class="contents" id="subject-menu">
+				<div>
+					<button type="button" id="back">돌아가기</button>
+					<div class="btn-group">
+                        <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fas fa-bars fa-2x"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+
+                            <!-- Dropdown menu links -->
+                            <li>
+                                <h6 class="dropdown-header">메뉴</h6>
+                            </li>
+                            <li>
+                               <a class="dropdown-item" href="#" id="modifyBoard">수정</a>
+                               <a class="dropdown-item" href="#" id="deleteBoard">삭제</a>
+                            </li>                      
+                        </ul>
+                    </div>
+				</div>
 				<span>주제(ex 동네소식)</span>
 				<h3>${dto.writer}</h3>
 				<h6>위치 / ${dto.write_date}</h6>
@@ -66,22 +86,39 @@
 
 				<span>등록순</span> / <span>최신순</span>
 			</div>
-			<c:forEach var="cdto" items="${list}">
-				<div class="contents">
-					<h3>${cdto.writer}</h3>
-					<span>위치</span> / <span>${cdto.write_date}</span>
-					<div>
-						<div>${cdto.contents}</div>
-						<span id="write-date">${cdto.write_date}</span>
+				<c:forEach var="cdto" items="${list}">
+					<div class="contents">
+						<h3 id="comment-writer">${cdto.writer}</h3>
+						<span id="location">위치</span> / <span id="comment-write-date">${cdto.write_date}</span>
+						<div class="btn-group">
+	                        <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
+	                            aria-expanded="false">
+	                            <i class="fas fa-bars fa-2x"></i>
+	                        </button>
+	                        <ul class="dropdown-menu">
+	
+	                            <!-- Dropdown menu links -->
+	                            <li>
+	                                <h6 class="dropdown-header">메뉴</h6>
+	                            </li>
+	                            <li>
+	                               <a class="dropdown-item" href="#" id="modifyComment">수정</a>
+	                               <a class="dropdown-item" href="#" id="deleteComment">삭제</a>
+	                            </li>                      
+	                        </ul>
+	                    </div>
+						<div id="comment-contents">${cdto.contents}</div>
+						<span id="like-count">좋아요(좋아요 수)</span>
 					</div>
-
-					<div class="form-floating">
-						<span>좋아요(좋아요 수)</span> <span>댓글</span>
-					</div>
-				</div>
-			</c:forEach>
-
-		</div>
+				</c:forEach>
+			<div class="contents">
+				<form action="/comment/writeProc?seq=${dto.board_seq}" method="post"
+					enctype="multipart/form-data">
+					<textarea rows="" cols="100%" placeholder="댓글을 입력해주세요."
+						name="contents"></textarea>
+					<button type="submit" name="submit">등록</button>
+				</form>
+			</div>
 		</div>
 	</main>
 	<footer>
@@ -90,5 +127,67 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
+
+	<script>
+		$("#back").on("click", function() {
+			location.href = "/board/boardList";
+		})
+		
+		$("#modifyBoard").on("click", function() {
+			location.href = "/board/boardList";
+		})
+		
+		$("#deleteBoard").on("click", function() {
+			location.href = "/board/boardList";
+		})
+		
+		$("#modifyComment").on("click", function() {
+			location.href = "/board/boardList";
+		})
+		
+		$("#deleteComment").on("click", function() {
+			location.href = "/board/boardList";
+		})
+	</script>
+
+	<!-- 댓글 Ajax 코드 -->
+	<!-- <script>
+		$("#add-comment").on("click", function() {
+			$.ajax({
+				url : "/comment/writeProc",
+				data : {
+					board_seq : "${dto.board_seq}",
+					contents : $("#contents").val()
+				},
+				dataType : "json"
+			}).done(function(ResponseResult) {
+				console.log(ResponseResult);
+				let contents = $("<div>");				
+
+				let comment_writer = $("<h3>");
+				comment_writer.append(ResponseResult.writer);
+				
+				let location = $("<span>");
+				location.append("위치");
+				
+				let comment_write_date = $("<span>");
+				comment_write_date.append(ResponseResult.write_date);
+
+				let comment_contents = $("<div>");
+				comment_contents.append(ResponseResult.contents);
+
+				let like_count = $("<span>");
+				like_count.append("좋아요(좋아요 수)");
+
+				contents.append(comment_writer);
+				contents.append(location);
+				contents.append(comment_write_date);
+				contents.append(comment_contents);
+				contents.append(like_count);
+
+				$("#comment-container").append(contents);
+			})
+		})
+	</script> -->
 </body>
 </html>

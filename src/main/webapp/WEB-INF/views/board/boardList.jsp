@@ -34,7 +34,7 @@
 <!-- Custom styles for this template -->
 <link href="/css/boardList.css" rel="stylesheet">
 <!-- JS -->
-<script src="/js/boardList.js"></script>
+<script src="/js/boardDetail.js"></script>
 
 </head>
 
