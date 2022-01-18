@@ -72,8 +72,8 @@
                                 <h6 class="dropdown-header">메뉴</h6>
                             </li>
                             <li>
-                               <a class="dropdown-item" href="#" id="modifyBoard">수정</a>
-                               <a class="dropdown-item" href="#" id="deleteBoard">삭제</a>
+                               <a class="dropdown-item" id="modifyBoard">수정</a>
+                               <a class="dropdown-item" id="deleteBoard">삭제</a>
                             </li>                      
                         </ul>
                     </div>
@@ -102,8 +102,8 @@
 	                                <h6 class="dropdown-header">메뉴</h6>
 	                            </li>
 	                            <li>
-	                               <a class="dropdown-item" href="#" id="modifyComment">수정</a>
-	                               <a class="dropdown-item" href="#" id="deleteComment">삭제</a>
+	                               <a class="dropdown-item" id="modifyComment">수정</a>
+	                               <a class="dropdown-item" id="deleteComment">삭제</a>
 	                            </li>                      
 	                        </ul>
 	                    </div>
@@ -138,7 +138,7 @@
 		})
 		
 		$("#deleteBoard").on("click", function() {
-			location.href = "/board/boardList";
+			location.href = "/board/deleteProc?seq=${dto.board_seq}";
 		})
 		
 		$("#modifyComment").on("click", function() {
