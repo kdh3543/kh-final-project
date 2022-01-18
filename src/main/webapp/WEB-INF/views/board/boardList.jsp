@@ -29,7 +29,7 @@
 	crossorigin="anonymous"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/header_searchBar.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom styles for this template -->
 <link href="/css/boardList.css" rel="stylesheet">
@@ -39,21 +39,46 @@
 </head>
 
 <body>
-	<header>
-		<div class="header_Container">
-			<ul class="header_list">
-				<li><a href="signIn">로그인</a></li>
-				<li><a href="join">회원가입</a></li>
-			</ul>
-		</div>
-		<div class="div-wrap">
-			<div class="nav_div">
-				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
-				</div>
-			</div>
-		</div>
-	</header>
+	 <!--  Header -->
+    <header>
+        <div class="header_Container">
+            <ul class="header_list">
+              <c:choose>
+               <c:when test="${loginID != null}">
+              
+              	
+              	${dto}
+           			${dto.profile_image } 하이요
+           				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+                  <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/member/leave" id="leavebtn" >회원 탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+               </c:when>
+               <c:otherwise>
+                  <li><a href="signIn">로그인</a></li>
+                  <li><a href="join">회원가입</a></li>
+               </c:otherwise>
+            </c:choose>
+                
+            </ul>
+        </div>
+        <div class="div-wrap">
+            <div class="nav_div">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <a href="/">00마켓</a>
+                </div>
+                <div class="searchBar">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+                            aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                                class="fas fa-search fa-2x"></i></button>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 	<main>
 		<div class="contents-box">
 			<div class="contents-top-div">

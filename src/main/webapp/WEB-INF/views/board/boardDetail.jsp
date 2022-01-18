@@ -29,21 +29,38 @@
 	crossorigin="anonymous"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/header_searchBar.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom styles for this template -->
-<link href="/css/boardList.css" rel="stylesheet">
+<link href="/css/boardDetail.css" rel="stylesheet">
 <!-- JS -->
 <script src="/js/boardList.js"></script>
 
 </head>
 
 <body>
+	<!--  Header -->
 	<header>
 		<div class="header_Container">
 			<ul class="header_list">
-				<li><a href="signIn">로그인</a></li>
-				<li><a href="join">회원가입</a></li>
+				<c:choose>
+					<c:when test="${loginID != null}">
+              
+              	
+              	${dto}
+           			${dto.profile_image } 하이요
+           				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+                  <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+                  <a href="/member/leave" id="leavebtn">회원
+							탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+               </c:when>
+					<c:otherwise>
+						<li><a href="signIn">로그인</a></li>
+						<li><a href="join">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+
 			</ul>
 		</div>
 		<div class="div-wrap">
@@ -51,67 +68,87 @@
 				<div class="logo">
 					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 				</div>
+				<div class="searchBar">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control"
+							placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+							aria-label="Recipient's username"
+							aria-describedby="button-addon2">
+						<button class="btn btn-outline-secondary" type="button"
+							id="button-addon2">
+							<i class="fas fa-search fa-2x"></i>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</header>
 
 	<main>
 		<div class="contents-box">
-			<div class="contents" id="subject-menu">
-				<div>
-					<button type="button" id="back">돌아가기</button>
-					<div class="btn-group">
-                        <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="fas fa-bars fa-2x"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-
-                            <!-- Dropdown menu links -->
-                            <li>
-                                <h6 class="dropdown-header">메뉴</h6>
-                            </li>
-                            <li>
-                               <a class="dropdown-item" id="modifyBoard">수정</a>
-                               <a class="dropdown-item" id="deleteBoard">삭제</a>
-                            </li>                      
-                        </ul>
-                    </div>
-				</div>
-				<span>${dto.subject}</span>
-				<h3>${dto.writer}</h3>
-				<h6>위치 / ${dto.write_date}</h6>
-
-				<div>${dto.contents}</div>
-
-				<span>등록순</span> / <span>최신순</span>
+			<div class="top-contents">
+				<button type="button" id="back">
+					<i class="fas fa-undo">돌아가기</i>
+				</button>
 			</div>
-				<c:forEach var="cdto" items="${list}">
-					<div class="contents">
-						<h3 id="comment-writer">${cdto.writer}</h3>
-						<span id="location">위치</span> / <span id="comment-write-date">${cdto.write_date}</span>
-						<div class="btn-group">
-	                        <button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
-	                            aria-expanded="false">
-	                            <i class="fas fa-bars fa-2x"></i>
-	                        </button>
-	                        <ul class="dropdown-menu">
-	
-	                            <!-- Dropdown menu links -->
-	                            <li>
-	                                <h6 class="dropdown-header">메뉴</h6>
-	                            </li>
-	                            <li>
-	                               <a class="dropdown-item" id="modifyComment">수정</a>
-	                               <a class="dropdown-item" id="deleteComment" href="/comment/deleteProc?cseq=${cdto.comment_seq}&bseq=${dto.board_seq}">삭제</a>
-	                            </li>                      
-	                        </ul>
-	                    </div>
-						<div id="comment-contents">${cdto.contents}</div>
-						<span id="like-count">좋아요(좋아요 수)</span>
+			<div class="contents" id="subject-menu">
+				<div class="contents-div">
+					<div class="subject-div">${dto.subject}</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-secondary-light"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fas fa-ellipsis-v fa-2x"></i>
+						</button>
+						<ul class="dropdown-menu">
+
+							<!-- Dropdown menu links -->
+							<li>
+								<h6 class="dropdown-header">메뉴</h6>
+							</li>
+							<li><a class="dropdown-item" id="modifyBoard">수정</a> <a
+								class="dropdown-item" id="deleteBoard">삭제</a></li>
+						</ul>
 					</div>
-				</c:forEach>
-			<div class="contents">
+				</div>
+				<div class="subject-contents">
+					<div class="writer-div">${dto.writer}</div>
+					<div class="location-div">위치 / ${dto.write_date}</div>
+
+					<div class="write-contents-div">${dto.contents}</div>
+
+					<span>등록순</span> / <span>최신순</span>
+				</div>
+			</div>
+			<c:forEach var="cdto" items="${list}">
+				<div class="showcomments-div">
+					<div class="showcomments-top-div">
+						<h3 id="comment-writer">
+							<i class="fas fa-arrow-right"></i>${cdto.writer}</h3>
+					
+						<div class="btn-group">
+							<button type="button" class="btn btn-secondary-light"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="fas fa-ellipsis-v fa-2x"></i>
+							</button>
+							<ul class="dropdown-menu">
+
+								<!-- Dropdown menu links -->
+								<li>
+									<h6 class="dropdown-header">메뉴</h6>
+								</li>
+								<li><a class="dropdown-item" id="modifyComment">수정</a> <a
+									class="dropdown-item" id="deleteComment"
+									href="/comment/deleteProc?cseq=${cdto.comment_seq}&bseq=${dto.board_seq}">삭제</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="location"> 위치 / ${cdto.write_date}</div>
+					<div id="comment-contents">${cdto.contents}</div>
+					<span id="like-count"><i class="fas fa-heart">좋아요(좋아요 수)</i></span>
+				</div>
+			</c:forEach>
+			<div class="writecomments-div">
 				<form action="/comment/writeProc?seq=${dto.board_seq}" method="post"
 					enctype="multipart/form-data">
 					<textarea rows="" cols="100%" placeholder="댓글을 입력해주세요."
@@ -132,22 +169,22 @@
 		$("#back").on("click", function() {
 			location.href = "/board/boardList";
 		})
-		
+
 		$("#modifyBoard").on("click", function() {
 			location.href = "/board/modify?seq=${dto.board_seq}";
 		})
-		
+
 		$("#deleteBoard").on("click", function() {
 			location.href = "/board/deleteProc?seq=${dto.board_seq}";
 		})
-		
+
 		$("#modifyComment").on("click", function() {
 			location.href = "/board/boardList";
 		})
-		
-	/* 	$("#deleteComment").on("click", function() {
-			location.href = "/comment/deleteProc?seq=${dto.board_seq}";
-		}) */
+
+		/* 	$("#deleteComment").on("click", function() {
+				location.href = "/comment/deleteProc?seq=${dto.board_seq}";
+			}) */
 	</script>
 
 	<!-- 댓글 Ajax 코드 -->
