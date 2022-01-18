@@ -26,4 +26,20 @@
    <update id="modify">
       UPDATE BOARD SET CONTENTS = #{contents}, SUBJECT = #{subject} WHERE BOARD_SEQ = #{board_seq}
    </update>
+   
+   <update id="addLikeCount">
+      UPDATE BOARD SET LIKE_COUNT = LIKE_COUNT + 1 WHERE BOARD_SEQ = ${value}
+   </update>
+   
+   <update id="subtractLikeCount">
+      UPDATE BOARD SET LIKE_COUNT = LIKE_COUNT - 1 WHERE BOARD_SEQ = ${value}
+   </update>
+   
+   <insert id="addLikeList">
+      INSERT INTO BOARD_LIKE VALUES(BOARD_LIKE_SEQ.NEXTVAL, #{seq}, #{user_id})
+   </insert>
+   
+   <delete id="removeLikeList">
+      DELETE FROM BOARD_LIKE WHERE BOARD_SEQ = #{seq} and USER_ID = #{user_id}
+   </delete>
 </mapper>
