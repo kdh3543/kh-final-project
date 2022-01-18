@@ -52,21 +52,21 @@
         </div>
     </header>
     <main>
-    <form action="/member/profileimage" method="post" enctype="multipart/form-data">
+    <form action="/member/signup" method="post" enctype="multipart/form-data">
         <div class="join-wrap">
             <div class="join-title">회원가입</div>
             <hr>
           <div class="mb-3">
            <label for="imgfile" class="del-button img-up">
-         		<input type="file" id=imgfile name="profile_image" accept=".jpg, .png, .jpeg, .gif" style="display:none;">
+         		<input type="file" id=imgfile name="file" accept=".jpg, .png, .jpeg, .gif" style="display:none;">
          		<img src="/imgs/회원가입2 (2).png" id="profile">
          		프로필 사진 등록
            </label>
           </div>
-          </form>
+          
 
             
-            <form action="/member/signup" method="get">
+            
         <div class="mb-3">
             <label for="inputId" class="form-label">아이디</label>
             <input type="text" class="form-control" id="inputId" name="id" placeholder="영문대소문자,숫자 조합의 6~15자리" pattern="^([A-Za-z0-9]){6,15}$" required>
@@ -184,10 +184,17 @@
       
      //비밀번호 일치 확인
       $("#inputPwAgain").on("keyup",function(){
-         if($("#inputPw").val()==$("#inputPwAgain").val()){
+         if($("#inputPw").val()==$("#inputPwAgain").val() && $("#inputPw").val()!=""){
             $("#checkpw").css("color","green");
             $("#checkpw").text("비밀번호가 일치합니다");
-         }else{
+         }else if($("#inputPw").val()==""){
+        	 $("#checkpw").css("color","red");
+             $("#checkpw").text("비밀번호를 입력해주세요");
+         }else if($("#inputPwAgain").val()==""){
+        	 $("#checkpw").css("color","red");
+             $("#checkpw").text("비밀번호확인을 입력해주세요");
+         }
+         else{
             $("#checkpw").css("color","pink");
             $("#checkpw").text("비밀번호가 틀립니다.");
          }

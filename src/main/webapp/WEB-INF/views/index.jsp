@@ -21,9 +21,6 @@
         <!-- CSS -->
         <link rel="stylesheet" href="/css/font.css">
         <link rel="stylesheet" href="/css/index.css">
-        <link rel="stylesheet" href="/css/toggle.css">
-        <!-- JS -->
-        <script src="/js/index.js"></script>
 
 </head>
 
@@ -33,8 +30,12 @@
         <div class="header_Container">
             <ul class="header_list">
               <c:choose>
-               <c:when test="${loginId != null}">
-            ${loginId} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+               <c:when test="${loginID != null}">
+              
+              	
+              	${dto}
+           			${dto.profile_image } 하이요
+           				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
                   <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <a href="/member/leave" id="leavebtn" >회원 탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
@@ -77,29 +78,10 @@
                         <ul class="dropdown-menu">
 
                             <!-- Dropdown menu links -->
-                            <li>
-                                <h6 class="dropdown-header">전체 카테고리</h6>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" id="c01">여성의류</a>
-                                <div class="c-content">
-                                    <a class="dropdown-item" href="#">여성 상의</a>
-                                    <a class="dropdown-item" href="#">여성 하의</a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#" id="c02">남성의류</a>
-                                <div class="c-content">
-                                    <a class="dropdown-item" href="#">남성 상의</a>
-                                    <a class="dropdown-item" href="#">남성 하의</a>
-                                </div>
-                            </li>
-                            <li><a class="dropdown-item" href="#" id="c03">신발</a>
-                                <div class="c03-content">
-                                    <a class="dropdown-item" href="#">운동화</a>
-                                    <a class="dropdown-item" href="#">슬리퍼</a>
-                                </div>
-                            </li>
+                            <li><h6 class="dropdown-header">전체 카테고리</h6></li>
+                            <li><a class="dropdown-item" href="productList" id="c01">여성의류</a></li>
+                            <li><a class="dropdown-item" href="#" id="c02">남성의류</a></li>
+                            <li><a class="dropdown-item" href="#" id="c03">신발</a></li>
                             <li><a class="dropdown-item" href="#" id="c04">가방</a></li>
                             <li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
                             <li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
@@ -162,10 +144,10 @@
                         <!-- imgBox 1 구간 -->
                         <div class="imgBox">
                             <a href="productDetail">
-                                <div>
+                                <div class="detail-img">
                                     <img src="imgs/t-shirt.jpeg">
                                 </div>
-                                <div>
+                                <div class="detail-container">
                                     <div class="title">티셔츠</div>
                                     <div class="price">3000원</div>
                                     <div class="date">0일전</div>
@@ -173,10 +155,10 @@
 
                             </a>
                             <a href="#">
-                                <div>
+                                <div class="detail-img">
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
+                                 <div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -184,10 +166,10 @@
 
                             </a>
                             <a href="#">
-                                <div>
+                               <div class="detail-img">
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
+                                <div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -195,10 +177,10 @@
 
                             </a>
                             <a href="#">
-                                <div>
+                               <div class="detail-img">
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
+                                <div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -206,10 +188,10 @@
                             </a>
 
                             <a href="#">
-                                <div>
+                                 <div class="detail-img">
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
+                                 <div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -217,10 +199,10 @@
 
                             </a>
                             <a href="#">
-                                <div>
+                                <div class="detail-img">
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
+                                <div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -230,10 +212,31 @@
 
                             <!-- imgBox 2 구간 -->
                             <a href="#">
-                                <div>
+                                <div class="detail-img">
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
+                               <div class="detail-container">
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+
+                            </a>
+                            <a href="#">
+                                <div class="detail-img">
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                                <div class="detail-container">
+                                    <div class="title">상품명</div>
+                                    <div class="price">0000원</div>
+                                    <div class="date">0일전</div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                 <div class="detail-img">
+                                    <img src="imgs/200Pic.png">
+                                </div>
+                               	<div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -244,28 +247,7 @@
                                 <div>
                                     <img src="imgs/200Pic.png">
                                 </div>
-                                <div>
-                                    <div class="title">상품명</div>
-                                    <div class="price">0000원</div>
-                                    <div class="date">0일전</div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div>
-                                    <img src="imgs/200Pic.png">
-                                </div>
-                                <div>
-                                    <div class="title">상품명</div>
-                                    <div class="price">0000원</div>
-                                    <div class="date">0일전</div>
-                                </div>
-
-                            </a>
-                            <a href="#">
-                                <div>
-                                    <img src="imgs/200Pic.png">
-                                </div>
-                                <div>
+                                <div class="detail-container">
                                     <div class="title">상품명</div>
                                     <div class="price">0000원</div>
                                     <div class="date">0일전</div>
@@ -277,11 +259,6 @@
 
                     </article>
                 </section>
-               <!--  <aside class="d-none d-lg-block">
-                    <div class="top">
-                        <a href="#"><button class="upTop">Top</button></a>
-                    </div>
-                </aside> -->
             </div>
         </div>
         </div>
@@ -303,10 +280,11 @@
     <script>
     	$("#logoutbtn").on("click",function(){
     		confirm("정말 로그아웃하시겠습니까?");
-    		location.href = "/member/leave" 
+    		location.href = "/member/logout" 
     	})
     	$("#leavebtn").on("click",function(){
     		confirm("정말 회원을 탈퇴하시겠습니까?")
+    		location.href = "/member/leave"
     	})
     </script>
 </body>
