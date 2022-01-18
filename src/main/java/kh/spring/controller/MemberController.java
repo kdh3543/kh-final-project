@@ -1,6 +1,7 @@
 package kh.spring.controller;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -82,11 +83,25 @@ public class MemberController {
 		return "redirect:/";
 	}
 	//마이페이지 이동기능
-	@RequestMapping("mypage")
+	@RequestMapping("myPage")
 	public String mypage(Model model) {
 		String id = (String)session.getAttribute("loginID");
 		MemberDTO dto = mservice.select(id);
+		//가입한지 몇일 째인지 확인
+		int signDate = mservice.signDate(id);
+		model.addAttribute("signDate",signDate);
 		model.addAttribute("dto", dto);
 		return "/member/myPage";
 	}
+	//마이페이지 수정기능
+	@RequestMapping("modify")
+	public String modify(MemberDTO dto) {
+		String encPw = EncryptionUtils.getSHA512(dto.getPw());
+		
+		dto.setPw(encPw);
+		int result = mservice.modify(dto);
+		System.out.println("정보수정완료");
+		return "home";	
+	}
+	
 }

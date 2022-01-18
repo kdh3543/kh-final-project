@@ -1,6 +1,8 @@
 package kh.spring.service;
 
 import java.io.File;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -58,5 +60,9 @@ public class MemberService {
 	//회원 정보 수정
 	public int modify(MemberDTO dto) {
 		return mdao.modify(dto);
+	}
+	//가입 날짜
+	public int signDate(String id) {
+		return mdao.signDate(id);
 	}
 }
