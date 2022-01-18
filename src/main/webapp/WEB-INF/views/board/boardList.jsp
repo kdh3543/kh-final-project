@@ -109,10 +109,11 @@
 		console.log(text.split(""));
 		let num = text.split("");
 		console.log(num.length);
-		if(num.length > 10){
-			let div = $("<div>");
-			$(".contents-div-contents > a").append(div);
-			$(".contents-div-contents > a").append("...");
+		// overflow hidden 값을 주기
+		if(num.length > 200){
+			$(".contents-div").css("overflow","hidden");
+			$(".contents-div-contents").css("overflow","hidden");
+			
 		}
 		/* if() */
 		

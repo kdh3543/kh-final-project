@@ -69,7 +69,7 @@
             <form action="/member/signup" method="get">
         <div class="mb-3">
             <label for="inputId" class="form-label">아이디</label>
-            <input type="password" class="form-control" id="inputId" name="id" placeholder="영문대소문자,숫자 조합의 6~15자리" pattern="^([A-Za-z0-9]){6,15}$" required>
+            <input type="text" class="form-control" id="inputId" name="id" placeholder="영문대소문자,숫자 조합의 6~15자리" pattern="^([A-Za-z0-9]){6,15}$" required>
             <span id="checkid"></span>
           </div>
           <div class="mb-3">

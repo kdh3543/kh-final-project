@@ -20,9 +20,6 @@
         <!-- CSS -->
         <link rel="stylesheet" href="/css/font.css">
         <link rel="stylesheet" href="/css/index.css">
-        <link rel="stylesheet" href="/css/toggle.css">
-        <!-- JS -->
-        <script src="/js/index.js"></script>
 
 </head>
 
