@@ -13,7 +13,7 @@ public class BoardService {
 
 	@Autowired
 	private BoardDAO dao;
-	
+
 	// 전체 게시글 리스트
 	public List<BoardDTO> selectAll() {
 		return dao.selectAll();
@@ -33,9 +33,21 @@ public class BoardService {
 	public int delete(int seq) {
 		return dao.delete(seq);
 	}
-	
+
 	// 게시글 수정
 	public int modify(BoardDTO dto) {
 		return dao.modify(dto);
+	}
+
+	// 게시글 좋아요
+	public int like(int seq, String user_id) {
+		dao.addLikeList(seq, user_id);
+		return dao.addLikeCount(seq);
+	}
+
+	// 게시글 좋아요 취소
+	public int unlike(int seq, String user_id) {
+		dao.removeLikeList(seq, user_id);
+		return dao.subtractLikeCount(seq);
 	}
 }

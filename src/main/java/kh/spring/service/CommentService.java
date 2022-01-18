@@ -34,4 +34,14 @@ public class CommentService {
 	public int modify(CommentDTO dto) {
 		return dao.modify(dto);
 	}
+
+	// 댓글 좋아요
+	public int like(int seq) {
+		return dao.like(seq);
+	}
+
+	// 댓글 좋아요 취소
+	public int unlike(int seq) {
+		return dao.unlike(seq);
+	}
 }
