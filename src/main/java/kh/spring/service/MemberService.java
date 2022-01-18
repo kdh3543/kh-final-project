@@ -26,7 +26,17 @@ public class MemberService {
 		return mdao.idCheck(id);
 	}
 	//회원가입 정보 입력
-	public int insert(MemberDTO dto) throws Exception{
+	public int insert(MemberDTO dto,MultipartFile file) throws Exception{
+		String realPath = session.getServletContext().getRealPath("signup");
+		File realPathFile = new File(realPath);
+		if(!realPathFile.exists()) {
+			realPathFile.mkdir();
+		}
+		String oriName = file.getOriginalFilename();
+		String sysName = UUID.randomUUID()+"_"+ oriName;
+		
+		file.transferTo(new File(realPath+"/"+sysName));
+		dto.setProfile_image(sysName);
 	
 		//비밀번호 암호화 작업
 		String encPw = EncryptionUtils.getSHA512(dto.getPw());
