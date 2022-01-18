@@ -83,7 +83,7 @@ main {
 .contents {
 	width: 100%;
 	margin: 1%;
-	border:1px solid black;
+	border:1px solid #b2bec3;
 	height:300px;
 }
 .contents-title{
