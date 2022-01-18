@@ -51,6 +51,10 @@ public class HomeController {
 	public String productAdd() {
 		return "/product/productAdd";
 	}
+	@RequestMapping("productList")
+	public String productList() {
+		return "/product/productList";
+	}
 	
 	
 	@RequestMapping("talk")

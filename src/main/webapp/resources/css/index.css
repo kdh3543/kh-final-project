@@ -212,29 +212,28 @@ section article .article_title{
 }
 
 .imgBox a {
-    border: 1px solid gray;
-    padding: 1%;
-    margin:1%;
+   	width: 18%;
+    border: 1px solid #dfe6e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: 1% 1% 1%;
     
 }
-.imgBox .date {
+.imgBox a .detail-container .date {
     text-align: right;
     color: #aaa69d;
 }
-/* 메인 - 플로팅바  */
-aside {
-    border: 1px solid black;
-    width: 10%;
-    height: 400px;
-    position: absolute;
-    right: calc(50% - 47%);
-    z-index: 20;
-    top: 360px;
+.detail-container {
+	width:100%;
+	padding:1%;
 }
-aside .upTop{
-    width: 100%;
-    height: 100px;
+.imgBox a div img {
+  	width: 100%;
+    height: 100%;
 }
+
 /* footer */
 footer{
     border-top: 1px solid #aaa69d; 
