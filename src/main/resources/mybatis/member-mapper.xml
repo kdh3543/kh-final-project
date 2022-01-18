@@ -15,6 +15,7 @@
 	</select>
 	<select id="login" resultType="int">select count(*) from member where id =#{id} and pw=#{pw} </select>
 
+
 <select id="mypage" resultType="kh.spring.dto.MemberDTO">select * from member where id=#{value} </select>
 
 <update id="modify">update member set pw=#{pw}, name=#{name}, phone=#{phone} where id=#{id} </update>
