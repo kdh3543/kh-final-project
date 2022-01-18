@@ -36,7 +36,7 @@
         <div class="header_Container">
             <ul class="header_list">
                 <li><a href="signIn" hidden>로그인</a></li>
-                <li><a href="join">로그아웃</a></li>
+                <li><a href="/member/logout">로그아웃</a></li>
             </ul>
         </div>
         <div class="div-wrap">
@@ -67,9 +67,12 @@
                     </div>
                 </div>
                 <div class="right-Container">
-                    <div class="right-id">아이디</div>
+                    <div class="right-id">아이디 : ${loginID }</div>
                     <div class="right-info">
+                    <label>
                         <div>상점오픈일</div>
+                        <span>${signDate }일째 오픈중!</span>
+                        </label>
                         <div>상점방문수</div>
                         <div>상품판매</div>
                         <div>택배발송</div>
@@ -101,6 +104,7 @@
                 <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
                     aria-labelledby="nav-profile-tab">
                     <div class="profile-top">회원정보수정</div>
+                   
                     <div class="profile-content">
                         <div class="profile-img">
                             <div class="profile-top-left"><i class="fas fa-camera fa-3x"></i></div>
@@ -113,7 +117,7 @@
                             <table class="profile-table">
                                 <tr>
                                     <td>아이디</td>
-                                    <td><input type="text" class="inputId" disabled></td>
+                                    <td><input type="text" class="inputId" value="${dto.id }" disabled></td>
                                 </tr>
                                 <tr>
                                     <td>비밀번호</td>
@@ -124,29 +128,29 @@
                                 </tr>
                                 <tr>
                                     <td>이름</td>
-                                    <td><input type="text" class="inputName" disabled></td>
+                                    <td><input type="text" class="inputName" value="${dto.name }" disabled></td>
                                 </tr>
                                 <tr>
                                     <td>전화번호</td>
-                                    <td><input type="text" class="inputPhone">
-                                        <button type="button" class=" btn btn-lg btn-light" id="phoneChange">전화번호
+                                    <td><input type="text" class="inputPhone" value="${dto.phone }">
+                                        <button type="button" class=" btn btn-lg btn-light" id="phoneChange"  >전화번호
                                             변경</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>우편변호</td>
-                                    <td><input type="text" class="inputZipcode">
-                                        <button type="button" class=" btn btn-lg btn-light" id="seachAddress">주소
+                                    <td><input type="text" class="inputZipcode" value="${dto.zipcode }">
+                                        <button type="button" class=" btn btn-lg btn-light"  id="seachAddress">주소
                                             검색</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소1</td>
-                                    <td><input type="text" class="inputAddress1" disabled></td>
+                                    <td><input type="text" class="inputAddress1" value="${dto.address1 }" disabled></td>
                                 </tr>
                                 <tr>
                                     <td>주소2</td>
-                                    <td><input type="text" class="inputAddress2" disabled></td>
+                                    <td><input type="text" class="inputAddress2" value="${dto.address2 }" disabled></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
@@ -157,6 +161,7 @@
                                     <td>
                                 </tr>
                             </table>
+                          
 
                         </div>
                     </div>
@@ -281,6 +286,19 @@
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>
         </div>
     </footer>
+    <script>
+    
+    //마이페이지 회원 탈퇴기능 
+    $("#deleteInfo").on("click",function(){
+    	if(confirm("정말 탈퇴하시겠습니까?")){
+    		location.href= "/member/leave";
+    	}else{
+    		return false;
+    	}
+    })
+    	
+    </script>
+    
 </body>
 
 </html>

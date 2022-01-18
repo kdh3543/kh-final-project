@@ -279,12 +279,20 @@
     
     <script>
     	$("#logoutbtn").on("click",function(){
-    		confirm("정말 로그아웃하시겠습니까?");
-    		location.href = "/member/logout" 
+    		if(confirm("정말 로그아웃하시겠습니까?")){
+    			location.href = "logout" 
+    		}else{
+    			return false;
+    		}
+    		
     	})
     	$("#leavebtn").on("click",function(){
-    		confirm("정말 회원을 탈퇴하시겠습니까?")
-    		location.href = "/member/leave"
+    		if(confirm("정말 회원을 탈퇴하시겠습니까?")){
+    			location.href = "leave"
+    		}else{
+    			return false;
+    		}
+    		
     	})
     </script>
 </body>

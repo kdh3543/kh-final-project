@@ -18,6 +18,10 @@
 
 <select id="mypage" resultType="kh.spring.dto.MemberDTO">select * from member where id=#{value} </select>
 
+	<select id="signDate" resultType="int">
+		select trunc(sysdate-signup_date+1,0) from member where id= #{id}
+	</select>
+
 <update id="modify">update member set pw=#{pw}, name=#{name}, phone=#{phone} where id=#{id} </update>
 
 <delete id="delete">delete from member where id=#{value} </delete>
