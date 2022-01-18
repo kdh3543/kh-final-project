@@ -84,7 +84,7 @@ main {
 	width: 100%;
 	margin: 1%;
 	border:1px solid black;
-	height:250px;
+	height:300px;
 }
 .contents-title{
 	font-family: OTWelcomeBA;
@@ -94,15 +94,15 @@ main {
 }
 .contents-div{
 	font-size:25px;	
-	height: 40%;
-  /*   overflow: hidden; */
+	height: 45%;
+    overflow: hidden;
 	
 }
 .contents-div .contents-div-contents{
 	padding:2%;
 	width: 100%;
-	height: 60px;
-  /*   overflow: hidden; */
+	height: 130px;
+    overflow: hidden; 
 }
 .contents-container{
 	padding: 0% 2% 2%;
@@ -128,4 +128,21 @@ main {
 }
 .floating-comments i{
 	padding-right:10px;
+}
+.btn-div {
+	width:100%;
+	height:20px;
+	padding: 0% 2% 0%;
+}
+.moreBtn {
+	width: 100px;
+    height: 40px;
+    line-height: 10px;
+    background-color:#fff;
+    font-size:15px;
+    color:black;
+    border:none;
+    cursor:pointer;
+    
+    
 }

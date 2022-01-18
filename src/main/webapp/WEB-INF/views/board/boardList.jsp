@@ -68,14 +68,22 @@
 				<button class="btn btn-primary" type="button">주제5</button>
 				<button class="btn btn-primary" type="button">주제6</button>
 			</div>
-			<c:forEach var="dto" items="${list}">
+			<c:forEach var="dto" items="${list}" varStatus="status">
 				<div class="contents">
 					<div class="contents-title">${dto.subject}</div>
 					<div class="contents-div">
 						<div class="contents-div-contents">
-							<a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
+							<a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
 						</div>
 					</div>
+					<script>
+						/* 글자수 넘쳤을 때 */
+						let div${status.count} = $(".contents-a${status.count}").html();
+						if(div${status.count}.length > 100){
+							$(".contents-a${status.count}").html(div${status.count}.substring(0,170)+"...");
+						}
+						
+		  			 </script>
 					<div class="contents-container">
 						<div class="contents-div-writer">${dto.writer}</div>
 						<div class="contents-div-location">위치</div>
@@ -91,6 +99,7 @@
 					</div>
 				</div>
 			</c:forEach>
+			
 		</div>
 	</main>
 	<footer>
@@ -99,25 +108,11 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
-
 	<script>
-		$("#toWrite").on("click", function() {
-			location.href = "/board/writeForm";
-		})
-		let text = $(".contents-div-contents > a").text();
-		console.log(text);
-		console.log(text.split(""));
-		let num = text.split("");
-		console.log(num.length);
-		// overflow hidden 값을 주기
-		if(num.length > 200){
-			$(".contents-div").css("overflow","hidden");
-			$(".contents-div-contents").css("overflow","hidden");
-			
-		}
-		/* if() */
-		
-		/* if($(".contents-div-contents").val) */
+	$("#toWrite").on("click", function() {
+		location.href = "/board/writeForm";
+	})
 	</script>
+
 </body>
 </html>
