@@ -35,40 +35,35 @@ public class MemberController {
 	}
 	//회원가입 정보 입력 
 	@RequestMapping("signup")
-	public String signup(MemberDTO dto) {
+	public String signup(MemberDTO dto,MultipartFile file) {
 		try {
-			int result = mservice.insert(dto);
+
+			int result = mservice.insert(dto,file);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
-	}
-	@RequestMapping("profileimage")
-	public String profileimage(MultipartFile profile_image) throws Exception{
-		String realPath = session.getServletContext().getRealPath("profileimage");
-		File realPathFile = new File(realPath);
-		if(!realPathFile.exists()) {realPathFile.mkdir();}
-		
-		String oriName = profile_image.getOriginalFilename();	// 사용자가 업로드 한 파일의 원본 이름
-		String sysName = UUID.randomUUID()+"_"+oriName; // 서버쪽에 저장할 파일 이름
-		// 절대로 겹치지 않는 무작위의 배열을 생성해줌
-		
-		//서버에 업로드되어 메모리에 적재된 파일의 내용을 어디에 저장할지 결정하는 부분
-		profile_image.transferTo(new File(realPath+"/"+sysName));
-		System.out.println(profile_image);
 		return "redirect:/";
 	}
+	
 	//로그인 기능
 	@RequestMapping("login")
-	public String login(String logid, String logpw) {
+	public String login(String logid, String logpw ,Model model) {
 		logpw = EncryptionUtils.getSHA512(logpw);
-
 		int result = mservice.login(logid,logpw);
+		
+		//로그인 성공 시
 		if(result>0) {
-			session.setAttribute("loginId", logid);
+			session.setAttribute("loginID", logid);
+			String id = (String)session.getAttribute("loginID");
+			
+			MemberDTO dto = mservice.select(id);
+			
+			model.addAttribute("dto", dto);
+	
 		}
 
-		return "redirect:/";
+		return "index";
 	}
 	//로그아웃 기능
 	@RequestMapping("logout")
@@ -80,7 +75,7 @@ public class MemberController {
 	//회원탈퇴 기능
 	@RequestMapping("leave")
 	public String leave() {
-		String id = (String)session.getAttribute("loginId");
+		String id = (String)session.getAttribute("loginID");
 		int result = mservice.delete(id);
 		session.invalidate();
 		System.out.println("회원이 탈퇴되었습니다.");
@@ -89,7 +84,7 @@ public class MemberController {
 	//마이페이지 이동기능
 	@RequestMapping("mypage")
 	public String mypage(Model model) {
-		String id = (String)session.getAttribute("loginId");
+		String id = (String)session.getAttribute("loginID");
 		MemberDTO dto = mservice.select(id);
 		model.addAttribute("dto", dto);
 		return "/member/myPage";

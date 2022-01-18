@@ -32,8 +32,12 @@
         <div class="header_Container">
             <ul class="header_list">
               <c:choose>
-               <c:when test="${loginId != null}">
-            ${loginId} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+               <c:when test="${loginID != null}">
+              
+              	
+              	${dto}
+           			${dto.profile_image } 하이요
+           				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
                   <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <a href="/member/leave" id="leavebtn" >회원 탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
@@ -302,10 +306,11 @@
     <script>
     	$("#logoutbtn").on("click",function(){
     		confirm("정말 로그아웃하시겠습니까?");
-    		location.href = "/member/leave" 
+    		location.href = "/member/logout" 
     	})
     	$("#leavebtn").on("click",function(){
     		confirm("정말 회원을 탈퇴하시겠습니까?")
+    		location.href = "/member/leave"
     	})
     </script>
 </body>
