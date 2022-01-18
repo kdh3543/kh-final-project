@@ -29,8 +29,9 @@
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/css/productAdd.css">
-<!-- JS -->
-<script src="/js/index.js"></script>
+<!-- 주소 API -->
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 </head>
 <body>
@@ -135,7 +136,7 @@
 								<tr>
 									<td>상품이미지</td>
 									<td><img src="imgs/200Pic.png">
-									<button class="btn btn-primary">이미지업로드</button>
+										<button class="btn btn-primary">이미지업로드</button>
 								</tr>
 								<tr>
 									<td>제목</td>
@@ -145,15 +146,7 @@
 								<tr>
 									<td>카테고리</td>
 									<td><select>
-											<option>1차 카테고리</option>
-											<option>여성의류</option>
-											<option>남성의류</option>
-									</select> <select>
-											<option>2차 카테고리</option>
-											<option>여성의류</option>
-											<option>남성의류</option>
-									</select> <select>
-											<option>3차 카테고리</option>
+											<option>카테고리 설정</option>
 											<option>여성의류</option>
 											<option>남성의류</option>
 									</select></td>
@@ -163,44 +156,42 @@
 									<td>
 										<button>내위치</button>
 										<button>최근지역</button>
-										<button>주소검색</button>
-										<button>지역설정안함</button> 
-										<br>
-										<input type="text" placeholder="주소" class="input-address">
+										<button type="button" id="findAddress">주소검색</button>
+										<button>지역설정안함</button> <br> <input type="text"placeholder="주소" id="input-address">
 
 									</td>
 								</tr>
 								<tr>
 									<td>상품 상태</td>
-									<td><input type="radio" name="상품상태" value="중고상품">중고상품 
-									<input type="radio" name="상품상태" value="새상품">새상품</td>
+									<td><input type="radio" name="상품상태" value="중고상품">중고상품
+										<input type="radio" name="상품상태" value="새상품">새상품</td>
 								</tr>
 								<tr>
 									<td>교환</td>
-									<td><input type="radio" name="교환" value="교환불가">교환불가 <input
-										type="radio" name="교환" value="교환가능">교환가능</td>
+									<td><input type="radio" name="교환" value="교환불가">교환불가
+										<input type="radio" name="교환" value="교환가능">교환가능</td>
 								</tr>
 								<tr>
 									<td>가격</td>
-									<td><input type="text" placeholder="숫자만 입력하세요">원 
-									<br><input type="radio" value="교환불가">배송비포함</td>
+									<td><input type="text" placeholder="숫자만 입력하세요"> 원
+										<br> <input type="radio" value="교환불가">배송비포함</td>
 								</tr>
 								<tr>
 									<td>기타 설명</td>
-									<td><textarea rows="5" cols="40"
+									<td><textarea rows="5" cols="55"
 											placeholder="상품설명을 입력해주세요."></textarea></td>
 								</tr>
 								<tr>
 									<td>연관태그</td>
-									<td><input type="text" placeholder="연관태그를 입력하세요."></td>
+									<td><input type="text" placeholder="연관태그를 입력하세요."
+										class="inputTag"></td>
+								</tr>
+								<tr>
+									<td>수량</td>
+									<td><input type="number" placeholder="수량을 입력하세요"
+										class="inputNumber"> 개</td>
 								</tr>
 							</table>
-							<div class="add-bottom-title">
-								<div class="bottom-left-title">기타옵션</div>
-							</div>
-							<div class="add-bottom-contents">
-								<div class="contents-div">기타옵션</div>
-							</div>
 							<div class="add-btns-div">
 								<button class="btn btn-outline-secondary" id="productAddBtn"
 									type="button">상품등록</button>
@@ -262,6 +253,15 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
-
+	<script>
+	  //주소지 값 자동 추가해주는 함수
+    document.getElementById("findAddress").onclick = function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.getElementById('input-address').value = data.roadAddress;
+            }  
+        }).open();
+    }
+	</script>
 </body>
 </html>
