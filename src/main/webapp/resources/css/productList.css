@@ -1,0 +1,153 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+}
+
+html,body{
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+       
+}
+main{
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    font-family:'OTWelcomeRA';
+}
+.main-title {
+	font-family:'OTWelcomeBA';
+	font-size:25px;
+	font-weight:800;
+	width: 80%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: auto;
+}
+.main-container {
+	width:100%;
+	height: auto;
+	display:flex;
+	flex-direction:row;
+}
+article {
+	width: 90%;
+    height: auto;
+}
+article p {
+	margin: auto;
+    width: 80%;
+    height: 50px;
+    font-size: 20px;
+	
+}
+.imgBox-1 {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 700px;
+    margin: auto;
+    padding: 0% 0% 1%;
+}
+
+.imgBox-2 {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 700px;
+    margin: auto;
+    padding: 0% 0% 1%;
+}
+
+article nav {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:5%;
+}
+
+.imgBox-1 a{
+	width: 18%;
+    border: 1px solid #dfe6e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin: 1% 1% 1%;
+}
+
+
+.imgBox-2 a{
+	width: 18%;
+	border: 1px solid #dfe6e9;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.imgBox-1 a .detail-container .date {
+    text-align: right;
+    color: #aaa69d;
+}
+.imgBox-2 a .detail-container .date {
+    text-align: right;
+    color: #aaa69d;
+}
+.detail-container {
+	width:100%;
+	padding:1%;
+}
+.imgBox-1 a div img {
+  	width:200px;
+  	height:200px;
+}
+.imgBox-2 a div img {
+  	width:200px;
+  	height:200px;
+}
+
+/* 사이드바 */
+#sideBar{
+	border: 1px solid #24a6a4;
+    width: 150px;
+    height: 200px;
+    position: fixed;
+    right: calc(50% - 47%);
+    z-index: 20;
+    top: 445px;
+}
+.sidebar-div {
+	display:flex;
+	flex-direction:column;
+}
+
+.sidebar-div a {
+	width:100%;
+	height:100px;
+}
+
+.sidebar-div a button {
+	width:100%;
+	height:100%;
+	cursor:pointer;
+}
+#likeProductBtn {
+	border:none;
+	color:black;
+	
+}
+#upTopBtn{
+	background-color:#24a6a4;
+	color:#fff;
+	border:none;
+
+}

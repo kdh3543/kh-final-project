@@ -75,15 +75,19 @@
 						<div class="contents-div-contents">
 							<a href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
 						</div>
-						<div class="contents-container">
-							<div class="contents-div-writer">${dto.writer}</div>
-							<div class="contents-div-location">위치</div>
-							<div class="contents-div-writedate">${dto.write_date}</div>
-						</div>
+					</div>
+					<div class="contents-container">
+						<div class="contents-div-writer">${dto.writer}</div>
+						<div class="contents-div-location">위치</div>
+						<div class="contents-div-writedate">${dto.write_date}</div>
 					</div>
 					<div class="form-floating">
-							<div class="floating-likes"><i class="fas fa-heart"></i>좋아요(좋아요 수)</div>
-							<div class="floating-comments"><i class="fas fa-comment"></i> 댓글</div>
+						<div class="floating-likes">
+							<i class="fas fa-heart"></i>좋아요(좋아요 수)
+						</div>
+						<div class="floating-comments">
+							<i class="fas fa-comment"></i> 댓글
+						</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -100,6 +104,19 @@
 		$("#toWrite").on("click", function() {
 			location.href = "/board/writeForm";
 		})
+		let text = $(".contents-div-contents > a").text();
+		console.log(text);
+		console.log(text.split(""));
+		let num = text.split("");
+		console.log(num.length);
+		if(num.length > 10){
+			let div = $("<div>");
+			$(".contents-div-contents > a").append(div);
+			$(".contents-div-contents > a").append("...");
+		}
+		/* if() */
+		
+		/* if($(".contents-div-contents").val) */
 	</script>
 </body>
 </html>
