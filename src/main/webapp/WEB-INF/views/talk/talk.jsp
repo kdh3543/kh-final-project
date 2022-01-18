@@ -59,6 +59,7 @@
                     대화목록
                 </div>
                 <div class="talk-list">
+   					<button class="talk-list-btn">
                     <div class="talk-list-left">
                         <i class="fas fa-camera fa-2x"></i>
                     </div>
@@ -66,6 +67,7 @@
                         <div class="talk-name">이름</div>
                         <div class="talk-last-conversation">안녕</div>
                     </div>
+                    </button>
                 </div>
             </div>
             <div class="talk-right">
