@@ -134,7 +134,8 @@
 							<table class="contents-table">
 								<tr>
 									<td>상품이미지</td>
-									<td>이미지넣기</td>
+									<td><img src="imgs/200Pic.png">
+									<button class="btn btn-primary">이미지업로드</button>
 								</tr>
 								<tr>
 									<td>제목</td>
@@ -143,49 +144,19 @@
 								</tr>
 								<tr>
 									<td>카테고리</td>
-									<td>
-										<ul class="category-menu">
-											<li>전체카테고리
-											<li><a href="#">여성의류</a>
-											<ul class="submenu-women">
-												<li><a href="#">여성 상의</a>
-												<li><a href="#">여성 하의</a>
-											</ul>
-											<li><a href="#">남성의류</a>
-											<ul class="submenu-men">
-												<li><a href="#">남성 상의</a>
-												<li><a href="#">남성 하의</a>
-											</ul>
-											<li><a href="#">남성의류</a>
-											<!-- <li>
-												<h6 class="dropdown-header">전체 카테고리</h6>
-											</li>
-											<li><a class="dropdown-item" href="#" id="c01">여성의류</a>
-												<div class="c01-content">
-													<a class="dropdown-item" href="#">여성 상의</a> <a
-														class="dropdown-item" href="#">여성 하의</a>
-												</div></li>
-											<li><a class="dropdown-item" href="#" id="c02">남성의류</a>
-												<div class="c02-content">
-													<a class="dropdown-item" href="#">남성 상의</a> <a
-														class="dropdown-item" href="#">남성 하의</a>
-												</div></li>
-											<li><a class="dropdown-item" href="#" id="c03">신발</a>
-												<div class="c03-content">
-													<a class="dropdown-item" href="#">운동화</a> <a
-														class="dropdown-item" href="#">슬리퍼</a>
-												</div></li>
-											<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
-											<li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
-											<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
-											<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
-											<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-											<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-											<li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
-											<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
-											<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li> -->
-										</ul>
-									</td>
+									<td><select>
+											<option>1차 카테고리</option>
+											<option>여성의류</option>
+											<option>남성의류</option>
+									</select> <select>
+											<option>2차 카테고리</option>
+											<option>여성의류</option>
+											<option>남성의류</option>
+									</select> <select>
+											<option>3차 카테고리</option>
+											<option>여성의류</option>
+											<option>남성의류</option>
+									</select></td>
 								</tr>
 								<tr>
 									<td>거래지역</td>
@@ -193,24 +164,26 @@
 										<button>내위치</button>
 										<button>최근지역</button>
 										<button>주소검색</button>
-										<button>지역설정안함</button> <br> <input type="text"
-										placeholder="주소">
+										<button>지역설정안함</button> 
+										<br>
+										<input type="text" placeholder="주소" class="input-address">
+
 									</td>
 								</tr>
 								<tr>
 									<td>상품 상태</td>
-									<td><input type="radio" value="중고상품">중고상품 <input
-										type="radio" value="새상품">새상품</td>
+									<td><input type="radio" name="상품상태" value="중고상품">중고상품 
+									<input type="radio" name="상품상태" value="새상품">새상품</td>
 								</tr>
 								<tr>
 									<td>교환</td>
-									<td><input type="radio" value="교환불가">교환불가 <input
-										type="radio" value="교환가능">교환가능</td>
+									<td><input type="radio" name="교환" value="교환불가">교환불가 <input
+										type="radio" name="교환" value="교환가능">교환가능</td>
 								</tr>
 								<tr>
 									<td>가격</td>
-									<td><input type="text" placeholder="숫자만 입력하세요">원 <br>
-										<input type="radio" value="교환불가">배송비포함</td>
+									<td><input type="text" placeholder="숫자만 입력하세요">원 
+									<br><input type="radio" value="교환불가">배송비포함</td>
 								</tr>
 								<tr>
 									<td>기타 설명</td>

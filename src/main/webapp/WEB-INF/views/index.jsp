@@ -20,6 +20,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="/css/font.css">
         <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/toggle.css">
         <!-- JS -->
         <script src="/js/index.js"></script>
 
@@ -69,14 +70,14 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#" id="c01">여성의류</a>
-                                <div class="c01-content">
+                                <div class="c-content">
                                     <a class="dropdown-item" href="#">여성 상의</a>
                                     <a class="dropdown-item" href="#">여성 하의</a>
                                 </div>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#" id="c02">남성의류</a>
-                                <div class="c02-content">
+                                <div class="c-content">
                                     <a class="dropdown-item" href="#">남성 상의</a>
                                     <a class="dropdown-item" href="#">남성 하의</a>
                                 </div>
