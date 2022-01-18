@@ -78,7 +78,7 @@
                         </ul>
                     </div>
 				</div>
-				<span>주제(ex 동네소식)</span>
+				<span>${dto.subject}</span>
 				<h3>${dto.writer}</h3>
 				<h6>위치 / ${dto.write_date}</h6>
 
@@ -103,7 +103,7 @@
 	                            </li>
 	                            <li>
 	                               <a class="dropdown-item" id="modifyComment">수정</a>
-	                               <a class="dropdown-item" id="deleteComment">삭제</a>
+	                               <a class="dropdown-item" id="deleteComment" href="/comment/deleteProc?cseq=${cdto.comment_seq}&bseq=${dto.board_seq}">삭제</a>
 	                            </li>                      
 	                        </ul>
 	                    </div>
@@ -134,7 +134,7 @@
 		})
 		
 		$("#modifyBoard").on("click", function() {
-			location.href = "/board/boardList";
+			location.href = "/board/modify?seq=${dto.board_seq}";
 		})
 		
 		$("#deleteBoard").on("click", function() {
@@ -145,9 +145,9 @@
 			location.href = "/board/boardList";
 		})
 		
-		$("#deleteComment").on("click", function() {
-			location.href = "/board/boardList";
-		})
+	/* 	$("#deleteComment").on("click", function() {
+			location.href = "/comment/deleteProc?seq=${dto.board_seq}";
+		}) */
 	</script>
 
 	<!-- 댓글 Ajax 코드 -->

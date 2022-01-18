@@ -75,10 +75,22 @@ public class BoardController {
 		int result = service.delete(seq);
 		return "redirect:boardList";
 	}
+	
+	@RequestMapping("modify")
+	public String modify(int seq, Model model) {
+		System.out.println("modify 로 들어온 요청은 이 메서드를 실행합니다.");
+
+		BoardDTO dto = service.selectBySeq(seq);
+		model.addAttribute("dto", dto);
+		return "board/modifyForm";
+	}
 
 	@RequestMapping("modifyProc")
 	public String modifyProc(BoardDTO dto) {
 		System.out.println("modifyProc 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+//		dto.setWriter((String) session.getAttribute("loginID"));
+		dto.setWriter("테스트 계정");
 
 		int result = service.modify(dto);
 		return "redirect:/board/toDetail?seq=" + dto.getBoard_seq();

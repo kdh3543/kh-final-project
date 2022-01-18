@@ -43,5 +43,13 @@ public class CommentController {
 
 		return "redirect:/board/toDetail?seq=" + dto.getBoard_seq();
 	}
+	
+	@RequestMapping("deleteProc")
+	public String deleteProc(int cseq, int bseq) {
+		System.out.println("deleteProc 로 들어온 요청은 이 메서드를 실행합니다.");
+
+		int result = service.delete(cseq);
+		return "redirect:/board/toDetail?seq=" + bseq;
+	}
 
 }

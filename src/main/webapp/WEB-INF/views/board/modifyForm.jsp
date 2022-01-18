@@ -34,7 +34,7 @@
 <!-- Custom styles for this template -->
 <link href="/css/writeForm.css" rel="stylesheet">
 <!-- JS -->
-<script src="/js/writeForm.js"></script>
+<script src="/js/modifyForm.js"></script>
 
 </head>
 
@@ -57,23 +57,25 @@
 
 	<main>
 		<div class="contents-box">
-			<form action="/board/writeProc" method="post" enctype="multipart/form-data">
+			<form action="/board/modifyProc" method="post"
+				enctype="multipart/form-data">
+				<input type="hidden" value="${dto.board_seq}" name="board_seq">
 				<div class="contents">
 					<select id="subject" name="subject">
-						<option>게시글의 주제를 선택해주세요</option>
-						<option>동네질문</option>
-						<option>동네사건사고</option>
-						<option>동네맛집</option>
-						<option>동네소식</option>
-						<option>분실/실종센터</option>					
-						<option>고양이</option>
-						<option>강아지</option>
-						<option>기타</option>
+						<option id="question">동네질문</option>
+						<option id="incident">동네사건사고</option>
+						<option id="restaurant">동네맛집</option>
+						<option id="news">동네소식</option>
+						<option id="lost">분실/실종센터</option>
+						<option id="cat">고양이</option>
+						<option id="dog">강아지</option>
+						<option id="others">기타</option>
 					</select>
 					<button type="submit" id="submit">완료</button>
 				</div>
 				<div class="contents">
-					<textarea rows="20%" cols="100%" placeholder="우리 동네 관련 정보를 공유해주세요!" name="contents"></textarea>
+					<textarea rows="20%" cols="100%" placeholder="우리 동네 관련 정보를 공유해주세요!"
+						name="contents">${dto.contents}</textarea>
 				</div>
 			</form>
 		</div>
@@ -84,5 +86,27 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
+
+	<script>
+		$(document).ready(function() {			
+			if("${dto.subject}" == $("#question").html()){
+				$("#question").attr("selected", "");
+			} else if("${dto.subject}" == $("#incident").html()){
+				$("#incident").attr("selected", "");
+			} else if("${dto.subject}" == $("#restaurant").html()){
+				$("#restaurant").attr("selected", "");
+			} else if("${dto.subject}" == $("#news").html()){
+				$("#news").attr("selected", "");
+			} else if("${dto.subject}" == $("#lost").html()){
+				$("#lost").attr("selected", "");
+			} else if("${dto.subject}" == $("#cat").html()){
+				$("#cat").attr("selected", "");
+			} else if("${dto.subject}" == $("#dog").html()){
+				$("#dog").attr("selected", "");
+			} else if("${dto.subject}" == $("#others").html()){
+				$("#others").attr("selected", "");
+			}
+		});
+	</script>
 </body>
 </html>
