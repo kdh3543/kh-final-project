@@ -108,29 +108,11 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
-<!-- 
 	<script>
-		$("#toWrite").on("click", function() {
-			location.href = "/board/writeForm";
-		})
-		let text = $(".contents-div-contents > a").text();
-		let num = text.split("");
-		let button = $("<button>더보기</button>");
-		let div = $("<div>");
-		button.addClass("moreBtn");
-		div.addClass("btn-div")
-		// overflow hidden 값을 주기
-		if(num.length > 100){
-			$(".contents-div").css("overflow","hidden");
-			$(".contents-div-contents").css("overflow","hidden");
-			$(".contents-div").append(div);
-			$(".btn-div").append(button);
-		}else{
-			$(".moreBtn").css("display","none");
-		}
-		/* if() */
-		
-		/* if($(".contents-div-contents").val) */
-	</script> -->
+	$("#toWrite").on("click", function() {
+		location.href = "/board/writeForm";
+	})
+	</script>
+
 </body>
 </html>
