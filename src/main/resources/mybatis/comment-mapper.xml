@@ -20,4 +20,12 @@
    <update id="modify">
       UPDATE COMMENTS SET CONTENTS = #{contents} WHERE COMMENT_SEQ = #{comment_seq}
    </update>
+   
+   <update id="like">
+      UPDATE COMMENTS SET LIKE_COUNT = LIKE_COUNT + 1 WHERE COMMENT_SEQ = ${value}
+   </update>
+   
+   <update id="unlike">
+      UPDATE COMMENTS SET LIKE_COUNT = LIKE_COUNT - 1 WHERE COMMENT_SEQ = ${value}
+   </update>
 </mapper>

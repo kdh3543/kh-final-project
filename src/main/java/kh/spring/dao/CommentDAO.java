@@ -35,4 +35,14 @@ public class CommentDAO {
 	public int modify(CommentDTO dto) {
 		return mybatis.update("Comment.modify", dto);
 	}
+
+	// 댓글 좋아요
+	public int like(int seq) {
+		return mybatis.update("Comment.like", seq);
+	}
+
+	// 댓글 좋아요 취소
+	public int unlike(int seq) {
+		return mybatis.update("Comment.unlike", seq);
+	}
 }

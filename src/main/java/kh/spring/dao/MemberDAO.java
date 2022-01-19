@@ -1,5 +1,6 @@
 package kh.spring.dao;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +44,10 @@ public class MemberDAO {
 	//회원 탈퇴
 	public int delete(String id) {
 		return mybatis.delete("Member.delete",id);
+	}
+	//가입 후 날짜
+	public int signDate(String id) {
+		return mybatis.selectOne("Member.signDate",id);
 	}
 
 }
