@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="ChatContents">
+ 	<insert id="insert">
+ 		insert into chatcontents values(contentsId_seq.nextval,default,default,#{chatContents},1,#{sellerId},#{buyerId},default)
+ 		<!-- <selectKey resultType="int" order="AFTER" keyProperty="seq">
+ 			select roomid_seq from dual
+ 		</selectKey> -->
+ 	</insert>
+ 	
+ 	<select id="selectBySellerID" resultType="kh.spring.dto.ChatContentsDTO">
+ 		select * from chatcontents where sellerID = #{value}
+ 	</select>
+ </mapper>
+ 
