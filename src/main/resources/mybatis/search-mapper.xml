@@ -18,6 +18,19 @@
    	INSERT INTO SEARCH_KEYWORD VALUES(SEARCH_KEYWORD_SEQ.NEXTVAL, #{keyword}, SYSDATE, #{user_id})
    	
    </insert>
+   
+   <delete id ="deleteAll">
+   
+   
+   	DELETE FROM SEARCH_KEYWORD
+   	
+   </delete>
+   
+   <delete id ="deleteByKeyword">
+   
+   DELETE FROM SEARCH_KEYWORD WHERE keyword = #{keyword}
+   </delete>
+   
     </mapper>
   
   

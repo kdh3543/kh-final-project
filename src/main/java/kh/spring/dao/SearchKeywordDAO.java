@@ -15,18 +15,32 @@ public class SearchKeywordDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	
+	
 	public List<SearchKeywordDTO> selectAll(){
 		
 		return mybatis.selectList("Search.selectAll");
 	}
 	
-public int insert (SearchKeywordDTO dto) {
+
+	
+	public int insert (SearchKeywordDTO dto) {
 		
 		return mybatis.insert("Search.insert",dto);
 		
 		 
 	}
 
+	public int deleteAll () {
+		
+		return mybatis.delete("Search.deleteAll");
+	}
+	
+	public int deleteByKeyword(String keyword) {
+		
+		
+		return mybatis.delete("Search.deleteByKeyword",keyword);
+	}
 
 	
 
