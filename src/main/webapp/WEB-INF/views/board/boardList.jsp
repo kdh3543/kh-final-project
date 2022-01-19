@@ -86,12 +86,14 @@
 				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
 			</div>
 			<div class="subject-menu">
-				<button class="btn btn-primary" type="button">주제1</button>
-				<button class="btn btn-primary" type="button">주제2</button>
-				<button class="btn btn-primary" type="button">주제3</button>
-				<button class="btn btn-primary" type="button">주제4</button>
-				<button class="btn btn-primary" type="button">주제5</button>
-				<button class="btn btn-primary" type="button">주제6</button>
+				<button class="btn btn-primary" type="button" id="question">동네질문</button>
+				<button class="btn btn-primary" type="button" id="incident">동네사건사고</button>
+				<button class="btn btn-primary" type="button" id="restaurant">동네맛집</button>
+				<button class="btn btn-primary" type="button" id="news">동네소식</button>
+				<button class="btn btn-primary" type="button" id="lost">분실/실종센터</button>
+				<button class="btn btn-primary" type="button" id="cat">고양이</button>
+				<button class="btn btn-primary" type="button" id="dog">강아지</button>
+				<button class="btn btn-primary" type="button" id="others">기타</button>
 			</div>
 			<c:forEach var="dto" items="${list}" varStatus="status">
 				<div class="contents">
@@ -115,11 +117,11 @@
 						<div class="contents-div-writedate">${dto.write_date}</div>
 					</div>
 					<div class="form-floating">
-						<div class="floating-likes">
-							<i class="fas fa-heart"></i>좋아요(좋아요 수)
+						<div class="floating-likes" id="like">
+							<i class="fas fa-heart"></i>좋아요 ${dto.like_count}
 						</div>
 						<div class="floating-comments">
-							<i class="fas fa-comment"></i> 댓글
+							<a href="toDetail?seq=${dto.board_seq}"><i class="fas fa-comment"></i> 댓글 ${dto.comment_count}</a>
 						</div>
 					</div>
 				</div>
@@ -136,6 +138,10 @@
 	<script>
 	$("#toWrite").on("click", function() {
 		location.href = "/board/writeForm";
+	})
+	
+	$("#like").on("click", function() {
+		
 	})
 	</script>
 

@@ -59,4 +59,14 @@ public class BoardDAO {
 	public int removeLikeList(int seq, String user_id) {
 		return mybatis.update("Board.removeLikeList", seq);
 	}
+
+	// 게시글 댓글 개수 증가
+	public int addCommentCount(int seq) {
+		return mybatis.update("Board.addCommentCount", seq);
+	}
+
+	// 게시글 댓글 개수 감소
+	public int subtractCommentCount(int seq) {
+		return mybatis.update("Board.subtractCommentCount", seq);
+	}
 }

@@ -42,4 +42,13 @@
    <delete id="removeLikeList">
       DELETE FROM BOARD_LIKE WHERE BOARD_SEQ = #{seq} and USER_ID = #{user_id}
    </delete>
+   
+   <update id="addCommentCount">
+      UPDATE BOARD SET COMMENT_COUNT = COMMENT_COUNT + 1 WHERE BOARD_SEQ = ${value}
+   </update>
+   
+   <update id="subtractCommentCount">
+      UPDATE BOARD SET COMMENT_COUNT = COMMENT_COUNT - 1 WHERE BOARD_SEQ = ${value}
+   </update>
+   
 </mapper>

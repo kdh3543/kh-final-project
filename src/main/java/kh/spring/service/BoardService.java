@@ -46,8 +46,18 @@ public class BoardService {
 	}
 
 	// 게시글 좋아요 취소
-	public int unlike(int seq, String user_id) {
+	public int dislike(int seq, String user_id) {
 		dao.removeLikeList(seq, user_id);
 		return dao.subtractLikeCount(seq);
+	}
+
+	// 게시글 댓글 개수 추가
+	public int addCommentCount(int seq) {
+		return dao.addCommentCount(seq);
+	}
+
+	// 게시글 댓글 개수 감소
+	public int subtractCommentCount(int seq) {
+		return dao.subtractCommentCount(seq);
 	}
 }
