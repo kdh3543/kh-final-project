@@ -99,7 +99,7 @@
   </footer>
 
   <script>
-    let ws = new WebSocket("ws://200.200.200.13/chatProgram");
+    let ws = new WebSocket("ws://localhost/chatProgram");
     let chatMessage = $("#message");
     let rightMiddle = $(".right-middle");
     let rightBottom = $(".right-bottom");
@@ -161,26 +161,26 @@
       }, 1000);
 
       button.one("click", function () {
-    	  
+
         $.ajax({
           url: "/chat/chatContents",
           data: { sellerID: sellerID },
           dataType: "json"
         }).done(function (resp) {
-        	rightMiddle.html("대화내용");
+          rightMiddle.html("대화내용");
 
-        	
-         for (let i = 0; i < resp.length; i++) {
+
+          for (let i = 0; i < resp.length; i++) {
             let line = $("<div>");
             line.addClass("line");
-           console.log(resp[i].buyerId);
-           console.log(resp[i].sellerId);
-             if(resp[i].sellerId==titleName.val()){
-            	line.append(resp[i].sellerId + ": "+resp[i].chatContents);	
-            }else{
-            	line.append(resp[i].buyerId + ": "+resp[i].chatContents);
-            } 
-            
+            console.log(resp[i].buyerId);
+            console.log(resp[i].sellerId);
+            if (resp[i].sellerId == titleName.val()) {
+              line.append(resp[i].sellerId + ": " + resp[i].chatContents);
+            } else {
+              line.append(resp[i].buyerId + ": " + resp[i].chatContents);
+            }
+
             rightMiddle.append(line);
             rightMiddle.stop().animate({
               scrollTop: rightMiddle[0].scrollHeight

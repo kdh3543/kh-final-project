@@ -29,22 +29,15 @@ public class ChatController {
 	@Autowired
 	private HttpSession session;
 
-//	@RequestMapping("chatRoomList")
-//	public String chatRoomList(Model model) {
-//		List<MemberDTO> list = service.chatRoomList();
-//		model.addAttribute("list",list);
-//		return "chat/chatRoomList";
-//	}
-
-	@RequestMapping("chatRoom")
-	public String chatRoom(String id, Model model) {
+	@RequestMapping("talk")
+	public String talk(String id, Model model) {
 		System.out.println(id);
 		model.addAttribute("id",id);
-		return "chat/talk";
+		return "talk/talk";
 	}
 
-	@RequestMapping("chatContents")
 	@ResponseBody
+	@RequestMapping(value ="chatContents", produces="text/html; charset=utf8")
 	public String chatContents(String sellerID) {
 		System.out.println(sellerID);
 		List<ChatContentsDTO> list = cService.selectBySellerID(sellerID);
