@@ -67,7 +67,7 @@
                     </form>
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <form action="" method=get>
+                <form action="changePw" method=get>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="inputId" placeholder="name@example.com">
                         <label for="inputId">가입한 아이디를 입력하세요.</label>

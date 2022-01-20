@@ -83,13 +83,6 @@ public class MemberController {
 		logpw = EncryptionUtils.getSHA512(logpw);
 		int result = mservice.login(logid,logpw);
 		
-		String cookie = "";
-		Cookie[] cookies = request.getCookies(); //쿠키생성
-		if(cookies !=null&& cookies.length > 0)
-		for (int i = 0; i < cookies.length; i++){
-			if (cookies[i].getName().equals("id")) { // 내가 원하는 쿠키명 찾아서 값 저장
-				cookie = cookies[i].getValue();}}
-		
 		Cookie cookie1 = new Cookie("logid", logid); //쿠키 생성
 		if(checkbox != null) {
 				// 체크박스 체크 된 경우
@@ -167,5 +160,7 @@ public class MemberController {
 		
 		
 	}
+	//@RequestMapping("changePw")
+	
 	
 }

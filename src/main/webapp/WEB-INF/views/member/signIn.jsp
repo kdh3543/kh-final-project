@@ -3,6 +3,14 @@
 
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%
+		String cookie = "";
+		Cookie[] cookies = request.getCookies(); //쿠키생성
+		if(cookies !=null&& cookies.length > 0)
+		for (int i = 0; i < cookies.length; i++){
+			if (cookies[i].getName().equals("id")) { // 내가 원하는 쿠키명 찾아서 값 저장
+				cookie = cookies[i].getValue();}}
+	%>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,7 +84,8 @@
 					</a>
 				</div>
                 </form>
-                <div class="buttons">	
+                <div class="buttons">
+                
 					</div>
 					
         </div>
