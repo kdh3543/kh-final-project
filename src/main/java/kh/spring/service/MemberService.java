@@ -77,4 +77,12 @@ public class MemberService {
 	public int selectBykakao(String kakaoemail) {
 		return mdao.selectBykakao(kakaoemail);
 	}
+	//ID 찾기
+	public MemberDTO selectID(String email,String phone) {
+		return mdao.selectID(email,phone);
+	}
+	//id존재여부확인
+	public int selectIDexist(String email,String phone) {
+		return mdao.selectIDexist(email, phone);
+	}
 }

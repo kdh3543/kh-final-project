@@ -149,5 +149,23 @@ public class MemberController {
 		System.out.println("정보수정완료");
 		return "home";	
 	}
+	@RequestMapping("findID")
+	public String selectID(String email,String phone,Model model) {
+		int result = mservice.selectIDexist(email, phone);
+		model.addAttribute("result",result);
+		if(result>0) {
+			MemberDTO dto = mservice.selectID(email,phone);
+			
+				String id= dto.getId();
+				model.addAttribute("id",id);
+				model.addAttribute("dto",dto);
+				return "/member/findID";
+			
+		}else {
+			return "/member/findID";
+		}
+		
+		
+	}
 	
 }

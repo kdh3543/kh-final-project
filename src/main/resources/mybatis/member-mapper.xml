@@ -31,6 +31,14 @@
 	<select id="selectBykakao" resultType="int">
 		select count(kakao) from member where kakao = #{kakaoemail}
 	</select>
+	
+	<!-- id찾기 -->
+	<select id="selectID" resultType="kh.spring.dto.MemberDTO">
+		select * from member where email=#{email} and phone=#{phone}
+	</select>
+	<select id="selectIDexist" resultType="int">
+		select count(id) from member where email=#{email} and phone=#{phone}
+	</select>
 
 <update id="modify">update member set pw=#{pw}, name=#{name}, phone=#{phone} where id=#{id} </update>
 

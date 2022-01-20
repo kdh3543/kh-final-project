@@ -1,6 +1,5 @@
 package kh.spring.dao;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +59,19 @@ public class MemberDAO {
 	//kakao 회원 가입 정보 입력
 	public int kakaoinsert(MemberDTO dto) {
 		return mybatis.insert("Member.kakaoinsert",dto);
+	}
+	//id찾기
+	public MemberDTO selectID(String email,String phone) {
+		Map<String,String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("phone", phone);
+		return mybatis.selectOne("Member.selectID",map);
+	}
+	public int selectIDexist(String email,String phone) {
+		Map<String,String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("phone", phone);
+		return mybatis.selectOne("Member.selectIDexist",map);
 	}
 
 }

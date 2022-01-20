@@ -117,7 +117,6 @@ public class kakaoService {
              userInfo.put("profile_image", profile_image);
 
          } catch (IOException e) {
-             // TODO Auto-generated catch block
              e.printStackTrace();
          }
 
