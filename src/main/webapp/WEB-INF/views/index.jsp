@@ -255,7 +255,7 @@
 					</div>
 					<div class="rightList">
 
-						<a href="productAdd" class="btn-sell"> <i
+						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
@@ -300,7 +300,7 @@
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
 						<div class="imgBox">
-							<a href="productDetail">
+							<a href="/items/itemsDetail">
 								<div class="detail-img">
 									<img src="imgs/t-shirt.jpeg">
 								</div>
