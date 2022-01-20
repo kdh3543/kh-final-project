@@ -1,9 +1,8 @@
 package kh.spring.controller;
 
-import java.io.File;
-import java.sql.Timestamp;
-import java.util.UUID;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,12 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 	
+	
+	
+	
+	
+	 
+	
 	//아이디 중복체크
 	@ResponseBody
 	@RequestMapping(value = "idCheck",produces="text/html;charset=utf8")
@@ -46,12 +51,54 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	//kakao 회원가입 
+	@RequestMapping("kakaosignup")
+	public String kakaosignup(MemberDTO dto1,Model model) {
+		String kakaoid = dto1.getId();
+		dto1.setId(kakaoid);
+		String kakao = dto1.getEmail();
+		dto1.setKakao(kakao);
+		try {
+			int result = mservice.kakaoinsert(dto1);
+			if(result>0) {
+				session.setAttribute("loginID", kakaoid);
+				String id = (String)session.getAttribute("loginID");
+				
+				MemberDTO dto = mservice.select(id);
+				
+				model.addAttribute("dto", dto);
+		
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
 	
 	//로그인 기능
 	@RequestMapping("login")
-	public String login(String logid, String logpw ,Model model) {
+	public String login(String logid, String logpw ,String checkbox,HttpServletResponse response,HttpServletRequest request,Model model) {
 		logpw = EncryptionUtils.getSHA512(logpw);
 		int result = mservice.login(logid,logpw);
+		
+		String cookie = "";
+		Cookie[] cookies = request.getCookies(); //쿠키생성
+		if(cookies !=null&& cookies.length > 0)
+		for (int i = 0; i < cookies.length; i++){
+			if (cookies[i].getName().equals("id")) { // 내가 원하는 쿠키명 찾아서 값 저장
+				cookie = cookies[i].getValue();}}
+		
+		Cookie cookie1 = new Cookie("logid", logid); //쿠키 생성
+		if(checkbox != null) {
+				// 체크박스 체크 된 경우
+				response.addCookie(cookie1); // 쿠키 저장
+			}else {
+				// 체크박스 체크 해제 경우
+				cookie1.setMaxAge(0); // 쿠키 유효시간 0으로 해서 브라우저에서 삭제
+				response.addCookie(cookie1);
+			}
 		
 		//로그인 성공 시
 		if(result>0) {
@@ -97,11 +144,28 @@ public class MemberController {
 	@RequestMapping("modify")
 	public String modify(MemberDTO dto) {
 		String encPw = EncryptionUtils.getSHA512(dto.getPw());
-		
 		dto.setPw(encPw);
 		int result = mservice.modify(dto);
 		System.out.println("정보수정완료");
 		return "home";	
+	}
+	@RequestMapping("findID")
+	public String selectID(String email,String phone,Model model) {
+		int result = mservice.selectIDexist(email, phone);
+		model.addAttribute("result",result);
+		if(result>0) {
+			MemberDTO dto = mservice.selectID(email,phone);
+			
+				String id= dto.getId();
+				model.addAttribute("id",id);
+				model.addAttribute("dto",dto);
+				return "/member/findID";
+			
+		}else {
+			return "/member/findID";
+		}
+		
+		
 	}
 	
 }

@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
         <link href="/css/signIn.css" rel="stylesheet">
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -61,15 +63,22 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me" name="remember_userID"> Remember me
                     </label>
                 </div>
                 <div class="buttons">
                     <button id="signIn" class=" btn btn-lg btn-light" type="submit">로그인</button>
                     <button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호 찾기</button>
                 </div>
-                <button id="kakoLogin" class="w-100 btn btn-lg btn-light" type="submit">카카오로 로그인</button>
-            </form>
+                <div class="form-group socialimage" id="kakaoBtn">
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:8080/kakaologin&response_type=code">
+						<img id="socialimage" src="/imgs/kakao_login_large_wide.png" width="100%" height="100%"/ >
+					</a>
+				</div>
+                </form>
+                <div class="buttons">	
+					</div>
+					
         </div>
     </main>
     <footer>
@@ -78,13 +87,21 @@
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>
         </div>
     </footer>
+    
     <script>
 
         $("#findMyInfo").on("click",function(){
             location.href="findInfo";
         });
         
-    </script>
+        
+	
+		
+</script>
+      
+       
+        
+   
 </body>
 
 </html>

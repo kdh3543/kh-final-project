@@ -43,8 +43,8 @@
 						<c:when test="${loginID != null}">
               
               	
-              	${dto}
-           			${dto.profile_image } 하이요
+              	
+           			${dto.profile_image }
            				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
                   <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;

@@ -17,6 +17,31 @@ public class MemberDTO {
 	private String profile_image;
 	private int cash;
 	private String login_check;
+	private String kakao;
+	public MemberDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public MemberDTO(int seq, String id, String pw, String name, String phone, String email, String zipcode,
+			String address1, String address2, Timestamp signup_date, String prefer_location, String profile_image,
+			int cash, String login_check, String kakao) {
+		super();
+		this.seq = seq;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.zipcode = zipcode;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.signup_date = signup_date;
+		this.prefer_location = prefer_location;
+		this.profile_image = profile_image;
+		this.cash = cash;
+		this.login_check = login_check;
+		this.kakao = kakao;
+	}
 	public int getSeq() {
 		return seq;
 	}
@@ -101,27 +126,13 @@ public class MemberDTO {
 	public void setLogin_check(String login_check) {
 		this.login_check = login_check;
 	}
-	public MemberDTO(int seq, String id, String pw, String name, String phone, String email, String zipcode,
-			String address1, String address2, Timestamp signup_date, String prefer_location, String profile_image,
-			int cash, String login_check) {
-		super();
-		this.seq = seq;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.zipcode = zipcode;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.signup_date = signup_date;
-		this.prefer_location = prefer_location;
-		this.profile_image = profile_image;
-		this.cash = cash;
-		this.login_check = login_check;
+	public String getKakao() {
+		return kakao;
 	}
-	public MemberDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setKakao(String kakao) {
+		this.kakao = kakao;
 	}
+	
+	
+	
 }
