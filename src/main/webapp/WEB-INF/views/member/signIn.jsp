@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
         <link href="/css/signIn.css" rel="stylesheet">
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -61,15 +63,20 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me" name="remember_userID"> Remember me
                     </label>
                 </div>
                 <div class="buttons">
                     <button id="signIn" class=" btn btn-lg btn-light" type="submit">로그인</button>
                     <button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호 찾기</button>
                 </div>
-                <button id="kakoLogin" class="w-100 btn btn-lg btn-light" type="submit">카카오로 로그인</button>
-            </form>
+                </form>
+                <div class="buttons">
+                <button id="kakaoLogin" class="w-100 btn btn-lg btn-light" type="button">
+						
+					</button>
+					<a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:8080/kakaologin&response_type=code">로그인</a>
+					</div>
         </div>
     </main>
     <footer>
@@ -78,11 +85,31 @@
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>
         </div>
     </footer>
+    <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout">Logout</a>
+    <script type='text/javascript'>
+        //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('72e986ca5a91ee0a598ee51ca906597c');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function (authObj) {
+                alert(JSON.stringify(authObj));
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+      //]]>
+    </script>
     <script>
 
         $("#findMyInfo").on("click",function(){
             location.href="findInfo";
         });
+      
+       
         
     </script>
 </body>
