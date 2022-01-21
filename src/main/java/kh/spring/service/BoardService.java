@@ -19,6 +19,11 @@ public class BoardService {
 		return dao.selectAll();
 	}
 
+	// 전체 게시글 리스트(로그인 시)
+	public List<BoardDTO> selectByUser(String user_id) {
+		return dao.selectByUser(user_id);
+	}
+
 	// 신규 게시글 삽입
 	public int insert(BoardDTO dto) {
 		return dao.insert(dto);
@@ -42,13 +47,15 @@ public class BoardService {
 	// 게시글 좋아요
 	public int like(int seq, String user_id) {
 		dao.addLikeList(seq, user_id);
-		return dao.addLikeCount(seq);
+		dao.addLikeCount(seq);
+		return dao.getLikeCount(seq);
 	}
 
 	// 게시글 좋아요 취소
 	public int dislike(int seq, String user_id) {
 		dao.removeLikeList(seq, user_id);
-		return dao.subtractLikeCount(seq);
+		dao.subtractLikeCount(seq);
+		return dao.getLikeCount(seq);
 	}
 
 	// 게시글 댓글 개수 추가
@@ -59,5 +66,10 @@ public class BoardService {
 	// 게시글 댓글 개수 감소
 	public int subtractCommentCount(int seq) {
 		return dao.subtractCommentCount(seq);
+	}
+
+	// 게시글 좋아요 체크
+	public int isLiked(int seq, String user_id) {
+		return dao.isLiked(seq, user_id);
 	}
 }

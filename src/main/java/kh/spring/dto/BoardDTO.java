@@ -11,6 +11,7 @@ public class BoardDTO {
 	private int view_count; // 조회 수
 	private int like_count; // 좋아요 수
 	private int comment_count; // 댓글 수
+	private String user_id; // 좋아요 한 아이디 체크
 
 	public BoardDTO() {
 		super();
@@ -18,7 +19,7 @@ public class BoardDTO {
 	}
 
 	public BoardDTO(int board_seq, String writer, String contents, String subject, Timestamp write_date, int view_count,
-			int like_count, int comment_count) {
+			int like_count, int comment_count, String user_id) {
 		super();
 		this.board_seq = board_seq;
 		this.writer = writer;
@@ -28,6 +29,7 @@ public class BoardDTO {
 		this.view_count = view_count;
 		this.like_count = like_count;
 		this.comment_count = comment_count;
+		this.user_id = user_id;
 	}
 
 	public int getBoard_seq() {
@@ -92,6 +94,14 @@ public class BoardDTO {
 
 	public void setComment_count(int comment_count) {
 		this.comment_count = comment_count;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 }

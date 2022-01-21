@@ -1,6 +1,7 @@
 package kh.spring.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -33,7 +34,16 @@ public class BoardController {
 	public String boardList(Model model) {
 		System.out.println("boardList 로 들어온 요청은 이 메서드를 실행합니다.");
 
-		List<BoardDTO> list = bservice.selectAll();
+		String user_id = (String) session.getAttribute("loginID");
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		if(user_id != null) {
+			// 로그인
+			list = bservice.selectByUser(user_id);
+		} else {
+			// 비로그인
+			list = bservice.selectAll();
+		}
+		
 		model.addAttribute("list", list);
 		return "board/boardList";
 	}
@@ -48,6 +58,8 @@ public class BoardController {
 	@RequestMapping("toDetail")
 	public String toDetail(int seq, Model model) {
 		System.out.println("toDetail 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		// 실행하면 조회수 + 1 작업 필요
 
 		BoardDTO dto = bservice.selectBySeq(seq);
 		model.addAttribute("dto", dto);
@@ -105,11 +117,10 @@ public class BoardController {
 	public String likeProc(int seq) {
 		System.out.println("likeProc 로 들어온 요청은 이 메서드를 실행합니다.");
 		
-//		String user_id = (String) session.getAttribute("loginID");
-		String user_id = "테스트 계정";
+		String user_id = (String) session.getAttribute("loginID");
 
-		int result = bservice.like(seq, user_id);
-		return String.valueOf(result);
+		int likeCount = bservice.like(seq, user_id);
+		return String.valueOf(likeCount);
 	}
 	
 	@ResponseBody
@@ -117,11 +128,22 @@ public class BoardController {
 	public String dislikeProc(int seq) {
 		System.out.println("dislikeProc 로 들어온 요청은 이 메서드를 실행합니다.");
 		
-//		String user_id = (String) session.getAttribute("loginID");
-		String user_id = "테스트 계정";
+		String user_id = (String) session.getAttribute("loginID");
 
-		int result = bservice.dislike(seq, user_id);
-		return String.valueOf(result);
+		int likeCount = bservice.dislike(seq, user_id);
+		return String.valueOf(likeCount);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "isLiked", produces = "text/html; charset=utf8")
+	public String isLiked(int seq) {
+		System.out.println("isLiked 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		String user_id = (String) session.getAttribute("loginID");
+		int result = bservice.isLiked(seq, user_id);
+		
+		System.out.println("result : " + result);
+		
+		return String.valueOf(result);
+	}
 }

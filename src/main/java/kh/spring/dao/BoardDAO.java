@@ -1,5 +1,6 @@
 package kh.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,6 +19,11 @@ public class BoardDAO {
 	public List<BoardDTO> selectAll() {
 		return mybatis.selectList("Board.selectAll");
 	}
+	
+	// 전체 게시글 리스트(로그인 시)
+		public List<BoardDTO> selectByUser(String user_id) {
+			return mybatis.selectList("Board.selectByUser", user_id);
+		}
 
 	// 시퀀스로 게시글 검색
 	public BoardDTO selectBySeq(int seq) {
@@ -47,7 +53,10 @@ public class BoardDAO {
 
 	// 게시글 좋아요 테이블 삽입
 	public int addLikeList(int seq, String user_id) {
-		return mybatis.update("Board.addLikeList", seq);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("seq", seq);
+		map.put("user_id", user_id);
+		return mybatis.update("Board.addLikeList", map);
 	}
 
 	// 게시글 좋아요 개수 감소
@@ -55,9 +64,17 @@ public class BoardDAO {
 		return mybatis.update("Board.subtractLikeCount", seq);
 	}
 
-	// 게시글 좋아요 테이블 제거
+	// 게시글 좋아요 테이블에서 이름 제거
 	public int removeLikeList(int seq, String user_id) {
-		return mybatis.update("Board.removeLikeList", seq);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("seq", seq);
+		map.put("user_id", user_id);
+		return mybatis.update("Board.removeLikeList", map);
+	}
+	
+	// 게시글 전체 좋아요 개수
+	public int getLikeCount(int seq) {
+		return mybatis.selectOne("Board.getLikeCount", seq);
 	}
 
 	// 게시글 댓글 개수 증가
@@ -68,5 +85,14 @@ public class BoardDAO {
 	// 게시글 댓글 개수 감소
 	public int subtractCommentCount(int seq) {
 		return mybatis.update("Board.subtractCommentCount", seq);
+	}
+	
+	// 게시글 좋아요 체크
+	public int isLiked(int seq, String user_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("seq", seq);
+		map.put("user_id", user_id);
+		
+		return mybatis.selectOne("Board.isLiked", map);
 	}
 }
