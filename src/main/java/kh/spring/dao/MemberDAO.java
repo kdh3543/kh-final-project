@@ -1,6 +1,5 @@
 package kh.spring.dao;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +35,11 @@ public class MemberDAO {
 	//id로 마이페이지 들어가기
 	public MemberDTO select(String id) {
 		return mybatis.selectOne("Member.mypage",id);
-	}	
+	}
+	//이미 가입한 카카오 계정
+	public MemberDTO selectBykakaoemail(String kakaoemail) {
+		return mybatis.selectOne("Member.selectBykakaoemail",kakaoemail);
+	}
 	//회원정보 변경
 	public int modify(MemberDTO dto) {
 		return mybatis.update("Member.modify",dto);
@@ -48,6 +51,27 @@ public class MemberDAO {
 	//가입 후 날짜
 	public int signDate(String id) {
 		return mybatis.selectOne("Member.signDate",id);
+	}
+	//kakao 회원 여부확인
+	public int selectBykakao(String kakaoemail) {
+		return mybatis.selectOne("Member.selectBykakao",kakaoemail);
+	}
+	//kakao 회원 가입 정보 입력
+	public int kakaoinsert(MemberDTO dto) {
+		return mybatis.insert("Member.kakaoinsert",dto);
+	}
+	//id찾기
+	public MemberDTO selectID(String email,String phone) {
+		Map<String,String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("phone", phone);
+		return mybatis.selectOne("Member.selectID",map);
+	}
+	public int selectIDexist(String email,String phone) {
+		Map<String,String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("phone", phone);
+		return mybatis.selectOne("Member.selectIDexist",map);
 	}
 
 }
