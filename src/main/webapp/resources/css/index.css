@@ -22,6 +22,54 @@ header .header_Container{
     display: flex;
     justify-content: flex-end;
 }
+header .header_Container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+header .header-list-after-login {
+	list-style: none;
+    display: flex;
+    padding-left: 0;
+}
+header .header-list-after-login li{
+	padding: 12px 12px;
+}
+
+header .header-list-after-login li:nth-child(1){
+    text-decoration: none;
+    color: whitesmoke;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+
+header .header-list-after-login li:nth-child(2){
+    text-decoration: none;
+    color: whitesmoke;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+
+header .header-list-after-login li:nth-child(3) a{
+    text-decoration: none;
+   color: whitesmoke;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+
+header .header-list-after-login li:nth-child(4) a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+header .header-list-after-login li:nth-child(5) a{
+    text-decoration: none;
+     color: #f8d200;
+    font-family:'OTWelcomeRA';
+    font-size: 20px;
+}
+
 header .header_list {
     list-style: none;
     display: flex;

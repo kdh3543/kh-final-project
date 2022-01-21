@@ -56,7 +56,10 @@ public class HomeController {
 //	public String productList() {
 //		return "/product/productList";
 //	}
-	
+	@RequestMapping("itemsList")
+	public String productList() {
+		return "/items/itemsList";
+	}
 	
 	@RequestMapping("talk")
 	public String talk() {
