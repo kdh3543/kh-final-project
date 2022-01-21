@@ -1,4 +1,3 @@
-@charset "UTF-8";
 
 * {
     box-sizing: border-box;
@@ -32,10 +31,20 @@ main > div {
     display: flex;
     padding: 2%;
 }
-.talk-list {
+.talk-list, .talk-add-list {
     display: flex;
     border: 1px solid black;
+    overflow-y: auto;
 }
+
+.talk-list-btn {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color:white;
+}
+
 .talk-list-left {
     width: 30%;
     display: flex;
@@ -53,16 +62,11 @@ main > div {
 .talk-left{
     width:40%;
     padding: 1%;
-}
-.talk-left .inputTalk {
-    width: 100%;
+    overflow-y:auto;
 }
 
-.talk-list-btn {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.talk-left .inputTalk {
+    width: 100%;
 }
 .talk-right{
     width:60%;
@@ -77,13 +81,35 @@ main > div {
 .talk-right .right-middle{
     height: 80%;
     border: 1px solid black;
+    overflow-y:auto;
 }
+.right-middle>* {
+    border-radius: 5px;
+    margin: 5px;
+    background-color:pink;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Dongle';
+    padding: 5px;
+    padding-left:3px;
+    width: fit-content;
+    max-width: 60%;
+}
+
+
 .talk-right .right-bottom{
     height: 15%;
     display: flex;
+    width: 100%;
 }
-.talk-right .right-bottom textarea{
+.talk-right .right-bottom *{
+	float: left;
+	
+}
+.talk-right .right-bottom div{
+	height: 100%;
     width: 80%;
+    border: 1px solid black;
 }
 .talk-right .right-bottom button{
     width: 20%;
@@ -99,3 +125,22 @@ main > div {
     width: 20%;
 }
 
+.talk-list-left>img{
+	width:50px;
+	height: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+    text-decoration: none;
+  color: black;
+}

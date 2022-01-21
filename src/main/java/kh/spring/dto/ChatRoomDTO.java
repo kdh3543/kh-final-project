@@ -8,21 +8,25 @@ public class ChatRoomDTO {
 	private Timestamp updateTime;
 	private char sellerStatus;
 	private char buyerStatus;
+	private String sellerId;
 	private String buyerId;
-	private String productId;
+	private int productId;
+	private String productName;
 	
 	public ChatRoomDTO() {}
 
 	public ChatRoomDTO(int roomId, Timestamp createTime, Timestamp updateTime, char sellerStatus, char buyerStatus,
-			String buyerId, String productId) {
+			String sellerId, String buyerId, int productId, String productName) {
 		super();
 		this.roomId = roomId;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
 		this.sellerStatus = sellerStatus;
 		this.buyerStatus = buyerStatus;
+		this.sellerId = sellerId;
 		this.buyerId = buyerId;
 		this.productId = productId;
+		this.productName = productName;
 	}
 
 	public int getRoomId() {
@@ -65,6 +69,14 @@ public class ChatRoomDTO {
 		this.buyerStatus = buyerStatus;
 	}
 
+	public String getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
+
 	public String getBuyerId() {
 		return buyerId;
 	}
@@ -73,13 +85,22 @@ public class ChatRoomDTO {
 		this.buyerId = buyerId;
 	}
 
-	public String getProductId() {
+	public int getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	
 }
 

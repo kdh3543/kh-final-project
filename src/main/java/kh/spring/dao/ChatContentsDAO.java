@@ -18,7 +18,7 @@ public class ChatContentsDAO {
 		return mybatis.insert("ChatContents.insert",dto);
 	}
 	
-	public List<ChatContentsDTO> selectBySellerID(String sellerID){
-		return mybatis.selectList("ChatContents.selectBySellerID",sellerID);
+	public List<ChatContentsDTO> selectByRoomID(int roomID){
+		return mybatis.selectList("ChatContents.selectByroomID",roomID);
 	}
 }

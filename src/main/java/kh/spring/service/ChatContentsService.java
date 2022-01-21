@@ -18,7 +18,8 @@ public class ChatContentsService {
 		return dao.insert(dto);
 	}
 	
-	public List<ChatContentsDTO> selectBySellerID(String sellerID){
-		return dao.selectBySellerID(sellerID);
+	public List<ChatContentsDTO> selectByRoomID(int roomID){
+		return dao.selectByRoomID(roomID);
 	}
+	
 }
