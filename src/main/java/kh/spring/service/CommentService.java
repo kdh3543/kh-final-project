@@ -41,7 +41,7 @@ public class CommentService {
 	}
 
 	// 댓글 좋아요 취소
-	public int unlike(int seq) {
-		return dao.unlike(seq);
+	public int dislike(int seq) {
+		return dao.dislike(seq);
 	}
 }
