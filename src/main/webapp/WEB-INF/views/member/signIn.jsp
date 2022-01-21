@@ -3,6 +3,7 @@
 
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,10 +25,20 @@
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
         <link href="/css/signIn.css" rel="stylesheet">
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
 <body>
+  <%
+      String cookie = "";
+      Cookie[] cookies = request.getCookies(); //쿠키생성
+      if(cookies !=null&& cookies.length > 0)
+      for (int i = 0; i < cookies.length; i++){
+         if (cookies[i].getName().equals("logid")) { // 내가 원하는 쿠키명 찾아서 값 저장
+            cookie = cookies[i].getValue();}}
+   %>
     <header>
         <div class="header_Container">
             <ul class="header_list">
@@ -51,7 +62,7 @@
                 <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="logid" placeholder="name@example.com">
+                    <input type="text" class="form-control" id="floatingInput" name="logid" placeholder="name@example.com" value="<%=cookie%>">
                     <label for="floatingInput">아이디</label>
                 </div>
                 <div class="form-floating">
@@ -61,15 +72,23 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" name="remember_userID"> Remember me
                     </label>
                 </div>
                 <div class="buttons">
                     <button id="signIn" class=" btn btn-lg btn-light" type="submit">로그인</button>
                     <button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호 찾기</button>
                 </div>
-                <button id="kakoLogin" class="w-100 btn btn-lg btn-light" type="submit">카카오로 로그인</button>
-            </form>
+                <div class="form-group socialimage" id="kakaoBtn">
+               <a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:8080/kakaologin&response_type=code">
+                  <img id="socialimage" src="/imgs/kakao_login_large_wide.png" width="100%" height="100%"/ >
+               </a>
+            </div>
+                </form>
+                <div class="buttons">
+                
+               </div>
+               
         </div>
     </main>
     <footer>
@@ -78,13 +97,21 @@
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>
         </div>
     </footer>
+    
     <script>
 
         $("#findMyInfo").on("click",function(){
             location.href="findInfo";
         });
         
-    </script>
+        
+   
+      
+</script>
+      
+       
+        
+   
 </body>
 
 </html>

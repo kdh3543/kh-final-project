@@ -38,26 +38,23 @@
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
-				<ul class="header_list">
 					<c:choose>
-						<c:when test="${loginID != null}">
-              
-              	
-              	${dto}
-           			${dto.profile_image } 하이요
-           				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-                  <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-                  <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-                  <a href="/member/leave" id="leavebtn">회원
-								탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+						<c:when test="${loginID != null}">	
+						<ul class="header-list-after-login">
+           			     <li> 이미지 부분 : ${dto.profile_image}</li>
+           				 <li>${loginID}님안녕하세요</li>
+							<li><a href="/member/myPage">마이페이지</a></li>
+							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+						</ul>
                </c:when>
 						<c:otherwise>
+						<ul class="header_list">
 							<li><a href="signIn">로그인</a></li>
 							<li><a href="join">회원가입</a></li>
+						</ul>
 						</c:otherwise>
 					</c:choose>
-
-				</ul>
 			</div>
 			<div class="div-wrap">
 				<div class="nav_div">
@@ -239,7 +236,7 @@
 
 							<!-- Dropdown menu links -->
 							<li><h6 class="dropdown-header">전체 카테고리</h6></li>
-							<li><a class="dropdown-item" href="productList" id="c01">여성의류</a></li>
+							<li><a class="dropdown-item" href="itemsList" id="c01">여성의류</a></li>
 							<li><a class="dropdown-item" href="#" id="c02">남성의류</a></li>
 							<li><a class="dropdown-item" href="#" id="c03">신발</a></li>
 							<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
@@ -255,7 +252,7 @@
 					</div>
 					<div class="rightList">
 
-						<a href="productAdd" class="btn-sell"> <i
+						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
@@ -300,7 +297,7 @@
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
 						<div class="imgBox">
-							<a href="productDetail">
+							<a href="/items/itemsDetail">
 								<div class="detail-img">
 									<img src="imgs/t-shirt.jpeg">
 								</div>
@@ -415,8 +412,7 @@
 				<a href="#">
 					<button class="btn btn-outline-secondary" type="button"
 						id="likeProductBtn">
-						찜한상품<br>
-						<i class="fas fa-heart">개수</i>
+						찜한상품<br> <i class="fas fa-heart">개수</i>
 					</button>
 				</a> <a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>

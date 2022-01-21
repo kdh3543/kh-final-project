@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Items">
+
+	<insert id="insert">
+		INSERT INTO ITEMS VALUES(ITEMS_ISEQ.NEXTVAL,
+		#{name},#{category},#{exarea},#{condition},#{refundable}
+		,#{price},#{info},DEFAULT,#{tag},#{cnt},#{sellerID}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		
+		<selectKey resultType="int" order="AFTER" keyProperty="iseq">
+		
+			SELECT ITEMS_ISEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+
+	<!-- <select id="selectBySeq" resultType="kh.spring.dto.ItemDTO"> select 
+		* from items where iseq = #{value} </select> -->
+
+</mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+
 public class HomeController {
 	
 	@RequestMapping("/")
@@ -43,19 +44,22 @@ public class HomeController {
 		
 		return "/member/findInfo";
 	}
-	@RequestMapping("productDetail")
-	public String productDetail() {
-		return "/product/productDetail";
-	}
-	@RequestMapping("productAdd")
-	public String productAdd() {
-		return "/product/productAdd";
-	}
-	@RequestMapping("productList")
+//	@RequestMapping("productDetail")
+//	public String productDetail() {
+//		return "/product/productDetail";
+//	}
+//	@RequestMapping("productAdd")
+//	public String productAdd() {
+//		return "/product/productAdd";
+//	}
+//	@RequestMapping("productList")
+//	public String productList() {
+//		return "/product/productList";
+//	}
+	@RequestMapping("itemsList")
 	public String productList() {
-		return "/product/productList";
+		return "/items/itemsList";
 	}
-	
 	
 	@RequestMapping("talk")
 	public String talk() {
