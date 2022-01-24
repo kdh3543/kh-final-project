@@ -1,9 +1,12 @@
 package kh.spring.controller;
 
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
@@ -15,13 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.MemberService;
 import kh.spring.utils.EncryptionUtils;
-
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
@@ -75,11 +78,11 @@ public class MemberController {
          e.printStackTrace();
       }
       
-      return "/items/index";
+      return "forward:/items/";
    }
    
    //로그인 기능
-   @RequestMapping("login")
+   @RequestMapping(value="login")
    public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
       logpw = EncryptionUtils.getSHA512(logpw);
       int result = mservice.login(logid,logpw);
@@ -107,7 +110,7 @@ public class MemberController {
          
          model.addAttribute("dto", dto);
          
-         return "/items/index";
+         return "forward:/items/";
    
       }else {
          return "redirect:/signIn";
@@ -177,8 +180,8 @@ public class MemberController {
       System.out.println(result);
       if(result>0) {
           String host = "smtp.naver.com";
-            String user = "......"; //자신의 네이버 계정
-            String password = ".......";//자신의 네이버 패스워드
+            String user = "wishstar1998"; //자신의 네이버 계정
+            String password = "wishstar199";//자신의 네이버 패스워드
             //  메일 받을 주소
             String to_email = inputEmail;
             System.out.println(to_email);

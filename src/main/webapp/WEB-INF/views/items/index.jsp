@@ -315,7 +315,7 @@
 									<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
 									<img src="${f.sysName}">
 
-									<img src="/imgs/t-shirt.jpeg">
+									
 
 								</div>
 							
@@ -337,55 +337,7 @@
 							
 
 							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a>
+								
 
 
 							<!-- imgBox 2 구간 -->
