@@ -1,5 +1,7 @@
 package kh.spring.dao;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,13 +21,18 @@ public class ItemsDAO {
 	@Autowired
 	HttpSession session;
 	
-	
+//	상품 등록
 	public int insert (ItemsDTO dto) {
 		System.out.println("dao");
 		int result = mybatis.insert("Items.insert",dto);
 		
 		System.out.println(result);
 		return dto.getIseq();
+	}
+//	상품 
+	public List<ItemsDTO> selectAll(){
+		
+		return mybatis.selectList("Items.selectAll");
 	}
 	
 	

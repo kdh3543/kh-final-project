@@ -20,9 +20,14 @@ public class FilesDAO {
 			return mybatis.insert("Files.insert",dto);
 		}
 		
-		public  List<FilesDTO> seletBySeq( int seq) {
+		public  List<FilesDTO> selectBySeq( int seq) {
 			
 			return mybatis.selectList("Files.selectBySeq",seq);
+		}
+		
+	public  List<FilesDTO> selectAll( ) {
+			
+			return mybatis.selectList("Files.selectAll");
 		}
 	
 		
