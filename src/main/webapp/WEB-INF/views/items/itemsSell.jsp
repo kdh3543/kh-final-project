@@ -358,9 +358,10 @@
 								<!-- 좋아요 개수 -->
 								<input type="hidden" name="like_cnt" value=0>
 								<!-- 사진 저장  -->
-								<input type="hidden" name="items_img1" value=0> <input
-									type="hidden" name="items_img2" value=0> <input
-									type="hidden" name="items_img3" value=0>
+								
+									<!-- 조회수-->
+									
+									<input type="hidden" name= "view_cnt" value=0> 
 
 
 

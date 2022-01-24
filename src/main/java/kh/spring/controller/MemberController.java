@@ -64,7 +64,7 @@ public class MemberController {
 	
 		}
 
-		return "index";
+		return "/items/index";
 	}
 	//로그아웃 기능
 	@RequestMapping("logout")

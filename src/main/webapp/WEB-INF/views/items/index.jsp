@@ -33,7 +33,7 @@
 
 <body>
 	<!-- form 태그 추가 button type=submit 변경 -->
-	<form action="/search/searchByInput" method="post">
+	<form action="/items/searchByInput" method="post">
 
 		<!--  Header -->
 		<header>
@@ -106,7 +106,7 @@
 								$("#delBtn").on("click",function(){
 									
 									$.ajax({
-										url:"/search/deleteAll",
+										url:"/items/deleteAll",
 										
 									}).done(function(resp){
 										console.log(resp);
@@ -126,7 +126,7 @@
 											
 											
 											$.ajax({
-												url:"/search/listing",
+												url:"/items/listing",
 												datatype:"json"
 											}).done(function(resp){
 												
@@ -177,7 +177,7 @@
 									$(this).parent().remove();
 									
 									$.ajax({
-										url:"/search/deleteByKeyword?keyword="+str
+										url:"/items/deleteByKeyword?keyword="+str
 										
 									}).done(function(resp){
 										
@@ -247,8 +247,7 @@
 							<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
 							<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
 							<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
+							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>							
 							<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
 							<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
 						</ul>
@@ -299,70 +298,43 @@
 
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
+						
+						
 						<div class="imgBox">
+						
+						<!--상품 반복 시작 -->
+						
+						<c:forEach var="i" items="${ilist}"> 
+							<c:forEach var="f"  items="${flist }"> 
+							
+							<c:if test= "${f.parentSeq == i.iseq}">
+								  
+									
+									
 							<a href="/items/itemsDetail">
 								<div class="detail-img">
-									<img src="imgs/t-shirt.jpeg">
+								 								
+									<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
+									<img src="${f.sysName}">
 								</div>
+							
 								<div class="detail-container">
-									<div class="title">티셔츠</div>
-									<div class="price">3000원</div>
-									<div class="date">0일전</div>
+									<div class="title">${i.name}</div>
+									<div class="price">${i.price}원</div>
+									<div class="date">${i.detailDate}</div>
+									<%-- <div class="title">${flist.oriname}</div> --%>
+									
 								</div>
 
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a>
-
+							</a> 
+								</c:if>
+							<%-- </c:if> ^^--%>
+							 <%-- </c:if> --%> 
+									</c:forEach>	
+							</c:forEach>
+							
 							<!-- imgBox 2 구간 -->
-							<a href="#">
+							<!-- <a href="#">
 								<div class="detail-img">
 									<img src="imgs/200Pic.png">
 								</div>
@@ -371,7 +343,7 @@
 									<div class="price">0000원</div>
 									<div class="date">0일전</div>
 								</div>
-
+dd
 							</a> <a href="#">
 								<div class="detail-img">
 									<img src="imgs/200Pic.png">
@@ -400,13 +372,14 @@
 									<div class="price">0000원</div>
 									<div class="date">0일전</div>
 								</div>
-							</a>
+							</a> -->
 
 						</div>
 
 
 					</article>
 				</section>
+				
 			</div>
 		</div>
 		</div>
