@@ -36,6 +36,7 @@ public class BoardController {
 
 		String user_id = (String) session.getAttribute("loginID");
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		
 		if(user_id != null) {
 			// 로그인
 			list = bservice.selectByUser(user_id);
@@ -57,12 +58,12 @@ public class BoardController {
 
 	@RequestMapping("toDetail")
 	public String toDetail(int seq, Model model) {
-		System.out.println("toDetail 로 들어온 요청은 이 메서드를 실행합니다.");
-		
-		// 실행하면 조회수 + 1 작업 필요
+		System.out.println("toDetail 로 들어온 요청은 이 메서드를 실행합니다.");		
 
 		BoardDTO dto = bservice.selectBySeq(seq);
 		model.addAttribute("dto", dto);
+		
+		int result = bservice.addViewCount(seq);
 		
 		List<CommentDTO> list = cservice.selectBySeq(dto.getBoard_seq());
 		model.addAttribute("list", list);
@@ -74,8 +75,7 @@ public class BoardController {
 	public String writeProc(BoardDTO dto) throws Exception {
 		System.out.println("writeProc 로 들어온 요청은 이 메서드를 실행합니다.");
 
-//		dto.setWriter((String) session.getAttribute("loginID"));
-		dto.setWriter("테스트 계정");
+		dto.setWriter((String) session.getAttribute("loginID"));
 		int parentSeq = bservice.insert(dto);
 
 		return "redirect:boardList";
@@ -105,7 +105,6 @@ public class BoardController {
 		System.out.println("modifyProc 로 들어온 요청은 이 메서드를 실행합니다.");
 		
 //		dto.setWriter((String) session.getAttribute("loginID"));
-		dto.setWriter("테스트 계정");
 
 		int result = bservice.modify(dto);
 		return "redirect:/board/toDetail?seq=" + dto.getBoard_seq();
@@ -132,18 +131,5 @@ public class BoardController {
 
 		int likeCount = bservice.dislike(seq, user_id);
 		return String.valueOf(likeCount);
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "isLiked", produces = "text/html; charset=utf8")
-	public String isLiked(int seq) {
-		System.out.println("isLiked 로 들어온 요청은 이 메서드를 실행합니다.");
-		
-		String user_id = (String) session.getAttribute("loginID");
-		int result = bservice.isLiked(seq, user_id);
-		
-		System.out.println("result : " + result);
-		
-		return String.valueOf(result);
 	}
 }

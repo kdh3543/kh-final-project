@@ -48,8 +48,8 @@
                <c:when test="${loginID != null}">
               
               	
-              	${dto}
-           			${dto.profile_image } 하이요
+              	<%-- ${dto}
+           			${dto.profile_image } 하이요 --%>
            				 ${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
                   <a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
                   <a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
@@ -98,7 +98,7 @@
 					</select>
 					<button type="submit" id="submit">완료</button>
 				</div>
-				<textarea id="summernote" name="contents"></textarea>
+				<textarea id="summernote" name="contents">${dto.contents}</textarea>
 			</form>
 		</div>
 	</main>
