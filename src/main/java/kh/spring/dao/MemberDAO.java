@@ -58,6 +58,7 @@ public class MemberDAO {
    }
    //kakao 회원 가입 정보 입력
    public int kakaoinsert(MemberDTO dto) {
+	   System.out.println("kakao회원가입 정보 입력 성공");
       return mybatis.insert("Member.kakaoinsert",dto);
    }
    //id찾기
