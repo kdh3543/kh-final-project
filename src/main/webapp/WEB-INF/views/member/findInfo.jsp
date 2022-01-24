@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,20 +52,22 @@
               </nav>
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
+					<form action="/member/findID" method=get>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput">
+                        <input type="email" class="form-control" id="floatingInput" name="email">
                         <label for="floatingInput"> 가입할 때 입력했던 이메일 주소를 입력하세요.</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingPhone">
+                        <input type="text" class="form-control" id="floatingPhone" name="phone">
                         <label for="floatingPhone">가입할 때 입력했던 전화번호를 입력하세요.</label>
                     </div>
                     <div class="findIdBtn">
-                        <button id="findId" class=" btn btn-lg btn-light" type="submit">찾기</button>
+                        <button id="findId" class=" btn btn-lg btn-light" type="submit">찾기</button><span>${dto.id }</span>
                     </div>
+                    </form>
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <form action="" method=get>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="inputId" placeholder="name@example.com">
                         <label for="inputId">가입한 아이디를 입력하세요.</label>
@@ -82,6 +85,7 @@
                         <label for="inputCode">전송된 인증번호를 입력하세요.</label>
                         <button id="checkCode" class=" btn btn-lg btn-light" type="submit">인증번호 확인</button>
                     </div>
+                    </form>
                 </div>
                 
               </div>
@@ -93,5 +97,22 @@
             <span>CopyRight 2022 @ ALL RIGHT RESERVED</span>
         </div>
     </footer>
+    <script>
+    //ID찾기
+    
+	// 인증하기 버튼 눌렀을 때
+	$("#checkCode").on("click",function(){
+		
+		let key = $("#Auth").val(); // 암호화된 키값 받아오기
+		if(key == $("#number").val()){ // 암호화된 키값과 입력한 값이 같을 때,
+			location.href="/resultId.mem";
+			session.removeAttribute("AuthenticationKey"); // 암호화된 키값 삭제
+			 session.removeAttribute("email2");
+		}else{
+			alert("인증번호를 다시 확인해주세요.");
+			
+		}
+	});
+    </script>
 </body>
 </html>

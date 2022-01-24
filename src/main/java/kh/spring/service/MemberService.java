@@ -45,6 +45,14 @@ public class MemberService {
 		dto.setPw(encPw);
 		return mdao.insert(dto);
 	}
+	//kakao회원 정보 입력
+	public int kakaoinsert(MemberDTO dto)throws Exception{
+		return mdao.kakaoinsert(dto);
+	}
+	//이미 가입한 카카오 회원
+	public MemberDTO selectBykakaoemail(String kakaoemail) {
+		return mdao.selectBykakaoemail(kakaoemail);
+	}
 	//아이디로 찾기
 	public MemberDTO select(String id){
 		return mdao.select(id);
@@ -64,5 +72,17 @@ public class MemberService {
 	//가입 날짜
 	public int signDate(String id) {
 		return mdao.signDate(id);
+	}
+	//카카오 기존 회원 여부 확인
+	public int selectBykakao(String kakaoemail) {
+		return mdao.selectBykakao(kakaoemail);
+	}
+	//ID 찾기
+	public MemberDTO selectID(String email,String phone) {
+		return mdao.selectID(email,phone);
+	}
+	//id존재여부확인
+	public int selectIDexist(String email,String phone) {
+		return mdao.selectIDexist(email, phone);
 	}
 }

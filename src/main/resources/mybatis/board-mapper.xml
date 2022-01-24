@@ -4,42 +4,116 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-   <select id="selectAll" resultType="kh.spring.dto.BoardDTO">
-      SELECT * FROM BOARD ORDER BY BOARD_SEQ DESC
-   </select>
-   
-   <select id="selectBySeq" resultType="kh.spring.dto.BoardDTO">
-      SELECT * FROM BOARD WHERE BOARD_SEQ = #{value}
-   </select>
-   
-   <insert id="insert">
-      INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{writer}, #{contents}, #{subject}, DEFAULT, DEFAULT, DEFAULT)
-      <selectKey resultType="int" order="AFTER" keyProperty="board_seq">
-         SELECT BOARD_SEQ.CURRVAL FROM DUAL
-      </selectKey>
-   </insert>
-   
-   <delete id="delete">
-      DELETE FROM BOARD WHERE BOARD_SEQ = ${value}
-   </delete>
-   
-   <update id="modify">
-      UPDATE BOARD SET CONTENTS = #{contents}, SUBJECT = #{subject} WHERE BOARD_SEQ = #{board_seq}
-   </update>
-   
-   <update id="addLikeCount">
-      UPDATE BOARD SET LIKE_COUNT = LIKE_COUNT + 1 WHERE BOARD_SEQ = ${value}
-   </update>
-   
-   <update id="subtractLikeCount">
-      UPDATE BOARD SET LIKE_COUNT = LIKE_COUNT - 1 WHERE BOARD_SEQ = ${value}
-   </update>
-   
-   <insert id="addLikeList">
-      INSERT INTO BOARD_LIKE VALUES(BOARD_LIKE_SEQ.NEXTVAL, #{seq}, #{user_id})
-   </insert>
-   
-   <delete id="removeLikeList">
-      DELETE FROM BOARD_LIKE WHERE BOARD_SEQ = #{seq} and USER_ID = #{user_id}
-   </delete>
+	<!-- <select id="selectAll" resultType="kh.spring.dto.BoardDTO"> SELECT 
+		B.*, BL.USER_ID FROM BOARD B LEFT OUTER JOIN BOARD_LIKE BL ON(B.BOARD_SEQ 
+		= BL.BOARD_SEQ) ORDER BY B.BOARD_SEQ DESC
+	</select> -->
+
+	<!-- <select id="selectAll" resultType="kh.spring.dto.BoardDTO">
+		SELECT B.*, BL.USER_ID
+		FROM
+		BOARD B, BOARD_LIKE BL
+		WHERE B.BOARD_SEQ = BL.BOARD_SEQ(+)
+		ORDER BY
+		B.BOARD_SEQ DESC
+	</select> -->
+	
+	<select id="selectAll" resultType="kh.spring.dto.BoardDTO">
+		SELECT * FROM BOARD ORDER BY BOARD_SEQ DESC
+	</select>
+	
+	<!-- <select id="selectAll" resultType="kh.spring.dto.BoardDTO">
+		SELECT B.*, BL.USER_ID
+		FROM
+		BOARD B, BOARD_LIKE BL
+		WHERE B.BOARD_SEQ = BL.BOARD_SEQ(+)
+		ORDER BY
+		B.BOARD_SEQ DESC
+	</select> -->
+	
+	<select id="selectByUser" resultType="kh.spring.dto.BoardDTO">
+		SELECT
+		    A.BOARD_SEQ, A.WRITER, A.CONTENTS, A.SUBJECT, A.WRITE_DATE, A.VIEW_COUNT, A.LIKE_COUNT, A.COMMENT_COUNT, B.USER_ID
+		FROM
+		    (
+		    BOARD A
+		    LEFT OUTER JOIN
+		    (SELECT BOARD_SEQ, USER_ID FROM BOARD_LIKE WHERE USER_ID = #{value}) B
+		    ON A.BOARD_SEQ = B.BOARD_SEQ
+		    )
+		ORDER BY A.BOARD_SEQ DESC
+	</select>
+
+	<select id="selectBySeq" resultType="kh.spring.dto.BoardDTO">
+		SELECT * FROM BOARD WHERE
+		BOARD_SEQ = #{value}
+	</select>
+
+	<insert id="insert">
+		INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{writer}, #{contents},
+		#{subject}, DEFAULT, DEFAULT, DEFAULT)
+		<selectKey resultType="int" order="AFTER"
+			keyProperty="board_seq">
+			SELECT BOARD_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+
+	<delete id="delete">
+		DELETE FROM BOARD WHERE BOARD_SEQ = ${value}
+	</delete>
+
+	<update id="modify">
+		UPDATE BOARD SET CONTENTS = #{contents}, SUBJECT =
+		#{subject} WHERE
+		BOARD_SEQ = #{board_seq}
+	</update>
+
+	<!-- 게시판 좋아요 관련 -->
+
+	<update id="addLikeCount">
+		UPDATE BOARD SET LIKE_COUNT = LIKE_COUNT + 1 WHERE
+		BOARD_SEQ = ${value}
+	</update>
+
+	<insert id="addLikeList" parameterType="HashMap">
+		INSERT INTO BOARD_LIKE
+		VALUES(BOARD_LIKE_SEQ.NEXTVAL,
+		#{seq}, #{user_id})
+	</insert>
+
+	<update id="subtractLikeCount">
+		UPDATE BOARD SET LIKE_COUNT = LIKE_COUNT - 1 WHERE
+		BOARD_SEQ = ${value}
+	</update>
+
+	<delete id="removeLikeList" parameterType="HashMap">
+		DELETE FROM BOARD_LIKE
+		WHERE BOARD_SEQ = #{seq} and
+		USER_ID = #{user_id}
+	</delete>
+
+	<select id="getLikeCount" resultType="int">
+		SELECT COUNT(*) FROM
+		BOARD_LIKE WHERE BOARD_SEQ = ${value}
+	</select>
+
+	<!-- 댓글 좋아요 관련 -->
+
+	<update id="addCommentCount">
+		UPDATE BOARD SET COMMENT_COUNT = COMMENT_COUNT + 1
+		WHERE BOARD_SEQ =
+		${value}
+	</update>
+
+	<update id="subtractCommentCount">
+		UPDATE BOARD SET COMMENT_COUNT = COMMENT_COUNT - 1
+		WHERE BOARD_SEQ =
+		${value}
+	</update>
+
+	<select id="isLiked" parameterType="HashMap" resultType="int">
+		SELECT
+		COUNT(*) FROM BOARD_LIKE WHERE BOARD_SEQ = #{seq} AND USER_ID =
+		#{user_id};
+	</select>
 </mapper>

@@ -1,6 +1,7 @@
 package kh.spring.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,10 +22,10 @@ import kh.spring.service.CommentService;
 public class BoardController {
 	
 	@Autowired
-	public BoardService service;
+	public BoardService bservice;
 	
 	@Autowired
-	public CommentService cservice;
+	public CommentService cservice;	
 	
 	@Autowired
 	private HttpSession session;
@@ -33,7 +34,16 @@ public class BoardController {
 	public String boardList(Model model) {
 		System.out.println("boardList 로 들어온 요청은 이 메서드를 실행합니다.");
 
-		List<BoardDTO> list = service.selectAll();
+		String user_id = (String) session.getAttribute("loginID");
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		if(user_id != null) {
+			// 로그인
+			list = bservice.selectByUser(user_id);
+		} else {
+			// 비로그인
+			list = bservice.selectAll();
+		}
+		
 		model.addAttribute("list", list);
 		return "board/boardList";
 	}
@@ -48,8 +58,10 @@ public class BoardController {
 	@RequestMapping("toDetail")
 	public String toDetail(int seq, Model model) {
 		System.out.println("toDetail 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		// 실행하면 조회수 + 1 작업 필요
 
-		BoardDTO dto = service.selectBySeq(seq);
+		BoardDTO dto = bservice.selectBySeq(seq);
 		model.addAttribute("dto", dto);
 		
 		List<CommentDTO> list = cservice.selectBySeq(dto.getBoard_seq());
@@ -64,7 +76,7 @@ public class BoardController {
 
 //		dto.setWriter((String) session.getAttribute("loginID"));
 		dto.setWriter("테스트 계정");
-		int parentSeq = service.insert(dto);
+		int parentSeq = bservice.insert(dto);
 
 		return "redirect:boardList";
 	}
@@ -72,8 +84,10 @@ public class BoardController {
 	@RequestMapping("deleteProc")
 	public String deleteProc(int seq) {
 		System.out.println("deleteProc 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		// 게시물 삭제되면 게시물 댓글 및 좋아요 삭제 구현 필요
 
-		int result = service.delete(seq);
+		int result = bservice.delete(seq);
 		return "redirect:boardList";
 	}
 	
@@ -81,7 +95,7 @@ public class BoardController {
 	public String modify(int seq, Model model) {
 		System.out.println("modify 로 들어온 요청은 이 메서드를 실행합니다.");
 
-		BoardDTO dto = service.selectBySeq(seq);
+		BoardDTO dto = bservice.selectBySeq(seq);
 		model.addAttribute("dto", dto);
 		return "board/modifyForm";
 	}
@@ -93,33 +107,43 @@ public class BoardController {
 //		dto.setWriter((String) session.getAttribute("loginID"));
 		dto.setWriter("테스트 계정");
 
-		int result = service.modify(dto);
+		int result = bservice.modify(dto);
 		return "redirect:/board/toDetail?seq=" + dto.getBoard_seq();
 	}
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "likeProc", produces = "test/html; charset=utf8")
+	@RequestMapping(value = "likeProc", produces = "text/html; charset=utf8")
 	public String likeProc(int seq) {
 		System.out.println("likeProc 로 들어온 요청은 이 메서드를 실행합니다.");
 		
-//		String user_id = (String) session.getAttribute("loginID");
-		String user_id = "테스트 계정";
+		String user_id = (String) session.getAttribute("loginID");
 
-		int result = service.like(seq, user_id);
-		return String.valueOf(result);
+		int likeCount = bservice.like(seq, user_id);
+		return String.valueOf(likeCount);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "unlikeProc", produces = "test/html; charset=utf8")
-	public String unlikeProc(int seq) {
-		System.out.println("unlikeProc 로 들어온 요청은 이 메서드를 실행합니다.");
+	@RequestMapping(value = "dislikeProc", produces = "text/html; charset=utf8")
+	public String dislikeProc(int seq) {
+		System.out.println("dislikeProc 로 들어온 요청은 이 메서드를 실행합니다.");
 		
-//		String user_id = (String) session.getAttribute("loginID");
-		String user_id = "테스트 계정";
+		String user_id = (String) session.getAttribute("loginID");
 
-		int result = service.unlike(seq, user_id);
-		return String.valueOf(result);
+		int likeCount = bservice.dislike(seq, user_id);
+		return String.valueOf(likeCount);
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "isLiked", produces = "text/html; charset=utf8")
+	public String isLiked(int seq) {
+		System.out.println("isLiked 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		String user_id = (String) session.getAttribute("loginID");
+		int result = bservice.isLiked(seq, user_id);
+		
+		System.out.println("result : " + result);
+		
+		return String.valueOf(result);
+	}
 }
