@@ -8,7 +8,7 @@
 		Cookie[] cookies = request.getCookies(); //쿠키생성
 		if(cookies !=null&& cookies.length > 0)
 		for (int i = 0; i < cookies.length; i++){
-			if (cookies[i].getName().equals("id")) { // 내가 원하는 쿠키명 찾아서 값 저장
+			if (cookies[i].getName().equals("logid")) { // 내가 원하는 쿠키명 찾아서 값 저장
 				cookie = cookies[i].getValue();}}
 	%>
         <meta charset="UTF-8">
@@ -61,7 +61,7 @@
                 <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="logid" placeholder="name@example.com">
+                    <input type="text" class="form-control" id="floatingInput" name="logid" placeholder="name@example.com" value="<%=cookie%>">
                     <label for="floatingInput">아이디</label>
                 </div>
                 <div class="form-floating">
@@ -71,7 +71,7 @@
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me" name="remember_userID"> Remember me
+                        <input type="checkbox" name="remember_userID"> Remember me
                     </label>
                 </div>
                 <div class="buttons">

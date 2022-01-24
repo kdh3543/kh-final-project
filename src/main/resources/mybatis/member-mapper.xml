@@ -7,11 +7,11 @@
     <mapper namespace="Member">
     <!-- DB에 회원가입정보 저장 -->
     <insert id="insert">
-		insert into member values(member_seq.nextval,#{id}, #{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,#{kakao} )
+		insert into member values(member_seq.nextval,#{id}, #{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,0 )
 	</insert>
 	<!-- kakao 회원정보 입력 -->
 	<insert id="kakaoinsert">
-		insert into member values(member_seq.nextval,#{id},0,#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,#{kakao})
+		insert into member values(member_seq.nextval,#{id},c6a82dbbad5044d88608d65edc35087951a45b1e943a40c40d75fe50e444a6e15034d2943101c6189d3714326920044fc197e3edbdbe8367cc0b9545e9de6d10,#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,#{kakao})
 	</insert>
 	<!-- id중복확인 -->
 	<select id="idCheck" resultType="int">
@@ -23,7 +23,7 @@
 		select * from member where kakao=#{value}
 	</select>
 <select id="mypage" resultType="kh.spring.dto.MemberDTO">select * from member where id=#{value} </select>
-
+	
 	<select id="signDate" resultType="int">
 		select trunc(sysdate-signup_date+1,0) from member where id= #{id}
 	</select>
@@ -39,8 +39,17 @@
 	<select id="selectIDexist" resultType="int">
 		select count(id) from member where email=#{email} and phone=#{phone}
 	</select>
+	<!-- 계정 존재여부확인 -->
+	<select id="AccountExist" resultType="int">
+		select count(*) from member where id=#{inputID} and email=#{inputEmail}
+	</select>
 
 <update id="modify">update member set pw=#{pw}, name=#{name}, phone=#{phone} where id=#{id} </update>
+
+<!-- 비밀번호 변경 -->
+<update id="updatePw">
+	update member set pw=#{pw} where id= #{id}
+</update>
 
 <delete id="delete">delete from member where id=#{value} </delete>
     </mapper>

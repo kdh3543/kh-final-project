@@ -67,11 +67,29 @@ public class MemberDAO {
 		map.put("phone", phone);
 		return mybatis.selectOne("Member.selectID",map);
 	}
+	//아이디 존재여부확인
 	public int selectIDexist(String email,String phone) {
 		Map<String,String> map = new HashMap<>();
 		map.put("email", email);
 		map.put("phone", phone);
 		return mybatis.selectOne("Member.selectIDexist",map);
+	}
+	//계정 존재 여부 확인
+	public int AccountExist(String inputID,String inputEmail) {
+		System.out.println(inputID+"dao");
+		System.out.println(inputEmail+"dao");
+		Map<String,String> map = new HashMap<>();
+		map.put("inputID", inputID);
+		map.put("inputEmail", inputEmail);
+		return mybatis.selectOne("Member.AccountExist",map);
+	}
+	//비밀번호 변경
+	public int updatePw(String pw,String id) {
+		Map<String,String> map = new HashMap<>();
+		System.out.println("암호화된 pw>?"+pw);
+		map.put("pw", pw);
+		map.put("id",id);
+		return mybatis.update("Member.updatePw",map);
 	}
 
 }

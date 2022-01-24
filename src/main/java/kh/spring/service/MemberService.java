@@ -1,10 +1,13 @@
 package kh.spring.service;
 
 import java.io.File;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +66,12 @@ public class MemberService {
 	}
 	//로그인하기
 	public int login(String logid, String logpw) {
-		return mdao.login(logid, logpw);
+		int result =  mdao.login(logid, logpw);
+		if(result!=1) {
+			result = 0;
+			return result;
+		}
+		return result;
 	}
 	//회원 정보 수정
 	public int modify(MemberDTO dto) {
@@ -85,4 +93,22 @@ public class MemberService {
 	public int selectIDexist(String email,String phone) {
 		return mdao.selectIDexist(email, phone);
 	}
+	//아이디 이메일 일치 여부
+	public int AccountExist(String inputID,String inputEmail) {
+		System.out.println(inputID+"Service");
+		System.out.println(inputEmail+"Service");
+		int result = mdao.AccountExist(inputID, inputEmail);
+		 if(result<1) {
+			result=0;
+			return result;
+		}
+		return result;
+	}
+	//비밀번호 변경
+	public int updatePw(String pw, String id) {
+		String encpw = EncryptionUtils.getSHA512(pw);
+		return mdao.updatePw(encpw,id);
+	}
+	
+
 }
