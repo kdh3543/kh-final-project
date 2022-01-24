@@ -1,5 +1,6 @@
 package kh.spring.controller;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -18,263 +19,281 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.FilesDTO;
+import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.service.FilesService;
+import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
 import kh.spring.utils.EncryptionUtils;
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
-   
-   @Autowired
-   public MemberService mservice;
-   
-   @Autowired
-   private HttpSession session;
-    
-   
-   //아이디 중복체크
-   @ResponseBody
-   @RequestMapping(value = "idCheck",produces="text/html;charset=utf8")
-   public String idCheck(String id) throws Exception{   
-   int result = mservice.idCheck(id);
-      return String.valueOf(result);
-   }
-   //회원가입 정보 입력 
-   @RequestMapping("signup")
-   public String signup(MemberDTO dto,MultipartFile file) {
-      try {
 
-         int result = mservice.insert(dto,file);
-         
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return "redirect:/";
-   }
-   //kakao 회원가입 
-   @RequestMapping("kakaosignup")
-   public String kakaosignup(MemberDTO dto1,Model model) {
-      String kakaoid = dto1.getId();
-      dto1.setId(kakaoid);
-      String kakao = dto1.getEmail();
-      dto1.setKakao(kakao);
-      try {
-         int result = mservice.kakaoinsert(dto1);
-         if(result>0) {
-            session.setAttribute("loginID", kakaoid);
-            String id = (String)session.getAttribute("loginID");
-            
-            MemberDTO dto = mservice.select(id);
-            
-            model.addAttribute("dto", dto);
-      
-         }
-         
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      
-      return "forward:/items/";
-   }
-   
-   //로그인 기능
-   @RequestMapping(value="login")
-   public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
-      logpw = EncryptionUtils.getSHA512(logpw);
-      int result = mservice.login(logid,logpw);
-      System.out.println(remember_userID);
-      Cookie cookie = new Cookie("logid", logid); //쿠키 생성
-       cookie.setDomain("localhost");
-         cookie.setPath("/signIn");
+	@Autowired
+	public MemberService mservice;
+	@Autowired
+	public ItemsService iservice;
+	@Autowired
+	public FilesService fservice;
+	
 
-      if(remember_userID !=null) {
-            // 체크박스 체크 된 경우
-            response.addCookie(cookie); // 쿠키 저장
-            
-         }else {
-            // 체크박스 체크 해제 경우
-            cookie.setMaxAge(0); // 쿠키 유효시간 0으로 해서 브라우저에서 삭제
-            response.addCookie(cookie);
-         }
-      
-      //로그인 성공 시
-      if(result>0) {
-         session.setAttribute("loginID", logid);
-         String id = (String)session.getAttribute("loginID");
-         
-         MemberDTO dto = mservice.select(id);
-         
-         model.addAttribute("dto", dto);
-         
-         return "forward:/items/";
-   
-      }else {
-         return "redirect:/signIn";
-      }
+	@Autowired
+	private HttpSession session;
 
-      
-   }
-   //로그아웃 기능
-   @RequestMapping("logout")
-   public String logout() {
-      session.invalidate();
-      System.out.println("로그아웃 되었습니다.");
-      return "redirect:/";
-   }
-   //회원탈퇴 기능
-   @RequestMapping("leave")
-   public String leave() {
-      String id = (String)session.getAttribute("loginID");
-      int result = mservice.delete(id);
-      session.invalidate();
-      System.out.println("회원이 탈퇴되었습니다.");
-      return "redirect:/";
-   }
-   //마이페이지 이동기능
-   @RequestMapping("myPage")
-   public String mypage(Model model) {
-      String id = (String)session.getAttribute("loginID");
-      MemberDTO dto = mservice.select(id);
-      //가입한지 몇일 째인지 확인
-      int signDate = mservice.signDate(id);
-      model.addAttribute("signDate",signDate);
-      model.addAttribute("dto", dto);
-      return "/member/myPage";
-   }
-   //마이페이지 수정기능
-   @RequestMapping("modify")
-   public String modify(MemberDTO dto) {
-      String encPw = EncryptionUtils.getSHA512(dto.getPw());
-      dto.setPw(encPw);
-      int result = mservice.modify(dto);
-      System.out.println("정보수정완료");
-      return "/items/index";   
-   }
-   @RequestMapping("findID")
-   public String selectID(String email,String phone,Model model) {
-      int result = mservice.selectIDexist(email, phone);
-      model.addAttribute("result",result);
-      if(result>0) {
-         MemberDTO dto = mservice.selectID(email,phone);
-         
-            String id= dto.getId();
-            model.addAttribute("id",id);
-            model.addAttribute("dto",dto);
-            return "/member/findID";
-         
-      }else {
-         return "/member/findID";
-      }
-      
-      
-   }
-   @RequestMapping("changePw")
-   public String changePw(String inputID,String inputEmail,Model model) {
-      System.out.println(inputID);
-      System.out.println(inputEmail);
-      int result = mservice.AccountExist(inputID, inputEmail);
-      System.out.println(result);
-      if(result>0) {
-          String host = "smtp.naver.com";
-            String user = "wishstar1998"; //자신의 네이버 계정
-            String password = "wishstar199";//자신의 네이버 패스워드
-            //  메일 받을 주소
-            String to_email = inputEmail;
-            System.out.println(to_email);
-          //SMTP 서버 정보를 설정한다.
-            Properties props = System.getProperties();
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", host);
-            props.put("mail.smtp.port", 465);
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.ssl.enable", "true");
-            props.put("mail.smtp.ssl.trust", host);
-            props.put("mail.smtp.ssl.protocols","TLSv1.2");
-            props.put("mail.debug", "true"); // 오류날때 debug로 확인 가능
-            
-          //인증 번호 생성기
-            StringBuffer temp =new StringBuffer();
-            Random rnd = new Random();
-            for(int i=0;i<10;i++)
-            {
-                int rIndex = rnd.nextInt(3);
-                switch (rIndex) {
-                case 0:
-                    // a-z
-                    temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-                    break;
-                case 1:
-                    // A-Z
-                    temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-                    break;
-                case 2:
-                    // 0-9
-                    temp.append((rnd.nextInt(10)));
-                    break;
-                }
-            }
-            String AuthenticationKey = temp.toString();
-             
-             
-             Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                 protected PasswordAuthentication getPasswordAuthentication() {
-                     return new PasswordAuthentication(user,password);
-                 }
-             });
-             //email 전송
-             try {
-                 MimeMessage msg = new MimeMessage(session);
-                 msg.setFrom(new InternetAddress("wishstar1998@naver.com", "OIMarket"));
-                 msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
-                 
-                 //메일 제목
-                 msg.setSubject("안녕하세요 오이마켓 [아이디 찾기 인증번호] 입니다.");
-                 //메일 내용
-                 msg.setText("인증 번호는 : "+temp +"입니다. ");
-                 
-                 Transport.send(msg);
-                 
-                 System.out.println("이메일 전송");
-                 model.addAttribute("temp",temp);
-                 model.addAttribute("inputID",inputID);
-                 model.addAttribute("inputEmail",inputEmail);
-             }catch (Exception e) {
-                 e.printStackTrace();// TODO: handle exception
-             }
-//             HttpSession saveKey = request.getSession();
-//             saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
-//             saveKey.setMaxInactiveInterval(3*60); // 3분까지만 세션 저장
-//             System.out.println("이메일 전송 완료");
-//            
-//             HttpSession session1 = request.getSession();
-//             session1.setAttribute("email2", email2);
-//        
-//              response.getWriter().append(String.valueOf(result));
-//        
-//        request.getRequestDispatcher("member/findId.jsp").forward(request, response);
-   }else {
-      System.out.println("이메일 전송 실패");
-      return "redirect:/findInfo";
-   }
-         return "/member/findInfo";
-   }
-   @RequestMapping("findPw")
-   public String findPw(String inputID,Model model) {
-      System.out.println(inputID+"아이디findpw");
-      model.addAttribute("inputID",inputID);
-      return "/member/findPw";
-   }
-   @RequestMapping("updatePw")
-   public String updatePw(String pw, String id) {
-      System.out.println(id+"아이디로 찾기");
-       int result = mservice.updatePw(pw,id);
-       System.out.println(result+"비밀번호 변경에 성공하였습니다.");
-       return "redirect:/";
-   }
-   
-   
+
+	//아이디 중복체크
+	@ResponseBody
+	@RequestMapping(value = "idCheck",produces="text/html;charset=utf8")
+	public String idCheck(String id) throws Exception{   
+		int result = mservice.idCheck(id);
+		return String.valueOf(result);
+	}
+	//회원가입 정보 입력 
+	@RequestMapping("signup")
+	public String signup(MemberDTO dto,MultipartFile file) {
+		try {
+
+			int result = mservice.insert(dto,file);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/";
+	}
+	//kakao 회원가입 
+	@RequestMapping("kakaosignup")
+	public String kakaosignup(MemberDTO dto1,Model model) {
+		String kakaoid = dto1.getId();
+		dto1.setId(kakaoid);
+		String kakao = dto1.getEmail();
+		dto1.setKakao(kakao);
+		try {
+			int result = mservice.kakaoinsert(dto1);
+			if(result>0) {
+				session.setAttribute("loginID", kakaoid);
+				String id = (String)session.getAttribute("loginID");
+
+				MemberDTO dto = mservice.select(id);
+
+				model.addAttribute("dto", dto);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "forward:/items/";
+	}
+
+	//로그인 기능
+	@RequestMapping(value="login")
+	public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
+		logpw = EncryptionUtils.getSHA512(logpw);
+		int result = mservice.login(logid,logpw);
+		System.out.println(remember_userID);
+		Cookie cookie = new Cookie("logid", logid); //쿠키 생성
+		cookie.setDomain("localhost");
+		cookie.setPath("/signIn");
+
+		if(remember_userID !=null) {
+			// 체크박스 체크 된 경우
+			response.addCookie(cookie); // 쿠키 저장
+
+		}else {
+			// 체크박스 체크 해제 경우
+			cookie.setMaxAge(0); // 쿠키 유효시간 0으로 해서 브라우저에서 삭제
+			response.addCookie(cookie);
+		}
+
+		//로그인 성공 시
+		if(result>0) {
+			session.setAttribute("loginID", logid);
+			String id = (String)session.getAttribute("loginID");
+
+			MemberDTO dto = mservice.select(id);
+
+			model.addAttribute("dto", dto);
+
+			return "forward:/items/";
+
+		}else {
+			return "redirect:/signIn";
+		}
+
+
+	}
+	//로그아웃 기능
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		System.out.println("로그아웃 되었습니다.");
+		return "redirect:/";
+	}
+	//회원탈퇴 기능
+	@RequestMapping("leave")
+	public String leave() {
+		String id = (String)session.getAttribute("loginID");
+		int result = mservice.delete(id);
+		session.invalidate();
+		System.out.println("회원이 탈퇴되었습니다.");
+		return "redirect:/";
+	}
+	//마이페이지 이동기능
+	@RequestMapping("myPage")
+	public String mypage(Model model) {
+		String id = (String)session.getAttribute("loginID");
+		MemberDTO dto = mservice.select(id);		
+		//가입한지 몇일 째인지 확인
+		int signDate = mservice.signDate(id);
+		model.addAttribute("signDate",signDate);
+		model.addAttribute("dto", dto);
+
+		List<ItemsDTO>ilist =iservice.selectById(id);		
+		model.addAttribute("ilist",ilist);		
+		
+		int icnt = iservice.ItemsCount(id);
+		model.addAttribute("icnt",icnt);
+
+		List<FilesDTO>flist =fservice.selectAll();			
+		model.addAttribute("flist",flist);
+		System.out.println(flist);
+		return "/member/myPage";
+	}
+	//마이페이지 수정기능
+	@RequestMapping("modify")
+	public String modify(MemberDTO dto) {
+		String encPw = EncryptionUtils.getSHA512(dto.getPw());
+		dto.setPw(encPw);
+		int result = mservice.modify(dto);
+		System.out.println("정보수정완료");
+		return "/items/index";   
+	}
+	@RequestMapping("findID")
+	public String selectID(String email,String phone,Model model) {
+		int result = mservice.selectIDexist(email, phone);
+		model.addAttribute("result",result);
+		if(result>0) {
+			MemberDTO dto = mservice.selectID(email,phone);
+
+			String id= dto.getId();
+			model.addAttribute("id",id);
+			model.addAttribute("dto",dto);
+			return "/member/findID";
+
+		}else {
+			return "/member/findID";
+		}
+
+
+	}
+	@RequestMapping("changePw")
+	public String changePw(String inputID,String inputEmail,Model model) {
+		System.out.println(inputID);
+		System.out.println(inputEmail);
+		int result = mservice.AccountExist(inputID, inputEmail);
+		System.out.println(result);
+		if(result>0) {
+			String host = "smtp.naver.com";
+			String user = "wishstar1998"; //자신의 네이버 계정
+			String password = "wishstar199";//자신의 네이버 패스워드
+			//  메일 받을 주소
+			String to_email = inputEmail;
+			System.out.println(to_email);
+			//SMTP 서버 정보를 설정한다.
+			Properties props = System.getProperties();
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.port", 465);
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.ssl.enable", "true");
+			props.put("mail.smtp.ssl.trust", host);
+			props.put("mail.smtp.ssl.protocols","TLSv1.2");
+			props.put("mail.debug", "true"); // 오류날때 debug로 확인 가능
+
+			//인증 번호 생성기
+			StringBuffer temp =new StringBuffer();
+			Random rnd = new Random();
+			for(int i=0;i<10;i++)
+			{
+				int rIndex = rnd.nextInt(3);
+				switch (rIndex) {
+				case 0:
+					// a-z
+					temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+					break;
+				case 1:
+					// A-Z
+					temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+					break;
+				case 2:
+					// 0-9
+					temp.append((rnd.nextInt(10)));
+					break;
+				}
+			}
+			String AuthenticationKey = temp.toString();
+
+
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user,password);
+				}
+			});
+			//email 전송
+			try {
+				MimeMessage msg = new MimeMessage(session);
+				msg.setFrom(new InternetAddress("wishstar1998@naver.com", "OIMarket"));
+				msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to_email));
+
+				//메일 제목
+				msg.setSubject("안녕하세요 오이마켓 [아이디 찾기 인증번호] 입니다.");
+				//메일 내용
+				msg.setText("인증 번호는 : "+temp +"입니다. ");
+
+				Transport.send(msg);
+
+				System.out.println("이메일 전송");
+				model.addAttribute("temp",temp);
+				model.addAttribute("inputID",inputID);
+				model.addAttribute("inputEmail",inputEmail);
+			}catch (Exception e) {
+				e.printStackTrace();// TODO: handle exception
+			}
+			//             HttpSession saveKey = request.getSession();
+			//             saveKey.setAttribute("AuthenticationKey", AuthenticationKey);
+			//             saveKey.setMaxInactiveInterval(3*60); // 3분까지만 세션 저장
+			//             System.out.println("이메일 전송 완료");
+			//            
+			//             HttpSession session1 = request.getSession();
+			//             session1.setAttribute("email2", email2);
+			//        
+			//              response.getWriter().append(String.valueOf(result));
+			//        
+			//        request.getRequestDispatcher("member/findId.jsp").forward(request, response);
+		}else {
+			System.out.println("이메일 전송 실패");
+			return "redirect:/findInfo";
+		}
+		return "/member/findInfo";
+	}
+	@RequestMapping("findPw")
+	public String findPw(String inputID,Model model) {
+		System.out.println(inputID+"아이디findpw");
+		model.addAttribute("inputID",inputID);
+		return "/member/findPw";
+	}
+	@RequestMapping("updatePw")
+	public String updatePw(String pw, String id) {
+		System.out.println(id+"아이디로 찾기");
+		int result = mservice.updatePw(pw,id);
+		System.out.println(result+"비밀번호 변경에 성공하였습니다.");
+		return "redirect:/";
+	}
+
+
 }
