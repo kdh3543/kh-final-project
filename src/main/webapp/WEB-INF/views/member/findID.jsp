@@ -24,6 +24,14 @@
     <link rel="stylesheet" href="/css/footer.css">
       <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/css/member/findInfo.css">
+    <style>
+    	#signIn:hover{
+    		background-color:#24A6A4;
+    	}
+    	#findMyInfo:hover{
+    		background-color:#24A6A4;
+    	}
+    </style>
 </head>
 <body>
     <header>
@@ -54,13 +62,13 @@
          </c:when>
          <c:otherwise>
          <div class="mb-3">
-            <label for="deallocation" class="form-label">고객님의 아이디를 찾지 못했습니다.</label>	
+            <label for="deallocation" class="form-label">고객님의 아이디를 찾지 못했습니다. 정확한 정보를 입력해주세요</label>	
           </div>
          </c:otherwise>
          </c:choose>
          
           
-           <div class="buttons">
+           <div class="buttons" id="btns">
                     <button id="signIn" class=" btn btn-lg btn-light" type="button">로그인하러 가기</button>
                     <button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호 찾기</button>
                 </div>
