@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="/css/header_searchBar.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom styles for this template -->
-<link href="/css/boardDetail.css" rel="stylesheet">
+<link href="/css/board/boardDetail.css" rel="stylesheet">
 <!-- JS -->
 <script src="/js/boardList.js"></script>
 

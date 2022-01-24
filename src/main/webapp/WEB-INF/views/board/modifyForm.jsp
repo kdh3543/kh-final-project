@@ -33,7 +33,7 @@
 			<link rel="stylesheet" href="/css/header_searchBar.css">
 			<link rel="stylesheet" href="/css/footer.css">
 			<!-- Custom styles for this template -->
-			<link href="/css/modifyForm.css" rel="stylesheet">
+			<link href="/css/board/modifyForm.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/modifyForm.js"></script>
 

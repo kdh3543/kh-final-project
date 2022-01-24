@@ -60,11 +60,21 @@ public class HomeController {
 	public String productList() {
 		return "/items/itemsList";
 	}
+	@RequestMapping("itemsAdd")
+	public String itemsAdd() {
+		return "/items/itemsAdd";
+	}
 	
 	@RequestMapping("talk")
 	public String talk() {
 		
 		return "/talk/talk";
+	}
+	
+	@RequestMapping("adminIndex")
+	public String adminIndex() {
+		
+		return "/admin/adminIndex";
 	}
 	
 }

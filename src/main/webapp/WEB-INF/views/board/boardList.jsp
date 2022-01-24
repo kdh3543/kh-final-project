@@ -26,7 +26,7 @@
 			<link rel="stylesheet" href="/css/header_searchBar.css">
 			<link rel="stylesheet" href="/css/footer.css">
 			<!-- Custom styles for this template -->
-			<link href="/css/boardList.css" rel="stylesheet">
+			<link href="/css/board/boardList.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/boardDetail.js"></script>
 

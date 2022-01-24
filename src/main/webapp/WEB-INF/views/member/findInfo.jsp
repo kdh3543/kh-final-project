@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
       <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/css/findInfo.css">
+    <link rel="stylesheet" href="/css/member/findInfo.css">
 </head>
 <body>
     <header>
