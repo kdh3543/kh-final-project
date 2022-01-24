@@ -299,7 +299,7 @@
 						<div class="imgBox">
 							<a href="/items/itemsDetail">
 								<div class="detail-img">
-									<img src="imgs/t-shirt.jpeg">
+									<img src="/imgs/t-shirt.jpeg">
 								</div>
 								<div class="detail-container">
 									<div class="title">티셔츠</div>
@@ -309,7 +309,7 @@
 
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -319,7 +319,7 @@
 
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -329,7 +329,7 @@
 
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -338,7 +338,7 @@
 								</div>
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -348,7 +348,7 @@
 
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -361,7 +361,7 @@
 							<!-- imgBox 2 구간 -->
 							<a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -371,7 +371,7 @@
 
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -380,7 +380,7 @@
 								</div>
 							</a> <a href="#">
 								<div class="detail-img">
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>
@@ -390,7 +390,7 @@
 
 							</a> <a href="#">
 								<div>
-									<img src="imgs/200Pic.png">
+									<img src="/imgs/200Pic.png">
 								</div>
 								<div class="detail-container">
 									<div class="title">상품명</div>

@@ -33,7 +33,7 @@
 			<link rel="stylesheet" href="/css/header.css">
 			<link rel="stylesheet" href="/css/footer.css">
 			<!-- Custom styles for this template -->
-			<link href="/css/writeForm.css" rel="stylesheet">
+			<link href="/css/board/writeForm.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/writeForm.js"></script>
 

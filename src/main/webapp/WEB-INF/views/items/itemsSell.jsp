@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom CSS -->
-<link rel="stylesheet" href="/css/productAdd.css">
+    <link rel="stylesheet" href="/css/items/itemsSell.css">
 <!-- 주소 API -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

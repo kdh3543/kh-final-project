@@ -26,11 +26,6 @@ public class MemberController {
    
    @Autowired
    private HttpSession session;
-   
-   
-   
-   
-   
     
    
    //아이디 중복체크
