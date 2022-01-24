@@ -47,7 +47,7 @@ public class kakaoController {
 	        		MemberDTO dto = mservice.select(id1);
 	        		
 	        		model.addAttribute("dto",dto);
-	        		
+	        		return "forward:/items/";
 	        		
 	        	}else {
 	        		model.addAttribute("kakaoemail",kakaoemail);

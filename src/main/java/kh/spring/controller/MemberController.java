@@ -294,6 +294,4 @@ public class MemberController {
 		System.out.println(result+"비밀번호 변경에 성공하였습니다.");
 		return "redirect:/";
 	}
-
-
 }

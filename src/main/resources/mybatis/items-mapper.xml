@@ -26,9 +26,9 @@
 		ISEQ DESC
 	</select>
 	<select id="ItemsCount" resultType="int">
-		SELECT COUNT(*) FROM ITEMS WHERE SELLERID = '#{value}'
+		SELECT COUNT(*) FROM ITEMS WHERE SELLERID = #{value}
 	</select>
 	<select id="selectById" resultType="kh.spring.dto.ItemsDTO">
-		SELECT * FROM ITEMS ORDER BY ISEQ DESC WHERE SELLERID='#{value}'
+		SELECT * FROM ITEMS WHERE SELLERID = #{value}
 	</select>
 </mapper>
