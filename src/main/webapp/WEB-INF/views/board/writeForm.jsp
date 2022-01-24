@@ -92,7 +92,7 @@
 				maxHeight: null,             // set maximum height of editor
 				focus: true                  // set focus to editable area after initializing summernote
 			});
-			
+
 		});
 	</script>
 </body>

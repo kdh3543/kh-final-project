@@ -4,32 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Board">
-	<!-- <select id="selectAll" resultType="kh.spring.dto.BoardDTO"> SELECT 
-		B.*, BL.USER_ID FROM BOARD B LEFT OUTER JOIN BOARD_LIKE BL ON(B.BOARD_SEQ 
-		= BL.BOARD_SEQ) ORDER BY B.BOARD_SEQ DESC
-	</select> -->
-
-	<!-- <select id="selectAll" resultType="kh.spring.dto.BoardDTO">
-		SELECT B.*, BL.USER_ID
-		FROM
-		BOARD B, BOARD_LIKE BL
-		WHERE B.BOARD_SEQ = BL.BOARD_SEQ(+)
-		ORDER BY
-		B.BOARD_SEQ DESC
-	</select> -->
-	
+		
 	<select id="selectAll" resultType="kh.spring.dto.BoardDTO">
 		SELECT * FROM BOARD ORDER BY BOARD_SEQ DESC
 	</select>
-	
-	<!-- <select id="selectAll" resultType="kh.spring.dto.BoardDTO">
-		SELECT B.*, BL.USER_ID
-		FROM
-		BOARD B, BOARD_LIKE BL
-		WHERE B.BOARD_SEQ = BL.BOARD_SEQ(+)
-		ORDER BY
-		B.BOARD_SEQ DESC
-	</select> -->
 	
 	<select id="selectByUser" resultType="kh.spring.dto.BoardDTO">
 		SELECT
@@ -48,10 +26,15 @@
 		SELECT * FROM BOARD WHERE
 		BOARD_SEQ = #{value}
 	</select>
+	
+	<update id="addViewCount">
+		UPDATE BOARD SET VIEW_COUNT = VIEW_COUNT + 1
+		WHERE
+		BOARD_SEQ = ${value}
+	</update>
 
 	<insert id="insert">
-		INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{writer}, #{contents},
-		#{subject}, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, #{writer}, #{contents},	#{subject}, CURRENT_DATE, DEFAULT, DEFAULT, DEFAULT)
 		<selectKey resultType="int" order="AFTER"
 			keyProperty="board_seq">
 			SELECT BOARD_SEQ.CURRVAL FROM DUAL
@@ -111,9 +94,4 @@
 		${value}
 	</update>
 
-	<select id="isLiked" parameterType="HashMap" resultType="int">
-		SELECT
-		COUNT(*) FROM BOARD_LIKE WHERE BOARD_SEQ = #{seq} AND USER_ID =
-		#{user_id};
-	</select>
 </mapper>

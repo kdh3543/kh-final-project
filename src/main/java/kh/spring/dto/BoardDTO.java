@@ -12,6 +12,7 @@ public class BoardDTO {
 	private int like_count; // 좋아요 수
 	private int comment_count; // 댓글 수
 	private String user_id; // 좋아요 한 아이디 체크
+	private String parsed_date;
 
 	public BoardDTO() {
 		super();
@@ -19,7 +20,7 @@ public class BoardDTO {
 	}
 
 	public BoardDTO(int board_seq, String writer, String contents, String subject, Timestamp write_date, int view_count,
-			int like_count, int comment_count, String user_id) {
+			int like_count, int comment_count, String user_id, String parsed_date) {
 		super();
 		this.board_seq = board_seq;
 		this.writer = writer;
@@ -30,6 +31,7 @@ public class BoardDTO {
 		this.like_count = like_count;
 		this.comment_count = comment_count;
 		this.user_id = user_id;
+		this.parsed_date = parsed_date;
 	}
 
 	public int getBoard_seq() {
@@ -102,6 +104,14 @@ public class BoardDTO {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getParsed_date() {
+		return parsed_date;
+	}
+
+	public void setParsed_date(String parsed_date) {
+		this.parsed_date = parsed_date;
 	}
 
 }
