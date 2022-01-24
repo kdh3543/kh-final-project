@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom CSS -->
-<link rel="stylesheet" href="/css/productAdd.css">
+    <link rel="stylesheet" href="/css/items/itemsSell.css">
 <!-- 주소 API -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -358,9 +358,10 @@
 								<!-- 좋아요 개수 -->
 								<input type="hidden" name="like_cnt" value=0>
 								<!-- 사진 저장  -->
-								<input type="hidden" name="items_img1" value=0> <input
-									type="hidden" name="items_img2" value=0> <input
-									type="hidden" name="items_img3" value=0>
+								
+									<!-- 조회수-->
+									
+									<input type="hidden" name= "view_cnt" value=0> 
 
 
 

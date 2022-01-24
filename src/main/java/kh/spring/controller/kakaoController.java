@@ -48,14 +48,14 @@ public class kakaoController {
 	        		
 	        		model.addAttribute("dto",dto);
 	        		
-	        		return "index";
+	        		
 	        	}else {
 	        		model.addAttribute("kakaoemail",kakaoemail);
 	        		model.addAttribute("profile_image",profile_image);
 	        		return "/member/kakaoLogin";
 	        	}
 	        }
-	        return "index";
+	        return "forward:/items/";
 	        
 	        // 만약에 카카오 로그인으로 가입한 사람의 경우 index로 보내
 	        // 카카오로 최초 로그인한 경우 필수 가입정보 입력

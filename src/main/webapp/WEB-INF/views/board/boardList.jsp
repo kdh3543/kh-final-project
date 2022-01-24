@@ -26,7 +26,7 @@
 			<link rel="stylesheet" href="/css/header_searchBar.css">
 			<link rel="stylesheet" href="/css/footer.css">
 			<!-- Custom styles for this template -->
-			<link href="/css/boardList.css" rel="stylesheet">
+			<link href="/css/board/boardList.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/boardDetail.js"></script>
 
@@ -39,10 +39,6 @@
 			<ul class="header_list">
 				<c:choose>
 					<c:when test="${loginID != null}">
-
-
-						${dto}
-						${dto.profile_image } 하이요
 						${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
 						<a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
 						<a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
@@ -94,8 +90,8 @@
 					<div class="contents-title">${dto.subject}</div>
 					<div class="contents-div">
 						<div class="contents-div-contents">
-							<a class="contents-a${status.count}"
-								href="toDetail?seq=${dto.board_seq}" style="color: black; text-decoration: none">${dto.contents}</a>
+							<a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}"
+								style="color: black; text-decoration: none">${dto.contents}</a>
 						</div>
 					</div>
 					<script>
@@ -118,12 +114,14 @@
 									<c:choose>
 										<c:when test="${dto.user_id == loginID}">
 											<a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
-												style="color: #24a6a4; text-decoration: none"> <i class="fas fa-heart"></i>좋아요 <span
+												style="color: #24a6a4; text-decoration: none"> <i
+													class="fas fa-heart"></i>좋아요 <span
 													class="likeCount">${dto.like_count}</span></a>
 										</c:when>
 										<c:otherwise>
 											<a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
-												style="color: black; text-decoration: none"> <i class="fas fa-heart"></i>좋아요 <span
+												style="color: black; text-decoration: none"> <i
+													class="fas fa-heart"></i>좋아요 <span
 													class="likeCount">${dto.like_count}</span></a>
 										</c:otherwise>
 									</c:choose>
@@ -135,7 +133,8 @@
 							</c:choose>
 						</div>
 						<div class="floating-comments">
-							<a href="toDetail?seq=${dto.board_seq}" style="color: black; text-decoration: none"><i class="fas fa-comment"></i> 댓글
+							<a href="toDetail?seq=${dto.board_seq}" style="color: black; text-decoration: none"><i
+									class="fas fa-comment"></i> 댓글
 								${dto.comment_count}</a>
 						</div>
 					</div>
@@ -151,14 +150,14 @@
 		</div>
 	</footer>
 	<script>
-		$("#toWrite").on("click", function(){
+		$("#toWrite").on("click", function () {
 			location.href = "writeForm";
 		})
 
 		$(".like-unclickable").on("click", function () {
 			alert("로그인이 필요한 기능입니다.");
 		})
-		
+
 		$(".btnLike").on("click", function () {
 			if ($(this).hasClass('liked')) {
 				$.ajax({

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
       <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/css/findInfo.css">
+    <link rel="stylesheet" href="/css/member/findInfo.css">
 </head>
 <body>
     <header>
@@ -52,13 +52,13 @@
               </nav>
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-					<form action="/member/findID" method=get>
+               <form action="/member/findID" method=get>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" name="email">
+                        <input type="email" class="form-control" id="floatingInput" name="email" required>
                         <label for="floatingInput"> 가입할 때 입력했던 이메일 주소를 입력하세요.</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingPhone" name="phone">
+                        <input type="text" class="form-control" id="floatingPhone" name="phone" required>
                         <label for="floatingPhone">가입할 때 입력했던 전화번호를 입력하세요.</label>
                     </div>
                     <div class="findIdBtn">
@@ -66,27 +66,53 @@
                     </div>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <form action="" method=get>
+                <c:choose>
+                   <c:when test="${temp !=null }">
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                   <form action="/member/findPw" method="get">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="inputId" placeholder="name@example.com">
+                        <input type="text" class="form-control" name="inputID" value="${inputID }" readonly>
                         <label for="inputId">가입한 아이디를 입력하세요.</label>
                     </div>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="inputEamil" placeholder="Password">
-                        <label for="inputEamil">가입할 때 입력했던 이메일 주소를 입력하세요.</label>
+                        <input type="email" class="form-control" value="${inputEmail }" readonly>
+                        <label for="inputemail">가입할 때 입력했던 이메일 주소를 입력하세요.</label>
+                    </div>
+                  
+                    
+                    <!-- hidden 부분-->
+                    
+                    <div class="form-floating" id="codeDiv">
+                        <input type="text" class="form-control" id="inputCode" placeholder="Password">
+                        <label for="inputCode">전송된 인증번호를 입력하세요.</label>
+                        <input type=hidden id="tempM" value="${temp }">
+                        <button id="checkCode" class=" btn btn-lg btn-light" type="button">인증번호 확인</button>
+                        <span id="changePw" style="visibility:hidden"><button id="changePw" class=" btn btn-lg btn-light" type="submit">비밀번호 변경하러 가기</button></span>
+                    </div>
+                    </form>
+                    
+                </div>
+                   </c:when>
+                   <c:otherwise>
+                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <form action="/member/changePw" method=get>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" name="inputID" placeholder="name@example.com" required>
+                        <label for="inputId">가입한 아이디를 입력하세요.</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" name="inputEmail" placeholder="" required>
+                        <label for="inputemail">가입할 때 입력했던 이메일 주소를 입력하세요.</label>
                     </div>
                     <div class="findPwBtn">
                         <button id="findPw" class=" btn btn-lg btn-light" type="submit">인증번호 전송</button>
                     </div>
-                    <!-- hidden 부분-->
-                    <div class="form-floating" id="codeDiv">
-                        <input type="text" class="form-control" id="inputCode" placeholder="Password">
-                        <label for="inputCode">전송된 인증번호를 입력하세요.</label>
-                        <button id="checkCode" class=" btn btn-lg btn-light" type="submit">인증번호 확인</button>
-                    </div>
                     </form>
+           
+                    
                 </div>
+                   </c:otherwise>
+                </c:choose>
                 
               </div>
         </div>
@@ -100,19 +126,21 @@
     <script>
     //ID찾기
     
-	// 인증하기 버튼 눌렀을 때
-	$("#checkCode").on("click",function(){
-		
-		let key = $("#Auth").val(); // 암호화된 키값 받아오기
-		if(key == $("#number").val()){ // 암호화된 키값과 입력한 값이 같을 때,
-			location.href="/resultId.mem";
-			session.removeAttribute("AuthenticationKey"); // 암호화된 키값 삭제
-			 session.removeAttribute("email2");
-		}else{
-			alert("인증번호를 다시 확인해주세요.");
-			
-		}
-	});
+   // 인증하기 버튼 눌렀을 때
+   $("#checkCode").on("click",function(){
+      
+      
+      
+      
+      if($("#inputCode").val() ==$("#tempM").val() ){ // 암호화된 키값과 입력한 값이 같을 때,
+         
+      $("#changePw").css("visibility","visible");
+      //   location.href="/member/findPw";
+      }else{
+         alert("인증번호를 다시 확인해주세요.");
+         
+      }
+   });
     </script>
 </body>
 </html>

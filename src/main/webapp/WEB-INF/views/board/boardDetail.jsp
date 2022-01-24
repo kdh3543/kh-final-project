@@ -39,14 +39,11 @@
 			<ul class="header_list">
 				<c:choose>
 					<c:when test="${loginID != null}">
-
-
-						<%-- ${dto} ${dto.profile_image } 하이요 --%>
-							${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-							<a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-							<a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-							<a href="/member/leave" id="leavebtn">회원
-								탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+						${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
+						<a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+						<a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+						<a href="/member/leave" id="leavebtn">회원
+							탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
 					</c:when>
 					<c:otherwise>
 						<li><a href="signIn">로그인</a></li>
@@ -106,7 +103,7 @@
 					<div class="writer-div">${dto.writer}</div>
 					<div class="location-div">위치 / ${dto.write_date}</div>
 					<div class="write-contents-div">${dto.contents}</div>
-				<!-- 	<span>등록순</span> / <span>최신순</span> -->
+					<!-- 	<span>등록순</span> / <span>최신순</span> -->
 				</div>
 			</div>
 			<c:forEach var="cdto" items="${list}">
@@ -141,7 +138,7 @@
 				</div>
 			</c:forEach>
 			<div class="writecomments-div">
-				<form action="/comment/writeProc" method="post" enctype="multipart/form-data">					
+				<form action="/comment/writeProc" method="post" enctype="multipart/form-data">
 					<textarea rows="" cols="100%" placeholder="댓글을 입력해주세요." name="contents"></textarea>
 					<button type="submit" name="submit">등록</button>
 					<input type="hidden" name="board_seq" value="${dto.board_seq}">
@@ -178,46 +175,6 @@
 				location.href = "/comment/deleteProc?seq=${dto.board_seq}";
 			}) */
 	</script>
-
-	<!-- 댓글 Ajax 코드 -->
-	<!-- <script>
-		$("#add-comment").on("click", function() {
-			$.ajax({
-				url : "/comment/writeProc",
-				data : {
-					board_seq : "${dto.board_seq}",
-					contents : $("#contents").val()
-				},
-				dataType : "json"
-			}).done(function(ResponseResult) {
-				console.log(ResponseResult);
-				let contents = $("<div>");				
-
-				let comment_writer = $("<h3>");
-				comment_writer.append(ResponseResult.writer);
-				
-				let location = $("<span>");
-				location.append("위치");
-				
-				let comment_write_date = $("<span>");
-				comment_write_date.append(ResponseResult.write_date);
-
-				let comment_contents = $("<div>");
-				comment_contents.append(ResponseResult.contents);
-
-				let like_count = $("<span>");
-				like_count.append("좋아요(좋아요 수)");
-
-				contents.append(comment_writer);
-				contents.append(location);
-				contents.append(comment_write_date);
-				contents.append(comment_contents);
-				contents.append(like_count);
-
-				$("#comment-container").append(contents);
-			})
-		})
-	</script> -->
 </body>
 
 </html>

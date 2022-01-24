@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
-        <link href="/css/signIn.css" rel="stylesheet">
+        <link href="/css/member/signIn.css" rel="stylesheet">
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -80,7 +80,7 @@
                     <button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호 찾기</button>
                 </div>
                 <div class="form-group socialimage" id="kakaoBtn">
-               <a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:8080/kakaologin&response_type=code">
+               <a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:80/kakaologin&response_type=code">
                   <img id="socialimage" src="/imgs/kakao_login_large_wide.png" width="100%" height="100%"/ >
                </a>
             </div>
