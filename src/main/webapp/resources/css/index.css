@@ -269,7 +269,7 @@ section article .article_title{
     margin: 1% 1% 1%;
     
 }
-
+.detail-img{width:175px; height:175px;}
 
 .imgBox a .detail-container .date {
     text-align: right;
