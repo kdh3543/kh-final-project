@@ -50,8 +50,8 @@
 		select count(*) from member where id=#{inputID} and email=#{inputEmail}
 	</select>
 
-	<update id="modify">update member set pw=#{pw}, name=#{name},
-		phone=#{phone} where id=#{id} </update>
+	<update id="modify">update member set pw=#{pw}, profile_image=#{profile_image}, zipcode=#{zipcode},address1=#{address1},address2=#{address2},
+		phone=#{phone}, prefer_location=#{prefer_location} where id=#{id} </update>
 
 	<!-- 비밀번호 변경 -->
 	<update id="updatePw">
