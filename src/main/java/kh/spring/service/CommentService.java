@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.spring.dao.CommentDAO;
-import kh.spring.dto.BoardDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.utils.DateParseUtils;
 
 @Service
 public class CommentService {
@@ -17,7 +17,11 @@ public class CommentService {
 
 	// 해당 게시물 전체 댓글 리스트
 	public List<CommentDTO> selectBySeq(int seq) {
-		return dao.selectBySeq(seq);
+		List<CommentDTO> list = dao.selectBySeq(seq);
+		for (CommentDTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
 	}
 
 	// 신규 댓글 삽입
