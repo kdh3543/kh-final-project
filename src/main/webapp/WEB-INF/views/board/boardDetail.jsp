@@ -26,7 +26,7 @@
 			<link rel="stylesheet" href="/css/header_searchBar.css">
 			<link rel="stylesheet" href="/css/footer.css">
 			<!-- Custom styles for this template -->
-			<link href="/css/boardDetail.css" rel="stylesheet">
+			<link href="/css/board/boardDetail.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/boardList.js"></script>
 
@@ -100,8 +100,7 @@
 					</c:if>
 				</div>
 				<div class="contents-container">
-					<div class="writer-div">${dto.writer}</div>
-					<div class="location-div">위치 / ${dto.write_date}</div>
+					<div class="writer-div">${dto.writer} · 위치 ·  ${dto.parsed_date}</div>
 					<div class="write-contents-div">${dto.contents}</div>
 					<!-- 	<span>등록순</span> / <span>최신순</span> -->
 				</div>
@@ -132,9 +131,8 @@
 							</div>
 						</c:if>
 					</div>
-					<div id="location"> 위치 / ${cdto.write_date}</div>
+					<div id="location"> 위치 · ${cdto.parsed_date}</div>
 					<div id="comment-contents">${cdto.contents}</div>
-					<span id="like-count"><i class="fas fa-heart">좋아요(좋아요 수)</i></span>
 				</div>
 			</c:forEach>
 			<div class="writecomments-div">

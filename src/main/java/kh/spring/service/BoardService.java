@@ -35,16 +35,14 @@ public class BoardService {
 
 	// 신규 게시글 삽입
 	public int insert(BoardDTO dto) {
-		System.out.println("service");
-		System.out.println(dto.getWriter());
-		System.out.println(dto.getContents());
-		System.out.println(dto.getSubject());
 		return dao.insert(dto);
 	}
 
 	// 시퀀스로 게시글 검색
 	public BoardDTO selectBySeq(int seq) {
-		return dao.selectBySeq(seq);
+		BoardDTO dto = dao.selectBySeq(seq);
+		dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		return dto;
 	}
 
 	// 시퀀스로 조회수 추가

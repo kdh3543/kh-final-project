@@ -11,7 +11,7 @@ body{
   font-family: OTWelcomeRA;
 }
 main {
-    /* height:auto; */
+    height:auto;
     width: 100%;
     flex-direction: column;
     margin-bottom: 200px;
@@ -24,15 +24,14 @@ main {
  */
 .contents-box {
   width: 100%;
-  height: 20%;
   margin: auto;
-  /* margin-bottom:160px; */
+  margin-bottom:160px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10%;
-
+  overflow: hidden;
 }
 
 .contents-top-div{
