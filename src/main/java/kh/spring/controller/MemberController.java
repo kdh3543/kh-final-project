@@ -78,7 +78,7 @@ public class MemberController {
          e.printStackTrace();
       }
       
-      return "forward:/items/";
+      return "redirect:/items/";
    }
    
    //로그인 기능
