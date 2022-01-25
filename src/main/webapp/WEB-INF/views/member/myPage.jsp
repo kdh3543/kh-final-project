@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="/css/header_searchBar.css">
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="/css/mypage.css">
+        <link rel="stylesheet" href="/css/member/mypage.css">
 
       
 
@@ -70,14 +70,15 @@
                     <div class="right-id">아이디 : ${loginID }</div>
                     <div class="right-info">
                     <label>
-                        <div>상점오픈일</div>
-                        <span>${signDate }일째 오픈중!</span>
+                        <div>상점오픈일 : ${signDate }일째 오픈중!</div>
                         </label>
                         <div>상점방문수</div>
                         <div>상품판매</div>
                         <div>택배발송</div>
                     </div>
-                    <div class="right-introduce">소개글</div>
+                    <div class="right-introduce">소개글
+                    	<textarea cols="30" rows="5"> 소개글을 작성하세요.</textarea>
+                    </div>
                 </div>
             </div>
         </section>

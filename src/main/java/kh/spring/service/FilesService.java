@@ -17,10 +17,15 @@ public class FilesService {
 	
 	public List<FilesDTO> selectBySeq(int seq) {
 		
-		return fdao.seletBySeq(seq);
+		return fdao.selectBySeq(seq);
 	}
 	public int insert(FilesDTO dto) {
 		return fdao.insert(dto);
+	}
+	
+	public List<FilesDTO> selectAll() {
+		
+		return fdao.selectAll();
 	}
 
 }

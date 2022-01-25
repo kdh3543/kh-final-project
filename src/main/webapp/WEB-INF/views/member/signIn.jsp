@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="/css/header.css">
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
-        <link href="/css/signIn.css" rel="stylesheet">
+        <link href="/css/member/signIn.css" rel="stylesheet">
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -99,7 +99,6 @@
     </footer>
     
     <script>
-
         $("#findMyInfo").on("click",function(){
             location.href="findInfo";
         });

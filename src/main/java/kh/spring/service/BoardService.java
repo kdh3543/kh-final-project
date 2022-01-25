@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.BoardDAO;
 import kh.spring.dto.BoardDTO;
+import kh.spring.utils.DateParseUtils;
 
 @Service
 public class BoardService {
@@ -14,14 +15,22 @@ public class BoardService {
 	@Autowired
 	private BoardDAO dao;
 
-	// 전체 게시글 리스트
+	//	 전체 게시글 리스트
 	public List<BoardDTO> selectAll() {
-		return dao.selectAll();
+		List<BoardDTO> list = dao.selectAll();
+		for (BoardDTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
 	}
 
 	// 전체 게시글 리스트(로그인 시)
 	public List<BoardDTO> selectByUser(String user_id) {
-		return dao.selectByUser(user_id);
+		List<BoardDTO> list = dao.selectByUser(user_id);
+		for (BoardDTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
 	}
 
 	// 신규 게시글 삽입
@@ -31,7 +40,14 @@ public class BoardService {
 
 	// 시퀀스로 게시글 검색
 	public BoardDTO selectBySeq(int seq) {
-		return dao.selectBySeq(seq);
+		BoardDTO dto = dao.selectBySeq(seq);
+		dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		return dto;
+	}
+
+	// 시퀀스로 조회수 추가
+	public int addViewCount(int seq) {
+		return dao.addViewCount(seq);
 	}
 
 	// 시퀀스로 게시글 삭제
@@ -66,10 +82,5 @@ public class BoardService {
 	// 게시글 댓글 개수 감소
 	public int subtractCommentCount(int seq) {
 		return dao.subtractCommentCount(seq);
-	}
-
-	// 게시글 좋아요 체크
-	public int isLiked(int seq, String user_id) {
-		return dao.isLiked(seq, user_id);
 	}
 }

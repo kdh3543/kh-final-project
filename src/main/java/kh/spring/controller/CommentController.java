@@ -23,43 +23,27 @@ public class CommentController {
 	
 	@Autowired
 	private HttpSession session;
-
-// 댓글 Ajax 코드	
-//	@ResponseBody
-//	@RequestMapping(value = "writeProc", produces = "test/html; charset=utf8")
-//	public String writeProc(CommentDTO dto) throws Exception {
-//		System.out.println("writeProc 로 들어온 요청은 이 메서드를 실행합니다.");
-//
-////		dto.setWriter((String) session.getAttribute("loginID"));
-//		dto.setWriter("테스트 계정");
-//		CommentDTO resultDto = cservice.insert(dto);
-//
-//		return String.valueOf(resultDto);
-//	}
 	
 	@RequestMapping("writeProc")
-	public String writeProc(CommentDTO dto, int seq) throws Exception {
+	public String writeProc(CommentDTO dto) throws Exception {
 		System.out.println("writeProc 로 들어온 요청은 이 메서드를 실행합니다.");
-
-		bservice.addCommentCount(seq);
 		
-//		dto.setWriter((String) session.getAttribute("loginID"));
-		dto.setBoard_seq(seq);
-		dto.setWriter("테스트 계정");
-		int result = cservice.insert(dto);		
+		dto.setWriter((String) session.getAttribute("loginID"));
+		int result = cservice.insert(dto);
 
+		bservice.addCommentCount(dto.getBoard_seq());
+		
 		return "redirect:/board/toDetail?seq=" + dto.getBoard_seq();
 	}
 	
 	@RequestMapping("deleteProc")
 	public String deleteProc(int cseq, int bseq) {
 		System.out.println("deleteProc 로 들어온 요청은 이 메서드를 실행합니다.");
-		
-		// 댓글 삭제되면 댓글 좋아요 삭제 필요
-		
-		bservice.subtractCommentCount(bseq);
 
 		int result = cservice.delete(cseq);
+		
+		bservice.subtractCommentCount(bseq);
+		
 		return "redirect:/board/toDetail?seq=" + bseq;
 	}
 	

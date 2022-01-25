@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/css/font.css">
 <link rel="stylesheet" href="/css/header_searchBar.css">
 <link rel="stylesheet" href="/css/footer.css">
-<link rel="stylesheet" href="/css/productList.css">
+    <link rel="stylesheet" href="/css/items/itemsList.css">
 <body>
 	<!--  Header -->
 	<header>
