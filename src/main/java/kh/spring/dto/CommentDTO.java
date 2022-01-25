@@ -9,21 +9,11 @@ public class CommentDTO {
 	private String contents; // 내용
 	private Timestamp write_date; // 작성일
 	private int like_count; // 좋아요 수
+	private String parsed_date;
 
 	public CommentDTO() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public CommentDTO(int comment_seq, int board_seq, String writer, String contents, Timestamp write_date,
-			int like_count) {
-		super();
-		this.comment_seq = comment_seq;
-		this.board_seq = board_seq;
-		this.writer = writer;
-		this.contents = contents;
-		this.write_date = write_date;
-		this.like_count = like_count;
 	}
 
 	public int getComment_seq() {
@@ -72,6 +62,14 @@ public class CommentDTO {
 
 	public void setLike_count(int like_count) {
 		this.like_count = like_count;
+	}
+
+	public String getParsed_date() {
+		return parsed_date;
+	}
+
+	public void setParsed_date(String parsed_date) {
+		this.parsed_date = parsed_date;
 	}
 
 }
