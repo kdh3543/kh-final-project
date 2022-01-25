@@ -18,8 +18,15 @@ public class ChatContentsService {
 		return dao.insert(dto);
 	}
 	
+	public int insertRoomId(ChatContentsDTO dto) {
+		return dao.insert(dto);
+	}
+	
 	public List<ChatContentsDTO> selectByRoomID(int roomID){
 		return dao.selectByRoomID(roomID);
 	}
 	
+	public List<ChatContentsDTO> selectByProductId(int productId){
+		return dao.selectByProductId(productId);
+	}
 }

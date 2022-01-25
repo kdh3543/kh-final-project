@@ -84,5 +84,10 @@ public class ItemsController {
 		return "/items/itemsDetail";
 
 	}
+	@RequestMapping("itemsDetail2")
+	public String itemsDetail2() {
+		return "/items/itemsDetail2";
+
+	}
 
 }

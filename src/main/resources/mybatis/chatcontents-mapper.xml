@@ -5,14 +5,22 @@
   
  <mapper namespace="ChatContents">
  	<insert id="insert">
- 		insert into chatcontents values(contentsId_seq.nextval,default,default,#{chatContents},roomid_seq.currval,#{sellerId},#{buyerId},default,100)
+ 		insert into chatcontents values(contentsId_seq.nextval,default,default,#{chatContents},roomid_seq.currval,#{sellerId},#{buyerId},default,#{productId})
  		<!-- <selectKey resultType="int" order="AFTER" keyProperty="seq">
  			select roomid_seq.currval from dual
  		</selectKey> -->
  	</insert>
  	
+ 	<insert id="insertRoomId">
+ 		insert into chatcontents values(contentsId_seq.nextval,default,default,#{chatContents},#{roomId},#{sellerId},#{buyerId},default,#{productId})
+ 	</insert>
+ 	
  	<select id="selectByroomID" resultType="kh.spring.dto.ChatContentsDTO">
- 		select * from chatcontents where roomID = #{value}
+ 		select * from chatcontents where roomID = #{value} order by 1
+ 	</select>
+ 	
+ 	<select id="selectByProductId" resultType="kh.spring.dto.ChatContentsDTO">
+ 		select * from chatcontents where productId = #{value} order by 1
  	</select>
 
  </mapper>

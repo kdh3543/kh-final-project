@@ -3,6 +3,7 @@ package kh.spring.endpoint;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,7 @@ public class ChatEndpoint {
 	private HttpSession session;
 	
 	private static List<Session> clients = Collections.synchronizedList(new ArrayList<>());
+	private static HashMap<String,Session> messageUser = new HashMap<String,Session>();
 	private ChatContentsDAO ccdao = ApplicationContextProvider.getApplicationContext().getBean(ChatContentsDAO.class);
 	private ChatRoomDAO crdao = ApplicationContextProvider.getApplicationContext().getBean(ChatRoomDAO.class);
 
@@ -54,7 +56,6 @@ public class ChatEndpoint {
 		int productId = Integer.parseInt(arr[3]);
 //		System.out.println(chatMessage + " : " + sellerID + " : " + productName +":"+productId);
 		ChatRoomDTO crdto = new ChatRoomDTO();		
-		
 		crdto.setBuyerId(userID);
 		crdto.setSellerId(sellerID);
 		crdto.setProductName(productName);
@@ -65,6 +66,7 @@ public class ChatEndpoint {
 			int result = crdao.insert(crdto);
 			crdto.setRoomId(result);
 			obj.addProperty("roomId", crdto.getRoomId());
+			
 		}
 		
 		obj.addProperty("id", userID);
@@ -77,17 +79,26 @@ public class ChatEndpoint {
 		ccdto.setBuyerId(userID);
 		ccdto.setChatContents(chatMessage);
 		ccdto.setSellerId(sellerID);
-		ccdao.insert(ccdto);
+		ccdto.setProductId(productId);
+		if(!crdao.selectByCheckRoomExist(crdto)) {
+			ccdao.insert(ccdto);
+		}else {
+			ccdto.setRoomId(crdao.selectRoomId(crdto));
+			ccdao.insertRoomId(ccdto);
+		}
+		
 
 //		clients.get(sellerID).getSession().getBasicRemote().sendText(obj.toString())
-		synchronized(clients){
-			for(Session client : clients) {
+		
+		synchronized(messageUser){
+			
 				try {
-					client.getBasicRemote().sendText(obj.toString());
+//					client.getBasicRemote().sendText(obj.toString());
+					messageUser.get(sellerID).getBasicRemote().sendText(obj.toString());
 				}catch(IOException e) {
 					e.printStackTrace();
 				}
-			}
+			
 		}
 
 		//		System.out.println("JsonObject: "+ obj + "\n");

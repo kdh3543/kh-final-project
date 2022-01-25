@@ -31,13 +31,33 @@ public class ChatController {
 	@Autowired
 	private HttpSession session;
 
-	@RequestMapping("talk")
-	public String talk(String productName, Model model) {
+	@RequestMapping("moveChatRoom")
+	public String moveChatRoom(String sellerId, int productId, String productName, String roomId, Model model) {
+		System.out.println(sellerId + " : " + productId + " : " + productName + " : " + roomId);
 		String id = (String)session.getAttribute("loginID");
 		List<ChatRoomDTO> list =  crService.selectByBuyerId(id);
-		model.addAttribute("productName",productName);
-		model.addAttribute("productId",1);
+		List<ChatContentsDTO> cList = cService.selectByProductId(productId);
 		model.addAttribute("list",list);
+		model.addAttribute("cList",cList);
+		model.addAttribute("sellerId",sellerId);
+		model.addAttribute("productId",productId);
+		model.addAttribute("productName",productName);
+		model.addAttribute("id",id);
+		return "talk/talk";
+	}
+	
+	@RequestMapping("talk")
+	public String talk(String productName, int productId,Model model) {
+		String id = (String)session.getAttribute("loginID");
+		System.out.println(productId);
+		List<ChatRoomDTO> list =  crService.selectByBuyerId(id);
+		List<ChatContentsDTO> cList = cService.selectByProductId(productId);
+		model.addAttribute("productName",productName);
+		model.addAttribute("productId",productId);
+		model.addAttribute("list",list);
+		model.addAttribute("cList",cList);
+		model.addAttribute("id",id);
+
 		return "talk/talk";
 	}
 	
@@ -75,18 +95,6 @@ public class ChatController {
 //		return message;
 //	}
 
-	@RequestMapping("moveChatRoom")
-	public String moveChatRoom(String sellerId, String productId, String productName, String roomId, Model model) {
-		System.out.println(sellerId + " : " + productId + " : " + productName + " : " + roomId);
-		String id = (String)session.getAttribute("loginID");
-		List<ChatRoomDTO> list =  crService.selectByBuyerId(id);
-		List<ChatContentsDTO> contentsList = cService.selectByRoomID(Integer.parseInt(roomId));
-		model.addAttribute("list",list);
-		model.addAttribute("contentsList",contentsList);
-		model.addAttribute("sellerId",sellerId);
-		model.addAttribute("productId",productId);
-		model.addAttribute("productName",productName);
-		return "talk/talk";
-	}
+	
 	
 }

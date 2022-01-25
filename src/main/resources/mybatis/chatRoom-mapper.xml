@@ -16,4 +16,8 @@
  	<select id="selectByCheckRoomExist" resultType="boolean">
  		select count(*) from chatroom where buyerId = #{buyerId} and sellerId=#{sellerId} and productid = #{productId}
  	</select>
+ 	<select id="selectRoomId" resultType="int">
+ 		select roomid from chatroom where buyerId = #{buyerId} and sellerId = #{sellerId} and productId = #{productId}
+ 	</select>
+ 	
  </mapper>

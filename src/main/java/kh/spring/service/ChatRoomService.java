@@ -23,7 +23,10 @@ public class ChatRoomService {
 	}
 
 	public boolean selectByCheckRoomExist(ChatRoomDTO dto) {
-
 		return dao.selectByCheckRoomExist(dto);
+	}
+	
+	public int selectRoomId(ChatRoomDTO dto) {
+		return dao.selectRoomId(dto);
 	}
 }

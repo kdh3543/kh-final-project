@@ -1,6 +1,8 @@
 package kh.spring.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChatContentsDTO {
 	private int contentsId;
@@ -101,4 +103,9 @@ public class ChatContentsDTO {
 		this.productId = productId;
 	}
 	
+	public String getFormDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		
+		return sdf.format(updateTime);
+	}
 }

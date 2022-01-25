@@ -256,7 +256,7 @@
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="talk" class="btn-talk"> <i
+						</a> | <a href="chat/talk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
 						</a> | <a href="board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
@@ -307,7 +307,7 @@
 									<div class="date">0일전</div>
 								</div>
 
-							</a> <a href="#">
+							<a href="#">
 								<div class="detail-img">
 									<img src="imgs/200Pic.png">
 								</div>
@@ -316,6 +316,7 @@
 									<div class="price">0000원</div>
 									<div class="date">0일전</div>
 								</div>
+							</a> 
 
 							</a> <a href="#">
 								<div class="detail-img">

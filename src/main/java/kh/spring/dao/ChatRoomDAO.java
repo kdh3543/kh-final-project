@@ -24,7 +24,10 @@ public class ChatRoomDAO {
 	}
 	
 	public boolean selectByCheckRoomExist(ChatRoomDTO dto) {
-		
 		return mybatis.selectOne("ChatRoom.selectByCheckRoomExist", dto);
+	}
+	
+	public int selectRoomId(ChatRoomDTO dto) {
+		return mybatis.selectOne("ChatRoom.selectRoomId",dto);
 	}
 }
