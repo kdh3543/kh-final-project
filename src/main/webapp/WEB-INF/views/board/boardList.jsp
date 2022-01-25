@@ -70,7 +70,7 @@
 		</div>
 	</header>
 	<main>
-		<div class="contents-box">
+		<div class="contents-box" id="contents-box">
 			<div class="contents-top-div">
 				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
 				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
@@ -100,7 +100,7 @@
 						if (div${ status.count }.length > 100) {
 							$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
 						}
-
+				
 					</script>
 					<div class="contents-container">
 						<div class="contents-div-writer">${dto.writer} ·</div>
@@ -150,6 +150,35 @@
 		</div>
 	</footer>
 	<script>
+		// window.onscroll = function () {
+		// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		// 		var toAdd = document.createElement("div");
+		// 		toAdd.classList.add("contents");
+		// 		toAdd.textContent = "추가";
+		// 		document.querySelector("contents-box").append(toAdd);
+		// 	}
+		// }
+		// window.onscroll = function () {
+		// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		// 		var toAdd = $("<div class='body'>");
+		// 		toAdd.append('추가!');
+		// 		$("#contents-box").append(toAdd);
+		// 	}
+		// }
+		// var count = 6;
+		// window.onscroll = function () {
+		// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		// 		var content_box = $("<div class='contents-box'>");
+		// 		var contents = $("<div class='contents'>");
+		// 		contents.append(count + '추가!');
+		// 		content_box.append(contents);
+		// 		$("#contents-box").append(contents);
+		// 		count = count + 1;
+		// 	}
+		// }
+	</script>
+	
+	<script>
 		$("#toWrite").on("click", function () {
 			location.href = "writeForm";
 		})
@@ -192,10 +221,7 @@
 			}
 			return false;
 		})
-
-
 	</script>
-
 </body>
 
 </html>
