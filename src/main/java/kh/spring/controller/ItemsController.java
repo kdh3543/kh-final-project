@@ -43,16 +43,11 @@ public class ItemsController {
 	@RequestMapping("")	
 	public String home(Model model) {
 		
-		List<ItemsDTO>ilist =iservice.selectAll();
-		
+		List<ItemsDTO>ilist =iservice.selectAll();		
 		model.addAttribute("ilist",ilist);
 		
-		List<FilesDTO>flist =fservice.selectAll();
-//		
-		
-		model.addAttribute("flist",flist);
-		
-		
+		List<FilesDTO>flist =fservice.selectAll();			
+		model.addAttribute("flist",flist);		
 		
 		return "/items/index";
 	}
