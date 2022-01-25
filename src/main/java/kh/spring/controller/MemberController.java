@@ -146,12 +146,25 @@ public class MemberController {
       return "/member/myPage";
    }
    //마이페이지 수정기능
-   @RequestMapping("modify")
-   public String modify(MemberDTO dto) {
-      String encPw = EncryptionUtils.getSHA512(dto.getPw());
-      dto.setPw(encPw);
-      int result = mservice.modify(dto);
-      System.out.println("정보수정완료");
+   @RequestMapping("updateInfo")
+   public String modify(MemberDTO dto,MultipartFile file) {
+     // String encPw = EncryptionUtils.getSHA512(dto.getPw());
+     // dto.setPw(encPw);
+      try {
+    	  System.out.println(file);
+    	  System.out.println(dto.getId());
+    	  System.out.println(dto.getAddress1());
+    	  System.out.println(dto.getAddress2());
+    	  System.out.println(dto.getZipcode());
+    	  
+    	  
+		int result = mservice.modify(dto,file);
+		
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+      System.out.println("컨트롤러 정보수정완료");
       return "/items/index";   
    }
    @RequestMapping("findID")
