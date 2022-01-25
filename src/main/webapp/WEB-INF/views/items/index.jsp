@@ -313,7 +313,7 @@
 
 								 								
 									<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
-									<img src="${f.sysName}">
+									<img src="${f.sysName}" style="width:100%; height:120px;">
 
 									
 
