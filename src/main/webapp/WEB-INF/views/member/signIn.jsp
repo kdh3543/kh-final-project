@@ -99,7 +99,6 @@
     </footer>
     
     <script>
-
         $("#findMyInfo").on("click",function(){
             location.href="findInfo";
         });
