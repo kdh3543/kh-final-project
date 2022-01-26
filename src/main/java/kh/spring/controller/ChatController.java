@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
 
 import kh.spring.dto.ChatContentsDTO;
 import kh.spring.dto.ChatRoomDTO;
 import kh.spring.service.ChatContentsService;
 import kh.spring.service.ChatRoomService;
+import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -30,6 +28,8 @@ public class ChatController {
 	private ChatRoomService crService;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private ItemsService iService;
 
 	@RequestMapping("moveChatRoom")
 	public String moveChatRoom(String sellerId, int productId, String productName, String roomId, Model model) {
@@ -60,6 +60,7 @@ public class ChatController {
 	public String talk(String productName, int productId,Model model) {
 		String id = (String)session.getAttribute("loginID");
 		
+		System.out.println(iService.selectByProductId(productId));
 		
 		boolean existRoomId = crService.selectByProductId(productId);
 		System.out.println(existRoomId);

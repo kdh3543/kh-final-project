@@ -44,10 +44,16 @@ public class ItemsDAO {
 		return mybatis.selectOne("Items.ItemsCount",id);
 	}	
 	
+	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
+	public String selectByProductId(int productId) {
+		return mybatis.selectOne("Items.selectByProductId",productId);
+	}
+	
 //	 public int insert(ItemsDTO dto) { String loginId =
 //	 (String)session.getAttribute("loginId"); dto.setSeller_id(loginId); return
 //	 mybatis.insert("Item.insert", dto);}
 //	 public ItemsDTO selectBySeq(int iseq) { return
 //	 mybatis.selectOne("Item.selectBySeq",iseq);}	
+	
 	
 }
