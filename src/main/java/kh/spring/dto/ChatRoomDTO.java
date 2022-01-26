@@ -12,6 +12,7 @@ public class ChatRoomDTO {
 	private String buyerId;
 	private int productId;
 	private String productName;
+	private String lastMessage;
 	
 	public ChatRoomDTO() {}
 
@@ -100,7 +101,14 @@ public class ChatRoomDTO {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-
+	
+	public String getLastMessage() {
+		return lastMessage;
+	}
+	
+	public void setLastMessage(String lastMessage) {
+		this.lastMessage = lastMessage;
+	}
 	
 }
 

@@ -29,4 +29,8 @@ public class ChatContentsDAO {
 	public List<ChatContentsDTO> selectByProductId(int productId){
 		return mybatis.selectList("ChatContents.selectByProductId",productId);
 	}
+	
+	public String selectLastTalk(int productId) {
+		return mybatis.selectOne("ChatContents.selectLastTalk",productId);
+	}
 }

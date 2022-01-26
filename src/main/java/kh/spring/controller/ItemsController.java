@@ -215,9 +215,9 @@ public class ItemsController {
 		
 	}
 	
-	@RequestMapping("itemsDetail2")
+	@RequestMapping("itemsDetailExam")
 	public String itemsDetail2() {
-		return "/items/itemsDetail2";
+		return "/items/itemsDetailExam";
 
 	}
 

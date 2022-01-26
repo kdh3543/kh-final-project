@@ -22,11 +22,19 @@ public class ChatRoomService {
 		return dao.selectByBuyerId(id);
 	}
 
-	public boolean selectByCheckRoomExist(ChatRoomDTO dto) {
-		return dao.selectByCheckRoomExist(dto);
+	public boolean selectByCheckRoomExist(int roomId) {
+		return dao.selectByCheckRoomExist(roomId);
 	}
 	
 	public int selectRoomId(ChatRoomDTO dto) {
 		return dao.selectRoomId(dto);
+	}
+	
+	public List<ChatRoomDTO> selectByBothId(ChatRoomDTO dto){
+		return dao.selectByBothId(dto);
+	}
+	
+	public boolean selectByProductId(int productId) {
+		return dao.selectByProductId(productId);
 	}
 }

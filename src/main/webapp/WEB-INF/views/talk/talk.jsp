@@ -73,6 +73,7 @@
               </a>
             </div>
             <c:forEach var="list" items="${list}">
+
               <div class="talk-list" pid="${list.productId}">
                 <a class="talk-list-btn"
                   href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}">
@@ -81,13 +82,17 @@
                   </div>
                   <div class="talk-list-right">
                     <div class="talk-name">${list.roomId}(${list.productName})</div>
-                    <div class="talk-last-conversation">${list.productId}
+
+                    <div class="talk-last-conversation" pid=${list.productId}>
+                      (${list.roomId})${list.lastMessage}
                       <input type=hidden value="${list.roomId }" id="hiddenRoomId">
                       <input type=hidden value="${list.productId }" id="productId">
                     </div>
+
                   </div>
                 </a>
               </div>
+
             </c:forEach>
 
           </div>
@@ -147,7 +152,7 @@
                       </div>
                     </div>
                   </c:when>
-                  <c:otherwise>
+                  <c:when test="${id ne cList.sellerId}">
                     <div class="left-line">
                       <div class="line">
                         ${cList.buyerId}: ${cList.chatContents}
@@ -157,7 +162,7 @@
                       </div>
                     </div>
 
-                  </c:otherwise>
+                  </c:when>
                 </c:choose>
               </c:forEach>
             </div>
@@ -191,8 +196,6 @@
         let hiddenProductId = $("#hiddenProductId");
         let hiddenProductName = $("#hiddenProductName");
 
-
-
         // 메세지를 받았을 때
         let anker = $("<a>");
         let talkList = $("<div>");
@@ -200,9 +203,9 @@
         let talkLeft = $("<div>");
         let talkRight = $("<div>");
         let talkName = $("<div>");
-        talkConverse.addClass("talkConverse");
+        talkConverse.addClass("talk-last-conversation");
         ws.onmessage = function (e) {
-        	console.log($("#updateTime").val());
+
           let time = new Date();
           let hours = time.getHours();
           let minutes = time.getMinutes();
@@ -214,11 +217,12 @@
           let productName = jsonObject.productName;
           let jsonProductId = jsonObject.productId;
           let jsonRoomId = jsonObject.roomId;
-          console.log(jsonRoomId);
-          console.log(jsonObject);
 
           console.log($(".talk-list[pid=" + jsonProductId + "]").length);
-          if ($(".talk-list[pid=" + jsonProductId + "]").length == 0) {
+          if(userID == sellerID){
+            $(".talk-last-conversation[pid=" + jsonProductId + "]").html(message);
+          }else{
+            if ($(".talk-list[pid=" + jsonProductId + "]").length == 0) {
             anker.addClass("talk-list-btn");
 
             talkList.addClass("talk-list");
@@ -229,6 +233,7 @@
 
             talkRight.addClass("talk-list-right");
 
+            talkName.addClass("talk-name");
             talkName.append(sellerID + "(" + productName + ")");
             talkConverse.append(message);
             talkRight.append(talkName);
@@ -244,8 +249,10 @@
               + "&productName=" + hiddenProductName.val()
               + "&productId=" + hiddenProductId.val() + "&roomId=" + jsonRoomId);
           } else {
-            $(".talkConverse").html(message);
+            $(".talk-last-conversation[pid=" + jsonProductId + "]").html(message);
           }
+          }
+          
 
           if (userID == $("#userId").val()) {
             let rightLine = $("<div>");
@@ -274,14 +281,24 @@
             leftLine.addClass("left-line");
             let chatTime = $("<div>");
             chatTime.addClass("chatTime");
-            chatTime.append(hours + ":" + minutes);
 
             let line = $("<div>");
             line.addClass("line");
             line.append(userID + ": " + message);
             leftLine.append(line);
+            if (hours < 10 && minutes >= 10) {
+              chatTime.append("0" + hours + ":" + minutes);
+            } else if (minutes < 10 && hours >= 10) {
+              chatTime.append(hours + ":0" + minutes);
+            } else if (hours < 10 && minutes < 10) {
+              chatTime.append("0" + hours + ":0" + minutes);
+            } else {
+              chatTime.append(hours + ":" + minutes);
+            }
             leftLine.append(chatTime);
             rightMiddle.append(leftLine);
+
+
           }
 
           rightMiddle.stop().animate({
@@ -316,8 +333,8 @@
             chatMessage.html("");
             chatMessage.focus();
 
-            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + hiddenProductId.val());
-
+            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + hiddenProductId.val() + '<br>' + hiddenRoomId.val());
+			console.log(hiddenRoomId.val());
             rightMiddle.stop().animate({
               scrollTop: rightMiddle[0].scrollHeight
             }, 1000);

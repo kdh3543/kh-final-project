@@ -14,10 +14,16 @@
  		select * from chatroom where buyerid = #{value} order by 1
  	</select>
  	<select id="selectByCheckRoomExist" resultType="boolean">
- 		select count(*) from chatroom where buyerId = #{buyerId} and sellerId=#{sellerId} and productid = #{productId}
+ 		select count(*) from chatroom where roomId = #{value}
  	</select>
  	<select id="selectRoomId" resultType="int">
  		select roomid from chatroom where buyerId = #{buyerId} and sellerId = #{sellerId} and productId = #{productId}
+ 	</select>
+ 	<select id="selectByBothId" resultType="kh.spring.dto.ChatRoomDTO">
+ 		select * from chatroom where buyerId = #{buyerId} or sellerId = #{sellerId} order by 1
+ 	</select>
+ 	<select id="selectByProductId" resultType="boolean">
+ 		select count(*) from chatroom where productId = #{value}
  	</select>
  	
  </mapper>

@@ -23,11 +23,19 @@ public class ChatRoomDAO {
 		return mybatis.selectList("ChatRoom.selectByBuyerId",id);
 	}
 	
-	public boolean selectByCheckRoomExist(ChatRoomDTO dto) {
-		return mybatis.selectOne("ChatRoom.selectByCheckRoomExist", dto);
+	public boolean selectByCheckRoomExist(int roomId) {
+		return mybatis.selectOne("ChatRoom.selectByCheckRoomExist", roomId);
 	}
 	
 	public int selectRoomId(ChatRoomDTO dto) {
 		return mybatis.selectOne("ChatRoom.selectRoomId",dto);
+	}
+	
+	public List<ChatRoomDTO> selectByBothId(ChatRoomDTO dto){
+		return mybatis.selectList("ChatRoom.selectByBothId",dto);
+	}
+	
+	public boolean selectByProductId(int productId) {
+		return mybatis.selectOne("ChatRoom.selectByProductId",productId);
 	}
 }

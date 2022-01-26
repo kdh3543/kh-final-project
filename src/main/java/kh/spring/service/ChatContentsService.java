@@ -29,4 +29,8 @@ public class ChatContentsService {
 	public List<ChatContentsDTO> selectByProductId(int productId){
 		return dao.selectByProductId(productId);
 	}
+	
+	public String selectLastTalk(int productId) {
+		return dao.selectLastTalk(productId);
+	}
 }
