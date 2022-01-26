@@ -1,342 +1,471 @@
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-html,body{
-    margin: 0;
-    height: 100%;
-    box-sizing: border-box;
+html, body {
+	margin: 0;
+	height: 100%;
+	box-sizing: border-box;
 }
 /* header */
-header{
-    width: 100%; 
-    height: 200px; 
-    justify-content: flex-end;
-    background-color: #24a6a4;
-    top:0;
-    z-index: 2;
-    position: fixed;
-    border-bottom-right-radius: 100px;
+header {
+	width: 100%;
+	height: 200px;
+	justify-content: flex-end;
+	background-color: #24a6a4;
+	top: 0;
+	z-index: 2;
+	position: fixed;
+	border-bottom-right-radius: 100px;
 }
-header .header_Container{
-    display: flex;
-    justify-content: flex-end;
+
+header .header_Container {
+	display: flex;
+	justify-content: flex-end;
 }
-header .header_Container{
-    display: flex;
-    justify-content: flex-end;
+
+header .header_Container {
+	display: flex;
+	justify-content: flex-end;
 }
 
 header .header-list-after-login {
 	list-style: none;
-    display: flex;
-    padding-left: 0;
+	display: flex;
+	padding-left: 0;
 }
-header .header-list-after-login li{
+
+header .header-list-after-login li {
 	padding: 12px 12px;
 }
 
-header .header-list-after-login li:nth-child(1){
-    text-decoration: none;
-    color: whitesmoke;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
+header .header-list-after-login li:nth-child(1) {
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
 }
 
-header .header-list-after-login li:nth-child(2){
-    text-decoration: none;
-    color: whitesmoke;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
+header .header-list-after-login li:nth-child(2) {
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
 }
 
-header .header-list-after-login li:nth-child(3) a{
-    text-decoration: none;
-   color: whitesmoke;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
+header .header-list-after-login li:nth-child(3) a {
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
 }
 
-header .header-list-after-login li:nth-child(4) a{
-    text-decoration: none;
-    color: whitesmoke;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
+header .header-list-after-login li:nth-child(4) a {
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
 }
-header .header-list-after-login li:nth-child(5) a{
-    text-decoration: none;
-     color: #f8d200;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
+
+header .header-list-after-login li:nth-child(5) a {
+	text-decoration: none;
+	color: #f8d200;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
 }
 
 header .header_list {
-    list-style: none;
-    display: flex;
-    padding-left: 0;
-  
+	list-style: none;
+	display: flex;
+	padding-left: 0;
 }
 
 header .header_list li {
-    padding: 12px 12px;
-    
-}
-header .header_list li:nth-child(1) a{
-    text-decoration: none;
-    color: whitesmoke;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
-}
-header .header_list li:nth-child(2) a{
-    text-decoration: none;
-    color: #f8d200;
-    font-family:'OTWelcomeRA';
-    font-size: 20px;
+	padding: 12px 12px;
 }
 
-header .div-wrap{
-    display: flex;
-    justify-content:center;
-
+header .header_list li:nth-child(1) a {
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
 }
 
-header .nav_div{
-    width: 80%;
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
+header .header_list li:nth-child(2) a {
+	text-decoration: none;
+	color: #f8d200;
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
+}
+
+header .div-wrap {
+	display: flex;
+	justify-content: center;
+}
+
+header .nav_div {
+	width: 80%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 header .logo {
-    font-family: 'SBAggroB';
-    font-size: 35px;
-    color: #fff;
-    display: flex;
-
+	font-family: 'SBAggroB';
+	font-size: 35px;
+	color: #fff;
+	display: flex;
 }
+
 header .logo a {
-    text-decoration: none;
-    color: #fff;
+	text-decoration: none;
+	color: #fff;
 }
-.searchContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
+
+.searchContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
 }
+
 .searchContainer .div-wrap2 {
-    display: flex;
-    justify-content: flex-start;
-    width: 52%;
+	display: flex;
+	justify-content: flex-start;
+	width: 52%;
 }
 
-.pContainer{
-    display: flex;
-    justify-content: center;
-}
-.pContainer p{
-    font-size: 20px;
-    font-family: 'OTWelcomeRA' ;
-    font-weight: 800;
-    padding-top: 10px;
-}
-.searchBar{
-    text-align: center; 
-    height: 55px;
-    width: 60%;
-    margin-left: 10px;
-    display: flex;
-}
- .searchBar div:first-child{
-    width: 85%;
-    height: 60px;
+.pContainer {
+	display: flex;
+	justify-content: center;
 }
 
-.searchBar div:last-child button{
-    border: none;
-    background-color: transparent;
+.pContainer p {
+	font-size: 20px;
+	font-family: 'OTWelcomeRA';
+	font-weight: 800;
+	padding-top: 10px;
 }
-.searchBar div:last-child button .fas{
-    height: 5px;
-    color: #fff;
+
+.searchBar {
+	text-align: center;
+	height: 55px;
+	width: 60%;
+	margin-left: 10px;
+	display: flex;
 }
-.searchBar .seacrh { 
-    width: 100%;
-    height: 100%;
-    border-radius: 10px 10px 10px 10px;
-    border: none;
+
+.searchBar div:first-child {
+	width: 85%;
+	height: 60px;
+}
+
+.searchBar div:last-child button {
+	border: none;
+	background-color: transparent;
+}
+
+.searchBar div:last-child button .fas {
+	height: 5px;
+	color: #fff;
+}
+
+.searchBar .seacrh {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px 10px 10px 10px;
+	border: none;
 }
 /* 카테고리 */
-.c01-content,.c02-content,.c03-content{
-    display: none;
-    width: 100px;
-    height: 100px;
-    translate:(157px, -1px);
-    position: absolute;
-    inset: 0px auto auto 0px;
-    margin: 0px;
-    z-index: 1000;
-    min-width: 10rem;
-    padding: 0.5rem 0;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 0.25rem;
-    cursor: pointer;
-
+.c01-content, .c02-content, .c03-content {
+	display: none;
+	width: 100px;
+	height: 100px;
+	translate: (157px, -1px);
+	position: absolute;
+	inset: 0px auto auto 0px;
+	margin: 0px;
+	z-index: 1000;
+	min-width: 10rem;
+	padding: 0.5rem 0;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 0.25rem;
+	cursor: pointer;
 }
 
- .rightList .btn-sell, .btn-myshop, .btn-talk{
-    font-family:'OTWelcomeRA';
-    font-size: 17px;
-    font-weight: 500;
-    color:  rgb(33, 33, 33);
-    padding-right: 15px;
-    padding-left: 10px;
-    text-decoration: none;
+.rightList .btn-sell, .btn-myshop, .btn-talk {
+	font-family: 'OTWelcomeRA';
+	font-size: 17px;
+	font-weight: 500;
+	color: rgb(33, 33, 33);
+	padding-right: 15px;
+	padding-left: 10px;
+	text-decoration: none;
 }
 /* 메인  */
-main{
-    height: auto;
-    margin-top: 210px;
-    margin-bottom: 150px;
-    display: flex;
-    flex-direction: row;
+main {
+	height: auto;
+	margin-top: 210px;
+	margin-bottom: 150px;
+	display: flex;
+	flex-direction: row;
 }
+
 main .index-container {
-    padding: 5%;
+	padding: 5%;
+	width: 90%;
 }
 
-main .index-container .top-div .div-wrap2{
-    display: flex;
-    align-items: flex-end;
-    height: 100%;
-    width: 80%;
-    justify-content:flex-start;
-    margin: auto;
-    padding-left: 1%;
+main .index-container .top-div .div-wrap2 {
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
+	width: 80%;
+	justify-content: flex-start;
+	margin: auto;
+	padding-left: 1%;
+}
 
+main .index-container .top-div .div-wrap2 .rightList {
+	line-height: 40px;
 }
-main .index-container .top-div .div-wrap2 .rightList{
-    line-height: 40px;
+
+main .container section {
+	width: 90%;
 }
-main .container section{
-    width:90%;
-}
+
 main .middle-div {
-    display: flex;
-    height: 100%;
-    padding: 25px;
-    margin: auto;
-    width: 80%;
+	display: flex;
+	height: 100%;
+	padding: 25px;
+	margin: auto;
+	width: 80%;
 }
 
 main .middle-div section {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
-section article{
-    height: 100%;
-    padding-top: 50px;
-    width: 100%;
+
+section article {
+	height: auto;
+	padding-top: 50px;
+	width: 100%;
 }
-section article .article_title{
-    font-size: 30px;
-    font-family: "OTWelcomeRA";
-    font-weight: 800;
-    padding: 8px 12px;
+
+section article .article_title {
+	font-size: 30px;
+	font-family: "OTWelcomeRA";
+	font-weight: 800;
+	padding: 8px 12px;
 }
 
 /* 메인 - 상품섹션  */
-.imgBox{
-    display: flex;
-    justify-content: space-evenly;
-    padding-bottom: 1%;
-    flex-wrap: wrap;
-    height: auto;
-    width: 100%;
-    margin: auto;
-    flex-direction: row;
+.imgBox {
+	display: flex;
+	justify-content: space-evenly;
+	padding-bottom: 1%;
+	flex-wrap: wrap;
+	height: auto;
+	width: 100%;
+	margin: auto;
+	flex-direction: row;
 }
 
 .imgBox a {
-   	width: 18%;
-    border: 1px solid #dfe6e9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-items: center;
-    margin: 1% 1% 1%;
-    
+	width: 18%;
+	border: 1px solid #dfe6e9;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-items: center;
+	margin: 1% 1% 1%;
 }
-.detail-img{width:175px; height:175px;}
+
+.detail-img {
+	width: 100%;
+	height: 175px;
+}
 
 .imgBox a .detail-container .date {
-    text-align: right;
-    color: #aaa69d;
+	text-align: right;
+	color: #aaa69d;
 }
+
 .detail-container {
-	width:100%;
-	padding:1%;
+	width: 100%;
+	padding: 1%;
 }
+
 .imgBox a div img {
-  	width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 /* footer */
-footer{
-    border-top: 1px solid #aaa69d; 
-    height:150px;
-    background-color: #f0f0f0;
-    font-family: 'OTWelcomeRA';
-    text-align: center;
-    color:#aaa69d;
-    position: absolute;
-    width: 100%;
+footer {
+	border-top: 1px solid #aaa69d;
+	height: 150px;
+	background-color: #f0f0f0;
+	font-family: 'OTWelcomeRA';
+	text-align: center;
+	color: #aaa69d;
+	position: absolute;
+	width: 100%;
 }
+
 footer .footer-box {
-    display: flex;
-    justify-content:center;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 10px 0px 3px 1px #aaa69d;
-    height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 10px 0px 3px 1px #aaa69d;
+	height: 100%;
 }
 
 /* 사이드바 */
-#sideBar{
-	border: 1px solid #24a6a4;
-    width: 150px;
-    height: 200px;
-    position: fixed;
-    right: calc(50% - 47%);
-    z-index: 20;
-    top: 370px;
+#sideBar {
+	width: 20%;
+	height: auto;
+	position: fixed;
+	right: calc(50% - 47%);
+	z-index: 20;
+	top: 370px;
+	position: fixed;
 }
+
 .sidebar-div {
-	display:flex;
-	flex-direction:column;
+	display: flex;
+	flex-direction: column;
+	width: 120px;
+	height: auto;
+	border: 1px solid #24a6a4;
 }
 
 .sidebar-div a {
-	width:100%;
-	height:100px;
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid #24a6a4;
 }
 
 .sidebar-div a button {
-	width:100%;
-	height:100%;
-	cursor:pointer;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
 }
-#likeProductBtn {
-	border:none;
-	color:black;
-	
-}
-#upTopBtn{
-	background-color:#24a6a4;
-	color:#fff;
-	border:none;
 
+#likeProductBtn {
+	border: none;
+	color: black;
+}
+
+#upTopBtn {
+	background-color: #24a6a4;
+	color: #fff;
+	border: none;
+}
+/* 사이드바 - 최근 본 상품 */
+.sidebar-resently-div {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar-title-div {
+	width: 100%;
+	text-align: center;
+}
+
+.sidebar-product-div {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.sidebar-product-div img {
+	border: 1px solid black;
+	width: 100px;
+	height: 100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+/* 검색 */
+.dropdown-item {
+	height: 500px;
+}
+
+#recent {
+	width: 30%;;
+	position: absolute;
+	inset: 0px auto auto 0px;
+	margin: 0px;
+	transform: translate3d(0px, 62px, 0px);
+	max-width: -webkit-fill-available;
+	min-width: -webkit-fill-available;
+	height: auto;
+}
+
+.list-search-div {
+	width: 100% !important;
+}
+
+#text {
+	width: 100% !important;
+	height: auto;
+	padding: 5%;
+}
+
+.line {
+	width: 100% !important;
+}
+
+.textLine {
+	display: flex;
+	width: 100% !important;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid gray;
+}
+
+.tab-content {
+	height: 500px;
+}
+
+#nav-home {
+	width: 100%;
+	height: 100%;
+}
+
+#nav-tab {
+	width: 100%;
+}
+
+#nav-home-tab {
+	width: 50%;
+}
+
+.nav-link {
+	color: #24a6a4;
+}
+
+.nav-tabs .nav-link.active {
+	color: #fff;
+	background-color: #24a6a4;
+	border-color: #24a6a4
+}
+
+#nav-profile-tab {
+	width: 50%;
+}
+
+#delBtn {
+	width: 100%;
+	height: 50px;
 }

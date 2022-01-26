@@ -38,23 +38,23 @@
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
-					<c:choose>
-						<c:when test="${loginID != null}">	
+				<c:choose>
+					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-           			     <li> 이미지 부분 : ${dto.profile_image}</li>
-           				 <li>${loginID}님안녕하세요</li>
+							<li>이미지 부분 : ${dto.profile_image}</li>
+							<li>${loginID}님안녕하세요</li>
 							<li><a href="/member/myPage">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 						</ul>
-               </c:when>
-						<c:otherwise>
+					</c:when>
+					<c:otherwise>
 						<ul class="header_list">
 							<li><a href="signIn">로그인</a></li>
 							<li><a href="join">회원가입</a></li>
 						</ul>
-						</c:otherwise>
-					</c:choose>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="div-wrap">
 				<div class="nav_div">
@@ -66,7 +66,7 @@
 
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
-									placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
 									aria-label="Recipient's username"
 									aria-describedby="button-addon2" id="search"
 									data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,112 +81,134 @@
 
 								<!-- 최신검색어-->
 
-								<div class="dropdown-menu" style="min-width: 600px;" id=recent>
-									<div>
-										<a class="dropdown-item" href="javascript:void(0);"
-											style="text-align: center">최근검색어 목록</a>
-									</div>
+								<div class="dropdown-menu" id=recent>
+									<a class="dropdown-item" href="javascript:void(0);"
+										style="text-align: center">
+										<div class="list-search-div">
+											<nav>
+												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													<button class="nav-link active" id="nav-home-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-home"
+														type="button" role="tab" aria-controls="nav-home"
+														aria-selected="true">최근검색어</button>
+													<button class="nav-link" id="nav-profile-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-profile"
+														type="button" role="tab" aria-controls="nav-profile"
+														aria-selected="false">인기검색어보기</button>
 
-									<!-- 내용 채워넣기 -->
-									<div id=text></div>
+												</div>
+											</nav>
+											<div class="tab-content" id="nav-tabContent">
+												<div class="tab-pane fade show active" id="nav-home"
+													role="tabpanel" aria-labelledby="nav-home-tab">
 
+													<!-- 내용 채워넣기 -->
+													<div id=text></div>
+													<button type=button id=delBtn class="dropdown-item"
+														style="display: inline">검색어 전체삭제</button>
+												</div>
+												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+													aria-labelledby="nav-profile-tab">인기검색어보기</div>
 
-									<div>
-										<button type=button id=delBtn class="dropdown-item"
-											style="display: inline">검색어 전체삭제</button>
-										<button type=button style="float: right">인기검색어 보기</button>
-									</div>
-
+											</div>
+										</div>
+									</a>
 								</div>
 
-								<script>
-								$("#delBtn").on("click",function(){
-									
-									$.ajax({
-										url:"/items/deleteAll",
-										
-									}).done(function(resp){
-										console.log(resp);
-										
-										$("#text").empty();
-										
-									})
-									
-									})
-								
-								</script>
 
-								<script>
-									$(function(){
-										
-										 $("#search").one("click",function(){ 
-											
-											
-											$.ajax({
-												url:"/items/listing",
-												datatype:"json"
-											}).done(function(resp){
-												
-											
-												 
-												 resp = JSON.parse(resp);
-											
-												 for(let i=0 ; i<resp.length; i++){	
-												 let text = $("#text");
-												 
-												 let line=$("<div>");
-								                    line.addClass("line");
-								                    line.css("background-color" ,"white").css("width","80%").css("padding","0px").css("margin","0px").css("border-radius","3px").css("float","left");
+								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
+							</div>
 
-								                    let textLine=$("<div>");
-								               	 
-								                    textLine.append(resp[i].keyword);
-								                    
-								               	 
-								                    textLine.addClass("textLine");
-								                    
-								                    let delButton=$("<button>");
-								                    delButton.addClass("delBtnOne");
-								                    delButton.text("X");
-								                    delButton.css("float","right");
-								                  
-								                    textLine.append(text.val());
-								                    textLine.append(delButton);
-								                    
-								                    line.append(textLine);
-								                   
-								                    $("#text").append(line);
-								                    
-												 }
-											
-											 })
-											})
-										})
-									
-								
-								</script>
+						</div>
 
-								<script>
-								$('#text').on("click",".delBtnOne",function(){
-									
-									/*버튼 X 제거하고 값 추출  */
-									var str = $(this).parent().text().slice(0,-1);
-									$(this).parent().remove();
-									
-									$.ajax({
-										url:"/items/deleteByKeyword?keyword="+str
-										
-									}).done(function(resp){
-										
-										
-									})
-									
+						<script>
+							$("#delBtn").on("click", function() {
+
+								$.ajax({
+									url : "/items/deleteAll",
+
+								}).done(function(resp) {
+									console.log(resp);
+
+									$("#text").empty();
+
 								})
-								
-								</script>
 
-								<!-- 인기 검색어 -->
-								<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
+							})
+						</script>
+
+						<script>
+							$(function() {
+
+								$("#search").one("click", function() {
+
+									$.ajax({
+										url : "/items/listing",
+										datatype : "json"
+									}).done(function(resp) {
+
+										resp = JSON.parse(resp);
+
+										for (let i = 0; i < resp.length; i++) {
+											let text = $("#text");
+
+											let line = $("<div>");
+											line.addClass("line");
+											/*  line.css("background-color" ,"white").css("width","80%").css("padding","0px").css("margin","0px").css("border-radius","3px").css("float","left"); */
+
+											let textLine = $("<div>");
+
+											textLine.append(resp[i].keyword);
+
+											textLine.addClass("textLine");
+
+											let delButton = $("<button>");
+											delButton.addClass("delBtnOne");
+											delButton.text("X");
+											delButton.css("float", "right");
+
+											textLine.append(text.val());
+											textLine.append(delButton);
+
+											line.append(textLine);
+
+											$("#text").append(line);
+
+										}
+
+									})
+								})
+							})
+						</script>
+
+						<script>
+							$('#text')
+									.on(
+											"click",
+											".delBtnOne",
+											function() {
+
+												/*버튼 X 제거하고 값 추출  */
+												var str = $(this).parent()
+														.text().slice(0, -1);
+												$(this).parent().remove();
+
+												$
+														.ajax(
+																{
+																	url : "/items/deleteByKeyword?keyword="
+																			+ str
+
+																}).done(
+																function(resp) {
+
+																})
+
+											})
+						</script>
+
+						<!-- 인기 검색어 -->
+						<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
 									<li><a class="dropdown-item" href="#"><span>1.</span> Action</a></li>
 									<li><a class="dropdown-item" href="#"> actisadfasdfasdfon</a></li>
 									<li><a class="dropdown-item" href="#">Something else
@@ -195,8 +217,8 @@
 									<li><a class="dropdown-item" href="#">검색어 전체삭제</a></li>
 								</ul> -->
 
-								<!-- Default dropend button -->
-								<!-- <div class="btn-group dropend">
+						<!-- Default dropend button -->
+						<!-- <div class="btn-group dropend">
   <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Dropright
   </button>
@@ -206,15 +228,14 @@
 </div> -->
 
 
-							</div>
-
-
-
-						</div>
 					</div>
+
+
 
 				</div>
 			</div>
+
+
 
 		</header>
 	</form>
@@ -244,7 +265,7 @@
 							<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
 							<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
 							<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>							
+							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
 							<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
 							<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
 						</ul>
@@ -295,49 +316,49 @@
 
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
-						
-						
-						<div class="imgBox">
-						
-						<!--상품 반복 시작 -->
-						
-						<c:forEach var="i" items="${ilist}"> 
-							<c:forEach var="f"  items="${flist }"> 
-							
-							<c:if test= "${f.parentSeq == i.iseq}">
-								  
-									
-									
-							<a href="/items/itemsDetail">
-								<div class="detail-img">
-
-								 								
-									<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
-									<img src="${f.sysName}" style="width:100%; height:100%;">
-
-									
-
-								</div>
-							
-								<div class="detail-container">
-									<div class="title">${i.name}</div>
-									<div class="price">${i.price}원</div>
-									<div class="date">${i.detailDate}</div>
-									<%-- <div class="title">${flist.oriname}</div> --%>
-									
-								</div>
 
 
-							</a> 
-								</c:if>
-							<%-- </c:if> ^^--%>
-							 <%-- </c:if> --%> 
-									</c:forEach>	
+						<div class="imgBox  col-sm-3">
+
+							<!--상품 반복 시작 -->
+
+							<c:forEach var="i" items="${ilist}">
+								<c:forEach var="f" items="${flist }">
+
+									<c:if test="${f.parentSeq == i.iseq}">
+
+
+
+										<a href="/items/itemsDetail">
+											<div class="detail-img">
+
+
+												<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
+												<img src="${f.sysName}" style="width: 100%; height: 100%;">
+
+
+
+											</div>
+
+											<div class="detail-container">
+												<div class="title">${i.name}</div>
+												<div class="price">${i.price}원</div>
+												<div class="date">${i.detailDate}</div>
+												<%-- <div class="title">${flist.oriname}</div> --%>
+
+											</div>
+
+
+										</a>
+									</c:if>
+									<%-- </c:if> ^^--%>
+									<%-- </c:if> --%>
+								</c:forEach>
 							</c:forEach>
-							
 
-							</a> <a href="#">
-								
+
+							<!-- </a> <a href="#"> -->
+
 
 
 							<!-- imgBox 2 구간 -->
@@ -386,9 +407,8 @@ dd
 
 					</article>
 				</section>
-				
+
 			</div>
-		</div>
 		</div>
 		<div class="d-none d-lg-block" id="sideBar">
 			<div class="sidebar-div">
@@ -397,7 +417,17 @@ dd
 						id="likeProductBtn">
 						찜한상품<br> <i class="fas fa-heart">개수</i>
 					</button>
-				</a> <a href="#"><button class="btn btn-outline-secondary"
+					
+				</a> 
+				<div class="sidebar-resently-div">
+						<div class="sidebar-title-div">최근 본 상품</div>
+						<div class="sidebar-product-div">
+							<img src="">
+							<img src="">
+						</div>
+
+					</div>
+				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
 		</div>
@@ -405,29 +435,29 @@ dd
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
 
 	<script>
-    	$("#logoutbtn").on("click",function(){
-    		if(confirm("정말 로그아웃하시겠습니까?")){
-    			location.href = "logout" 
-    		}else{
-    			return false;
-    		}
-    		
-    	})
-    	$("#leavebtn").on("click",function(){
-    		if(confirm("정말 회원을 탈퇴하시겠습니까?")){
-    			location.href = "leave"
-    		}else{
-    			return false;
-    		}
-    		
-    	})
-    </script>
+		$("#logoutbtn").on("click", function() {
+			if (confirm("정말 로그아웃하시겠습니까?")) {
+				location.href = "logout"
+			} else {
+				return false;
+			}
+
+		})
+		$("#leavebtn").on("click", function() {
+			if (confirm("정말 회원을 탈퇴하시겠습니까?")) {
+				location.href = "leave"
+			} else {
+				return false;
+			}
+
+		})
+	</script>
 </body>
 
 </html>

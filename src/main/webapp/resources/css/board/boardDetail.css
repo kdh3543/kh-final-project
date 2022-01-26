@@ -19,103 +19,127 @@ main {
 	margin-top: 200px;
 	font-family: 'OTWelcomeRA';
 }
-.contents{
-	    border: 1px solid #b2bec3;
-	    width:100%;
-	    height: 400px;
-}
-.contents-box {
-  width: 80%;
-  margin: auto;
-  margin-bottom:160px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
-}
-.top-contents{
+.contents {
+	border: 1px solid #b2bec3;
 	width: 100%;
-    height: 50px;
+	height: auto;
 }
-#back{
+
+.contents-box {
+	width: 80%;
+	margin: auto;
+	margin-bottom: 160px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.top-contents {
+	width: 100%;
+	height: 50px;
+}
+
+#back {
 	width: 110px;
-    height: 80%;
-    border: none;
-    background: #fff;
-    font-size: 20px;
+	height: 80%;
+	border: none;
+	background: #fff;
+	font-size: 20px;
 }
-.contents-div{
-	display:flex;
+
+.contents-div {
+	display: flex;
 	justify-content: space-between;
 	padding: 1%;
 	height: 20%;
 }
-.subject-div{
+
+.subject-div {
 	font-family: 'OTWelcomeBA';
-	font-size:30px;
-	font-weight:800;
+	font-size: 30px;
+	font-weight: 800;
 	height: 80%;
 }
-.subject-contents{
-	width:100%;
-	height:auto;
-	padding:1%;
+
+.subject-contents {
+	width: 100%;
+	height: auto;
+	padding: 1%;
 }
-.writer-div{
-	font-size:20px;
+
+.contents-container {
+	width: 90%;
+	height: auto;
+	margin: auto;
 }
-.location-div{
-	font-size:16px;
+
+.writer-div {
+	font-size: 20px;
 }
-.write-contents-div{
-	font-size:18px;
+
+.location-div {
+	font-size: 16px;
+}
+
+.write-contents-div {
+	font-size: 25px;
+	padding-bottom: 5%;
 }
 
 /* 댓글확인 */
-.showcomments-div{
-	  border: 1px solid #b2bec3;
-	  width: 100%;
-	  padding:1%;
+.showcomments-div {
+	border: 1px solid #b2bec3;
+	width: 100%;
+	padding: 1%;
 }
-.showcomments-top-div{
+
+.showcomments-top-div {
 	display: flex;
-    justify-content: space-between;
+	justify-content: space-between;
 }
-#comment-writer i{
-	padding-right:10px;
+
+#comment-writer i {
+	padding-right: 10px;
 }
-#location{
-	font-size:14px;
+
+#location {
+	font-size: 14px;
 }
-#comment-contents{
-	font-size:20px;
+
+#comment-contents {
+	font-size: 20px;
 }
 /* 댓글작성 */
-.writecomments-div{
-	  border: 1px solid #b2bec3;
-	  width: 100%;
-	  padding:1%;
-	  height: 150px;
+.writecomments-div {
+	border: 1px solid #b2bec3;
+	width: 100%;
+	padding: 1%;
+	height: 150px;
+	
 }
+
 .writecomments-div form {
-	  display:flex;
-	  justify-content: space-between;
-	  align-items:center;
-	  height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
 }
+
 .writecomments-div form textarea {
 	width: 80%;
 	height: 100%;
 	border: 1px solid black;
 	font-size: 20px;
-	padding:1%;
+	padding: 1%;
 }
-.writecomments-div form button{
-	width:20%;
+
+.writecomments-div form button {
+	width: 20%;
 	height: 100%;
-	background-color:#24a6a4;
-	border:1px solid #24a6a4;
-	color:#fff;
-	font-size:20px;
+	background-color: #24a6a4;
+	border: 1px solid #24a6a4;
+	color: #fff;
+	font-size: 20px;
 }
