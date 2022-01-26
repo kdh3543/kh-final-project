@@ -99,16 +99,7 @@
             </div>
         </div>
         
-         <!-- 연락하기 버튼을 눌렀을 때의 script -->
-        <input type=hidden value="300티셔츠" id="hiddenProduct">
-        <input type=hidden value="1" id="hiddenProductId">
-       <script>
-        	let hiddenProduct = $("#hiddenProduct").val();
-        	let hiddenProductId = $("#hiddenProductId").val();
-        	$("#btn-talk").on("click",function(){
-        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId;
-        	})
-        </script>
+         
        
         <div class="detail-bottom-div">
             <div class="bottom-top">

@@ -25,10 +25,15 @@ public class FilesDAO {
 			return mybatis.selectList("Files.selectBySeq",seq);
 		}
 		
-	public  List<FilesDTO> selectAll( ) {
+	public  List<FilesDTO> selectAll() {
 			
 			return mybatis.selectList("Files.selectAll");
 		}
+	
+	public List<FilesDTO> selectById(String id){
+		System.out.println(id);
+		return mybatis.selectList("Files.selectById",id);		
+	}
 	
 		
 	

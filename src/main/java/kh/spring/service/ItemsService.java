@@ -31,6 +31,14 @@ public class ItemsService {
 		return idao.selectAll();
 	}
 	
+	public List<ItemsDTO> selectById(String id){
+		return idao.selectById(id);
+	}
+	
+	public int ItemsCount(String id) {
+		return idao.ItemsCount(id);
+	}
+	
 	
 	
 	

@@ -1,5 +1,6 @@
 package kh.spring.controller;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -18,106 +19,115 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.spring.dto.FilesDTO;
+import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.service.FilesService;
+import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
 import kh.spring.utils.EncryptionUtils;
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
-   
-   @Autowired
-   public MemberService mservice;
-   
-   @Autowired
-   private HttpSession session;
-    
-   
-   //아이디 중복체크
-   @ResponseBody
-   @RequestMapping(value = "idCheck",produces="text/html;charset=utf8")
-   public String idCheck(String id) throws Exception{   
-   int result = mservice.idCheck(id);
-      return String.valueOf(result);
-   }
-   //회원가입 정보 입력 
-   @RequestMapping("signup")
-   public String signup(MemberDTO dto,MultipartFile file) {
-      try {
 
-         int result = mservice.insert(dto,file);
-         
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return "redirect:/";
-   }
-   //kakao 회원가입 
-   @RequestMapping("kakaosignup")
-   public String kakaosignup(MemberDTO dto1,Model model) {
-      String kakaoid = dto1.getId();
-      dto1.setId(kakaoid);
-      String kakao = dto1.getEmail();
-      dto1.setKakao(kakao);
-      try {
-         int result = mservice.kakaoinsert(dto1);
-         if(result>0) {
-            session.setAttribute("loginID", kakaoid);
-            String id = (String)session.getAttribute("loginID");
-            
-            MemberDTO dto = mservice.select(id);
-            
-            model.addAttribute("dto", dto);
-      
-         }
-         
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      
-      return "redirect:/items/";
-   }
-   
-   //로그인 기능
-   @RequestMapping(value="login")
-   public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
-      logpw = EncryptionUtils.getSHA512(logpw);
-      int result = mservice.login(logid,logpw);
-      System.out.println(remember_userID);
-      Cookie cookie = new Cookie("logid", logid); //쿠키 생성
-       cookie.setDomain("localhost");
-         cookie.setPath("/signIn");
+	@Autowired
+	public MemberService mservice;
+	@Autowired
+	public ItemsService iservice;
+	@Autowired
+	public FilesService fservice;
+	
 
-      if(remember_userID !=null) {
-            // 체크박스 체크 된 경우
-            response.addCookie(cookie); // 쿠키 저장
-            
-         }else {
-            // 체크박스 체크 해제 경우
-            cookie.setMaxAge(0); // 쿠키 유효시간 0으로 해서 브라우저에서 삭제
-            response.addCookie(cookie);
-         }
-      
-      //로그인 성공 시
-      if(result>0) {
-         session.setAttribute("loginID", logid);
-         String id = (String)session.getAttribute("loginID");
-         
-         MemberDTO dto = mservice.select(id);
-         
-         model.addAttribute("dto", dto);
-         
-         return "forward:/items/";
-   
-      }else {
-         return "redirect:/signIn";
-      }
+	@Autowired
+	private HttpSession session;
+
 
       
-   }
+//아이디 중복체크
+	@ResponseBody
+	@RequestMapping(value = "idCheck",produces="text/html;charset=utf8")
+	public String idCheck(String id) throws Exception{   
+		int result = mservice.idCheck(id);
+		return String.valueOf(result);
+	}
+	//회원가입 정보 입력 
+	@RequestMapping("signup")
+	public String signup(MemberDTO dto,MultipartFile file) {
+		try {
+
+			int result = mservice.insert(dto,file);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/";
+	}
+	//kakao 회원가입 
+	@RequestMapping("kakaosignup")
+	public String kakaosignup(MemberDTO dto1,Model model) {
+		String kakaoid = dto1.getId();
+		dto1.setId(kakaoid);
+		String kakao = dto1.getEmail();
+		dto1.setKakao(kakao);
+		try {
+			int result = mservice.kakaoinsert(dto1);
+			if(result>0) {
+				session.setAttribute("loginID", kakaoid);
+				String id = (String)session.getAttribute("loginID");
+
+				MemberDTO dto = mservice.select(id);
+
+				model.addAttribute("dto", dto);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "forward:/items/";
+	}
+
+	//로그인 기능
+	@RequestMapping(value="login")
+	public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
+		logpw = EncryptionUtils.getSHA512(logpw);
+		int result = mservice.login(logid,logpw);
+		System.out.println(remember_userID);
+		Cookie cookie = new Cookie("logid", logid); //쿠키 생성
+		cookie.setDomain("localhost");
+		cookie.setPath("/signIn");
+
+		if(remember_userID !=null) {
+			// 체크박스 체크 된 경우
+			response.addCookie(cookie); // 쿠키 저장
+
+		}else {
+			// 체크박스 체크 해제 경우
+			cookie.setMaxAge(0); // 쿠키 유효시간 0으로 해서 브라우저에서 삭제
+			response.addCookie(cookie);
+		}
+
+		//로그인 성공 시
+		if(result>0) {
+			session.setAttribute("loginID", logid);
+			String id = (String)session.getAttribute("loginID");
+
+			MemberDTO dto = mservice.select(id);
+
+			model.addAttribute("dto", dto);
+
+			return "forward:/items/";
+
+		}else {
+			return "redirect:/signIn";
+		}
+
+
+	}
    //로그아웃 기능
    @RequestMapping("logout")
    public String logout() {
@@ -146,12 +156,25 @@ public class MemberController {
       return "/member/myPage";
    }
    //마이페이지 수정기능
-   @RequestMapping("modify")
-   public String modify(MemberDTO dto) {
-      String encPw = EncryptionUtils.getSHA512(dto.getPw());
-      dto.setPw(encPw);
-      int result = mservice.modify(dto);
-      System.out.println("정보수정완료");
+   @RequestMapping("updateInfo")
+   public String modify(MemberDTO dto,MultipartFile file) {
+     // String encPw = EncryptionUtils.getSHA512(dto.getPw());
+     // dto.setPw(encPw);
+      try {
+    	  System.out.println(file);
+    	  System.out.println(dto.getId());
+    	  System.out.println(dto.getAddress1());
+    	  System.out.println(dto.getAddress2());
+    	  System.out.println(dto.getZipcode());
+    	  
+    	  
+		int result = mservice.modify(dto,file);
+		
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+      System.out.println("컨트롤러 정보수정완료");
       return "/items/index";   
    }
    @RequestMapping("findID")
@@ -275,6 +298,4 @@ public class MemberController {
        System.out.println(result+"비밀번호 변경에 성공하였습니다.");
        return "redirect:/";
    }
-   
-   
 }
