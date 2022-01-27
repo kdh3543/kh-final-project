@@ -11,7 +11,7 @@
 
 	<insert id="insert">
 		INSERT INTO COMMENTS VALUES(COMMENT_SEQ.NEXTVAL, #{board_seq},
-		#{writer}, #{contents}, DEFAULT, DEFAULT)
+		#{writer}, #{contents}, CURRENT_DATE, DEFAULT)
 		<!-- <selectKey resultType="int" order="AFTER"
 			keyProperty="board_seq">
 			SELECT BOARD_SEQ FROM 
