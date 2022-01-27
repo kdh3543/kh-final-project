@@ -43,16 +43,11 @@ public class ItemsController {
 	@RequestMapping("")	
 	public String home(Model model) {
 		
-		List<ItemsDTO>ilist =iservice.selectAll();
-		
+		List<ItemsDTO>ilist =iservice.selectAll();		
 		model.addAttribute("ilist",ilist);
 		
-		List<FilesDTO>flist =fservice.selectAll();
-//		
-		
-		model.addAttribute("flist",flist);
-		
-		
+		List<FilesDTO>flist =fservice.selectAll();			
+		model.addAttribute("flist",flist);		
 		
 		return "/items/index";
 	}
@@ -110,14 +105,12 @@ public class ItemsController {
 //	List<ItemsDTO>ilist =iservice.selectBySeq();
 		
 //		model.addAttribute("ilist",ilist);
-		
-		
-		
-		
-		
+	
 		return "/items/itemsDetail";
 
 	}
+
+
 	
 	
 //최근 검색어 data 넣기
@@ -217,6 +210,11 @@ public class ItemsController {
 		
 	}
 	
+	@RequestMapping("itemsDetailExam")
+	public String itemsDetail2() {
+		return "/items/itemsDetailExam";
+
+	}
 
 
 }

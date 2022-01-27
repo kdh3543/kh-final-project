@@ -147,7 +147,7 @@ nav {
 
 .tab-content>.active {
 	display: block;
-	height: 600px;
+	height: auto;
 	padding: 1%;
 }
 
@@ -162,7 +162,7 @@ nav {
 }
 
 .profile-content {
-	height: 90%;
+	height: 800px;
 }
 
 .profile-content .profile-img {
@@ -211,11 +211,16 @@ nav {
 	height: 10%;
 	font-family: 'OTWelcomeBA';
 	font-size: 18px;
+	width:15%;
 }
 
 .profile-content-section .profile-table tr td:nth-child(2) input {
 	width: 30%;
 	height: 60%;
+}
+
+.profile-content-section .profile-table tr:last-child td {
+	text-align:right;
 }
 
 #imgChange {
@@ -224,6 +229,7 @@ nav {
 	line-height: 25px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
+	background-color:#fff;
 }
 
 #imgChange:hover {
@@ -237,6 +243,7 @@ nav {
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
+	background-color:#fff;
 }
 
 #pwChange:hover {
@@ -250,6 +257,7 @@ nav {
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
+	background-color:#fff;
 }
 
 #phoneChange:hover {
@@ -263,6 +271,7 @@ nav {
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
+	background-color:#fff;
 }
 
 #seachAddress:hover {
@@ -278,19 +287,22 @@ nav {
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
 	width: 120px;
-	height: 80%;
+	height: 70%;
 }
 
 #deleteInfo {
+	background-color:#fff;
 	border-color: #24a6a4;
 	height: 35px;
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
 	width: 120px;
-	height: 80%;
+	height: 70%;
 }
 /* 판매내역 */
+.itemImg{width:50px; height:50px;}
+
 .sell-top {
 	height: 15%;
 	line-height: 80px;

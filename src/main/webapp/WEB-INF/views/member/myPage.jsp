@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,8 +27,14 @@
         <link rel="stylesheet" href="/css/footer.css">
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="/css/member/mypage.css">
-
-      
+		<!-- 주소 API -->
+         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <style>
+			img{
+			width:100px;
+			height:100px;
+			}
+		</style>
 
 </head>
 
@@ -105,53 +114,63 @@
                 <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
                     aria-labelledby="nav-profile-tab">
                     <div class="profile-top">회원정보수정</div>
-                   
+                   <form action="updateInfo" method="post" enctype=multipart/form-data>
                     <div class="profile-content">
                         <div class="profile-img">
-                            <div class="profile-top-left"><i class="fas fa-camera fa-3x"></i></div>
-                            <div class="profile-top-right">
-                                <button type="button" class="btn btn-lg btn-light" id="imgChange">사진변경</button>
-                                사진 수정을 원하시면 사진변경 버튼을 눌러주세요.
-                            </div>
+                           <label for="imgfile" class="del-button img-up">
+         					<input type="file" id=imgfile name="file" accept=".jpg, .png, .jpeg, .gif" style="display:none;">
+         						<img src="${dto.profile_image }" id="profile">
+         						프로필 사진 등록
+           					</label>
                         </div>
                         <div class="profile-content-section">
+                        
+           		
+          
                             <table class="profile-table">
+                            <br>
                                 <tr>
                                     <td>아이디</td>
-                                    <td><input type="text" class="inputId" value="${dto.id }" disabled></td>
+                                    <td><input type="text" class="inputId" name="id" value="${dto.id }" readonly></td>
                                 </tr>
-                                <tr>
-                                    <td>비밀번호</td>
-                                    <td><input type="text" class="inputPw">
-                                        <button type="button" class=" btn btn-lg btn-light" id="pwChange">비밀번호
-                                            변경</button>
-                                    </td>
-                                </tr>
+                          
                                 <tr>
                                     <td>이름</td>
                                     <td><input type="text" class="inputName" value="${dto.name }" disabled></td>
                                 </tr>
+                    
+                                <tr>
+                              <td>비밀번호</td>
+                              <td><input type="hidden" class="input Password" id="pw" name="pw" value="${dto.pw }">
+                                <input type="text" class="input Password" id="cpw" name="pw" placeholder="최소 한개의 문자, 한개의 숫자 , 한개의 특수 문자를 포함한 8~20자리" value="비밀번호를 변경하시려면 버튼을 눌러주세요" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$" required disabled>
+                                 <button type="button" class=" btn btn-lg btn-light" id="pwChange">비밀번호
+                                            변경</button></td>
+                           </tr>
                                 <tr>
                                     <td>전화번호</td>
-                                    <td><input type="text" class="inputPhone" value="${dto.phone }">
+                                    <td><input type="text" class="inputPhone" id="phone" name="phone" value="${dto.phone }" readonly required>
                                         <button type="button" class=" btn btn-lg btn-light" id="phoneChange"  >전화번호
                                             변경</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>우편변호</td>
-                                    <td><input type="text" class="inputZipcode" value="${dto.zipcode }">
-                                        <button type="button" class=" btn btn-lg btn-light"  id="seachAddress">주소
+                                    <td><input type="text" class="inputZipcode" id="inputZipcode" name="zipcode" value="${dto.zipcode }" required>
+                                        <button type="button" class=" btn btn-lg btn-light"  id="findAddress">주소
                                             검색</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소1</td>
-                                    <td><input type="text" class="inputAddress1" value="${dto.address1 }" disabled></td>
+                                    <td><input type="text" class="inputAddress1" id="inputAddress1" name="address1" value="${dto.address1 }"readonly required></td>
                                 </tr>
                                 <tr>
                                     <td>주소2</td>
-                                    <td><input type="text" class="inputAddress2" value="${dto.address2 }" disabled></td>
+                                    <td><input type="text" class="inputAddress2" id="address2" name=address2 value="${dto.address2 }" required></td>
+                                </tr>
+                                 <tr>
+                                    <td>거래선호지역</td>
+                                    <td><input type="text" class="inputlocation" id="prefer_location" name=prefer_location value="${dto.prefer_location }" required></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
@@ -159,10 +178,13 @@
                                             id="updateInfo">정보수정</button>
                                         <button type="button" class=" btn btn-lg btn-light"
                                             id="deleteInfo">회원탈퇴</button>
+                                             
+                                       
+                                    
                                     <td>
                                 </tr>
                             </table>
-                          
+                          </form>
 
                         </div>
                     </div>
@@ -297,6 +319,33 @@
     		return false;
     	}
     })
+    $("#pwChange").on("click",function(){
+    	$("#pw").attr("disabled",true);
+    	$("#cpw").attr("disabled",false);
+    	document.getElementById("cpw").value ="";
+    	
+    })
+          //이미지 삽입 후 바뀜
+$(document).ready(function(){
+	$("#imgfile").change(function(event){
+		var tmppath=URL.createObjectURL(event.target.files[0]);
+		$('#profile').attr('src',tmppath);
+	});
+});
+    $("#phoneChange").on("click",function(){
+    	$("#phone").attr("readonly",false);
+    })
+     //주소지 값 자동 추가해주는 함수
+    document.getElementById("findAddress").onclick = function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.getElementById('inputZipcode').value = data.zonecode;
+                	document.getElementById("inputAddress1").value = data.roadAddress;
+                	 document.getElementById("inputAddress1").value = data.jibunAddress;
+            }  
+        }).open();
+    }
+     
     	
     </script>
     
