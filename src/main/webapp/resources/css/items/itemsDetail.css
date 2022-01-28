@@ -1,217 +1,483 @@
 @charset "UTF-8";
+
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-body{
-    margin: 0;
-    height : auto;
-    min-height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    
-  }
+body {
+	margin: 0;
+	height: auto;
+	min-height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
 
 main {
-    height:auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20%;
-    margin: auto;
-    width:90%;
-    flex-direction: column;
-    font-family: 'OTWelcomeRA';
-    padding: 5%;
-}
-.detail-top-div{
-    width: 100%;
-    height: 50%;
-    display: flex;
-    padding: 1%;
-}
-.detail-left {
-    display: flex;
-    width: 30%;
-}
-.detail-left .left-img{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#carouselExampleIndicators {
-    width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20%;
+	margin: auto;
+	width: 90%;
+	flex-direction: column;
+	font-family: 'OTWelcomeRA';
+	padding: 5%;
 }
 
-.detail-right{
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 2%;
+.detail-top-div {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	padding: 1%;
 }
+
+.detail-left {
+	display: flex;
+	width: 30%;
+}
+
+.detail-left .left-img {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#carouselExampleIndicators {
+	width: 100%;
+}
+
+.detail-right {
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	padding: 2%;
+}
+
 .detail-right .productName {
-    font-family: 'OTWelcomeBA';
-    font-size: 30px;
+	font-family: 'OTWelcomeBA';
+	font-size: 30px;
 }
 
 .detail-right .productPrice {
-    font-family: 'OTWelcomeBA';
-    font-size: 32px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    width: 100%;
+	font-family: 'OTWelcomeBA';
+	font-size: 32px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
+
 .detail-right .product-status {
-    font-family: 'OTWelcomeRA';
-    font-size: 20px;
-    display: flex;
-    justify-content: flex-start;
-    
+	font-family: 'OTWelcomeRA';
+	font-size: 20px;
+	display: flex;
+	justify-content: flex-start;
 }
 
-.detail-right .product-status div{
-    padding-right:30px;
-}
-.detail-right .product-detail{
-    padding: 2%;
-}
-.detail-right .product-detail div{
-    
-    padding-top: 10px;
-    padding-bottom: 10px;
-
+.detail-right .product-status div {
+	padding-right: 30px;
 }
 
-.detail-right .detail-btns{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-.detail-right .detail-btns button{
-    width: 30%;
-    height: 60px;
-}
-#btn-like{
-    background-color: #b2bec3;
-    color:#fff;
-    width: 30%;
-    height: 70px;
-    line-height: 20px;
-    font-size: 17px;
-    font-family: 'OTWelcomeRA';
-}
-#btn-talk{
-    background-color: #f8d200;
-    color:#fff;
-    width: 30%;
-    height: 70px;
-    line-height: 20px;
-    font-size: 17px;
-    font-family: 'OTWelcomeRA';
-}
-#btn-buy{
-    background-color: #24a6a4;
-    color:#fff;
-    width: 30%;
-    height: 70px;
-    line-height: 20px;
-    font-size: 17px;
-    font-family: 'OTWelcomeRA';
-}
-.detail-bottom-div{
-    width: 100%;
-    height: 50%;
+.detail-right .product-detail {
+	padding: 2%;
 }
 
-.detail-bottom-div .bottom-top{
-    height: 50%;
+.detail-report {
+	text-align: right;
+	font-size: 15px;
+	color: gray;
 }
+/* 신고하기 */ 
+#reportBtn {
+	background-color: #fff !important;
+	border: none;
+	color: black;
+}
+.form-check{
+	text-align:left;
+	width:100%;
+}
+.reasonInput{
+	width: 70%;
+    height: 100%;
+}
+#reportSubmitBtn{
+	background-color: #24a6a4;
+	color: #fff;
+	border: none;
+}
+.detail-right .product-detail div {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.detail-right .detail-btns {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.detail-right .detail-btns button {
+	width: 30%;
+	height: 60px;
+}
+
+#btn-like {
+	background-color: #b2bec3;
+	color: #fff;
+	width: 30%;
+	height: 70px;
+	line-height: 20px;
+	font-size: 17px;
+	font-family: 'OTWelcomeRA';
+}
+
+#btn-talk {
+	background-color: #f8d200;
+	color: #fff;
+	width: 30%;
+	height: 70px;
+	line-height: 20px;
+	font-size: 17px;
+	font-family: 'OTWelcomeRA';
+}
+
+#btn-buy {
+	background-color: #24a6a4;
+	color: #fff;
+	width: 30%;
+	height: 70px;
+	line-height: 20px;
+	font-size: 17px;
+	font-family: 'OTWelcomeRA';
+}
+
+.detail-bottom-div {
+	width: 100%;
+	height: 50%;
+}
+
+.detail-bottom-div .bottom-top {
+	height: 50%;
+}
+
 .bottom-top .bottom-top-title {
-    font-family: 'OTWelcomeBA';
-    font-size: 18px;
-    padding: 1%;
+	font-family: 'OTWelcomeBA';
+	font-size: 18px;
+	padding: 1%;
 }
-.bottom-top-img{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 1%;
-    flex-wrap: wrap;
+
+.bottom-top-img {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	padding: 1%;
+	flex-wrap: wrap;
 }
+
 .bottom-top-imglist {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
 }
 
-.bottom-bottom{
-    padding-top: 30px;
-    height: 50%;
+.bottom-top-imglist img {
+	width: 100%;
+	height: 200px;
+}
+/* .bottom-top-imglist {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width:100%;
+}
+ */
+.bottom-bottom {
+	padding-top: 30px;
+	height: 50%;
 }
 
 .nav {
-    height: 70px;
+	height: 70px;
 }
-.nav button{
-    width: 16.5%;
+
+.nav button {
+	width: 16.5%;
 }
-.nav-link{
-    color:gray;
+
+.nav-link {
+	color: gray;
 }
-.nav-tabs .nav-link.active{
-    background-color: #24a6a4;
-    color: #fff;
+
+.nav-tabs .nav-link.active {
+	background-color: #24a6a4;
+	color: #fff;
+	width: 250px;
 }
-.tab-content{
-    height: 90%;
+
+.tab-content {
+	height: 90%;
 }
 
 .tab-content>.tab-pane {
-    display: none;
+	display: none;
 }
+
 .tab-content>.active {
-    display: block;
-    height: 100%;
-    padding: 1%;
-}
-.product-section{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: row;
-}
-.product-section1{
-    display: flex;
-    width: 70%;
-    flex-direction: column;
+	display: block;
+	height: 600px;
+	padding: 1%;
+	padding-top: 3%;
 }
 
-.product-section1 .product-info-title{
-    font-size: 30px;
+.product-section {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	flex-direction: row;
+}
+/* 상품 정보 */
+.product-section1 {
+	display: flex;
+	width: 70%;
+	flex-direction: column;
 }
 
-.product-section1 .product-info{
-    width: 70%;
+.product-section1 .product-info-title {
+	font-family: 'OTWelcomeRA';
+	font-size: 25px;
+	border-bottom: 1px solid #dfe6e9;
+	width: 100%;
+	height: 50px;
 }
 
-.product-section1 .shop-info{
-    width: 30%;
+.product-section1 .product-info-contents {
+	padding-top: 2%;
+	width: 100%;
+	height: auto;
 }
 
-.product-section2{
-    display: flex;
-    width: 30%;
-    flex-direction: column;
-}
-.product-section2 .shop-info{
-    font-size: 30px;
+.product-section1 .product-middle {
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid #dfe6e9;
+	border-bottom: 1px solid #dfe6e9;
+	justify-content: space-evenly;
+	text-align: center;
+	height: 100px;
+	align-items: center;
 }
 
+.product-middle .middle-location {
+	width: 30%;
+}
+
+.product-middle .middle-category {
+	border-left: 1px solid #dfe6e9;
+	border-right: 1px solid #dfe6e9;
+	width: 30%;
+}
+
+.product-middle .middle-tag {
+	width: 30%;
+}
+/* 상품문의*/
+.write-title-div {
+	font-family: 'OTWelcomeRA';
+	font-size: 25px;
+	border-bottom: 1px solid #dfe6e9;
+	width: 100%;
+	height: 50px;
+	padding-top: 2%;
+}
+
+.product-question {
+	border: 1px solid #dfe6e9;
+	width: 95%;
+	height: 180px;
+}
+
+.write-div {
+	width: 100%;
+	height: 70%;
+	border-bottom: 1px solid #dfe6e9;
+}
+
+.write-textarea {
+	width: 100%;
+	height: 100%;
+}
+
+.write-bottom-div {
+	width: 100%;
+	height: 30%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.writeBtn {
+	width: 100px;
+	height: 80%;
+	border: 1px solid #24a6a4;
+	background-color: #fff;
+	color: black;
+	font-size: 13px;
+}
+
+.writeBtn:hover {
+	border: 1px solid #24a6a4;
+	background-color: #24a6a4;
+	color: #fff;
+	font-size: 13px;
+}
+/* 
+.product-section1 .product-info {
+	width: 70%;
+}
+
+.product-section1 .shop-info {
+	width: 30%;
+} */
+/* 상점정보 */
+.product-section2 {
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+	border-left: 1px solid #dfe6e9;
+	padding: 2%;
+}
+
+.shop-info-title {
+	font-size: 15px;
+	border-bottom: 1px solid #dfe6e9;
+	height: 30px;
+}
+
+.shop-info-div {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 100px;
+	align-items: center;
+}
+
+.shop-info-div .info-left-div {
+	width: 30%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.shop-info-div .info-right-div {
+	width: 70%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.info-right-div .right-div-title {
+	font-size: 13px;
+}
+
+.info-right-div .right-div-contents {
+	font-size: 10px;
+	color: gray;
+}
+
+.follow-btn-div {
+	width: 100%;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.followBtn {
+	border: 1px solid #24a6a4;
+	background-color: #fff;
+	width: 90%;
+	height: 30px;
+	color: gray;
+	font-size: 13px;
+}
+
+.followBtn:hover {
+	border: 1px solid #24a6a4;
+	background-color: #24a6a4;
+	color: #fff;
+}
+
+.shop-info-images {
+	width: 100%;
+	height: 120px;
+	display: flex;
+	padding: 5%;
+}
+
+.shop-info-images img {
+	border: 1px solid gray;
+	width: 50%;
+	height: 100%;
+	margin: 1%;
+}
+
+.more-btn-div {
+	width: 100%;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.moreBtn {
+	background-color: #fff;
+	width: 90%;
+	height: 100%;
+	color: gray;
+	font-size: 13px;
+	border: none;
+	border-bottom: 1px solid #dfe6e9;
+}
+
+.review-title-div {
+	font-size: 15px;
+	border-bottom: 1px solid #dfe6e9;
+	padding-top: 5%;
+	height: 40px;
+}
+
+.review-title-contents {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	align-items: center;
+}
+
+.review-contents-left {
+	font-size: 13px;
+	color: gray;
+}
+
+.reviewBtn {
+	background-color: #24a6a4;
+	width: 70px;
+	height: 30px;
+	color: #fff;
+	font-size: 13px;
+	border: none;
+	height: 30px;
+}
