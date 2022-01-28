@@ -74,7 +74,20 @@ public class MemberService {
       return result;
    }
    //회원 정보 수정
-   public int modify(MemberDTO dto) {
+   public int modify(MemberDTO dto,MultipartFile file) throws Exception{
+	   String realPath = session.getServletContext().getRealPath("updateInfo");
+	      File realPathFile = new File(realPath);
+	      if(!realPathFile.exists()) {
+	         realPathFile.mkdir();
+	      }
+	      String oriName = file.getOriginalFilename();
+	      String sysName = UUID.randomUUID()+"_"+ oriName;
+	      
+	      file.transferTo(new File(realPath+"/"+sysName));
+	      dto.setProfile_image(sysName);
+	      System.out.println(dto.getProfile_image()+"서비스 정보수정완료");
+	      String encPw = EncryptionUtils.getSHA512(dto.getPw());
+	      dto.setPw(encPw);
       return mdao.modify(dto);
    }
    //가입 날짜

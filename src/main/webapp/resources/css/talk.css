@@ -1,4 +1,3 @@
-@charset "UTF-8";
 
 * {
     box-sizing: border-box;
@@ -32,10 +31,22 @@ main > div {
     display: flex;
     padding: 2%;
 }
-.talk-list {
+.talk-list, .talk-add-list {
     display: flex;
     border: 1px solid black;
+    overflow-y: auto;
+    
 }
+
+.talk-list-btn {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color:white;
+    
+}
+
 .talk-list-left {
     width: 30%;
     display: flex;
@@ -53,16 +64,11 @@ main > div {
 .talk-left{
     width:40%;
     padding: 1%;
-}
-.talk-left .inputTalk {
-    width: 100%;
+    overflow-y:auto;
 }
 
-.talk-list-btn {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.talk-left .inputTalk {
+    width: 100%;
 }
 .talk-right{
     width:60%;
@@ -75,18 +81,82 @@ main > div {
     height: 5%;
 }
 .talk-right .right-middle{
+    height: 85%;
+    border: 1px solid black;
+    overflow-y:auto;
+
+}
+
+.left-line{
+	display: flex;
+    justify-content: flex-start;
+
+    flex-direction: row;
+}
+
+.right-line{
+	display: flex;
+    justify-content: flex-end;
+
+    flex-direction: row;
+}
+
+.left-line>*{
+    float: left;
+}
+
+.right-line>*{
+    float: left;
+}
+
+.chatExtra{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.readNum{
     height: 80%;
+}
+
+.chatTime{
+    
+    font-size: 20px;
+    font-family: 'Dongle';
+}
+
+
+.line {
+    border-radius: 5px;
+    margin: 3px;
+    background-color:pink;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Dongle';
+   	padding:3px;
+    padding-left:4px;
+    padding-top:3px;
+    width: fit-content;
+    max-width: 60%;
+}
+
+
+.talk-right .right-bottom{
+    height: 10%;
+    display: flex;
+    width: 100%;
+}
+.talk-right .right-bottom *{
+	float: left;
+	
+}
+.talk-right .right-bottom div{
+	height: 100%;
+    width: 85%;
     border: 1px solid black;
 }
-.talk-right .right-bottom{
-    height: 15%;
-    display: flex;
-}
-.talk-right .right-bottom textarea{
-    width: 80%;
-}
 .talk-right .right-bottom button{
-    width: 20%;
+    width: 15%;
 }
 .right-title-left{
     border-bottom: 1px solid black;
@@ -96,6 +166,25 @@ main > div {
     width: 10%;
 }
 .title-name{
-    width: 20%;
+    width: 80%;
 }
 
+.talk-list-left>img{
+	width:50px;
+	height: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+    text-decoration: none;
+  color: black;
+}

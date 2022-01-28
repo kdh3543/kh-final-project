@@ -29,6 +29,7 @@
 			<link href="/css/board/boardList.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/boardDetail.js"></script>
+			<script src="/js/paginga.jquery.js"></script>
 
 </head>
 
@@ -39,10 +40,6 @@
 			<ul class="header_list">
 				<c:choose>
 					<c:when test="${loginID != null}">
-
-
-						${dto}
-						${dto.profile_image } 하이요
 						${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
 						<a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
 						<a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
@@ -74,7 +71,7 @@
 		</div>
 	</header>
 	<main>
-		<div class="contents-box">
+		<div class="contents-box" id="contents-box">
 			<div class="contents-top-div">
 				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
 				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
@@ -89,59 +86,72 @@
 				<button class="btn btn-primary" type="button" id="dog">강아지</button>
 				<button class="btn btn-primary" type="button" id="others">기타</button>
 			</div>
-			<c:forEach var="dto" items="${list}" varStatus="status">
-				<div class="contents">
-					<div class="contents-title">${dto.subject}</div>
-					<div class="contents-div">
-						<div class="contents-div-contents">
-							<a class="contents-a${status.count}"
-								href="toDetail?seq=${dto.board_seq}">${dto.contents}</a>
-						</div>
-					</div>
-					<script>
-						/* 글자수 넘쳤을 때 */
-						let div${ status.count } = $(".contents-a${status.count}").html();
-						if (div${ status.count }.length > 100) {
-							$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
-						}
+			<div class="paginate">
+				<div class="items">
+					<c:forEach var="dto" items="${list}" varStatus="status">
+						<div class="contents">
+							<div class="contents-title">${dto.subject}</div>
+							<div class="contents-div">
+								<div class="contents-div-contents">
+									<a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}"
+										style="color: black; text-decoration: none">${dto.contents}</a>
+								</div>
+							</div>
+							<script>
+								/* 글자수 넘쳤을 때 */
+								let div${ status.count } = $(".contents-a${status.count}").html();
+								if (div${ status.count }.length > 100) {
+									$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
+								}
 
-					</script>
-					<div class="contents-container">
-						<div class="contents-div-writer">${dto.writer}</div>
-						<div class="contents-div-location">위치</div>
-						<div class="contents-div-writedate">${dto.write_date}</div>
-					</div>
-					<div class="form-floating">
-						<div class="floating-likes" id="like">
-							<c:choose>
-								<c:when test="${loginID != null}">
+							</script>
+							<div class="contents-container">
+								<div class="contents-div-writer">${dto.writer} ·</div>
+								<div class="contents-div-location"> 위치 ·</div>
+								<div class="contents-div-writedate"> ${dto.parsed_date}</div>
+							</div>
+							<div class="form-floating">
+								<div class="floating-likes" id="like">
 									<c:choose>
-										<c:when test="${dto.user_id == loginID}">
-											<a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
-												style="color: #24a6a4;"> <i class="fas fa-heart"></i>좋아요 <span
-													class="likeCount">${dto.like_count}</span></a>
+										<c:when test="${loginID != null}">
+											<c:choose>
+												<c:when test="${dto.user_id == loginID}">
+													<a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
+														style="color: #24a6a4; text-decoration: none"> <i
+															class="fas fa-heart"></i>좋아요 <span
+															class="likeCount">${dto.like_count}</span></a>
+												</c:when>
+												<c:otherwise>
+													<a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
+														style="color: black; text-decoration: none"> <i
+															class="fas fa-heart"></i>좋아요 <span
+															class="likeCount">${dto.like_count}</span></a>
+												</c:otherwise>
+											</c:choose>
 										</c:when>
 										<c:otherwise>
-											<a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
-												style="color: black;"> <i class="fas fa-heart"></i>좋아요 <span
-													class="likeCount">${dto.like_count}</span></a>
+											<a class="like-unclickable"><i class="fas fa-heart"></i>좋아요
+												<span>${dto.like_count}</span></a>
 										</c:otherwise>
 									</c:choose>
-								</c:when>
-								<c:otherwise>
-									<a class="like-unclickable"><i class="fas fa-heart"></i>좋아요
-										<span>${dto.like_count}</span></a>
-								</c:otherwise>
-							</c:choose>
+								</div>
+								<div class="floating-comments">
+									<a href="toDetail?seq=${dto.board_seq}"
+										style="color: black; text-decoration: none"><i class="fas fa-comment"></i> 댓글
+										${dto.comment_count}</a>
+								</div>
+							</div>
 						</div>
-						<div class="floating-comments">
-							<a href="toDetail?seq=${dto.board_seq}"><i class="fas fa-comment"></i> 댓글
-								${dto.comment_count}</a>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
-
+				<div class="pager">
+					<div class="firstPage">&laquo;</div>
+					<div class="previousPage">&lsaquo;</div>
+					<div class="pageNumbers"></div>
+					<div class="nextPage">&rsaquo;</div>
+					<div class="lastPage">&raquo;</div>
+				</div>
+			</div>
 		</div>
 	</main>
 	<footer>
@@ -151,10 +161,20 @@
 		</div>
 	</footer>
 	<script>
+		$(".paginate").paginga({
+			itemsPerPage: 5,
+			maxPageNumbers: 10
+		});
+	</script>
+	<script>
+		$("#toWrite").on("click", function () {
+			location.href = "writeForm";
+		})
+
 		$(".like-unclickable").on("click", function () {
 			alert("로그인이 필요한 기능입니다.");
 		})
-		
+
 		$(".btnLike").on("click", function () {
 			if ($(this).hasClass('liked')) {
 				$.ajax({
@@ -189,10 +209,7 @@
 			}
 			return false;
 		})
-
-
 	</script>
-
 </body>
 
 </html>

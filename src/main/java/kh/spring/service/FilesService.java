@@ -30,6 +30,7 @@ public class FilesService {
 		return fdao.selectAll();
 	}
 	
+
 	public List<FilesDTO> selectBySeqR(List<ItemsDTO> NameToSeq) {
 		
 		return fdao.selectBySeqR(NameToSeq);
@@ -45,4 +46,6 @@ public class FilesService {
 	 * 
 	 * return fdao.selectBySeq(parentSeq); }
 	 */
+
+
 }

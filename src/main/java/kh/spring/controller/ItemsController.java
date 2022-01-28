@@ -49,6 +49,7 @@ public class ItemsController {
 	@RequestMapping("")	
 	public String home(Model model) {
 
+
 		List<ItemsDTO>ilist =iservice.selectAll();
 
 		model.addAttribute("ilist",ilist);
@@ -58,7 +59,7 @@ public class ItemsController {
 
 		model.addAttribute("flist",flist);
 
-
+	
 
 		return "/items/index";
 	}
@@ -231,6 +232,7 @@ public class ItemsController {
 
 	//	아이템 상세페이지 하나 클릭했을때
 	@RequestMapping("itemsDetail")
+
 	public String itemsDetail(int iseq ,Model model) {
 
 		// 해당 상품과 이미지들
@@ -281,12 +283,14 @@ public class ItemsController {
 
 		String id =(String)session.getAttribute("loginID");
 		model.addAttribute("loginID",id);
-
-
-
+		
 		return "/items/itemsDetail";
 
 	}
+
+
+
+
 
 
 	//	상품등록시 이동 
@@ -320,6 +324,11 @@ public class ItemsController {
 
 
 	//최근 검색어 data 넣기
+
+	
+	
+//최근 검색어 data 넣기
+
 	@RequestMapping("searchByInput")	
 	public String input(SearchKeywordDTO dto,Model model) {
 
@@ -454,6 +463,16 @@ public class ItemsController {
 		return "/talk/talk";
 	}
 
+
+	//	상품등록시 이동 
+	
+
+	
+	@RequestMapping("itemsDetailExam")
+	public String itemsDetail2() {
+		return "/items/itemsDetailExam";
+
+	}
 
 
 

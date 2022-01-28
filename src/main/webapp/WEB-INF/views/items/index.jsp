@@ -66,7 +66,7 @@
 
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
-									placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
 									aria-label="Recipient's username"
 									aria-describedby="button-addon2" id="search"
 									data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,23 +81,40 @@
 
 								<!-- 최신검색어-->
 
-								<div class="dropdown-menu" style="min-width: 600px;" id=recent>
-									<div>
-										<a class="dropdown-item" href="javascript:void(0);"
-											style="text-align: center">최근검색어 목록</a>
-									</div>
+								<div class="dropdown-menu" id=recent>
+									<a class="dropdown-item" href="javascript:void(0);"
+										style="text-align: center">
+										<div class="list-search-div">
+											<nav>
+												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													<button class="nav-link active" id="nav-home-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-home"
+														type="button" role="tab" aria-controls="nav-home"
+														aria-selected="true">최근검색어</button>
+													<button class="nav-link" id="nav-profile-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-profile"
+														type="button" role="tab" aria-controls="nav-profile"
+														aria-selected="false">인기검색어보기</button>
 
-									<!-- 내용 채워넣기 -->
-									<div id=text></div>
+												</div>
+											</nav>
+											<div class="tab-content" id="nav-tabContent">
+												<div class="tab-pane fade show active" id="nav-home"
+													role="tabpanel" aria-labelledby="nav-home-tab">
 
+													<!-- 내용 채워넣기 -->
+													<div id=text></div>
+													<button type=button id=delBtn class="dropdown-item"
+														style="display: inline">검색어 전체삭제</button>
+												</div>
+												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+													aria-labelledby="nav-profile-tab">인기검색어보기</div>
 
-									<div>
-										<button type=button id=delBtn class="dropdown-item"
-											style="display: inline">검색어 전체삭제</button>
-										<button type=button style="float: right">인기검색어 보기</button>
-									</div>
-
+											</div>
+										</div>
+									</a>
 								</div>
+
 
 								<script>
 									$("#delBtn").on("click", function() {
@@ -232,8 +249,10 @@
 													})
 								</script>
 
-								<!-- 인기 검색어 -->
-								<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
+
+
+						<!-- 인기 검색어 -->
+						<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
 									<li><a class="dropdown-item" href="#"><span>1.</span> Action</a></li>
 									<li><a class="dropdown-item" href="#"> actisadfasdfasdfon</a></li>
 									<li><a class="dropdown-item" href="#">Something else
@@ -242,8 +261,8 @@
 									<li><a class="dropdown-item" href="#">검색어 전체삭제</a></li>
 								</ul> -->
 
-								<!-- Default dropend button -->
-								<!-- <div class="btn-group dropend">
+						<!-- Default dropend button -->
+						<!-- <div class="btn-group dropend">
   <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Dropright
   </button>
@@ -253,15 +272,14 @@
 </div> -->
 
 
-							</div>
-
-
-
-						</div>
 					</div>
+
+
 
 				</div>
 			</div>
+
+
 
 		</header>
 	</form>
@@ -303,7 +321,7 @@
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="talk" class="btn-talk"> <i
+						</a> | <a href="chat/directTalk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
 						</a> | <a href="board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
@@ -346,7 +364,7 @@
 
 
 						<div class="imgBox">
-
+						<div class="imgBox  col-sm-3">
 							<!--상품 반복 시작 -->
 
 							<c:forEach var="i" items="${ilist}">
@@ -355,42 +373,30 @@
 									<c:if test="${f.parentSeq == i.iseq}">
 
 
-
 										<a href="/items/itemsDetail?iseq=${i.iseq}">
 											<div class="detail-img">
-
-
-												<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
-												<img src="${f.sysName}" style="max-width:200px; max-height:200px;">
-
-
-
+												<img src="${f.sysName}" style="width: 100%; height: 100%;">
 											</div>
-
 											<div class="detail-container">
 												<div class="title">${i.name}</div>
 												<div class="price">${i.price}원</div>
 												<div class="date">${i.detailDate}</div>
 												<%-- <div class="title">${flist.oriname}</div> --%>
-
 											</div>
-
 										</a>
-
 
 									</c:if>
 
 								</c:forEach>
 							</c:forEach>
+
+							</div>
 						</div>
-
-
 
 					</article>
 				</section>
 
 			</div>
-		</div>
 		</div>
 		<div class="d-none d-lg-block" id="sideBar">
 			<div class="sidebar-div">
@@ -399,7 +405,17 @@
 						id="likeProductBtn">
 						찜한상품<br> <i class="fas fa-heart">개수</i>
 					</button>
-				</a> <a href="#"><button class="btn btn-outline-secondary"
+					
+				</a> 
+				<div class="sidebar-resently-div">
+						<div class="sidebar-title-div">최근 본 상품</div>
+						<div class="sidebar-product-div">
+							<img src="">
+							<img src="">
+						</div>
+
+					</div>
+				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
 		</div>
@@ -407,7 +423,7 @@
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>

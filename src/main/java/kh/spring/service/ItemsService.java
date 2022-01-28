@@ -31,6 +31,7 @@ public class ItemsService {
 		return idao.selectAll();
 	}
 	
+
 	public List<ItemsDTO> selectBySeq(int iseq) {
 		return idao.selectBySeq(iseq);
 		
@@ -70,6 +71,20 @@ public class ItemsService {
 	}
 
 
+
+
+	public List<ItemsDTO> selectById(String id){
+		return idao.selectById(id);
+	}
+	
+	public int ItemsCount(String id) {
+		return idao.ItemsCount(id);
+	}
+	
+	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
+	public String selectByProductId(int productId) {
+		return idao.selectByProductId(productId);
+	}
 
 	
 	

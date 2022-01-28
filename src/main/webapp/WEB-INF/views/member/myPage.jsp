@@ -1,46 +1,46 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내 상점</title>
-<!-- fontawesome-->
-<script src="https://kit.fontawesome.com/7d7ec2f3ed.js"
-	crossorigin="anonymous"></script>
-<!-- Jquery-->
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<!-- bootstrap-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-
-<!-- CSS -->
-<link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/header_searchBar.css">
-<link rel="stylesheet" href="/css/footer.css">
-<!-- Custom styles for this template -->
-<link rel="stylesheet" href="/css/member/mypage.css">
-
+       
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>내 상점 </title>
+        <!-- fontawesome-->
+        <script src="https://kit.fontawesome.com/7d7ec2f3ed.js" crossorigin="anonymous"></script>
+        <!-- Jquery-->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <!-- bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+       
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/font.css">
+        <link rel="stylesheet" href="/css/header_searchBar.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="/css/member/mypage.css">
+		<!-- 주소 API -->
+         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <style>
+			img{
+			width:100px;
+			height:100px;
+			}
+		</style>
 
 
 </head>
 
 <body>
+
 	<!--  Header -->
 	<header>
 		<!-- 로그인 했을 때만 진입 가능 -->
@@ -254,7 +254,7 @@
 												<td>${i.price }</td>
 												<td>${i.like_cnt }</td>
 												<td>문의수들어갈자리</td>
-												<td>2022-01-22</td>
+												<td>${i.detailDate}</td>
 												<td><a href= "/items/itemsModify?iseq=${i.iseq}"><button type="button" class=" btn btn-lg btn-light"
 														>수정하기</button></a></td>
 														
@@ -450,15 +450,45 @@
 		</div>
 	</footer>
 	<script>
-		//마이페이지 회원 탈퇴기능 
-		$("#deleteInfo").on("click", function() {
-			if (confirm("정말 탈퇴하시겠습니까?")) {
-				location.href = "/member/leave";
-			} else {
-				return false;
-			}
-		})
-	</script>
+    
+    $("#deleteInfo").on("click",function(){
+    	if(confirm("정말 탈퇴하시겠습니까?")){
+    		location.href= "/member/leave";
+    	}else{
+    		return false;
+    	}
+    })
+    $("#pwChange").on("click",function(){
+    	$("#pw").attr("disabled",true);
+    	$("#cpw").attr("disabled",false);
+    	document.getElementById("cpw").value ="";
+    	
+    })
+          //이미지 삽입 후 바뀜
+$(document).ready(function(){
+	$("#imgfile").change(function(event){
+		var tmppath=URL.createObjectURL(event.target.files[0]);
+		$('#profile').attr('src',tmppath);
+	});
+});
+    $("#phoneChange").on("click",function(){
+    	$("#phone").attr("readonly",false);
+    })
+     //주소지 값 자동 추가해주는 함수
+    document.getElementById("findAddress").onclick = function(){
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.getElementById('inputZipcode').value = data.zonecode;
+                	document.getElementById("inputAddress1").value = data.roadAddress;
+                	 document.getElementById("inputAddress1").value = data.jibunAddress;
+            }  
+        }).open();
+    }
+     
+    	
+    </script>
+	
+
 
 </body>
 

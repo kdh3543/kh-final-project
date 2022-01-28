@@ -19,15 +19,20 @@ public class BoardDAO {
 	public List<BoardDTO> selectAll() {
 		return mybatis.selectList("Board.selectAll");
 	}
-	
+
 	// 전체 게시글 리스트(로그인 시)
-		public List<BoardDTO> selectByUser(String user_id) {
-			return mybatis.selectList("Board.selectByUser", user_id);
-		}
+	public List<BoardDTO> selectByUser(String user_id) {
+		return mybatis.selectList("Board.selectByUser", user_id);
+	}
 
 	// 시퀀스로 게시글 검색
 	public BoardDTO selectBySeq(int seq) {
 		return mybatis.selectOne("Board.selectBySeq", seq);
+	}
+
+	// 시퀀스로 조회수 추가
+	public int addViewCount(int seq) {
+		return mybatis.update("Board.addViewCount", seq);
 	}
 
 	// 신규 게시글 삽입
@@ -71,7 +76,7 @@ public class BoardDAO {
 		map.put("user_id", user_id);
 		return mybatis.update("Board.removeLikeList", map);
 	}
-	
+
 	// 게시글 전체 좋아요 개수
 	public int getLikeCount(int seq) {
 		return mybatis.selectOne("Board.getLikeCount", seq);
@@ -85,14 +90,5 @@ public class BoardDAO {
 	// 게시글 댓글 개수 감소
 	public int subtractCommentCount(int seq) {
 		return mybatis.update("Board.subtractCommentCount", seq);
-	}
-	
-	// 게시글 좋아요 체크
-	public int isLiked(int seq, String user_id) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("seq", seq);
-		map.put("user_id", user_id);
-		
-		return mybatis.selectOne("Board.isLiked", map);
 	}
 }

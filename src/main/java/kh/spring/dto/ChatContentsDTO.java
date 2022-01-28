@@ -1,6 +1,8 @@
 package kh.spring.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChatContentsDTO {
 	private int contentsId;
@@ -11,11 +13,12 @@ public class ChatContentsDTO {
 	private String sellerId;
 	private String buyerId;
 	private char contentCheck;
+	private int productId;
 	
 	public ChatContentsDTO() {}
 
 	public ChatContentsDTO(int contentsId, Timestamp createTime, Timestamp updateTime, String chatContents, int roomId,
-			String sellerId, String buyerId, char contentCheck) {
+			String sellerId, String buyerId, char contentCheck, int productId) {
 		super();
 		this.contentsId = contentsId;
 		this.createTime = createTime;
@@ -25,6 +28,7 @@ public class ChatContentsDTO {
 		this.sellerId = sellerId;
 		this.buyerId = buyerId;
 		this.contentCheck = contentCheck;
+		this.productId = productId;
 	}
 
 	public int getContentsId() {
@@ -90,5 +94,18 @@ public class ChatContentsDTO {
 	public void setContentCheck(char contentCheck) {
 		this.contentCheck = contentCheck;
 	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
 	
+	public String getFormDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		
+		return sdf.format(updateTime);
+	}
 }

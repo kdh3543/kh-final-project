@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
   
   <mapper namespace="Files">
   
@@ -49,3 +50,6 @@ WHERE SELLERID =#{id} AND  SEQ IN (SELECT MIN(SEQ) FROM FILES GROUP BY PARENTSEQ
   <!-- <![CDATA[ ROWNUM = 1 ]]> -->
   
   </mapper>
+
+
+

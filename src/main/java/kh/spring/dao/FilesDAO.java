@@ -28,11 +28,12 @@ public class FilesDAO {
 		return mybatis.selectList("Files.selectBySeq",seq); }
 		
 		
-	public  List<FilesDTO> selectAll( ) {
+	public  List<FilesDTO> selectAll() {
 			
 			return mybatis.selectList("Files.selectAll");
 		}
 	
+
 	public List<FilesDTO> selectBySeqR(List<ItemsDTO> NameToSeq) {
 		
 		HashMap<String, Object> map = new HashMap<>();
@@ -51,6 +52,13 @@ public class FilesDAO {
 		
 		return mybatis.selectList("Files.selectMineById",id);
 	}
+
+	public List<FilesDTO> selectById(String id){
+		System.out.println(id);
+		return mybatis.selectList("Files.selectById",id);		
+	}
+	
+
 		
 	
 }
