@@ -52,4 +52,13 @@
 </update>
 
 <delete id="delete">delete from member where id=#{value} </delete>
+
+
+	
+
     </mapper>
+    
+    
+    
+    	
+    

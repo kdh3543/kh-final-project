@@ -31,8 +31,49 @@ public class ItemsService {
 		return idao.selectAll();
 	}
 	
+	public List<ItemsDTO> selectBySeq(int iseq) {
+		return idao.selectBySeq(iseq);
+		
+	}
+	
+	public List<ItemsDTO> selectByName(List<String> targetList,int iseq){
+		
+		return idao.selectByName(targetList,iseq);
+	}
+	
+	public List<ItemsDTO> selectNameToSeq(List<ItemsDTO> rilist){
+		
+		return idao.selectNameToSeq(rilist);
+	}
+
+	public List<ItemsDTO> selectMineById(String id) {
+		
+		return idao.selectMineById(id);
+	}
+
+	public int sellCount(String id) {
+		
+		return idao.sellCount(id);
+	}
+
+	public int updateProc(String deal, int iseq) {
+
+		return idao.updateProc(deal,iseq);
+	}
+
+
+	
+
+	public int itemsModifyProc(ItemsDTO dto) {
+		// TODO Auto-generated method stub
+		return idao.itemsModifyProc(dto);
+	}
+
+
+
 	
 	
+	 
 	
 	
 

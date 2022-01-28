@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.FilesDAO;
 import kh.spring.dto.FilesDTO;
+import kh.spring.dto.ItemsDTO;
 
 @Service
 public class FilesService {
@@ -15,10 +16,11 @@ public class FilesService {
 	public FilesDAO fdao;
 	
 	
+	
 	public List<FilesDTO> selectBySeq(int seq) {
-		
-		return fdao.selectBySeq(seq);
-	}
+	
+	return fdao.selectBySeq(seq); }
+	
 	public int insert(FilesDTO dto) {
 		return fdao.insert(dto);
 	}
@@ -27,5 +29,20 @@ public class FilesService {
 		
 		return fdao.selectAll();
 	}
+	
+	public List<FilesDTO> selectBySeqR(List<ItemsDTO> NameToSeq) {
+		
+		return fdao.selectBySeqR(NameToSeq);
+	}
 
+	public List<FilesDTO> selectMineById(String id) {
+		// 
+		return fdao.selectMineById(id);
+	}
+	
+	/*
+	 * public List<FilesDTO> selectBySeq(int parentSeq) {
+	 * 
+	 * return fdao.selectBySeq(parentSeq); }
+	 */
 }

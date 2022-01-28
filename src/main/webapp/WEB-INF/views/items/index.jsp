@@ -38,23 +38,23 @@
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
-					<c:choose>
-						<c:when test="${loginID != null}">	
+				<c:choose>
+					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-           			     <li> 이미지 부분 : ${dto.profile_image}</li>
-           				 <li>${loginID}님안녕하세요</li>
-							<li><a href="/member/myPage">마이페이지</a></li>
+							<li>이미지 부분 : ${dto.profile_image}</li>
+							<li>${loginID}님안녕하세요</li>
+							<li><a href="/myPage">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 						</ul>
-               </c:when>
-						<c:otherwise>
+					</c:when>
+					<c:otherwise>
 						<ul class="header_list">
 							<li><a href="signIn">로그인</a></li>
 							<li><a href="join">회원가입</a></li>
 						</ul>
-						</c:otherwise>
-					</c:choose>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="div-wrap">
 				<div class="nav_div">
@@ -100,89 +100,136 @@
 								</div>
 
 								<script>
-								$("#delBtn").on("click",function(){
-									
-									$.ajax({
-										url:"/items/deleteAll",
-										
-									}).done(function(resp){
-										console.log(resp);
-										
-										$("#text").empty();
-										
-									})
-									
-									})
-								
-								</script>
+									$("#delBtn").on("click", function() {
 
-								<script>
-									$(function(){
-										
-										 $("#search").one("click",function(){ 
-											
-											
-											$.ajax({
-												url:"/items/listing",
-												datatype:"json"
-											}).done(function(resp){
-												
-											
-												 
-												 resp = JSON.parse(resp);
-											
-												 for(let i=0 ; i<resp.length; i++){	
-												 let text = $("#text");
-												 
-												 let line=$("<div>");
-								                    line.addClass("line");
-								                    line.css("background-color" ,"white").css("width","80%").css("padding","0px").css("margin","0px").css("border-radius","3px").css("float","left");
+										$.ajax({
+											url : "/items/deleteAll",
 
-								                    let textLine=$("<div>");
-								               	 
-								                    textLine.append(resp[i].keyword);
-								                    
-								               	 
-								                    textLine.addClass("textLine");
-								                    
-								                    let delButton=$("<button>");
-								                    delButton.addClass("delBtnOne");
-								                    delButton.text("X");
-								                    delButton.css("float","right");
-								                  
-								                    textLine.append(text.val());
-								                    textLine.append(delButton);
-								                    
-								                    line.append(textLine);
-								                   
-								                    $("#text").append(line);
-								                    
-												 }
-											
-											 })
-											})
+										}).done(function(resp) {
+											console.log(resp);
+
+											$("#text").empty();
+
 										})
-									
-								
+
+									})
 								</script>
 
 								<script>
-								$('#text').on("click",".delBtnOne",function(){
-									
-									/*버튼 X 제거하고 값 추출  */
-									var str = $(this).parent().text().slice(0,-1);
-									$(this).parent().remove();
-									
-									$.ajax({
-										url:"/items/deleteByKeyword?keyword="+str
-										
-									}).done(function(resp){
-										
-										
+									$(function() {
+
+										$("#search")
+												.one(
+														"click",
+														function() {
+
+															$
+																	.ajax(
+																			{
+																				url : "/items/listing",
+																				datatype : "json"
+																			})
+																	.done(
+																			function(
+																					resp) {
+
+																				resp = JSON
+																						.parse(resp);
+
+																				for (let i = 0; i < resp.length; i++) {
+																					let text = $("#text");
+
+																					let line = $("<div>");
+																					line
+																							.addClass("line");
+																					line
+																							.css(
+																									"background-color",
+																									"white")
+																							.css(
+																									"width",
+																									"80%")
+																							.css(
+																									"padding",
+																									"0px")
+																							.css(
+																									"margin",
+																									"0px")
+																							.css(
+																									"border-radius",
+																									"3px")
+																							.css(
+																									"float",
+																									"left");
+
+																					let textLine = $("<div>");
+
+																					textLine
+																							.append(resp[i].keyword);
+
+																					textLine
+																							.addClass("textLine");
+
+																					let delButton = $("<button>");
+																					delButton
+																							.addClass("delBtnOne");
+																					delButton
+																							.text("X");
+																					delButton
+																							.css(
+																									"float",
+																									"right");
+
+																					textLine
+																							.append(text
+																									.val());
+																					textLine
+																							.append(delButton);
+
+																					line
+																							.append(textLine);
+
+																					$(
+																							"#text")
+																							.append(
+																									line);
+
+																				}
+
+																			})
+														})
 									})
-									
-								})
-								
+								</script>
+
+								<script>
+									$('#text')
+											.on(
+													"click",
+													".delBtnOne",
+													function() {
+
+														/*버튼 X 제거하고 값 추출  */
+														var str = $(this)
+																.parent()
+																.text().slice(
+																		0, -1);
+														$(this).parent()
+																.remove();
+
+														$
+																.ajax(
+																		{
+																			url : "/items/deleteByKeyword?keyword="
+																					+ str
+
+																		})
+																.done(
+																		function(
+																				resp) {
+
+																		})
+
+													})
 								</script>
 
 								<!-- 인기 검색어 -->
@@ -244,12 +291,13 @@
 							<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
 							<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
 							<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>							
+							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
 							<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
 							<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
 						</ul>
 					</div>
 					<div class="rightList">
+
 
 						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
@@ -295,98 +343,52 @@
 
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
-						
-						
+
+
 						<div class="imgBox">
-						
-						<!--상품 반복 시작 -->
-						
-						<c:forEach var="i" items="${ilist}"> 
-							<c:forEach var="f"  items="${flist }"> 
-							
-							<c:if test= "${f.parentSeq == i.iseq}">
-								  
-									
-									
-							<a href="/items/itemsDetail">
-								<div class="detail-img">
 
-								 								
-									<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
-									<img src="${f.sysName}">
+							<!--상품 반복 시작 -->
 
-									
+							<c:forEach var="i" items="${ilist}">
+								<c:forEach var="f" items="${flist }">
 
-								</div>
-							
-								<div class="detail-container">
-									<div class="title">${i.name}</div>
-									<div class="price">${i.price}원</div>
-									<div class="date">${i.detailDate}</div>
-									<%-- <div class="title">${flist.oriname}</div> --%>
-									
-								</div>
+									<c:if test="${f.parentSeq == i.iseq}">
 
 
-							</a> 
-								</c:if>
-							<%-- </c:if> ^^--%>
-							 <%-- </c:if> --%> 
-									</c:forEach>	
+
+										<a href="/items/itemsDetail?iseq=${i.iseq}">
+											<div class="detail-img">
+
+
+												<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
+												<img src="${f.sysName}" style="max-width:200px; max-height:200px;">
+
+
+
+											</div>
+
+											<div class="detail-container">
+												<div class="title">${i.name}</div>
+												<div class="price">${i.price}원</div>
+												<div class="date">${i.detailDate}</div>
+												<%-- <div class="title">${flist.oriname}</div> --%>
+
+											</div>
+
+										</a>
+
+
+									</c:if>
+
+								</c:forEach>
 							</c:forEach>
-							
-
-							</a> <a href="#">
-								
-
-
-							<!-- imgBox 2 구간 -->
-							<!-- <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-dd
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div>
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> -->
-
 						</div>
+
 
 
 					</article>
 				</section>
-				
+
 			</div>
 		</div>
 		</div>
@@ -411,23 +413,23 @@ dd
 	</footer>
 
 	<script>
-    	$("#logoutbtn").on("click",function(){
-    		if(confirm("정말 로그아웃하시겠습니까?")){
-    			location.href = "logout" 
-    		}else{
-    			return false;
-    		}
-    		
-    	})
-    	$("#leavebtn").on("click",function(){
-    		if(confirm("정말 회원을 탈퇴하시겠습니까?")){
-    			location.href = "leave"
-    		}else{
-    			return false;
-    		}
-    		
-    	})
-    </script>
+		$("#logoutbtn").on("click", function() {
+			if (confirm("정말 로그아웃하시겠습니까?")) {
+				location.href = "logout"
+			} else {
+				return false;
+			}
+
+		})
+		$("#leavebtn").on("click", function() {
+			if (confirm("정말 회원을 탈퇴하시겠습니까?")) {
+				location.href = "leave"
+			} else {
+				return false;
+			}
+
+		})
+	</script>
 </body>
 
 </html>

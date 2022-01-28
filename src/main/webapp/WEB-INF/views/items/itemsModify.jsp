@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/items/itemsSell.css">
+<link rel="stylesheet" href="/css/items/itemsSell.css">
 <!-- 주소 API -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -61,7 +61,7 @@
 			</header>
 
 		</c:when>
-		
+
 		<c:otherwise>
 		</c:otherwise>
 	</c:choose>
@@ -129,7 +129,7 @@
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
 						<button class="nav-link active" id="nav-add-tab"
 							data-bs-toggle="tab" data-bs-target="#nav-add" type="button"
-							role="tab" aria-controls="nav-add" aria-selected="true">상품등록</button>
+							role="tab" aria-controls="nav-add" aria-selected="true">상품수정</button>
 						<button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
 							data-bs-target="#nav-control" type="button" role="tab"
 							aria-controls="nav-control" aria-selected="false">상품관리</button>
@@ -148,28 +148,57 @@
 						</div>
 
 						<!-- 상품등록하기 -->
-						<form action="/items/itemsUpload" method="post"
+
+
+
+						<form action="/items/itemsModifyProc" method="post"
 							enctype="multipart/form-data">
 							<div class="add-contents">
 								<table class="contents-table">
 
 									<tr>
-										<td>상품이미지</td>
+										<td>상품이미지<br><br><br><br>기존이미지</td>
 
 										<!-- 파일 넘기기 / 파일 미리보기  -->
 										<td>
 											<div id='att_zone'>
-												<label for="btnAtt"> <img
-													src="/imgs/inputIMG.png">
-												</label> <input type=file class="btn btn-primary" name=file
+												  <label for =btnAtt><img src="/imgs/inputIMG.png"></label> 
+												 <input type=file   class="btn btn-primary" name=file
 													id="btnAtt" multiple style="display: none;">
+												
 
 											</div> 
+											<div id='att_zone2'>
+											<c:forEach var="f" items="${flist}" varStatus="status">
+
+
+													<div class = delImages style="display: inline-block; position: relative; width: 200px; height: 200px; margin: 5px; border: 1px solid #d5ffff; z-index: 1">
+														<img style="width: 100%; height: 100%; z-index: none"
+															src="${f.sysName}">
+														
+													</div>
+
+
+												</c:forEach>
+											</div>
+											<script>
+
+											$("#btnAtt").on("click",function(){
+												
+												alert("주의!! 파일 재업로드시  기존이미지들은 사라집니다.");
+													$(this).parent;
+													
+												
+												
+											});
 											
-	
 											
-<!--미리보기 script -->											
- <script>
+											</script>
+											
+											
+											
+											
+											<!--미리보기 script --> <script>
 ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
   imageView = function imageView(att_zone, btn){
 
@@ -190,6 +219,7 @@
     var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
                   + 'right:0px;bottom:0px;z-index:999;border:1px ; background-color:#c4ffff;color:#FF8383';
   
+    
     btnAtt.onchange = function(e){
       var files = e.target.files;
       var fileArr = Array.prototype.slice.call(files)
@@ -280,75 +310,99 @@
 									</tr>
 
 
+									<!-- ilist 뿌리기 -->
+									<c:forEach var="i" items="${ilist}" varStatus="status">
+										<tr>
+											<td>제목</td>
+											<td><input type="text" placeholder="상품제목을 입력하세요."
+												class="inputTitle" name="name" value="${i.name }"></td>
 
+											<!-- 상품번호도 히든으로 넘기기 -->
+											<td><input type="hidden" placeholder="상품번호"
+												class="inputTitle" name="iseq" value="${i.iseq }"></td>
+												
+											
+											<td><input type="hidden" placeholder="상품판매자"
+												class="inputTitle" name="sellerID" value="${i.sellerID }"></td>
+															<tr>
+											<td>카테고리</td>
+											<td><select name="category">
+													<option>카테고리 설정</option>
+													<option value="여성의류"
+														<c:if test ="${i.category eq '여성의류' }">selected</c:if>>여성의류</option>
+													<option value="남성의류"
+														<c:if test ="${i.category eq '남성의류' }">selected</c:if>>남성의류</option>
+													<option value="신발"
+														<c:if test ="${i.category eq '신발' }">selected</c:if>>신발</option>
+													<option value="가방"
+														<c:if test ="${i.category eq '가방' }">selected</c:if>>가방</option>
+													<option value="시계/주얼리"
+														<c:if test ="${i.category eq '시계/주얼리' }">selected</c:if>>시계/주얼리</option>
+													<option value="패션악세서리"
+														<c:if test ="${i.category eq '패션악세서리' }">selected</c:if>>패션악세서리</option>
+													<option value="디지털/가전"
+														<c:if test ="${i.category eq '디지털/가전' }">selected</c:if>>디지털/가전</option>
+													<option value="스포츠/레저"
+														<c:if test ="${i.category eq '스포츠/레저' }">selected</c:if>>스포츠/레저</option>
+													<option value="차량/오토바이"
+														<c:if test ="${i.category eq '차량/오토바이' }">selected</c:if>>차량/오토바이</option>
+													<option value="스타굿즈"
+														<c:if test ="${i.category eq '스타굿즈' }">selected</c:if>>스타굿즈</option>
+													<option value="키덜트"
+														<c:if test ="${i.category eq '키덜트' }">selected</c:if>>키덜트</option>
+											</select></td>
+										</tr>
+										<tr>
+											<td>거래지역</td>
+											<td>
+												<button>내위치</button>
+												<button>최근지역</button>
+												<button type="button" id="findAddress">주소검색</button>
+												<button>지역설정안함</button> <br> <input type="text"
+												placeholder="주소" id="input-address" name="exarea"
+												value="${i.exarea}">
 
-									<tr>
-										<td>제목</td>
-										<td><input type="text" placeholder="상품제목을 입력하세요."
-											class="inputTitle" name="name"></td>
-									</tr>
-									<tr>
-										<td>카테고리</td>
-										<td><select name="category">
-												<option>카테고리 설정</option>
-												<option value="여성의류">여성의류</option>
-												<option value="남성의류">남성의류</option>
-												<option value="신발">신발</option>
-												<option value="가방">가방</option>
-												<option value="시계/주얼리">시계/주얼리</option>
-												<option value="패션악세서리">패션악세서리</option>
-												<option value="디지털/가전">디지털/가전</option>
-												<option value="스포츠/레저">스포츠/레저</option>
-												<option value="차량/오토바이">차량/오토바이</option>
-												<option value="스타굿즈">스타굿즈</option>
-												<option value="키덜트">키덜트</option>
-										</select></td>
-									</tr>
-									<tr>
-										<td>거래지역</td>
-										<td>
-											<button>내위치</button>
-											<button>최근지역</button>
-											<button type="button" id="findAddress">주소검색</button>
-											<button>지역설정안함</button> <br> <input type="text"
-											placeholder="주소" id="input-address" name="exarea">
+											</td>
+										</tr>
+										<tr>
+											<td>상품 상태</td>
+											<td><input type="radio" name="condition" value="상"
+												<c:if test ="${i.condition eq '상' }">checked</c:if>>상
+												<input type="radio" name="condition" value="중"
+												<c:if test ="${i.condition eq '중' }">checked</c:if>>중
+												<input type="radio" name="condition" value="하"
+												<c:if test ="${i.condition eq '하' }">checked</c:if>>하</td>
+										</tr>
+										<tr>
+											<td>교환여부</td>
+											<td><input type="radio" name="refundable" value="불가능"
+												<c:if test ="${i.refundable eq '불가능' }">checked</c:if>>불가능
+												<input type="radio" name="refundable" value="가능"
+												<c:if test ="${i.refundable eq '가능' }">checked</c:if>>가능</td>
+										</tr>
+										<tr>
+											<td>가격</td>
+											<td><input type="text" placeholder="숫자만 입력하세요"
+												name="price" value="${i.price}"> 원</td>
+										</tr>
 
-										</td>
-									</tr>
-									<tr>
-										<td>상품 상태</td>
-										<td><input type="radio" name="condition" value="상">상
-											<input type="radio" name="condition" value="중">중 <input
-											type="radio" name="condition" value="하">하</td>
-									</tr>
-									<tr>
-										<td>교환여부</td>
-										<td><input type="radio" name="refundable" value="불가능">불가능
-											<input type="radio" name="refundable" value="가능">가능</td>
-									</tr>
-									<tr>
-										<td>가격</td>
-										<td><input type="text" placeholder="숫자만 입력하세요"
-											name="price"> 원</td>
-									</tr>
+										<tr>
+											<td>상품 소개</td>
+											<td><textarea rows="5" cols="55"
+													placeholder="상품설명을 입력해주세요." name="info">${i.info }</textarea></td>
+										</tr>
+										<tr>
+											<td>연관태그</td>
+											<td><input type="text" placeholder="연관태그를 입력하세요."
+												class="inputTag" name="tag" value="${i.tag}"></td>
+										</tr>
+										<tr>
+											<td>수량</td>
+											<td><input type="number" placeholder="수량을 입력하세요"
+												class="inputNumber" name="cnt" value="${i.cnt}"> 개</td>
+										</tr>
 
-									<tr>
-										<td>상품 소개</td>
-										<td><textarea rows="5" cols="55"
-												placeholder="상품설명을 입력해주세요." name="info"></textarea></td>
-									</tr>
-									<tr>
-										<td>연관태그</td>
-										<td><input type="text" placeholder="연관태그를 입력하세요."
-											class="inputTag" name="tag"></td>
-									</tr>
-									<tr>
-										<td>수량</td>
-										<td><input type="number" placeholder="수량을 입력하세요"
-											class="inputNumber" name="cnt"> 개</td>
-									</tr>
-
-
+									</c:forEach>
 								</table>
 
 								<!-- 숨겨진 값 -->
@@ -361,19 +415,19 @@
 								<!-- 좋아요 개수 -->
 								<input type="hidden" name="like_cnt" value=0>
 								<!-- 사진 저장  -->
-								
-									<!-- 조회수-->
-									
-									<input type="hidden" name= "view_cnt" value=0> 
+
+								<!-- 조회수-->
+
+								<input type="hidden" name="view_cnt" value=0>
 
 
 
 
 								<div class="add-btns-div">
-									<button type="submit" class="btn btn-outline-secondary"
-										id="productAddBtn">상품등록</button>
-									<button class="btn btn-outline-secondary" id="resetBtn"
-										type="reset">초기화</button>
+									<input type="submit" class="btn btn-outline-secondary"
+										id="productAddBtn">수정하기
+									<a href="/items/myPage"><button
+											class="btn btn-outline-secondary" id="resetBtn" type="button">돌아가기</button></a>
 								</div>
 							</div>
 						</form>
@@ -402,10 +456,10 @@
 										<th>최근수정일
 										<th>기능
 									</tr>
-									
-								
+
+
 									<tr>
-										<td> ㅇㅇ
+										<td>ㅇㅇ
 										<td>판상
 										<td>상품명
 										<td>ㅁㅇㄴ
@@ -447,13 +501,6 @@
 		}
 	
 	</script>
-	<script>
-		
-			${"#imageUpload"}.on{"click",function(){
-				
-			}}
-		
-		</script>
-
+	
 </body>
 </html>
