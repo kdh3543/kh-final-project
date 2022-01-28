@@ -144,17 +144,16 @@ public class MemberController {
       System.out.println("회원이 탈퇴되었습니다.");
       return "redirect:/";
    }
-   //마이페이지 이동기능
-   @RequestMapping("myPage")
-   public String mypage(Model model) {
-      String id = (String)session.getAttribute("loginID");
-      MemberDTO dto = mservice.select(id);
-      //가입한지 몇일 째인지 확인
-      int signDate = mservice.signDate(id);
-      model.addAttribute("signDate",signDate);
-      model.addAttribute("dto", dto);
-      return "/member/myPage";
-   }
+
+	/*
+	 * //마이페이지 이동기능
+	 * 
+	 * @RequestMapping("myPage") public String mypage(Model model) { String id =
+	 * (String)session.getAttribute("loginID"); MemberDTO dto = mservice.select(id);
+	 * //가입한지 몇일 째인지 확인 int signDate = mservice.signDate(id);
+	 * model.addAttribute("signDate",signDate); model.addAttribute("dto", dto);
+	 * return "forward:/myPage"; }
+	 */
    //마이페이지 수정기능
    @RequestMapping("updateInfo")
    public String modify(MemberDTO dto,MultipartFile file) {

@@ -34,6 +34,7 @@
 		select trunc(sysdate-signup_date+1,0) from member where id= #{id}
 	</select>
 
+
 	<select id="selectBykakao" resultType="int">
 		select count(kakao) from member where kakao = #{kakaoemail}
 	</select>
@@ -60,3 +61,4 @@
 
 	<delete id="delete">delete from member where id=#{value} </delete>
 </mapper>
+
