@@ -29,7 +29,6 @@
 			<link href="/css/board/boardList.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/boardDetail.js"></script>
-			<script src="/js/paginga.jquery.js"></script>
 
 </head>
 
@@ -86,72 +85,62 @@
 				<button class="btn btn-primary" type="button" id="dog">강아지</button>
 				<button class="btn btn-primary" type="button" id="others">기타</button>
 			</div>
-			<div class="paginate">
-				<div class="items">
-					<c:forEach var="dto" items="${list}" varStatus="status">
-						<div class="contents">
-							<div class="contents-title">${dto.subject}</div>
-							<div class="contents-div">
-								<div class="contents-div-contents">
-									<a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}"
-										style="color: black; text-decoration: none">${dto.contents}</a>
-								</div>
-							</div>
-							<script>
-								/* 글자수 넘쳤을 때 */
-								let div${ status.count } = $(".contents-a${status.count}").html();
-								if (div${ status.count }.length > 100) {
-									$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
-								}
-
-							</script>
-							<div class="contents-container">
-								<div class="contents-div-writer">${dto.writer} ·</div>
-								<div class="contents-div-location"> 위치 ·</div>
-								<div class="contents-div-writedate"> ${dto.parsed_date}</div>
-							</div>
-							<div class="form-floating">
-								<div class="floating-likes" id="like">
+			<c:forEach var="dto" items="${list}" varStatus="status">
+				<div class="contents">
+					<div class="contents-title">${dto.subject}</div>
+					<div class="contents-div">
+						<div class="contents-div-contents">
+							<a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}"
+								style="color: black; text-decoration: none">${dto.contents}</a>
+						</div>
+					</div>
+					<script>
+						/* 글자수 넘쳤을 때 */
+						let div${ status.count } = $(".contents-a${status.count}").html();
+						if (div${ status.count }.length > 100) {
+							$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
+						}
+				
+					</script>
+					<div class="contents-container">
+						<div class="contents-div-writer">${dto.writer} ·</div>
+						<div class="contents-div-location"> 위치 ·</div>
+						<div class="contents-div-writedate"> ${dto.parsed_date}</div>
+					</div>
+					<div class="form-floating">
+						<div class="floating-likes" id="like">
+							<c:choose>
+								<c:when test="${loginID != null}">
 									<c:choose>
-										<c:when test="${loginID != null}">
-											<c:choose>
-												<c:when test="${dto.user_id == loginID}">
-													<a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
-														style="color: #24a6a4; text-decoration: none"> <i
-															class="fas fa-heart"></i>좋아요 <span
-															class="likeCount">${dto.like_count}</span></a>
-												</c:when>
-												<c:otherwise>
-													<a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
-														style="color: black; text-decoration: none"> <i
-															class="fas fa-heart"></i>좋아요 <span
-															class="likeCount">${dto.like_count}</span></a>
-												</c:otherwise>
-											</c:choose>
+										<c:when test="${dto.user_id == loginID}">
+											<a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
+												style="color: #24a6a4; text-decoration: none"> <i
+													class="fas fa-heart"></i>좋아요 <span
+													class="likeCount">${dto.like_count}</span></a>
 										</c:when>
 										<c:otherwise>
-											<a class="like-unclickable"><i class="fas fa-heart"></i>좋아요
-												<span>${dto.like_count}</span></a>
+											<a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
+												style="color: black; text-decoration: none"> <i
+													class="fas fa-heart"></i>좋아요 <span
+													class="likeCount">${dto.like_count}</span></a>
 										</c:otherwise>
 									</c:choose>
-								</div>
-								<div class="floating-comments">
-									<a href="toDetail?seq=${dto.board_seq}"
-										style="color: black; text-decoration: none"><i class="fas fa-comment"></i> 댓글
-										${dto.comment_count}</a>
-								</div>
-							</div>
+								</c:when>
+								<c:otherwise>
+									<a class="like-unclickable"><i class="fas fa-heart"></i>좋아요
+										<span>${dto.like_count}</span></a>
+								</c:otherwise>
+							</c:choose>
 						</div>
-					</c:forEach>
+						<div class="floating-comments">
+							<a href="toDetail?seq=${dto.board_seq}" style="color: black; text-decoration: none"><i
+									class="fas fa-comment"></i> 댓글
+								${dto.comment_count}</a>
+						</div>
+					</div>
 				</div>
-				<div class="pager">
-					<div class="firstPage">&laquo;</div>
-					<div class="previousPage">&lsaquo;</div>
-					<div class="pageNumbers"></div>
-					<div class="nextPage">&rsaquo;</div>
-					<div class="lastPage">&raquo;</div>
-				</div>
-			</div>
+			</c:forEach>
+
 		</div>
 	</main>
 	<footer>
@@ -161,11 +150,34 @@
 		</div>
 	</footer>
 	<script>
-		$(".paginate").paginga({
-			itemsPerPage: 5,
-			maxPageNumbers: 10
-		});
+		// window.onscroll = function () {
+		// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		// 		var toAdd = document.createElement("div");
+		// 		toAdd.classList.add("contents");
+		// 		toAdd.textContent = "추가";
+		// 		document.querySelector("contents-box").append(toAdd);
+		// 	}
+		// }
+		// window.onscroll = function () {
+		// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		// 		var toAdd = $("<div class='body'>");
+		// 		toAdd.append('추가!');
+		// 		$("#contents-box").append(toAdd);
+		// 	}
+		// }
+		// var count = 6;
+		// window.onscroll = function () {
+		// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+		// 		var content_box = $("<div class='contents-box'>");
+		// 		var contents = $("<div class='contents'>");
+		// 		contents.append(count + '추가!');
+		// 		content_box.append(contents);
+		// 		$("#contents-box").append(contents);
+		// 		count = count + 1;
+		// 	}
+		// }
 	</script>
+	
 	<script>
 		$("#toWrite").on("click", function () {
 			location.href = "writeForm";
