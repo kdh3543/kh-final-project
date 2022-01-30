@@ -32,10 +32,22 @@ main > div {
     display: flex;
     padding: 2%;
 }
-.talk-list {
+.talk-list, .talk-add-list {
     display: flex;
     border: 1px solid black;
+    overflow-y: auto;
+    
 }
+
+.talk-list-btn {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color:white;
+    
+}
+
 .talk-list-left {
     width: 30%;
     display: flex;
@@ -53,30 +65,12 @@ main > div {
 .talk-left{
     width:40%;
     padding: 1%;
+    overflow-y:auto;
 }
+
 .talk-left .inputTalk {
     width: 100%;
 }
-
-
-.initial-page div{
-    margin: auto;
-    margin-top: 400px;
-}
-
-
-#preventInput{
-    height: 100%;
-    width: 100%;
-}
-
-.talk-list-btn {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-}
-
 .talk-right{
     width:60%;
     padding: 1%;
@@ -88,7 +82,6 @@ main > div {
     height: 5%;
 }
 .talk-right .right-middle{
-
     height: 85%;
     border: 1px solid black;
     overflow-y:auto;
@@ -191,3 +184,22 @@ main > div {
     width: 20%;
 }
 
+.talk-list-left>img{
+	width:50px;
+	height: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+  
+a:active {
+    text-decoration: none;
+    color: black;
+}
+  
+a:hover{
+    text-decoration: none;
+    color: black;
+}
