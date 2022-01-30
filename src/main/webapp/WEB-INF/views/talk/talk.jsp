@@ -46,7 +46,7 @@
           <div class="nav_div">
             <div class="logo">
               <i class="fas fa-seedling"></i>
-              <a href="index.jsp">00마켓</a>
+              <a href="index">00마켓</a>
             </div>
           </div>
         </div>

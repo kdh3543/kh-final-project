@@ -473,6 +473,13 @@ public class ItemsController {
 		return "/items/itemsDetailExam";
 
 	}
+	
+	
+	@RequestMapping("itemsOrder")
+	public String itemsOrder() {
+		return "/items/itemsOrder";
+
+	}
 
 
 
