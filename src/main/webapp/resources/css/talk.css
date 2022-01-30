@@ -1,4 +1,3 @@
-@charset "UTF-8";
 
 * {
     box-sizing: border-box;
@@ -71,6 +70,19 @@ main > div {
 .talk-left .inputTalk {
     width: 100%;
 }
+
+.initial-page div{
+    margin: auto;
+    margin-top: 400px;
+}
+
+
+#preventInput{
+    height: 100%;
+    width: 100%;
+}
+
+
 .talk-right{
     width:60%;
     padding: 1%;
@@ -158,20 +170,10 @@ main > div {
 .talk-right .right-bottom div{
 	height: 100%;
     width: 85%;
-
-    height: 80%;
-
     border: 1px solid black;
 }
-.talk-right .right-bottom{
-    height: 15%;
-    display: flex;
-}
-.talk-right .right-bottom textarea{
-    width: 80%;
-}
 .talk-right .right-bottom button{
-    width: 20%;
+    width: 15%;
 }
 .right-title-left{
     border-bottom: 1px solid black;
@@ -181,7 +183,7 @@ main > div {
     width: 10%;
 }
 .title-name{
-    width: 20%;
+    width: 80%;
 }
 
 .talk-list-left>img{
@@ -190,16 +192,16 @@ main > div {
 }
 
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
-  
+
 a:active {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
-  
+
 a:hover{
     text-decoration: none;
-    color: black;
+  color: black;
 }

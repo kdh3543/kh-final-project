@@ -290,7 +290,7 @@
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="talk" class="btn-talk"> <i
+						</a> | <a href="chat/directTalk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
 						</a> | <a href="board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
