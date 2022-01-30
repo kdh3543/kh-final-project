@@ -86,7 +86,12 @@ public class ItemsService {
 		return idao.selectByProductId(productId);
 	}
 
-	
+	public int addViewCount(int iseq) {
+		// TODO Auto-generated method stub
+		return idao.addViewCount(iseq);
+	}
+
+
 	
 	 
 	

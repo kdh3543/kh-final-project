@@ -23,8 +23,9 @@
   		 SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) FROM FILES GROUP BY PARENTSEQ)
   	</select>
   	
+  	<!-- 연관상품이미지 -->
   	<select id = "NameToSeq" resultType="kh.spring.dto.FilesDTO">
-  	SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) FROM FILES WHERE SEQ IN
+  	SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) FROM FILES WHERE PARENTSEQ IN
   	<foreach collection="NameToSeq" index="index" item="items" open="(" close=")" separator=",">
  		 #{items.iseq}
  		
@@ -33,7 +34,7 @@
   	</select>
   	
   	
-  	
+  	<!--마이페이지 내 상품 사진 1개씩 보여주기  -->
   		<select id="selectMineById" resultType="kh.spring.dto.FilesDTO"> 
   	SELECT  F.* 
 FROM ITEMS I  INNER JOIN FILES F ON(I.ISEQ =F.PARENTSEQ)
@@ -48,6 +49,19 @@ WHERE SELLERID =#{id} AND  SEQ IN (SELECT MIN(SEQ) FROM FILES GROUP BY PARENTSEQ
   	  
   	  
   <!-- <![CDATA[ ROWNUM = 1 ]]> -->
+  
+  <!-- 아이템 수정시 삭제후 수정작업 -->
+  	<delete id  ="deleteBySeq" >
+  	
+  		DELETE FILES WHERE PARENTSEQ = #{value}
+  	</delete>
+  	
+  	<update id = "modifyProc">
+  	
+ 		INSERT INTO FILES VALUES (files_seq.nextval, #{oriName},#{sysName},#{parentSeq})  
+ 		
+		 	</update>
+  	
   
   </mapper>
 

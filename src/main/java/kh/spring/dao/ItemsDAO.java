@@ -115,6 +115,12 @@ public class ItemsDAO {
 	public String selectByProductId(int productId) {
 		return mybatis.selectOne("Items.selectByProductId",productId);
 	}
+
+
+
+	public int addViewCount(int iseq) {
+		return mybatis.update("Items.addViewCount", iseq);
+	}
 	
 //	 public int insert(ItemsDTO dto) { String loginId =
 //	 (String)session.getAttribute("loginId"); dto.setSeller_id(loginId); return

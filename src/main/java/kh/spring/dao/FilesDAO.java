@@ -57,6 +57,19 @@ public class FilesDAO {
 		System.out.println(id);
 		return mybatis.selectList("Files.selectById",id);		
 	}
+
+
+	public int deleteBySeq(int iseq) {
+		return mybatis.delete("Files.deleteBySeq",iseq);
+	}
+
+
+	public int modifyProc(FilesDTO fdto) {
+		
+		
+		return mybatis.insert("Files.modifyProc",fdto);
+
+	}
 	
 
 		

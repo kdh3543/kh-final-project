@@ -97,5 +97,13 @@
 	<select id="selectByProductId" resultType="String">
 		SELECT SELLERID FROM ITEMS WHERE ISEQ = #{value}
 	</select>
+	
+	<!-- 조회수 추가 -->
+	
+	<update id="addViewCount">
+		UPDATE ITEMS SET VIEW_CNT = VIEW_CNT + 1
+		WHERE
+		ISEQ = ${value}
+	</update>
 
 </mapper>

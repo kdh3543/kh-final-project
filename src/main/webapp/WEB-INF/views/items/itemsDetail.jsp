@@ -171,7 +171,8 @@
 					<div class="productPrice">${i.price}원</div>
 					<div class="product-status">
 						<div class="status-like">좋아요</div>
-						<div class="status-view">조회수</div>
+						
+						<div class="status-view">조회수 : ${i.view_cnt}</div>
 						<div class="status-view">작성일 : ${i.detailDate}</div>
 					</div>
 					<div class="product-detail">
