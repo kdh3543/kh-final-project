@@ -60,6 +60,21 @@
             <div class="talk-title">
               대화목록
             </div>
+            <!-- 관리자 챗봇에 대한 div -->
+            <!-- <c:forEach var="chatBot" items="${chatBot}">
+              <div class="talk-list">
+                <a class="talk-list-btn"
+                  href="/chat/moveChatRoom?sellerId=${chatBot.sellerId}&productId=${chatBot.productId}&productName=${chatBot.productName}&roomId=${chatBot.roomId}">
+                  <div class="talk-list-left">
+                    <i class="fas fa-camera fa-2x"></i>
+                  </div>
+                  <div class="talk-list-right">
+                    <div class="talk-name">${chatBot.sellerId}</div>
+                    <div class="talk-last-conversation">${chatBot.roomId}</div>
+                  </div>
+                </a>
+              </div>
+            </c:forEach> -->
 
             <div class="talk-list">
               <a class="talk-list-btn" href="#">
@@ -67,14 +82,15 @@
                   <i class="fas fa-camera fa-2x"></i>
                 </div>
                 <div class="talk-list-right">
-                  <div class="talk-name">이름</div>
-                  <div class="talk-last-conversation">안녕</div>
+                  <div class="talk-name">관리자 챗봇입니다.</div>
+                  <div class="talk-last-conversation">관리자 챗봇</div>
                 </div>
               </a>
             </div>
-            <c:forEach var="list" items="${list}">
+            <!-- 생성된 대화방에 대한 div -->
+            <c:forEach var="list" items="${list}" varStatus="delCount">
 
-              <div class="talk-list" pid="${list.productId}">
+              <div class="talk-list" pid="${list.productId}" id="delNo${delCount.count}">
                 <a class="talk-list-btn"
                   href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}">
                   <div class="talk-list-left">
@@ -85,14 +101,52 @@
 
                     <div class="talk-last-conversation" pid=${list.productId}>
                       (${list.roomId})${list.lastMessage}
-                      <input type=hidden value="${list.roomId }" id="hiddenRoomId">
-                      <input type=hidden value="${list.productId }" id="productId">
+                      
+                      <input type=hidden value="${list.roomId }" id="hiddenRoomId"
+                        class="hiddenRoomId${delCount.count}" pid=${list.productId}>
+                      <input type=hidden value="${list.productId }" id="hiddenProductId">
+                      <input type=hidden value="${list.sellerId}" id="hiddenSellerId">
+                      <input type=hidden value="${list.productName}" id="hiddenProductName">
+                      <input type=hidden value="${list.buyerId}" id="hiddenBuyerId">
+                      <input type=hidden value="${id}" id="hiddenId">
                     </div>
 
                   </div>
+                  <div>
+                    <input type="button" id="chatDelBtn${delCount.count}" value="X">
+                  </div>
                 </a>
+
               </div>
 
+              <script>
+                $("#chatDelBtn${delCount.count}").on("click", function () {
+                  
+                  console.log($(".hiddenRoomId${delCount.count}").val());
+                  console.log($("#hiddenId").val());
+                  console.log($("#hiddenProductId").val());
+                  
+                  if (confirm("정말 채팅방을 나가시겠습니까?")) {
+                    // location.href="/chat/delChatRoom?roomId="+$(".hiddenRoomId${delCount.current}").val();
+                    location.href="/chat/delChatRoom?buyerId="+$("#hiddenId").val()+"&sellerId="+$("#hiddenSellerId").val()
+                    +"&productId="+$("#hiddenProductId");
+                    
+                    $.ajax({
+                      url: "/chat/delChatRoom",
+                      data: {
+                        roomId: $(".hiddenRoomId${delCount.count}").val()
+                      }
+                    }).done(function (resp) {
+                      if (resp > 0) {
+                        ws.send("대화하는 사람이 나갔습니다." + '<br>' + "hiddenSellerId.val()" + '<br>' + "hiddenProductName.val()" + '<br>' + "1" + '<br>' + "1");
+                        
+                        location.href = "/chat/directTalk";
+                      }
+                    })
+                  }
+
+                })
+              </script>
             </c:forEach>
 
           </div>
@@ -106,10 +160,7 @@
 
                 <div class="title-name">
                   ${productName}
-                  <input type=hidden value="${id}" id="userId">
-                  <input type=hidden value="testtest" id="hiddenSellerId" name="sellerId">
-                  <input type=hidden value="${productId}" id="hiddenProductId" name="productId">
-                  <input type=hidden value="${productName}" id="hiddenProductName" name="productName">
+                  <input type=hidden value="${productId}" id="productId">
                 </div>
 
               </div>
@@ -117,61 +168,102 @@
                 <div class="title-alarms"></div>
               </div>
             </div>
-            <div class="right-middle">
-              대화내용
-              <c:forEach var="cList" items="${cList}">
 
-                <c:choose>
-                  <c:when test="${id eq cList.buyerId}">
-                    <div class="right-line">
-                      <div class="chatTime">
-                        ${cList.formDate }
-                      </div>
-                      <div class="line">
-                        ${cList.buyerId}: ${cList.chatContents}
-                      </div>
-                    </div>
-                  </c:when>
-                  <c:when test="${id eq cList.sellerId}">
-                    <div class="right-line">
-                      <div class="chatTime">
-                        ${cList.formDate }
-                      </div>
-                      <div class="line">
-                        ${cList.sellerId}: ${cList.chatContents}
-                      </div>
-                    </div>
-                  </c:when>
-                  <c:when test="${id ne cList.buyerId}">
-                    <div class="left-line">
-                      <div class="line">
-                        ${cList.sellerId}: ${cList.chatContents}
-                      </div>
-                      <div class="chatTime">
-                        ${cList.formDate }
-                      </div>
-                    </div>
-                  </c:when>
-                  <c:when test="${id ne cList.sellerId}">
-                    <div class="left-line">
-                      <div class="line">
-                        ${cList.buyerId}: ${cList.chatContents}
-                      </div>
-                      <div class="chatTime">
-                        ${cList.formDate }
-                      </div>
-                    </div>
 
-                  </c:when>
-                </c:choose>
-              </c:forEach>
-            </div>
-            <div class="right-bottom">
-              <div contenteditable="true" id="message"></div>
+            <c:choose>
+              <c:when test="${roomId == 0}">
+                <div class="right-middle">
+                  <div class="initial-page">
+                    <div class="line">
+                      테스트 중입니다.
+                    </div>
+                  </div>
+                </div>
 
-              <button id="send">전송하기</button>
+                <div class="right-bottom">
+                  <input type=text placeholder="입력하지 못합니다" id="preventInput" disabled>
+                  <button type="button">전송못함</button>
 
-            </div>
+                </div>
+              </c:when>
+              <c:otherwise>
+                <div class="right-middle">
+
+                    대화내용
+                    <c:forEach var="cList" items="${cList}">
+                      <c:choose>
+                        <c:when test="${cList.roomId==0}">
+                          <div class="left-line" id="chatBot-Left">
+                            <div class="line">
+                              관리자 챗봇입니다. 무엇을 도와드릴까요?
+                            </div>
+                          </div>
+                          <div class="right-line" id="chatBot-Right">
+                            <div class="line">
+                              <input type="radio" name=select id=1번>1번 항목<br>
+                              <input type="radio" name=select id=2번>2번 항목<br>
+                              <input type="radio" name=select id=3번>3번 항목<br>
+                              <input type="radio" name=select id=4번>4번 항목
+
+
+                            </div>
+                          </div>
+                        </c:when>
+                        <c:otherwise>
+
+                          <c:choose>
+                            <c:when test="${id eq cList.buyerId}">
+                              <div class="right-line">
+                                <div class="chatTime">
+                                  <div class="chatRead">
+                                    1
+                                  </div>
+                                  <div class="time">
+                                    ${cList.formDate }
+                                  </div>
+                                  
+                                </div>
+                                <div class="line">
+                                  ${cList.chatContents}
+                                </div>
+                              </div>
+                            </c:when>
+
+                            <c:otherwise>
+                              <div class="left-line">
+                                <div class="line">
+                                  ${cList.chatContents}
+                                </div>
+                                <div class="chatTime">
+                                  <div class="chatRead">
+                                    1
+                                  </div>
+                                  <div class="time">
+                                    ${cList.formDate }
+                                  </div>
+                                </div>
+                              </div>
+                            </c:otherwise>
+                          </c:choose>
+                        </c:otherwise>
+
+                      </c:choose>
+                    </c:forEach>
+
+
+
+                </div>
+
+                <div class="right-bottom">
+                  <div contenteditable="true" id="message"></div>
+
+                  <button id="send">전송하기</button>
+
+                </div>
+
+              </c:otherwise>
+            </c:choose>
+
           </div>
 
         </div>
@@ -190,11 +282,16 @@
         let rightBottom = $(".right-bottom");
         let send = $("#send");
         let hiddenSellerId = $("#hiddenSellerId");
-        let productName = $("#productName");
-        let productId = $("#productId");
         let hiddenRoomId = $("#hiddenRoomId");
         let hiddenProductId = $("#hiddenProductId");
         let hiddenProductName = $("#hiddenProductName");
+        let productId = $("#productId");
+        let hiddenBuyerId = $("#hiddenBuyerId");
+        let hiddenId = $("#hiddenId").val();
+
+        rightMiddle.scrollTop(rightMiddle[0].scrollHeight);
+
+        
 
         // 메세지를 받았을 때
         let anker = $("<a>");
@@ -205,74 +302,51 @@
         let talkName = $("<div>");
         talkConverse.addClass("talk-last-conversation");
         ws.onmessage = function (e) {
-
+          let alpha = e.data;
+          console.log(e.data);
           let time = new Date();
           let hours = time.getHours();
           let minutes = time.getMinutes();
           let seconds = time.getSeconds();
           let jsonObject = JSON.parse(event.data);
-          let userID = jsonObject.id;
+          let userId = jsonObject.id;
           let message = jsonObject.message;
-          let sellerID = jsonObject.sellerID;
+          let sellerId = jsonObject.sellerId;
           let productName = jsonObject.productName;
           let jsonProductId = jsonObject.productId;
           let jsonRoomId = jsonObject.roomId;
-
-          console.log($(".talk-list[pid=" + jsonProductId + "]").length);
-          if(userID == sellerID){
-            $(".talk-last-conversation[pid=" + jsonProductId + "]").html(message);
-          }else{
-            if ($(".talk-list[pid=" + jsonProductId + "]").length == 0) {
-            anker.addClass("talk-list-btn");
-
-            talkList.addClass("talk-list");
-            talkList.attr("pid", jsonProductId);
-
-            talkLeft.addClass("talk-list-left");
-            talkLeft.append("<img src='/imgs/t-shirt.jpeg'>");
-
-            talkRight.addClass("talk-list-right");
-
-            talkName.addClass("talk-name");
-            talkName.append(sellerID + "(" + productName + ")");
-            talkConverse.append(message);
-            talkRight.append(talkName);
-            talkRight.append(talkConverse);
-
-            anker.append(talkLeft);
-            anker.append(talkRight);
-
-            talkList.append(anker);
-
-            $(".talk-left").append(talkList);
-            $(".talk-list-btn").attr("href", "/chat/moveChatRoom?sellerId=" + hiddenSellerId.val()
-              + "&productName=" + hiddenProductName.val()
-              + "&productId=" + hiddenProductId.val() + "&roomId=" + jsonRoomId);
-          } else {
-            $(".talk-last-conversation[pid=" + jsonProductId + "]").html(message);
-          }
-          }
           
-
-          if (userID == $("#userId").val()) {
+          // 채팅 쳤을 때 input type text가 사라지는 이유 
+          
+          $("#hiddenRoomId[pid="+jsonProductId+"]").val(jsonRoomId);
+          $(".talk-last-conversation[pid=" + jsonProductId + "]").html(message);
+          
+          if (userId == hiddenId) {
             let rightLine = $("<div>");
             rightLine.addClass("right-line");
             let chatTime = $("<div>");
             chatTime.addClass("chatTime");
-            if (hours < 10 && minutes >= 10) {
-              chatTime.append("0" + hours + ":" + minutes);
-            } else if (minutes < 10 && hours >= 10) {
-              chatTime.append(hours + ":0" + minutes);
-            } else if (hours < 10 && minutes < 10) {
-              chatTime.append("0" + hours + ":0" + minutes);
-            } else {
-              chatTime.append(hours + ":" + minutes);
-            }
-
+            let chatRead = $("<div>");
+            chatRead.addClass("chatRead");
+            let time = $("<div>");
+            time.addClass("time");
+            chatRead.append(1);
+            chatTime.append(chatRead);
+            chatTime.append(time);
 
             let line = $("<div>");
             line.addClass("line");
-            line.append(userID + ": " + message);
+            line.append(message);
+            if (hours < 10 && minutes >= 10) {
+              time.append("0" + hours + ":" + minutes);
+            } else if (minutes < 10 && hours >= 10) {
+              time.append(hours + ":0" + minutes);
+            } else if (hours < 10 && minutes < 10) {
+              time.append("0" + hours + ":0" + minutes);
+            } else {
+              time.append(hours + ":" + minutes);
+            }
+
             rightLine.append(chatTime);
             rightLine.append(line);
             rightMiddle.append(rightLine);
@@ -281,23 +355,29 @@
             leftLine.addClass("left-line");
             let chatTime = $("<div>");
             chatTime.addClass("chatTime");
+            let chatRead = $("<div>");
+            chatRead.addClass("chatRead");
+            let time = $("<div>");
+            time.addClass("time");
+            chatRead.append(1);
+            chatTime.append(chatRead);
+            chatTime.append(time);
 
             let line = $("<div>");
             line.addClass("line");
-            line.append(userID + ": " + message);
+            line.append(message);
             leftLine.append(line);
             if (hours < 10 && minutes >= 10) {
-              chatTime.append("0" + hours + ":" + minutes);
+              time.append("0" + hours + ":" + minutes);
             } else if (minutes < 10 && hours >= 10) {
-              chatTime.append(hours + ":0" + minutes);
+              time.append(hours + ":0" + minutes);
             } else if (hours < 10 && minutes < 10) {
-              chatTime.append("0" + hours + ":0" + minutes);
+              time.append("0" + hours + ":0" + minutes);
             } else {
-              chatTime.append(hours + ":" + minutes);
+              time.append(hours + ":" + minutes);
             }
             leftLine.append(chatTime);
             rightMiddle.append(leftLine);
-
 
           }
 
@@ -308,7 +388,7 @@
         }
 
         //전송하기 버튼을 클릭했을 때
-        send.on("click", function () {
+        /* send.on("click", function () {
           if (chatMessage.html() == "") {
             return false;
           }
@@ -321,7 +401,7 @@
           rightMiddle.stop().animate({
             scrollTop: rightMiddle[0].scrollHeight
           }, 1000);
-        });
+        }); */
 
         //전송하기 버튼 엔터를 눌렀을 때
         rightBottom.on("keypress", function (e) {
@@ -332,9 +412,9 @@
             let text = chatMessage.html();
             chatMessage.html("");
             chatMessage.focus();
+            
+            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() );
 
-            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + hiddenProductId.val() + '<br>' + hiddenRoomId.val());
-			console.log(hiddenRoomId.val());
             rightMiddle.stop().animate({
               scrollTop: rightMiddle[0].scrollHeight
             }, 1000);

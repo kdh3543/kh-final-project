@@ -33,4 +33,8 @@ public class ChatContentsService {
 	public String selectLastTalk(int productId) {
 		return dao.selectLastTalk(productId);
 	}
+	
+	public int deleteByRoomId(int roomId) {
+		return dao.deleteByRoomId(roomId);
+	}
 }

@@ -34,7 +34,15 @@ public class ChatRoomService {
 		return dao.selectByBothId(dto);
 	}
 	
-	public boolean selectByProductId(int productId) {
-		return dao.selectByProductId(productId);
+	public boolean selectByProductId(ChatRoomDTO dto) {
+		return dao.selectByProductId(dto);
+	}
+	
+	public List<ChatRoomDTO> selectByRoomId(int chatBotRoomId){
+		return dao.selectByRoomId(chatBotRoomId);
+	}
+	
+	public int deleteByRoomId(int roomId) {
+		return dao.deleteByRoomId(roomId);
 	}
 }

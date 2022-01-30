@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.ChatContentsDTO;
 import kh.spring.dto.ChatRoomDTO;
@@ -32,19 +33,25 @@ public class ChatController {
 	private ItemsService iService;
 
 	@RequestMapping("moveChatRoom")
-	public String moveChatRoom(String sellerId, int productId, String productName, String roomId, Model model) {
+	public String moveChatRoom(String sellerId, int productId, String productName, int roomId, Model model) {
+		//챗봇에 대한 룸 정보 불러오기
+		int chatBotRoomId = 0;
+		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
+		model.addAttribute("chatBot",chatBot);
+		System.out.println(chatBot.get(0).getRoomId());
+
+		//채팅방에 대한 룸 정보 가져오기
 //		System.out.println(sellerId + " : " + productId + " : " + productName + " : " + roomId);
 		String id = (String)session.getAttribute("loginID");
 		ChatRoomDTO dto = new ChatRoomDTO();
 		dto.setBuyerId(id);
 		dto.setSellerId(id);
 		List<ChatRoomDTO> list = crService.selectByBothId(dto);
-		List<ChatContentsDTO> cList = cService.selectByProductId(productId);
+		List<ChatContentsDTO> cList = cService.selectByRoomID(roomId);
 		// list로부터 producId를 가져와 그 productId에 해당하는 마지막 메세지를 list에 세팅
 		for(int i =0; i<list.size();i++) {
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getProductId()));
-		}
-		System.out.println(list.size() + ":"+cList.size());
+		}	
 		
 		model.addAttribute("list",list);
 		model.addAttribute("cList",cList);
@@ -58,30 +65,32 @@ public class ChatController {
 	
 	@RequestMapping("talk")
 	public String talk(String productName, int productId,Model model) {
-		String id = (String)session.getAttribute("loginID");
+		//챗봇에 대한 룸 정보 불러오기
+		int chatBotRoomId = 0;
+		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
+		model.addAttribute("chatBot",chatBot);
+		System.out.println(chatBot.get(0).getRoomId());
+
+		//채팅방에 대한 룸 정보 가져오기
+		System.out.println(productId);
+		String userId = (String)session.getAttribute("loginID");
+		String sellerId = iService.selectByProductId(productId);
+		ChatRoomDTO crdto = new ChatRoomDTO();
+		crdto.setBuyerId(userId);
+		crdto.setProductId(productId);
+		boolean existRoomId = crService.selectByProductId(crdto);
 		
-		System.out.println(iService.selectByProductId(productId));
-		
-		boolean existRoomId = crService.selectByProductId(productId);
-		System.out.println(existRoomId);
-		if(existRoomId) {
-			
+		if(!existRoomId) {
+			crdto.setSellerId(sellerId);
+			crdto.setProductName(productName);
+
+			crService.insert(crdto);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		List<ChatRoomDTO> list =  crService.selectByBuyerId(id);
+		List<ChatRoomDTO> list =  crService.selectByBuyerId(userId);
 		List<ChatContentsDTO> cList = cService.selectByProductId(productId);
-	
 		
-		for(int i =0; i<list.size();i++) {
-			
-			System.out.println(cService.selectLastTalk(list.get(i).getProductId()));
+		for(int i =0; i<list.size();i++) {		
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getProductId()));
 		}
 		
@@ -89,28 +98,34 @@ public class ChatController {
 		model.addAttribute("productId",productId);
 		model.addAttribute("list",list);
 		model.addAttribute("cList",cList);
-		model.addAttribute("id",id);
+		model.addAttribute("id",userId);
+		
 		return "talk/talk";
 	}
 	
-	@RequestMapping("addChatList")
-	public String addChatList(String sellerId, String productName, int productId) {
-		System.out.println(sellerId + " : " + productName + " : " + productId);
-		return "talk/talk";
-	}
+
 	
 	@RequestMapping("directTalk")
 	public String directTalk(Model model) {
 		String id = (String)session.getAttribute("loginID");
+		
+		//챗봇에 대한 룸 정보 불러오기
+		
+//		List<ChatRoomDTO> chatBot = crService.selectByRoomId(roomId);
+//		model.addAttribute("chatBot",chatBot);
+//		System.out.println(chatBot.get(0).getRoomId());
+		
+		//채팅방에 대한 룸 정보 가져오기
 		ChatRoomDTO dto = new ChatRoomDTO();
 		dto.setBuyerId(id);
 		dto.setSellerId(id);
 		List<ChatRoomDTO> list = crService.selectByBothId(dto);
 		for(int i =0; i<list.size();i++) {	
-			System.out.println(cService.selectLastTalk(list.get(i).getProductId()));
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getProductId()));
 		}
 		 
+		int roomId = 0;
+		model.addAttribute("roomId",roomId);
 		model.addAttribute("list",list);
 		
 //		List<ChatContentsDTO> lastTalkList = cService.selectLastTalk(productId);
@@ -119,7 +134,25 @@ public class ChatController {
 //		
 		return "talk/talk";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "delChatRoom", produces = "text/html; charset=utf8")
+	public String delChatRoom(String roomId) {
+		System.out.println("삭제 컨트롤러입니다.");
+		System.out.println("들어온 roomId의 값은s: "+roomId);
+		int result = crService.deleteByRoomId(Integer.parseInt(roomId));
+		cService.deleteByRoomId(Integer.parseInt(roomId));
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping("delSuccess")
+	public String delSuccess(int roomId){
+		System.out.println(roomId);
+		System.out.println("종료완료");
+		return  "redirect:/chat/talk";
+	}
+	
+	
 //	@ResponseBody
 //	@RequestMapping(value ="chatContents", produces="text/html; charset=utf8")
 //	public String chatContents(int roomId) {
@@ -148,6 +181,10 @@ public class ChatController {
 //		return message;
 //	}
 
-	
+//	@RequestMapping("addChatList")
+//	public String addChatList(String sellerId, String productName, int productId) {
+//		System.out.println(sellerId + " : " + productName + " : " + productId);
+//		return "talk/talk";
+//	}
 	
 }

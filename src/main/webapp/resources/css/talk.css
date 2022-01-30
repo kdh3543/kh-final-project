@@ -70,6 +70,19 @@ main > div {
 .talk-left .inputTalk {
     width: 100%;
 }
+
+.initial-page div{
+    margin: auto;
+    margin-top: 400px;
+}
+
+
+#preventInput{
+    height: 100%;
+    width: 100%;
+}
+
+
 .talk-right{
     width:60%;
     padding: 1%;
@@ -109,20 +122,24 @@ main > div {
     float: left;
 }
 
-.chatExtra{
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-}
-
-.readNum{
-    height: 80%;
-}
-
 .chatTime{
-    
+    height: 100%;
     font-size: 20px;
     font-family: 'Dongle';
+}
+
+.left-line .chatRead{
+    text-align: left;
+    height: 15px;
+}
+
+.right-line .chatRead{
+    text-align: right;
+    height: 15px;
+}
+.time{
+    height: 25px;
+    text-align: end;
 }
 
 
