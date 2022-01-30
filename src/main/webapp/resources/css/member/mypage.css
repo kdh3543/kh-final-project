@@ -109,8 +109,17 @@ main {
 	display: flex;
 	flex-direction: column;
 }
-.right-Container .right-introduce textarea{
-	width:80%;
+
+.right-Container .right-introduce textarea {
+	width: 80%;
+	margin: auto;
+}
+
+.right-Container .right-introduce .writeBtn {
+	width: 20%;
+	height: 35px;
+	margin-left: 70%;
+	margin-top: 1%;
 }
 
 .tab-content {
@@ -167,7 +176,10 @@ nav {
 
 .profile-content .profile-img {
 	display: flex;
-	height: 25%;
+	width: 100%;
+	height: 30%;
+	align-items: center;
+	padding: 3%;
 }
 
 .profile-img .profile-top-left {
@@ -211,7 +223,7 @@ nav {
 	height: 10%;
 	font-family: 'OTWelcomeBA';
 	font-size: 18px;
-	width:15%;
+	width: 15%;
 }
 
 .profile-content-section .profile-table tr td:nth-child(2) input {
@@ -220,7 +232,7 @@ nav {
 }
 
 .profile-content-section .profile-table tr:last-child td {
-	text-align:right;
+	text-align: right;
 }
 
 #imgChange {
@@ -229,7 +241,7 @@ nav {
 	line-height: 25px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
-	background-color:#fff;
+	background-color: #fff;
 }
 
 #imgChange:hover {
@@ -243,7 +255,7 @@ nav {
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
-	background-color:#fff;
+	background-color: #fff;
 }
 
 #pwChange:hover {
@@ -257,7 +269,7 @@ nav {
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
-	background-color:#fff;
+	background-color: #fff;
 }
 
 #phoneChange:hover {
@@ -271,7 +283,7 @@ nav {
 	line-height: 20px;
 	font-size: 17px;
 	font-family: 'OTWelcomeRA';
-	background-color:#fff;
+	background-color: #fff;
 }
 
 #seachAddress:hover {
@@ -291,7 +303,7 @@ nav {
 }
 
 #deleteInfo {
-	background-color:#fff;
+	background-color: #fff;
 	border-color: #24a6a4;
 	height: 35px;
 	line-height: 20px;
@@ -301,7 +313,10 @@ nav {
 	height: 70%;
 }
 /* 판매내역 */
-.itemImg{width:50px; height:50px;}
+.itemImg {
+	width: 50px;
+	height: 50px;
+}
 
 .sell-top {
 	height: 15%;
@@ -378,11 +393,10 @@ nav {
 }
 
 .like-section {
-	height: 120px;
+	height: auto;
 	display: flex;
 	width: 100%;
 	padding: 1%;
-	border: 1px solid gray;
 	margin-top: 1%;
 }
 
@@ -411,6 +425,13 @@ nav {
 	justify-content: center;
 }
 
+.section {
+	width: 50%;
+	height: 170px;
+	display: flex;
+	border: 1px solid gray;
+	margin: 1%;
+}
 /* 팦로잉 */
 .following-top {
 	height: 15%;

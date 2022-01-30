@@ -82,9 +82,9 @@
 								<!-- 최신검색어-->
 
 								<div class="dropdown-menu" id=recent>
-									<a class="dropdown-item" href="javascript:void(0);"
+									<div class="list-search-div">
+									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
 										style="text-align: center">
-										<div class="list-search-div">
 											<nav>
 												<div class="nav nav-tabs" id="nav-tab" role="tablist">
 													<button class="nav-link active" id="nav-home-tab"
@@ -94,7 +94,7 @@
 													<button class="nav-link" id="nav-profile-tab"
 														data-bs-toggle="tab" data-bs-target="#nav-profile"
 														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어보기</button>
+														aria-selected="false">인기검색어</button>
 
 												</div>
 											</nav>
@@ -108,11 +108,35 @@
 														style="display: inline">검색어 전체삭제</button>
 												</div>
 												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">인기검색어보기</div>
+													aria-labelledby="nav-profile-tab">
+													<div class="hotkeyword-title">인기검색어 순위</div>
+													<div class=hotkeyword-contents>
+														<div>
+															<span class="hotkeyword-num">1.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">2.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">3.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">4.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">5.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+													</div>
+												</div>
 
 											</div>
+											</a>
 										</div>
-									</a>
 								</div>
 
 
@@ -138,6 +162,7 @@
 						</script>
 
 						<script>
+						// 검색버튼 눌렀을 때, 
 							$(function() {
 
 								$("#search").one("click", function() {
@@ -154,7 +179,6 @@
 
 											let line = $("<div>");
 											line.addClass("line");
-											/*  line.css("background-color" ,"white").css("width","80%").css("padding","0px").css("margin","0px").css("border-radius","3px").css("float","left"); */
 
 											let textLine = $("<div>");
 
@@ -173,38 +197,28 @@
 											line.append(textLine);
 
 											$("#text").append(line);
+											$("#recent").on('click', function (e) {
+					                             e.stopPropagation();
+					                           });
 
 										}
 
 									})
 								})
 							})
-						</script>
+					// 삭제할 때, 
+							$('#text').on("click",".delBtnOne",function() {
+								/*버튼 X 제거하고 값 추출  */
+								var str = $(this).parent().text().slice(0, -1);
+								$(this).parent().remove();
+								$.ajax({
+								url : "/items/deleteByKeyword?keyword="+ str
+								}).done(function(resp) {
 
-						<script>
-							$('#text')
-									.on(
-											"click",
-											".delBtnOne",
-											function() {
+								})
 
-												/*버튼 X 제거하고 값 추출  */
-												var str = $(this).parent()
-														.text().slice(0, -1);
-												$(this).parent().remove();
-
-												$
-														.ajax(
-																{
-																	url : "/items/deleteByKeyword?keyword="
-																			+ str
-
-																}).done(
-																function(resp) {
-
-																})
-
-											})
+							})
+			
 						</script>
 
 						<!-- 인기 검색어 -->
@@ -246,7 +260,7 @@
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
-			<div class="top-div">
+			<div class="top-div .d-sm-none .d-md-block">
 				<div class="div-wrap2">
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary-light"
@@ -276,7 +290,7 @@
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="chat/directTalk" class="btn-talk"> <i
+						</a> | <a href="talk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
 						</a> | <a href="board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
@@ -290,15 +304,15 @@
 				<section>
 					<div id="carouselExampleControls" class="carousel slide"
 						data-bs-ride="carousel">
-						<div class="carousel-inner" style="height: 30vh;">
+						<div class="carousel-inner" style="height: auto;">
 							<div class="carousel-item active">
-								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+								<img src="/imgs/welcome.png" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+								<img src="/imgs/welcome2.png" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+								<img src="/imgs/welcome3.png" class="d-block w-100" alt="...">
 							</div>
 						</div>
 						<button class="carousel-control-prev" type="button"
@@ -317,9 +331,6 @@
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
 
-
-							</a> <a href="#">
-								
 
 						<div class="imgBox  col-sm-3">
 

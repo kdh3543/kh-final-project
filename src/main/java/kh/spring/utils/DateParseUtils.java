@@ -8,7 +8,6 @@ public class DateParseUtils {
 	public static String parseDate(Timestamp write_date) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-//		long parse_date = sdf.format(write_date);
 
 		long currTime = System.currentTimeMillis();
 		long regTime = write_date.getTime();
@@ -23,5 +22,6 @@ public class DateParseUtils {
 		} else {
 			return sdf.format(write_date);
 		}
+
 	}
 }

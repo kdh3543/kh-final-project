@@ -123,5 +123,7 @@ public class MemberService {
       return mdao.updatePw(encpw,id);
    }
    
+  
+   
 
 }
