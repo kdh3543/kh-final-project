@@ -176,6 +176,9 @@ header .logo a {
 	border-radius: 10px 10px 10px 10px;
 	border: none;
 }
+.tab-content>.active {
+	background-color:#fff;
+}
 /* 검색어 드랍다운 */
 #recent {
 	width: 30%;;

@@ -260,7 +260,7 @@
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
-			<div class="top-div">
+			<div class="top-div .d-sm-none .d-md-block">
 				<div class="div-wrap2">
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary-light"
@@ -304,15 +304,15 @@
 				<section>
 					<div id="carouselExampleControls" class="carousel slide"
 						data-bs-ride="carousel">
-						<div class="carousel-inner" style="height: 30vh;">
+						<div class="carousel-inner" style="height: auto;">
 							<div class="carousel-item active">
-								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+								<img src="/imgs/welcome.png" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+								<img src="/imgs/welcome2.png" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
+								<img src="/imgs/welcome3.png" class="d-block w-100" alt="...">
 							</div>
 						</div>
 						<button class="carousel-control-prev" type="button"
