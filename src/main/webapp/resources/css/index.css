@@ -121,7 +121,7 @@ header .logo a {
 	text-decoration: none;
 	color: #fff;
 }
-
+/* 검색어 부분 */
 .searchContainer {
 	display: flex;
 	justify-content: center;
@@ -175,6 +175,109 @@ header .logo a {
 	height: 100%;
 	border-radius: 10px 10px 10px 10px;
 	border: none;
+}
+/* 검색어 드랍다운 */
+#recent {
+	width: 30%;;
+	position: absolute;
+	inset: 0px auto auto 0px;
+	margin: 0px;
+	transform: translate3d(0px, 62px, 0px);
+	max-width: -webkit-fill-available;
+	min-width: -webkit-fill-available;
+	height: auto;
+}
+
+.list-search-div {
+	width: 100% !important;
+}
+
+#text {
+	width: 100% !important;
+	height: auto;
+	padding: 5%;
+	background: #fff;
+}
+
+.line {
+	width: 100% !important;
+}
+
+.textLine {
+	display: flex;
+	width: 100% !important;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid gray;
+}
+
+#nav-home {
+	width: 100%;
+	height: 100%;
+}
+
+#nav-tab {
+	width: 100%;
+}
+
+#nav-home-tab {
+	width: 50%;
+}
+
+.nav-link {
+	color: #24a6a4;
+}
+
+.nav-tabs .nav-link.active {
+	color: #fff;
+	background-color: #24a6a4;
+	border-color: #24a6a4
+}
+
+#nav-profile-tab {
+	width: 50%;
+}
+
+#delBtn {
+	width: 100%;
+	height: 50px;
+}
+.search-dropdown{
+	background-color:#fff;
+}
+/* 검색어 - 인기검색어 */
+.hotkeyword-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100% !important;
+	height: 50px !important;
+	font-size: 20px;
+	font-weight: 700;
+	padding-top: 20px;
+}
+
+.hotkeyword-contents {
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 5%;
+}
+
+.hotkeyword-contents div {
+	width: 100% !important;
+	height: 50px !important;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.hotkeyword-contents .hotkeyword-num {
+	font-size: 20px;
+	font-weight: 600;
 }
 /* 카테고리 */
 .c01-content, .c02-content, .c03-content {
@@ -395,77 +498,4 @@ footer .footer-box {
 	height: 100px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-}
-/* 검색 */
-.dropdown-item {
-	height: 500px;
-}
-
-#recent {
-	width: 30%;;
-	position: absolute;
-	inset: 0px auto auto 0px;
-	margin: 0px;
-	transform: translate3d(0px, 62px, 0px);
-	max-width: -webkit-fill-available;
-	min-width: -webkit-fill-available;
-	height: auto;
-}
-
-.list-search-div {
-	width: 100% !important;
-}
-
-#text {
-	width: 100% !important;
-	height: auto;
-	padding: 5%;
-}
-
-.line {
-	width: 100% !important;
-}
-
-.textLine {
-	display: flex;
-	width: 100% !important;
-	justify-content: space-between;
-	align-items: center;
-	border-bottom: 1px solid gray;
-}
-
-.tab-content {
-	height: 500px;
-}
-
-#nav-home {
-	width: 100%;
-	height: 100%;
-}
-
-#nav-tab {
-	width: 100%;
-}
-
-#nav-home-tab {
-	width: 50%;
-}
-
-.nav-link {
-	color: #24a6a4;
-}
-
-.nav-tabs .nav-link.active {
-	color: #fff;
-	background-color: #24a6a4;
-	border-color: #24a6a4
-}
-
-#nav-profile-tab {
-	width: 50%;
-}
-
-#delBtn {
-	width: 100%;
-	height: 50px;
 }

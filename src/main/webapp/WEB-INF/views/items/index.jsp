@@ -43,7 +43,7 @@
 						<ul class="header-list-after-login">
 							<li>이미지 부분 : ${dto.profile_image}</li>
 							<li>${loginID}님안녕하세요</li>
-							<li><a href="/myPage">마이페이지</a></li>
+							<li><a href="/member/myPage">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 						</ul>
@@ -82,9 +82,9 @@
 								<!-- 최신검색어-->
 
 								<div class="dropdown-menu" id=recent>
-									<a class="dropdown-item" href="javascript:void(0);"
+									<div class="list-search-div">
+									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
 										style="text-align: center">
-										<div class="list-search-div">
 											<nav>
 												<div class="nav nav-tabs" id="nav-tab" role="tablist">
 													<button class="nav-link active" id="nav-home-tab"
@@ -94,7 +94,7 @@
 													<button class="nav-link" id="nav-profile-tab"
 														data-bs-toggle="tab" data-bs-target="#nav-profile"
 														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어보기</button>
+														aria-selected="false">인기검색어</button>
 
 												</div>
 											</nav>
@@ -108,148 +108,118 @@
 														style="display: inline">검색어 전체삭제</button>
 												</div>
 												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">인기검색어보기</div>
+													aria-labelledby="nav-profile-tab">
+													<div class="hotkeyword-title">인기검색어 순위</div>
+													<div class=hotkeyword-contents>
+														<div>
+															<span class="hotkeyword-num">1.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">2.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">3.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">4.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+															<div>
+															<span class="hotkeyword-num">5.</span>
+															<span class="hotkeyword-word">곰돌이</span>
+														</div>
+													</div>
+												</div>
 
 											</div>
+											</a>
 										</div>
-									</a>
 								</div>
 
 
-								<script>
-									$("#delBtn").on("click", function() {
+								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
+							</div>
 
-										$.ajax({
-											url : "/items/deleteAll",
+						</div>
 
-										}).done(function(resp) {
-											console.log(resp);
+						<script>
+							$("#delBtn").on("click", function() {
 
-											$("#text").empty();
+								$.ajax({
+									url : "/items/deleteAll",
 
-										})
+								}).done(function(resp) {
+									console.log(resp);
+
+									$("#text").empty();
+
+								})
+
+							})
+						</script>
+
+						<script>
+						// 검색버튼 눌렀을 때, 
+							$(function() {
+
+								$("#search").one("click", function() {
+
+									$.ajax({
+										url : "/items/listing",
+										datatype : "json"
+									}).done(function(resp) {
+
+										resp = JSON.parse(resp);
+
+										for (let i = 0; i < resp.length; i++) {
+											let text = $("#text");
+
+											let line = $("<div>");
+											line.addClass("line");
+
+											let textLine = $("<div>");
+
+											textLine.append(resp[i].keyword);
+
+											textLine.addClass("textLine");
+
+											let delButton = $("<button>");
+											delButton.addClass("delBtnOne");
+											delButton.text("X");
+											delButton.css("float", "right");
+
+											textLine.append(text.val());
+											textLine.append(delButton);
+
+											line.append(textLine);
+
+											$("#text").append(line);
+											$("#recent").on('click', function (e) {
+					                             e.stopPropagation();
+					                           });
+
+										}
 
 									})
-								</script>
+								})
+							})
+					// 삭제할 때, 
+							$('#text').on("click",".delBtnOne",function() {
+								/*버튼 X 제거하고 값 추출  */
+								var str = $(this).parent().text().slice(0, -1);
+								$(this).parent().remove();
+								$.ajax({
+								url : "/items/deleteByKeyword?keyword="+ str
+								}).done(function(resp) {
 
-								<script>
-									$(function() {
+								})
 
-										$("#search")
-												.one(
-														"click",
-														function() {
-
-															$
-																	.ajax(
-																			{
-																				url : "/items/listing",
-																				datatype : "json"
-																			})
-																	.done(
-																			function(
-																					resp) {
-
-																				resp = JSON
-																						.parse(resp);
-
-																				for (let i = 0; i < resp.length; i++) {
-																					let text = $("#text");
-
-																					let line = $("<div>");
-																					line
-																							.addClass("line");
-																					line
-																							.css(
-																									"background-color",
-																									"white")
-																							.css(
-																									"width",
-																									"80%")
-																							.css(
-																									"padding",
-																									"0px")
-																							.css(
-																									"margin",
-																									"0px")
-																							.css(
-																									"border-radius",
-																									"3px")
-																							.css(
-																									"float",
-																									"left");
-
-																					let textLine = $("<div>");
-
-																					textLine
-																							.append(resp[i].keyword);
-
-																					textLine
-																							.addClass("textLine");
-
-																					let delButton = $("<button>");
-																					delButton
-																							.addClass("delBtnOne");
-																					delButton
-																							.text("X");
-																					delButton
-																							.css(
-																									"float",
-																									"right");
-
-																					textLine
-																							.append(text
-																									.val());
-																					textLine
-																							.append(delButton);
-
-																					line
-																							.append(textLine);
-
-																					$(
-																							"#text")
-																							.append(
-																									line);
-
-																				}
-
-																			})
-														})
-									})
-								</script>
-
-								<script>
-									$('#text')
-											.on(
-													"click",
-													".delBtnOne",
-													function() {
-
-														/*버튼 X 제거하고 값 추출  */
-														var str = $(this)
-																.parent()
-																.text().slice(
-																		0, -1);
-														$(this).parent()
-																.remove();
-
-														$
-																.ajax(
-																		{
-																			url : "/items/deleteByKeyword?keyword="
-																					+ str
-
-																		})
-																.done(
-																		function(
-																				resp) {
-
-																		})
-
-													})
-								</script>
-
-
+							})
+			
+						</script>
 
 						<!-- 인기 검색어 -->
 						<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
@@ -316,12 +286,11 @@
 					</div>
 					<div class="rightList">
 
-
 						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="chat/directTalk" class="btn-talk"> <i
+						</a> | <a href="talk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
 						</a> | <a href="board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
@@ -363,8 +332,8 @@
 						<!-- imgBox 1 구간 -->
 
 
-						<div class="imgBox">
 						<div class="imgBox  col-sm-3">
+
 							<!--상품 반복 시작 -->
 
 							<c:forEach var="i" items="${ilist}">
@@ -373,25 +342,82 @@
 									<c:if test="${f.parentSeq == i.iseq}">
 
 
-										<a href="/items/itemsDetail?iseq=${i.iseq}">
+
+										<a href="/items/itemsDetail">
 											<div class="detail-img">
+
+
+												<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
 												<img src="${f.sysName}" style="width: 100%; height: 100%;">
+
+
+
 											</div>
+
 											<div class="detail-container">
 												<div class="title">${i.name}</div>
 												<div class="price">${i.price}원</div>
 												<div class="date">${i.detailDate}</div>
 												<%-- <div class="title">${flist.oriname}</div> --%>
+
 											</div>
+
+
 										</a>
-
 									</c:if>
-
+									<%-- </c:if> ^^--%>
+									<%-- </c:if> --%>
 								</c:forEach>
 							</c:forEach>
 
-							</div>
+
+							<!-- </a> <a href="#"> -->
+
+
+
+							<!-- imgBox 2 구간 -->
+							<!-- <a href="#">
+								<div class="detail-img">
+									<img src="/imgs/200Pic.png">
+								</div>
+								<div class="detail-container">
+									<div class="title">상품명</div>
+									<div class="price">0000원</div>
+									<div class="date">0일전</div>
+								</div>
+dd
+							</a> <a href="#">
+								<div class="detail-img">
+									<img src="/imgs/200Pic.png">
+								</div>
+								<div class="detail-container">
+									<div class="title">상품명</div>
+									<div class="price">0000원</div>
+									<div class="date">0일전</div>
+								</div>
+							</a> <a href="#">
+								<div class="detail-img">
+									<img src="/imgs/200Pic.png">
+								</div>
+								<div class="detail-container">
+									<div class="title">상품명</div>
+									<div class="price">0000원</div>
+									<div class="date">0일전</div>
+								</div>
+
+							</a> <a href="#">
+								<div>
+									<img src="/imgs/200Pic.png">
+								</div>
+								<div class="detail-container">
+									<div class="title">상품명</div>
+									<div class="price">0000원</div>
+									<div class="date">0일전</div>
+								</div>
+							</a> -->
+
 						</div>
+
 
 					</article>
 				</section>

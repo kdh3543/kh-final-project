@@ -46,7 +46,7 @@
 
 				<div class="header_Container">
 					<ul class="header_list">
-						<li><a href="signIn">${loginID }</a></li>
+						<li><a href="signIn">로그인</a></li>
 						<li><a href="join">회원가입</a></li>
 					</ul>
 				</div>
@@ -61,9 +61,6 @@
 			</header>
 
 		</c:when>
-		
-		<c:otherwise>
-		</c:otherwise>
 	</c:choose>
 
 	<main>
@@ -370,8 +367,8 @@
 
 
 								<div class="add-btns-div">
-									<button type="submit" class="btn btn-outline-secondary"
-										id="productAddBtn">상품등록</button>
+									<input type="submit" class="btn btn-outline-secondary"
+										id="productAddBtn">상품등록
 									<button class="btn btn-outline-secondary" id="resetBtn"
 										type="reset">초기화</button>
 								</div>
@@ -402,16 +399,14 @@
 										<th>최근수정일
 										<th>기능
 									</tr>
-									
-								
 									<tr>
-										<td> ㅇㅇ
-										<td>판상
-										<td>상품명
-										<td>ㅁㅇㄴ
-										<td>ㅁㅇㅁㄴㅇㄴㅁㄴㅇ
-										<td>ㅁㅇㄴㅁㄴㅇ
-										<td>ㅁㅇㄴ
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
 									</tr>
 									<!-- 
 									<tr>
