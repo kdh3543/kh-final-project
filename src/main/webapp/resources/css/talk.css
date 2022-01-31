@@ -1,207 +1,231 @@
-
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-body{
-    margin: 0;
-    height : auto;
-    min-height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-  }
+body {
+	margin: 0;
+	height: auto;
+	min-height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	font-family: 'OTWelcomeRA';
+}
 
 main {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20%;
-    margin: auto;
-    width:80%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20%;
+	margin: auto;
+	width: 80%;
 }
 
-main > div {
-    border: 1px solid black;
+main>div {
+	border: 1px solid black;
 }
+
 .talk-container {
-    width: 100%;
-    height: 1000px;
-    display: flex;
-    padding: 2%;
+	width: 100%;
+	height: 1000px;
+	display: flex;
+	padding: 2%;
+	margin-top: 10%;
+	margin-bottom: 10%;
 }
+
+.talk-list {
+	overflow: scroll;
+}
+
+
 .talk-list, .talk-add-list {
-    display: flex;
-    border: 1px solid black;
-    overflow-y: auto;
-    
+	display: flex;
+	border: 1px solid black;
+	overflow-y: auto;
 }
 
 .talk-list-btn {
 	width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    background-color:white;
-    
+	height: 100%;
+	display: flex;
+	align-items: center;
+	background-color: white;
 }
 
 .talk-list-left {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 30%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.talk-list-right {
-    width: 70%;
-}
-.talk-list-right .talk-name {
-    font-family: OTWelcomeBA;
-    font-size: 17px;
 
+.talk-list-right {
+	width: 70%;
 }
-.talk-left{
-    width:40%;
-    padding: 1%;
-    overflow-y:auto;
+
+.talk-list-right .talk-name {
+	font-family: OTWelcomeBA;
+	font-size: 15px;
+}
+
+.talk-left {
+	width: 40%;
+	padding: 1%;
+	overflow-y: auto;
 }
 
 .talk-left .inputTalk {
-    width: 100%;
+	width: 100%;
 }
 
-.initial-page div{
-    margin: auto;
-    margin-top: 400px;
+.initial-page div {
+	margin: auto;
+	margin-top: 400px;
 }
 
-
-#preventInput{
-    height: 100%;
-    width: 100%;
+#preventInput {
+	height: 100%;
+	width: 100%;
 }
 
+.talk-right {
+	width: 60%;
+	padding: 1%;
+	border-left: 1px solid black;
+	display: flex;
+	flex-direction: column;
+}
 
-.talk-right{
-    width:60%;
-    padding: 1%;
-    border-left: 1px solid black;
+.talk-right .right-top {
+	height: 5%;
+}
+
+.talk-right .right-middle {
+	height: 85%;
+	border: 1px solid black;
+	overflow-y: auto;
+}
+
+.left-line {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+}
+
+.right-line {
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: row;
+}
+
+.left-line>* {
+	float: left;
+}
+
+.right-line>* {
+	float: left;
+}
+
+.chatTime {
+	height: 100%;
+	font-size: 12px;
     display: flex;
     flex-direction: column;
-}
-.talk-right .right-top{
-    height: 5%;
-}
-.talk-right .right-middle{
-    height: 85%;
-    border: 1px solid black;
-    overflow-y:auto;
-
+    justify-content: center;
 }
 
-.left-line{
-	display: flex;
-    justify-content: flex-start;
-
-    flex-direction: row;
+.left-line .chatRead {
+	text-align: left;
 }
 
-.right-line{
-	display: flex;
-    justify-content: flex-end;
-
-    flex-direction: row;
+.right-line .chatRead {
+	text-align: right;
 }
 
-.left-line>*{
-    float: left;
+.time {
+	text-align: end;
 }
-
-.right-line>*{
-    float: left;
-}
-
-.chatTime{
-    height: 100%;
-    font-size: 20px;
-    font-family: 'Dongle';
-}
-
-.left-line .chatRead{
-    text-align: left;
-    height: 15px;
-}
-
-.right-line .chatRead{
-    text-align: right;
-    height: 15px;
-}
-.time{
-    height: 25px;
-    text-align: end;
-}
-
 
 .line {
-    border-radius: 5px;
-    margin: 3px;
-    background-color:pink;
-    font-weight: bold;
-    font-size: 25px;
-    font-family: 'Dongle';
-   	padding:3px;
-    padding-left:4px;
-    padding-top:3px;
-    width: fit-content;
-    max-width: 60%;
+	border-radius: 5px;
+	margin: 3px;
+	background-color: #24a6a4;
+	font-weight: bold;
+	font-size: 20px;
+	font-family: 'OTWelcomeRA';
+	padding: 3px;
+	padding-left: 4px;
+	padding-top: 3px;
+	width: fit-content;
+	max-width: 60%;
+	opacity: 0.8;
 }
 
-
-.talk-right .right-bottom{
-    height: 10%;
-    display: flex;
-    width: 100%;
+.talk-right .right-bottom {
+	height: 10%;
+	display: flex;
+	width: 100%;
 }
-.talk-right .right-bottom *{
+
+.talk-right .right-bottom * {
 	float: left;
-	
-}
-.talk-right .right-bottom div{
-	height: 100%;
-    width: 85%;
-    border: 1px solid black;
-}
-.talk-right .right-bottom button{
-    width: 15%;
-}
-.right-title-left{
-    border-bottom: 1px solid black;
-    display: flex;
-}
-.title-img {
-    width: 10%;
-}
-.title-name{
-    width: 80%;
 }
 
-.talk-list-left>img{
-	width:50px;
+.talk-right .right-bottom div {
+	height: 100%;
+	width: 85%;
+	border: 1px solid black;
+}
+
+.talk-right .right-bottom button {
+	width: 15%;
+	font-size: 13px;
+}
+
+.talk-right .right-bottom button:hover {
+	background-color: #24a6a4;
+	color: #fff;
+}
+
+.right-title-left {
+	border-bottom: 1px solid black;
+	display: flex;
+}
+
+.title-img {
+	width: 10%;
+}
+
+.title-name {
+	width: 80%;
+}
+
+.talk-list-left>img {
+	width: 50px;
 	height: 50px;
 }
 
 a {
-  text-decoration: none;
-  color: black;
+	text-decoration: none;
+	color: black;
 }
 
 a:active {
-  text-decoration: none;
-  color: black;
+	text-decoration: none;
+	color: black;
 }
 
-a:hover{
-    text-decoration: none;
-  color: black;
+a:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.right-middle-title {
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	font-size: 15px;
+	color: gray;
 }

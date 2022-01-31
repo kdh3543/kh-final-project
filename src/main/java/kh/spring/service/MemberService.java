@@ -1,6 +1,7 @@
 package kh.spring.service;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -123,7 +124,15 @@ public class MemberService {
       return mdao.updatePw(encpw,id);
    }
    
-  
+  // 모든 회원 찾기 
+   public List<MemberDTO> selectAll() {
+	   return mdao.selectAll();
+   }
+   
+   // 관리자 계정에서 계정 탈퇴
+   public int deleteBySeq(int seq) {
+	   return mdao.deleteBySeq(seq);
+   }
    
 
 }
