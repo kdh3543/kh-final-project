@@ -447,9 +447,150 @@
 					</div>
 
 				</div>
+<<<<<<< HEAD
+=======
+				<p class="article_title">일반상품</p>
+				<!-- imgBox 1 구간 -->
+				<div class="imgBox-2">
+					<a href="productDetail">
+						<div class="detail-img">
+							<img src="imgs/t-shirt.jpeg">
+						</div>
+						<div class="detail-container">
+							<div class="title">티셔츠</div>
+							<div class="price">3000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a>
+
+					<!-- imgBox 2 구간 -->
+					<a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+					</a> <a href="#">
+						<div class="detail-img">
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+
+					</a> <a href="#">
+						<div>
+							<img src="imgs/200Pic.png">
+						</div>
+						<div class="detail-container">
+							<div class="title">상품명</div>
+							<div class="price">0000원</div>
+							<div class="date">0일전</div>
+						</div>
+					</a>
+
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+			</article>
+			<div class="d-none d-lg-block" id="sideBar">
+			<div class="sidebar-div">
+				<a href="#">
+					<button class="btn btn-outline-secondary" type="button"
+						id="likeProductBtn">
+						찜한상품<br> <i class="fas fa-heart">개수</i>
+					</button>
+					
+				</a> 
+				<div class="sidebar-resently-div">
+						<div class="sidebar-title-div">최근 본 상품</div>
+						<div class="sidebar-product-div">
+							<img src="">
+							<img src="">
+						</div>
+
+					</div>
+>>>>>>> f38f2e4f44178308c027d194d262a04213d265bb
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
+		</div>
 		</div>
 	</main>
 	<!-- footer -->

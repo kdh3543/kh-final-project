@@ -136,11 +136,12 @@
 		DESC
 		
 		</select>
-		
-		
-
 		<!-- 검색창 관련 부분입니다. -->
 		
+		<insert id="insertQNA">
+		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL, #{iseq},
+		#{writer}, #{contents}, CURRENT_DATE)
+	</insert>
 		
 		
 		

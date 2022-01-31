@@ -43,7 +43,8 @@
 						<ul class="header-list-after-login">
 							<li>이미지 부분 : ${dto.profile_image}</li>
 							<li>${loginID}님안녕하세요</li>
-							<li><a href="/myPage">마이페이지</a></li>
+
+							<li><a href="/items/myPage">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 							
@@ -284,7 +285,7 @@
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
-			<div class="top-div .d-sm-none .d-md-block">
+			<div class="d-none d-md-block d-lg-block" id="top-div">
 				<div class="div-wrap2">
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary-light"
@@ -312,11 +313,11 @@
 
 						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="myPage" class="btn-myshop"> <i
+						</a> | <a href="/items/myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="chat/directTalk" class="btn-talk"> <i
+						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
-						</a> | <a href="board/boardList" class="btn-talk"> <i
+						</a> | <a href="/board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
@@ -359,7 +360,8 @@
 								
 						<div class="imgBox  col-sm-3">
 
-							<!--상품 반복 시작 -->
+  <!--상품 반복 시작 -->
+
 
 								<c:forEach var="i" items="${ilist}">
 									<c:forEach var="f" items="${flist}">
@@ -383,8 +385,6 @@
 									</c:forEach>
 
 								</c:forEach>
-
-
 
 						</div>
 

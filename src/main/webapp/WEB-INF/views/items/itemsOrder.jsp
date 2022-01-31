@@ -47,10 +47,14 @@
 		<div class="container-div">
 
 			<div class="back-div">
-				<a href="history:back()">뒤로가기</a>
+				<button type="button" id="back">
+					<i class="fas fa-undo">돌아가기</i>
+				</button>
 			</div>
 			<div class="items-div">
-				<div class="img-container">이미지</div>
+				<div class="img-container">
+				<img src="/imgs/200Pic.png">
+				</div>
 				<div class="items-contents">
 					<div>상품가격</div>
 					<div>상품명</div>
@@ -89,14 +93,14 @@
 					</div>
 				</div>
 				<div class="usingpoint-div">
-					<div>결제 금액</div>
+					<div>포인트 사용</div>
 					<div>
 					<span>70000</span>
 					<span>원</span>
 					</div>
 				</div>
 				<div class="final-div">
-					<div>결제 금액</div>
+					<div> 총 결제 금액</div>
 					<div>
 					<span>70000</span>
 					<span>원</span>
@@ -105,7 +109,10 @@
 			</div>
 			</div>
 				<div class="payment-div">
+				<div class="paymemnt-title-div">결제수단</div>
+					<div class="payment-contents-div">
 					<input type="radio"> 계좌이체
+					</div>
 				</div>
 					<div class="button-div">
 					<input type="button" value="결제하기">

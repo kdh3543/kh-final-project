@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import kh.spring.dto.FilesDTO;
 import kh.spring.dto.ItemsDTO;
+import kh.spring.dto.ItemsQNADTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.SearchKeywordDTO;
 import kh.spring.service.FilesService;
@@ -317,7 +318,42 @@ public class ItemsController {
 
 	}
 
+//아이템 상세페이지 하나 클릭했을때 - 문의글
+	
+	@RequestMapping("QNAWriteProc")
+	public String writeProc(ItemsQNADTO dto) throws Exception {
+		System.out.println("QNAWriteProc 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		dto.setWriter((String) session.getAttribute("loginID"));
+		int result = iservice.insertQNA(dto);
 
+		// bservice.addCommentCount(dto.getBoard_seq());
+		// items 테이블에 상품문의 달린 개수 필요없지?
+		
+		return "redirect:/items/itemsDetail?iseq=" + dto.getIseq();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

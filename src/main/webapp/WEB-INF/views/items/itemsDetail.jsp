@@ -242,16 +242,16 @@
 						<div class="detail-exchange">교환 여부 : ${i.refundable}</div>
 						<div class="detail-delivery">거래 희망 지역 : ${i.exarea}</div>
 						<div class="detail-location"></div>
-				</c:forEach>
 				
+					</c:forEach>
 				</div>
+			
 				
-				
-				
-					<div class="detail-btns">
+				<c:forEach var="i" items="${ilist}" varStatus="status">	
+							<div class="detail-btns">
 					<c:choose> 
 						<c:when test = "${i.sellerID eq loginID}">
-					<a href = "/items/myPage" ><button type="button" class="btn btn-lg btn-light">내상점관리</button></a>
+					<button type="button" id="btn-myPage" class="btn btn-lg btn-light">내상점관리</button>
 						</c:when>
 						<c:otherwise>
 						<button id="btn-like" class="btn btn-lg btn-light">찜</button>
@@ -260,14 +260,14 @@
 						</c:otherwise>
 						</c:choose>
 					</div>
-			</div>
+					</c:forEach>	
+					<!-- 진행중 -->
+				</div>
+			
 		</div>
 		
-		
-		<!-- 연락하기 버튼을 눌렀을 때의 script -->
-					 
-					 
-        <input type=hidden value="300티셔츠" id="hiddenProduct">
+		<!--  동현이형 -->
+          <input type=hidden value="300티셔츠" id="hiddenProduct">
         <input type=hidden value="1" id="hiddenProductId">
        <script>
         	let hiddenProduct = $("#hiddenProduct").val();
@@ -276,16 +276,24 @@
         		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId;
         	})
         </script>
-            <!-- 바로구매 버튼을 눌렀을 때의 script -->
-        
+          
+           
+        <!-- 동현이형 /// -->
         <script>
-        	
+        <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){
         		location.href = "/items/itemsOrder";
         	})
+        	
+        	<!-- 내상점관리 버튼을 눌렀을 때의 script -->
+        	  $("#btn-myPage").on("click",function(){
+    		location.href = "/items/myPage";
+    	})
+  
         </script>
+      
         
-        
+     
         
 		
 		<div class="detail-bottom-div">
@@ -342,6 +350,7 @@
 						
 							<div class="product-section1">
 							<c:forEach var="i" items="${ilist}" varStatus="status">		
+
 								<div class="product-info-title">상품정보</div>
 								<div class="product-info-contents">
 									${i.info}
@@ -367,13 +376,18 @@
 								<!-- 시현이형 부분 -->
 								<div class="write-title-div">상품문의</div>
 								<div class="product-question">
-									<div class="write-div">
-										<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요."></textarea>
-									</div>
-									<div class="write-bottom-div">
-										<div>1/100</div>
-										<button type="button" class="writeBtn">등록</button>
-									</div>
+									<form action="/items/QNAWriteProc" method="post" enctype="multipart/form-data">
+										<div class="write-div">
+											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요." name="contents"></textarea>
+										</div>
+										<div class="write-bottom-div">
+											<div>1/100</div>
+											<button type="submit" class="writeBtn" name="submit">등록</button>
+											<c:forEach var="i" items="${ilist}" varStatus="status">		
+											<input type="hidden" name="iseq" value="${i.iseq}">
+											</c:forEach>
+										</div>
+									</form>
 								</div>
 							</div>
 							<div class="product-section2">

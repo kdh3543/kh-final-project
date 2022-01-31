@@ -183,12 +183,12 @@
     
     // 이미지와 체크 박스를 감싸고 있는 div 속성
     var div_style = 'display:inline-block;position:relative;'
-                  + 'width:200px;height:200px;margin:5px;border:1px solid #d5ffff;;z-index:1';
+                  + 'width:200px;height:200px;margin:5px;z-index:1';
     // 미리보기 이미지 속성
     var img_style = 'width:100%;height:100%;z-index:none';
     // 이미지안에 표시되는 체크박스의 속성
     var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
-                  + 'right:0px;bottom:0px;z-index:999;border:1px ; background-color:#c4ffff;color:#FF8383';
+                  + 'right:0px;bottom:0px;z-index:999;border:1px ;color: black;';
   
     btnAtt.onchange = function(e){
       var files = e.target.files;

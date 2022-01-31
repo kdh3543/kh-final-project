@@ -83,9 +83,10 @@ html, body {
 }
 
 .control-page .control-contents-div {
-	width: 90%;
+	width: 100%;
 	height: 90%;
 	margin: auto;
+	overflow: auto;
 }
 
 .control-page .control-contents-div table {
@@ -94,7 +95,30 @@ html, body {
 	margin: auto;
 	text-align: center;
 	margin-top: 20px;
+	font-size:13px;
 }
+
+.control-page .control-contents-div table tr:nth-child(1) {
+	height:50px;
+	border-bottom: 1px solid lightgray;
+}
+
+.control-page .control-contents-div table tr:nth-child(1) th:nth-child(1){
+	width:30px;
+
+}
+.control-page .control-contents-div table tr:nth-child(n+1) {
+	height:50px;
+	border-bottom: 1px solid lightgray;
+}
+.control-page .control-contents-div table tr:last-child td {
+	text-align:right;
+}
+.control-page .control-contents-div table tr:last-child button {
+	width:100px;
+	height:35px;
+}
+
 /* 1:1문의 */
 .main-right-container .question-page {
 	display: none;
@@ -148,4 +172,9 @@ html, body {
 	width: 90%;
 	height: 90%;
 	margin: auto;
+}
+
+/* 통계 */
+.statistics-page {
+	display: none;
 }

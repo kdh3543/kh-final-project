@@ -39,10 +39,12 @@
 			<ul class="header_list">
 				<c:choose>
 					<c:when test="${loginID != null}">
-						${loginID} 님 안녕하세요&nbsp;&nbsp;| &nbsp;&nbsp;
-						<a href="/member/logout" id="logoutbtn">로그아웃&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-						<a href="/member/myPage">마이페이지&nbsp;&nbsp;|</a>&nbsp;&nbsp;
-						<a href="/member/leave" id="leavebtn">회원 탈퇴&nbsp;&nbsp;|</a>&nbsp;&nbsp;
+						<ul class="header-list-after-login">
+							<li>이미지 부분 : ${dto.profile_image}</li>
+							<li>${loginID}님안녕하세요</li>
+							<li><a href="/member/myPage">마이페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+						</ul>
 					</c:when>
 					<c:otherwise>
 						<li><a href="signIn">로그인</a></li>
