@@ -49,7 +49,7 @@
 		<div class="div-wrap">
 			<div class="nav_div">
 				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="index.jsp">00마켓</a>
+					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 				</div>
 			</div>
 		</div>
@@ -144,8 +144,8 @@
 					<script>
               
                 $(".chatDelBtn${delCount.count}").on("click", function () {
-                  console.log( $(".chatDelBtn${delCount.count}").val());
-                  console.log( $(".hiddenRoomId${delCount.count}.val());
+                  console.log($(".chatDelBtn${delCount.count}").val());
+                  console.log($(".hiddenRoomId${delCount.count}").val());
                   console.log($("#hiddenId").val());
                   console.log($("#hiddenProductId").val());
                   
@@ -160,6 +160,7 @@
                         roomId: $(".hiddenRoomId${delCount.count}").val()
                       }
                     }).done(function (resp) {
+                 
                       if (resp > 0) {
                         ws.send("대화하는 사람이 나갔습니다." + '<br>' + "hiddenSellerId.val()" + '<br>' + "hiddenProductName.val()" + '<br>' + "1" + '<br>' + "1");
                         
@@ -296,7 +297,6 @@
         let productId = $("#productId");
         let hiddenBuyerId = $("#hiddenBuyerId");
         let hiddenId = $("#hiddenId").val();
-
         rightMiddle.scrollTop(rightMiddle[0].scrollHeight);
 
         
@@ -420,7 +420,17 @@
             let text = chatMessage.html();
             chatMessage.html("");
             chatMessage.focus();
-            console.log($("#hiddenRoomId").val());
+            console.log("--확인값--");
+            // 현재 url 값 받아오기 
+            let url = window.location.href;
+            console.log(url);
+            // url을 쿼리 문자열로 작업할 수 있게 UrlSearchParams 생성
+            let urlParams = new URLSearchParams(url);
+            console.log(urlParams);
+            // url에서 roomId 뒤에 있는 값 가져오기
+            let roomId = urlParams.get('roomId'); 
+       		 console.log(roomId);
+         
             ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() );
 
             rightMiddle.stop().animate({

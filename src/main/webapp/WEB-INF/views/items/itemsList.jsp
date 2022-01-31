@@ -288,16 +288,26 @@
 				</nav>
 			</article>
 			<div class="d-none d-lg-block" id="sideBar">
-				<div class="sidebar-div">
-					<a href="#">
-						<button class="btn btn-outline-secondary" type="button"
-							id="likeProductBtn">
-							찜한상품<br> <i class="fas fa-heart">개수</i>
-						</button>
-					</a> <a href="#"><button class="btn btn-outline-secondary"
-							id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
-				</div>
+			<div class="sidebar-div">
+				<a href="#">
+					<button class="btn btn-outline-secondary" type="button"
+						id="likeProductBtn">
+						찜한상품<br> <i class="fas fa-heart">개수</i>
+					</button>
+					
+				</a> 
+				<div class="sidebar-resently-div">
+						<div class="sidebar-title-div">최근 본 상품</div>
+						<div class="sidebar-product-div">
+							<img src="">
+							<img src="">
+						</div>
+
+					</div>
+				<a href="#"><button class="btn btn-outline-secondary"
+						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
+		</div>
 		</div>
 	</main>
 	<!-- footer -->

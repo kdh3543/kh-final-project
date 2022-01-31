@@ -44,7 +44,6 @@
 							<li>이미지 부분 : ${dto.profile_image}</li>
 							<li>${loginID}님안녕하세요</li>
 							<li><a href="/member/myPage">마이페이지</a></li>
-							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 						</ul>
 					</c:when>
@@ -260,7 +259,7 @@
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
-			<div class="top-div .d-sm-none .d-md-block">
+			<div class="d-none d-md-block d-lg-block" id="top-div">
 				<div class="div-wrap2">
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary-light"
@@ -334,87 +333,31 @@
 
 						<div class="imgBox  col-sm-3">
 
-							<!--상품 반복 시작 -->
+  <!--상품 반복 시작 -->
 
-							<c:forEach var="i" items="${ilist}">
-								<c:forEach var="f" items="${flist }">
+                        <c:forEach var="i" items="${ilist}">
+                           <c:forEach var="f" items="${flist}">
 
-									<c:if test="${f.parentSeq == i.iseq}">
+                              <c:if test="${f.parentSeq == i.iseq}">
 
+                                 <a href="/items/itemsDetail?iseq=${i.iseq}">
+                                    <div class="detail-img">
+                                       <img src="${f.sysName}" style="width: 100%; height: 100%;">
+                                    </div>
+                                    <div class="detail-container">
+                                       <div class="title">${i.name}</div>
+                                       <div class="price">${i.price}원</div>
+                                       <div class="date">${i.detailDate}</div>
+                                       <%-- <div class="title">${flist.oriname}</div> --%>
+                                    </div>
+                                 </a>
 
+                              </c:if>
 
-										<a href="/items/itemsDetail">
-											<div class="detail-img">
+                           </c:forEach>
 
+                        </c:forEach>
 
-												<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
-												<img src="${f.sysName}" style="width: 100%; height: 100%;">
-
-
-
-											</div>
-
-											<div class="detail-container">
-												<div class="title">${i.name}</div>
-												<div class="price">${i.price}원</div>
-												<div class="date">${i.detailDate}</div>
-												<%-- <div class="title">${flist.oriname}</div> --%>
-
-											</div>
-
-
-										</a>
-									</c:if>
-									<%-- </c:if> ^^--%>
-									<%-- </c:if> --%>
-								</c:forEach>
-							</c:forEach>
-
-
-							<!-- </a> <a href="#"> -->
-
-
-
-							<!-- imgBox 2 구간 -->
-							<!-- <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-dd
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div>
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> -->
 
 						</div>
 
