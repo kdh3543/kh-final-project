@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-
+<title>상점 검색페이지</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>index</title>
@@ -27,15 +27,12 @@
 	crossorigin="anonymous"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/index.css">
-
+<link rel="stylesheet" href="/css/header_searchBar.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/storeList.css">
 </head>
-
 <body>
-	
-<!-- form 태그 추가 button type=submit 변경 -->
-	<form action="/items/searchByInput" name =inputForm method="post" onsubmit="return frmSubmit()">
-		<!--  Header -->
+	<!--  Header -->
 		<header>
 			<div class="header_Container">
 				<c:choose>
@@ -43,11 +40,9 @@
 						<ul class="header-list-after-login">
 							<li>이미지 부분 : ${dto.profile_image}</li>
 							<li>${loginID}님안녕하세요</li>
-							<li><a href="/myPage">마이페이지</a></li>
+							<li><a href="/member/myPage">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
-							
-							
 						</ul>
 					</c:when>
 					<c:otherwise>
@@ -63,14 +58,10 @@
 					<div class="logo">
 						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 					</div>
-					
-					
 					<div class="searchBar">
 						<div class="input-group mb-3">
 
-	
-	<!-- 검색창 관련 -->
-							<div class="btn-group ">
+						<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
 									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
 									aria-label="Recipient's username"
@@ -276,145 +267,51 @@
 							
 						</script>
 
-							
+								<!-- 인기 검색어 -->
+									<!-- <ul class="dropdown-menu" style="min-width: 400px;" >
+									<li><a class="dropdown-item" href="#"><span>1.</span> Action</a></li>
+									<li><a class="dropdown-item" href="#"> actisadfasdfasdfon</a></li>
+									<li><a class="dropdown-item" href="#">Something else
+											here</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="#">검색어 전체삭제</a></li>
+								</ul>  -->
+
+								<!-- Default dropend button -->
+								<!-- <div class="btn-group dropend">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropright
+  </button>
+  <ul class="dropdown-menu">
+    Dropdown menu links
+  </ul>
+</div> -->
+
+			
 
 
 
 
+		</header>
+	
 	<main>
-		<div class="index-container">
-			<!-- 네비바 -->
-			<div class="top-div .d-sm-none .d-md-block">
-				<div class="div-wrap2">
-					<div class="btn-group">
-						<button type="button" class="btn btn-secondary-light"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fas fa-bars fa-2x"></i>
-						</button>
-						<ul class="dropdown-menu">
-
-							<!-- Dropdown menu links -->
-							<li><h6 class="dropdown-header">전체 카테고리</h6></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
-						</ul>
-					</div>
-					<div class="rightList">
-
-						<a href="/items/itemsSell" class="btn-sell"> <i
-							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="myPage" class="btn-myshop"> <i
-							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="chat/directTalk" class="btn-talk"> <i
-							class="fas fa-comment fa-2x"></i> 00톡
-						</a> | <a href="board/boardList" class="btn-talk"> <i
-							class="fas fa-edit fa-2x"></i>커뮤니티
-						</a>
-
-
+	<div class="main-container">
+		<div class="title">검색결과</div>
+		<div class="contents">
+			<div class="contents-list">
+				<div class="left-list">
+					<img src="#">
+				</div>
+				<div class="right-list">
+					<div class="store-name">스토어이름</div>
+					<div class="store-etc">
+						<span>상품 </span>|
+						<span>팔로워 </span>
 					</div>
 				</div>
 			</div>
-			<div class="middle-div">
-				<section>
-					<div id="carouselExampleControls" class="carousel slide"
-						data-bs-ride="carousel">
-						<div class="carousel-inner" style="height: auto;">
-							<div class="carousel-item active">
-								<img src="/imgs/welcome.png" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/imgs/welcome2.png" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/imgs/welcome3.png" class="d-block w-100" alt="...">
-							</div>
-						</div>
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#carouselExampleControls" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
-					</div>
-					<article>
-
-						<p class="article_title">오늘의 상품추천</p>
-						<!-- imgBox 1 구간 -->
-
-						
-								
-						<div class="imgBox  col-sm-3">
-
-							<!--상품 반복 시작 -->
-
-								<c:forEach var="i" items="${ilist}">
-									<c:forEach var="f" items="${flist}">
-
-										<c:if test="${f.parentSeq == i.iseq}">
-
-											<a href="/items/itemsDetail?iseq=${i.iseq}">
-												<div class="detail-img">
-													<img src="${f.sysName}" style="width: 100%; height: 100%;">
-												</div>
-												<div class="detail-container">
-													<div class="title">${i.name}</div>
-													<div class="price">${i.price}원</div>
-													<div class="date">${i.detailDate}</div>
-													<%-- <div class="title">${flist.oriname}</div> --%>
-												</div>
-											</a>
-
-										</c:if>
-
-									</c:forEach>
-
-								</c:forEach>
-
-
-
-						</div>
-
-
-					</article>
-				</section>
-
-			</div>
 		</div>
-		<div class="d-none d-lg-block" id="sideBar">
-			<div class="sidebar-div">
-				<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeProductBtn">
-						찜한상품<br> <i class="fas fa-heart">개수</i>
-					</button>
-
-				</a>
-				<div class="sidebar-resently-div">
-					<div class="sidebar-title-div">최근 본 상품</div>
-					<div class="sidebar-product-div">
-						<img src=""> 
-						<img src="">
-					</div>
-
-				</div>
-				<a href="#"><button class="btn btn-outline-secondary"
-						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
-			</div>
-		</div>
+	</div>
 	</main>
 	<!-- footer -->
 	<footer>
@@ -424,24 +321,5 @@
 		</div>
 	</footer>
 
-	<script>
-		$("#logoutbtn").on("click", function() {
-			if (confirm("정말 로그아웃하시겠습니까?")) {
-				location.href = "logout"
-			} else {
-				return false;
-			}
-
-		})
-		$("#leavebtn").on("click", function() {
-			if (confirm("정말 회원을 탈퇴하시겠습니까?")) {
-				location.href = "leave"
-			} else {
-				return false;
-			}
-
-		})
-	</script>
 </body>
-
 </html>

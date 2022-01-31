@@ -46,7 +46,7 @@
 
 				<div class="header_Container">
 					<ul class="header_list">
-						<li><a href="signIn">${loginID }</a></li>
+						<li><a href="signIn">로그인</a></li>
 						<li><a href="join">회원가입</a></li>
 					</ul>
 				</div>
@@ -55,15 +55,15 @@
 						<div class="logo">
 							<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 						</div>
+						
+						
+						
 					</div>
 				</div>
 				<div class="div-wrap3"></div>
 			</header>
 
 		</c:when>
-		
-		<c:otherwise>
-		</c:otherwise>
 	</c:choose>
 
 	<main>
@@ -110,13 +110,13 @@
 					</div>
 					<div class="rightList">
 
-						<a href="productAdd" class="btn-sell"> <i
+					<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="talk" class="btn-talk"> <i
+						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
-						</a> | <a href="board/boardList" class="btn-talk"> <i
+						</a> | <a href="/board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
@@ -370,8 +370,8 @@
 
 
 								<div class="add-btns-div">
-									<button type="submit" class="btn btn-outline-secondary"
-										id="productAddBtn">상품등록</button>
+									<input type="submit" class="btn btn-outline-secondary"
+										id="productAddBtn">상품등록
 									<button class="btn btn-outline-secondary" id="resetBtn"
 										type="reset">초기화</button>
 								</div>
@@ -402,16 +402,14 @@
 										<th>최근수정일
 										<th>기능
 									</tr>
-									
-								
 									<tr>
-										<td> ㅇㅇ
-										<td>판상
-										<td>상품명
-										<td>ㅁㅇㄴ
-										<td>ㅁㅇㅁㄴㅇㄴㅁㄴㅇ
-										<td>ㅁㅇㄴㅁㄴㅇ
-										<td>ㅁㅇㄴ
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
+										<td>
 									</tr>
 									<!-- 
 									<tr>

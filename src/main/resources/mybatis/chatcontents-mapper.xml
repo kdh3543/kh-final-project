@@ -26,5 +26,9 @@
 	<select id="selectLastTalk" resultType="String">
 		SELECT chatcontents FROM chatcontents WHERE contentsid IN (SELECT Max(contentsid) FROM chatcontents where productid = #{value}) order by 1
 	</select>
+	
+	<delete id="deleteByRoomId">
+		delete from chatcontents where roomid = #{value}
+	</delete>
  </mapper>
  

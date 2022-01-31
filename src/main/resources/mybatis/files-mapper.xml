@@ -4,66 +4,113 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-  
-  <mapper namespace="Files">
-  
-  	<insert id="insert">
-  	
-  		INSERT INTO FILES VALUES(files_seq.nextval, #{oriName},#{sysName},#{parentSeq})
-  		
-  	</insert>
-  	
-   	<select id ="selectBySeq" resultType="kh.spring.dto.FilesDTO">
-  	
-  		SELECT * FROM FILES WHERE parentSeq = #{seq}
-  	</select> 
-  	
-  	<select id ="selectAll" resultType="kh.spring.dto.FilesDTO">
-  	
-  		 SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) FROM FILES GROUP BY PARENTSEQ)
-  	</select>
-  	
-  	<!-- 연관상품이미지 -->
-  	<select id = "NameToSeq" resultType="kh.spring.dto.FilesDTO">
-  	SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) FROM FILES WHERE PARENTSEQ IN
-  	<foreach collection="NameToSeq" index="index" item="items" open="(" close=")" separator=",">
- 		 #{items.iseq}
- 		
- 		</foreach>
- 		GROUP BY PARENTSEQ)
-  	</select>
-  	
-  	
-  	<!--마이페이지 내 상품 사진 1개씩 보여주기  -->
-  		<select id="selectMineById" resultType="kh.spring.dto.FilesDTO"> 
-  	SELECT  F.* 
-FROM ITEMS I  INNER JOIN FILES F ON(I.ISEQ =F.PARENTSEQ)
-WHERE SELLERID =#{id} AND  SEQ IN (SELECT MIN(SEQ) FROM FILES GROUP BY PARENTSEQ)
-  	
-  	</select>
-  	
-  	<!-- <select id ="selectBySeqListing" resultType="kh.spring.dto.FilesDTO">
-  	
-  		 SELECT * FROM FILES WHERE PARENTSEQ = #{parentSeq}
-  	</select> -->
-  	  
-  	  
-  <!-- <![CDATA[ ROWNUM = 1 ]]> -->
-  
-  <!-- 아이템 수정시 삭제후 수정작업 -->
-  	<delete id  ="deleteBySeq" >
-  	
-  		DELETE FILES WHERE PARENTSEQ = #{value}
-  	</delete>
-  	
-  	<update id = "modifyProc">
-  	
- 		INSERT INTO FILES VALUES (files_seq.nextval, #{oriName},#{sysName},#{parentSeq})  
- 		
-		 	</update>
-  	
-  
-  </mapper>
 
+<mapper namespace="Files">
+
+	<insert id="insert">
+
+		INSERT INTO FILES VALUES(files_seq.nextval,
+		#{oriName},#{sysName},#{parentSeq})
+
+	</insert>
+
+	<select id="selectBySeq" resultType="kh.spring.dto.FilesDTO">
+
+		SELECT * FROM FILES WHERE
+		parentSeq = #{seq}
+	</select>
+
+	<select id="selectAll" resultType="kh.spring.dto.FilesDTO">
+
+		SELECT * FROM FILES WHERE SEQ
+		IN (SELECT MIN(SEQ) FROM FILES GROUP BY
+		PARENTSEQ)
+	</select>
+
+	<!-- 연관상품이미지 -->
+	<select id="NameToSeq" resultType="kh.spring.dto.FilesDTO">
+		SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) FROM FILES WHERE
+		PARENTSEQ IN
+		<foreach collection="NameToSeq" index="index" item="items"
+			open="(" close=")" separator=",">
+			#{items.iseq}
+
+		</foreach>
+		GROUP BY PARENTSEQ)
+	</select>
+
+
+	<!--마이페이지 내 상품 사진 1개씩 보여주기 -->
+	<select id="selectMineById" resultType="kh.spring.dto.FilesDTO">
+		SELECT F.*
+		FROM ITEMS I
+		INNER JOIN FILES F ON(I.ISEQ =F.PARENTSEQ)
+		WHERE SELLERID =#{id} AND
+		SEQ IN (SELECT MIN(SEQ) FROM FILES  
+		GROUP BY PARENTSEQ)
+		ORDER BY 1 DESC
+
+	</select>
+
+	<!-- <select id ="selectBySeqListing" resultType="kh.spring.dto.FilesDTO"> 
+		SELECT * FROM FILES WHERE PARENTSEQ = #{parentSeq} </select> -->
+
+
+	<!-- <![CDATA[ ROWNUM = 1 ]]> -->
+
+	<!-- 아이템 수정시 삭제후 수정작업 -->
+	<delete id="deleteBySeq">
+
+		DELETE FILES WHERE PARENTSEQ = #{value}
+	</delete>
+
+	<update id="modifyProc">
+
+		INSERT INTO FILES VALUES (files_seq.nextval,
+		#{oriName},#{sysName},#{parentSeq})
+
+	</update>
+
+	<!-- 검색창 관련 부분입니다. -->
+	<!-- 카테고리 검색시 사진뽑기 -->
+
+	<select id="selectByCategory"
+		resultType="kh.spring.dto.FilesDTO">
+
+
+
+		SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) AS SEQ
+		FROM
+		(SELECT F.*, I.CATEGORY
+		FROM FILES F
+		LEFT OUTER JOIN ITEMS I ON F.PARENTSEQ = I.ISEQ
+		WHERE CATEGORY = #{value}
+		ORDER BY 1 DESC)
+		GROUP BY PARENTSEQ)
+
+	</select>
+
+	<!--검색창 제목 검색시 -->
+	<select id="selectByIName" resultType="kh.spring.dto.FilesDTO">
+		SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) AS SEQ
+		FROM
+		(SELECT F.*, I.NAME
+		FROM FILES F
+		LEFT OUTER JOIN ITEMS I ON F.PARENTSEQ = I.ISEQ
+ 		WHERE NAME LIKE '%'||#{value}||'%' 
+		<!-- WHERE NAME =#{value} -->
+
+		ORDER BY 1 DESC)
+		GROUP BY PARENTSEQ)
+
+
+
+
+
+	</select>
+	<!-- 검색창 관련 부분입니다. -->
+
+
+</mapper>
 
 

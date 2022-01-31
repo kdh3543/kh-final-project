@@ -121,6 +121,19 @@ public class ItemsDAO {
 	public int addViewCount(int iseq) {
 		return mybatis.update("Items.addViewCount", iseq);
 	}
+
+
+
+	public List<ItemsDTO> selectByCategory(String category) {
+		return mybatis.selectList("Items.selectByCategory", category);
+		
+	}
+
+
+
+	public List<ItemsDTO> selectByIName(String name) {
+		return mybatis.selectList("Items.selectByIName", name);
+	}
 	
 //	 public int insert(ItemsDTO dto) { String loginId =
 //	 (String)session.getAttribute("loginId"); dto.setSeller_id(loginId); return

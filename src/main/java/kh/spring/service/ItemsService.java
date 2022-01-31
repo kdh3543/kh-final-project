@@ -87,8 +87,16 @@ public class ItemsService {
 	}
 
 	public int addViewCount(int iseq) {
-		// TODO Auto-generated method stub
 		return idao.addViewCount(iseq);
+	}
+
+	public List<ItemsDTO> selectByCategory(String category) {
+
+		return idao.selectByCategory(category);	
+		}
+
+	public List<ItemsDTO> selectByIName(String name) {
+		return idao.selectByIName(name);	
 	}
 
 

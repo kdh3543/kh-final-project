@@ -1,6 +1,8 @@
 package kh.spring.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,7 @@ public class ChatRoomDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public int insert(ChatRoomDTO dto) {
-		int result =  mybatis.insert("ChatRoom.insert",dto);
-		return dto.getRoomId();
+		return mybatis.insert("ChatRoom.insert",dto);
 	}
 	
 	public List<ChatRoomDTO> selectByBuyerId(String id){
@@ -35,7 +36,24 @@ public class ChatRoomDAO {
 		return mybatis.selectList("ChatRoom.selectByBothId",dto);
 	}
 	
-	public boolean selectByProductId(int productId) {
-		return mybatis.selectOne("ChatRoom.selectByProductId",productId);
+	public boolean selectByProductId(ChatRoomDTO dto) {	
+		return mybatis.selectOne("ChatRoom.selectByProductId",dto);
 	}
+	
+	public int bringRoomId(int productId) {
+		return mybatis.selectOne("ChatRoom.bringRoomId",productId);
+	}
+	
+	public List<ChatRoomDTO> selectByRoomId(int chatBotRoomId){
+		return mybatis.selectList("ChatRoom.selectByChatBotRoomId",chatBotRoomId);
+	}
+	
+	public int deleteByRoomId(int roomId) {
+		return mybatis.delete("ChatRoom.deleteByRoomId",roomId);
+	}
+	
+	public int bringRoomIdByBuyerId(String buyerId) {
+		return mybatis.selectOne("ChatRoom.bringRoomIdByBuyerId",buyerId);
+	}
+	
 }

@@ -70,6 +70,19 @@ public class FilesDAO {
 		return mybatis.insert("Files.modifyProc",fdto);
 
 	}
+
+
+	public List<FilesDTO> selectByCategory(String category) {
+		return mybatis.selectList("Files.selectByCategory",category);
+	}
+
+
+	public List<FilesDTO> selectByIName(String name) {
+		
+		
+		return mybatis.selectList("Files.selectByIName",name);
+
+	}
 	
 
 		
