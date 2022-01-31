@@ -10,7 +10,7 @@ html, body {
 /* header */
 header {
 	width: 100%;
-	height: 200px;
+	height: 170px;
 	justify-content: flex-end;
 	background-color: #24a6a4;
 	top: 0;
@@ -39,39 +39,48 @@ header .header-list-after-login li {
 	padding: 12px 12px;
 }
 
+
 header .header-list-after-login li:nth-child(1) {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
-	font-size: 20px;
+	font-size: 15px;
 }
 
 header .header-list-after-login li:nth-child(2) {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
-	font-size: 20px;
+	font-size: 15px;
+}
+
+header .header-list-after-login li:nth-child(3) {
+	line-height:20px;
+}
+
+header .header-list-after-login li:nth-child(4) {
+	line-height:20px;
 }
 
 header .header-list-after-login li:nth-child(3) a {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
-	font-size: 20px;
+	font-size: 15px;
 }
 
-header .header-list-after-login li:nth-child(4) a {
+/* header .header-list-after-login li:nth-child(4) a {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
 	font-size: 20px;
 }
-
-header .header-list-after-login li:nth-child(5) a {
+ */
+header .header-list-after-login li:nth-child(4) a {
 	text-decoration: none;
 	color: #f8d200;
 	font-family: 'OTWelcomeRA';
-	font-size: 20px;
+	font-size: 15px;
 }
 
 header .header_list {
@@ -88,14 +97,14 @@ header .header_list li:nth-child(1) a {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
-	font-size: 20px;
+	font-size: 15px;
 }
 
 header .header_list li:nth-child(2) a {
 	text-decoration: none;
 	color: #f8d200;
 	font-family: 'OTWelcomeRA';
-	font-size: 20px;
+	font-size: 15px;
 }
 
 header .div-wrap {
@@ -156,7 +165,7 @@ header .logo a {
 }
 
 .searchBar div:first-child {
-	width: 85%;
+	width: 90%;
 	height: 60px;
 }
 
@@ -179,6 +188,10 @@ header .logo a {
 .tab-content>.active {
 	background-color:#fff;
 }
+
+.form-control{
+	font-size:13px !important;
+}
 /* 검색어 드랍다운 */
 #recent {
 	width: 30%;;
@@ -193,6 +206,7 @@ header .logo a {
 
 .list-search-div {
 	width: 100% !important;
+	height: auto !important;
 }
 
 #text {
@@ -303,7 +317,7 @@ header .logo a {
 
 .rightList .btn-sell, .btn-myshop, .btn-talk {
 	font-family: 'OTWelcomeRA';
-	font-size: 17px;
+	font-size: 14px;
 	font-weight: 500;
 	color: rgb(33, 33, 33);
 	padding-right: 15px;
@@ -324,7 +338,7 @@ main .index-container {
 	width: 90%;
 }
 
-main .index-container .top-div .div-wrap2 {
+main .index-container #top-div .div-wrap2 {
 	display: flex;
 	align-items: flex-end;
 	height: 100%;
@@ -334,7 +348,7 @@ main .index-container .top-div .div-wrap2 {
 	padding-left: 1%;
 }
 
-main .index-container .top-div .div-wrap2 .rightList {
+main .index-container #top-div .div-wrap2 .rightList {
 	line-height: 40px;
 }
 
