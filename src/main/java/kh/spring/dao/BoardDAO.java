@@ -25,6 +25,19 @@ public class BoardDAO {
 		return mybatis.selectList("Board.selectByUser", user_id);
 	}
 
+	// 게시글 주제 검색
+	public List<BoardDTO> searchByAll(String subject) {
+		return mybatis.selectList("Board.searchByAll", subject);
+	}
+
+	// 게시글 주제 검색(로그인 시)
+	public List<BoardDTO> searchByUser(String user_id, String subject) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("subject", subject);
+		map.put("user_id", user_id);
+		return mybatis.selectList("Board.searchByUser", map);
+	}
+
 	// 시퀀스로 게시글 검색
 	public BoardDTO selectBySeq(int seq) {
 		return mybatis.selectOne("Board.selectBySeq", seq);
