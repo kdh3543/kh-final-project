@@ -26,12 +26,12 @@ public class ChatContentsService {
 		return dao.selectByRoomID(roomID);
 	}
 	
-	public List<ChatContentsDTO> selectByProductId(int productId){
-		return dao.selectByProductId(productId);
+	public List<ChatContentsDTO> selectByProductId(ChatContentsDTO dto){
+		return dao.selectByProductId(dto);
 	}
 	
-	public String selectLastTalk(int productId) {
-		return dao.selectLastTalk(productId);
+	public String selectLastTalk(int roomId) {
+		return dao.selectLastTalk(roomId);
 	}
 	
 	public int deleteByRoomId(int roomId) {
