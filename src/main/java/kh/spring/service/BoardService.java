@@ -32,7 +32,25 @@ public class BoardService {
 		}
 		return list;
 	}
+	
+	//	 게시글 주제 검색
+	public List<BoardDTO> searchByAll(String subject) {
+		List<BoardDTO> list = dao.searchByAll(subject);
+		for (BoardDTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
+	}
 
+	// 게시글 주제 검색(로그인 시)
+	public List<BoardDTO> searchByUser(String user_id, String subject) {
+		List<BoardDTO> list = dao.searchByUser(user_id, subject);
+		for (BoardDTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
+	}
+	
 	// 신규 게시글 삽입
 	public int insert(BoardDTO dto) {
 		return dao.insert(dto);

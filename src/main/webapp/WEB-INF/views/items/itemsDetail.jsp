@@ -101,8 +101,9 @@
 									<c:otherwise>
 										<button type="button"
 											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide-to="${status.index}" aria-label="${status.count}"></button>
-										
+											data-bs-slide-to="${status.index}"
+											aria-label="${status.count}"></button>
+
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -148,23 +149,23 @@
 
 
 
-<div class="detail-right">
-<c:forEach var="i" items="${ilist}" varStatus="status">
+			<div class="detail-right">
+				<c:forEach var="i" items="${ilist}" varStatus="status">
 
-				
+
 					<div class="productName">${i.name}</div>
 					<div class="productPrice">${i.price}원</div>
 					<div class="product-status">
 						<div class="status-like">좋아요</div>
-						
+
 						<div class="status-view">조회수 : ${i.view_cnt}</div>
 						<div class="status-view">작성일 : ${i.detailDate}</div>
 					</div>
-					
-			
-			</c:forEach>	
+
+
+				</c:forEach>
 				<div class="product-detail">
-				
+
 					<div class="detail-report">
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
@@ -236,17 +237,17 @@
 							</div>
 						</div>
 					</div>
-					
-			<c:forEach var="i" items="${ilist}" varStatus="status">		
-					<div class="detail-product-status">상품 상태 : ${i.condition}</div>
+
+					<c:forEach var="i" items="${ilist}" varStatus="status">
+						<div class="detail-product-status">상품 상태 : ${i.condition}</div>
 						<div class="detail-exchange">교환 여부 : ${i.refundable}</div>
 						<div class="detail-delivery">거래 희망 지역 : ${i.exarea}</div>
 						<div class="detail-location"></div>
-				
+
 					</c:forEach>
 				</div>
-			
-				
+
+
 				<c:forEach var="i" items="${ilist}" varStatus="status">	
 							<div class="detail-btns">
 					<c:choose> 
@@ -292,32 +293,35 @@
     	})
   
         </script>
-      
+
 		<div class="detail-bottom-div">
 			<div class="bottom-top">
 				<div class="bottom-top-title">연관상품</div>
 				<div class="bottom-top-img">
-				
-				
-				
-				<c:forEach var="ri" items="${rilist}"  varStatus="statusRI">
-						<c:forEach var="rf" items="${rflist}"  varStatus="statusRF">
+
+
+
+					<c:forEach var="ri" items="${rilist}" varStatus="statusRI">
+						<c:forEach var="rf" items="${rflist}" varStatus="statusRF">
+
+							<c:if test="${statusRF.index eq statusRI.index }">
+
+								<%--  <c:if test= "${rf.parentSeq == ri.iseq}"> --%>
+								<div class="bottom-top-imglist">
+									<a href="/items/itemsDetail?iseq=${ri.iseq}"><img
+										src="${rf.sysName}"
+										style="max-width: 200px; max-height: 200px;"> <a
+										href="javascript:void(0);">${ri.name}</a></a>
+									<script>
 						
-						<c:if test = "${statusRF.index eq statusRI.index }" >
-	
-							<%--  <c:if test= "${rf.parentSeq == ri.iseq}"> --%>
-							<div class="bottom-top-imglist">
-								<a href="/items/itemsDetail?iseq=${ri.iseq}"><img src="${rf.sysName}" style="max-width:200px; max-height:200px;"> <a href="javascript:void(0);">${ri.name}</a></a>
-						<script>
-						
-								</script>		
-								
-							</div>
+								</script>
+
+								</div>
 							</c:if>
-							</c:forEach>
-					
 						</c:forEach>
 
+					</c:forEach>
+				
 
 
 
@@ -338,53 +342,77 @@
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
 					<!-- 상품정보 -->
-					
-					
+
+
 					<div class="tab-pane fade show active" id="nav-profile"
 						role="tabpanel" aria-labelledby="nav-profile-tab">
 						<div class="product-section">
-						
-						
-							<div class="product-section1">
-							<c:forEach var="i" items="${ilist}" varStatus="status">		
 
-								<div class="product-info-title">상품정보</div>
-								<div class="product-info-contents">
-									${i.info}
-								</div>
-								<div class="product-middle">
-									<div class="middle-location">
-										<div class="location-title">거래지역</div>
-										<div class="location-contents">${i.exarea}</div>
-									</div>
-									<div class="middle-category">
-										<div class="category-title">카테고리</div>
-										<div class="category-contents">
-											<a href="#">${i.category}</a>
+
+							<div class="product-section1">
+								<c:forEach var="i" items="${ilist}" varStatus="status">
+
+									<div class="product-info-title">상품정보</div>
+									<div class="product-info-contents">${i.info}</div>
+									<div class="product-middle">
+										<div class="middle-location">
+											<div class="location-title">거래지역</div>
+											<div class="location-contents">${i.exarea}</div>
+										</div>
+										<div class="middle-category">
+											<div class="category-title">카테고리</div>
+											<div class="category-contents">
+												<a href="#">${i.category}</a>
+											</div>
+										</div>
+										<div class="middle-tag">
+											<div class="tag-title">태그</div>
+											<div class="tagy-contents">${i.tag}</div>
 										</div>
 									</div>
-									<div class="middle-tag">
-										<div class="tag-title">태그</div>
-										<div class="tagy-contents">${i.tag}</div>
-									</div>
-								</div>
-								
 								</c:forEach>
 								<!-- 시현이형 부분 -->
 								<div class="write-title-div">상품문의</div>
 								<div class="product-question">
-									<form action="/items/QNAWriteProc" method="post" enctype="multipart/form-data">
+									<form action="/items/QNAWriteProc" method="post"
+										enctype="multipart/form-data">
 										<div class="write-div">
-											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요." name="contents"></textarea>
+											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요."
+												name="contents"></textarea>
 										</div>
 										<div class="write-bottom-div">
 											<div>1/100</div>
 											<button type="submit" class="writeBtn" name="submit">등록</button>
-											<c:forEach var="i" items="${ilist}" varStatus="status">		
-											<input type="hidden" name="iseq" value="${i.iseq}">
+											<c:forEach var="i" items="${ilist}" varStatus="status">
+												<input type="hidden" name="iseq" value="${i.iseq}">
 											</c:forEach>
 										</div>
 									</form>
+									<div>
+										<c:forEach var="q" items="${qlist}" varStatus="status">
+										${q.writer}
+										${q.contents}
+										${q.parsed_date}
+										<c:if test="${q.writer == loginID}">
+												<div class="btn-group">
+													<button type="button" class="btn btn-secondary-light"
+														data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="fas fa-ellipsis-v fa-2x"></i>
+													</button>
+													<ul class="dropdown-menu">
+
+														<!-- Dropdown menu links -->
+														<li>
+															<h6 class="dropdown-header">메뉴</h6>
+														</li>
+														<li><a class="dropdown-item" id="deleteQNA"
+															href="/items/deleteQNAProc?qseq=${q.items_qna_seq}&iseq=${q.iseq}">삭제</a>
+														</li>
+													</ul>
+												</div>
+											</c:if>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
 							<div class="product-section2">
@@ -425,8 +453,8 @@
 							</div>
 						</div>
 					</div>
-					
-					
+
+
 					<!-- <!— 판매내역—>
 					<!— <div class="tab-pane fade" id="nav-ask" role="tabpanel" aria-labelledby="nav-ask-tab">
                         페이지2
@@ -437,12 +465,12 @@
                     </div>  —> -->
 
 				</div>
-				
-				
+
+
 			</div>
 
 		</div>
-	
+
 	</main>
 	<!-- <!— footer —> -->
 	<footer>
