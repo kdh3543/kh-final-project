@@ -86,7 +86,7 @@ public class ChatController {
 			crdto.setSellerId(sellerId);
 			crdto.setProductName(productName);
 
-			roomId = crService.insert(crdto);
+			crService.insert(crdto);
 		}
 		
 		List<ChatRoomDTO> list =  crService.selectByBuyerId(userId);
@@ -96,7 +96,6 @@ public class ChatController {
 		List<ChatContentsDTO> cList = cService.selectByProductId(cdto);
 		
 		for(int i =0; i<list.size();i++) {		
-			
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}
 		
@@ -154,10 +153,11 @@ public class ChatController {
 	}
 	
 	@RequestMapping("delSuccess")
-	public String delSuccess(int roomId){
+	public String delSuccess(int roomId,Model model){
 		System.out.println(roomId);
 		System.out.println("종료완료");
-		return  "redirect:/chat/talk";
+		model.addAttribute("roomId",roomId);
+		return  "talk/talk";
 	}
 	
 	

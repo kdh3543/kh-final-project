@@ -38,22 +38,130 @@
 
     <body>
       <header>
-        <div class="header_Container">
-          <ul class="header_list">
-            <li><a href="signIn">로그인</a></li>
-            <li><a href="join">회원가입</a></li>
-          </ul>
+			<div class="header_Container">
+				<c:choose>
+					<c:when test="${loginID != null}">
+						<ul class="header-list-after-login">
+							<li>이미지 부분 : ${dto.profile_image}</li>
+							<li>${loginID}님안녕하세요</li>
 
-        </div>
-        <div class="div-wrap">
-          <div class="nav_div">
-            <div class="logo">
-              <i class="fas fa-seedling"></i>
-              <a href="index.jsp">00마켓</a>
-            </div>
-          </div>
-        </div>
-      </header>
+							<li><a href="/items/myPage">마이페이지</a></li>
+							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+							
+							
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="header_list">
+							<li><a href="signIn">로그인</a></li>
+							<li><a href="join">회원가입</a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="div-wrap">
+				<div class="nav_div">
+					<div class="logo">
+						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+					</div>
+					
+					
+					<div class="searchBar">
+						<div class="input-group mb-3">
+
+	
+	<!-- 검색창 관련 -->
+							<div class="btn-group ">
+								<input type="text" name="keyword" class="form-control"
+									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
+									aria-label="Recipient's username"
+									aria-describedby="button-addon2" id="search"
+									data-bs-toggle="dropdown" aria-expanded="false">
+
+								<!-- 돋보기-->
+								<button class="btn btn-outline-secondary" type="submit"
+									id="button-addon2">
+									<i class="fas fa-search fa-2x"></i>
+								</button>
+								<!--  돋보기 끝-->
+								
+								<input type=hidden name="user_id" value="${loginID}">
+								
+
+								<!-- 최신검색어-->
+								<!--  수정 -->
+
+								<div class="dropdown-menu" id=recent>
+									<!-- <a class="dropdown-item" href="/"
+										style="text-align: center"> -->
+										<div class="list-search-div">
+									<div class="list-search-div">
+									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
+										style="text-align: center">
+											<nav>
+												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													
+													<button class="nav-link active" id="nav-home-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-home"
+														type="button" role="tab" aria-controls="nav-home"
+														aria-selected="true">최근검색어</button>
+														
+														
+													<button class="nav-link" id="nav-profile-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-profile"
+														type="button" role="tab" aria-controls="nav-profile"
+														aria-selected="false">인기검색어</button>
+
+												</div>
+											</nav>
+											<!-- 최근검색어 -->
+											<div class="tab-content" id="nav-tabContent">
+												<div class="tab-pane fade show active" id="nav-home"
+													role="tabpanel" aria-labelledby="nav-home-tab">
+
+													<!-- 내용 채워넣기 -->
+													<div id=text>
+													
+													<button type=button id=delBtn class="dropdown-item"
+														style="display: inline"><b><h5>검색어 전체삭제</h5></b></button>												
+													</div>
+																	
+														
+												</div>
+												<!--  인기검색어-->
+												  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+												
+												  </div>
+													
+												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+													aria-labelledby="nav-profile-tab">
+													<div class="hotkeyword-title">인기검색어 순위</div>
+													<div class=hotkeyword-contents>
+													
+													
+													<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
+														
+														<div>
+															<span class="hotkeyword-num">${statusHS.count}.</span>
+															<span class="hotkeyword-word">${hs.keyword}</span>
+														</div>
+														
+														
+														</c:forEach>
+													</div>
+												</div>
+
+											</div>
+											</a>
+										</div>
+								</div>
+							</div>
+							</div>
+							</div>
+						</div>
+					</div>
+		</header>
       <main>
         <div class="talk-container">
           <div class="talk-left">
@@ -130,8 +238,8 @@
                   console.log("되라: " + $("#chatDelBtn${delCount.count}").val());
                   if (confirm("정말 채팅방을 나가시겠습니까?")) {
                     // location.href="/chat/delChatRoom?roomId="+$(".hiddenRoomId${delCount.current}").val();
-                    location.href = "/chat/delChatRoom?buyerId=" + $("#hiddenId").val() + "&sellerId=" + $("#hiddenSellerId").val()
-                      + "&productId=" + $("#hiddenProductId");
+                    // location.href = "/chat/delChatRoom?buyerId=" + $("#hiddenId").val() + "&sellerId=" + $("#hiddenSellerId").val()
+                    //   + "&productId=" + $("#hiddenProductId");
 
                     $.ajax({
                       url: "/chat/delChatRoom",
@@ -140,9 +248,9 @@
                       }
                     }).done(function (resp) {
                       if (resp > 0) {
-                        ws.send("대화하는 사람이 나갔습니다." + '<br>' + $("#hiddenSellerId").val() + '<br>' + $("#hiddenProductName").val() + '<br>' + "" + '<br>' + roomId);
+                        // ws.send("대화하는 사람이 나갔습니다." + '<br>' + $("#hiddenSellerId").val() + '<br>' + $("#hiddenProductName").val() + '<br>' + "" + '<br>' + roomId);
 
-                        location.href = "/chat/directTalk";
+                        location.href = "/chat/delSuccess?roomId=0";
                       }
                     })
                   }
@@ -153,42 +261,60 @@
 
           </div>
 
-          <div class="talk-right">
-            <div class="right-top">
-              <div class="right-title-left">
-                <div class="title-img">
-                  <i class="fas fa-camera fa-2x"></i>
-                </div>
-
-                <div class="title-name">
-                  ${productName}
-                  <input type=hidden value="${productId}" id="productId">
-                </div>
-
-              </div>
-              <div class="right-title-right">
-                <div class="title-alarms"></div>
-              </div>
-            </div>
+          
 
 
             <c:choose>
               <c:when test="${roomId == 0}">
+                <div class="talk-right">
+                  <div class="right-top">
+                    <div class="right-title-left">
+                      <div class="title-img">
+                        <i class="fas fa-camera fa-2x"></i>
+                      </div>
+                      <div class="title-name">
+                        00톡 첫페이지입니다
+                      </div>
+                    </div>
+                    <div class="right-title-right">
+                      <div class="title-alarms"></div>
+                    </div>
+                  </div>
                 <div class="right-middle">
                   <div class="initial-page">
-                    <div class="line">
-                      테스트 중입니다.
+                    <div class="initial-page-line">
+                      00톡 첫페이지입니다.<br>
+                      판매자 및 구매자와 연락하고 싶으시면<br>
+                      왼쪽 채팅방을 클릭한 뒤<br>
+                      채팅을 시작해주세요
                     </div>
                   </div>
                 </div>
 
                 <div class="right-bottom">
-                  <input type=text placeholder="입력하지 못합니다" id="preventInput" disabled>
-                  <button type="button">전송못함</button>
+                  <input type=text placeholder="이 페이지는 입력할 수 없는 페이지입니다." id="preventInput" disabled>
+                  <button type="button">전송불가</button>
 
                 </div>
               </c:when>
               <c:otherwise>
+                <div class="talk-right">
+                  <div class="right-top">
+                    <div class="right-title-left">
+                      <div class="title-img">
+                        <i class="fas fa-camera fa-2x"></i>
+                      </div>
+      
+                      <div class="title-name">
+                        ${productName}
+                        <input type=hidden value="${productId}" id="productId">
+                      </div>
+      
+                    </div>
+                    <div class="right-title-right">
+                      <div class="title-alarms"></div>
+                    </div>
+                  </div>
                 <div class="right-middle">
 
                   대화내용
@@ -257,8 +383,8 @@
                 <div class="right-bottom">
                   <div contenteditable="true" id="message"></div>
 
-                  <button id="send">전송하기</button>
-                  <input type=hidden value=${roomId} id="roomId">
+                  <button id="send">전송하기${roomId }</button>
+                  <input type=hidden value="${roomId}" id="roomId">
                 </div>
 
               </c:otherwise>
