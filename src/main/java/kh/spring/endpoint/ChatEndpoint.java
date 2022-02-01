@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,9 +14,6 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
@@ -100,10 +98,11 @@ public class ChatEndpoint{
 
 				key = sessionIds.next();
 				
-				
+				System.out.println("key 값은: "+key);
 				crdto.setBuyerId(key);
 				crdto.setSellerId(key);
 				crdto.setRoomId(roomId);
+				System.out.println("존재 여부는: "+crdao.keyCount(crdto)); 
 				
 				if(crdao.keyCount(crdto)) {
 					try {
@@ -135,15 +134,16 @@ public class ChatEndpoint{
 	@OnClose
 	public void onClose(Session session) throws IOException {
 
-		//		String userId = (String)this.session.getAttribute("loginID");
-		//		
-		//		int roomId = crdao.bringRoomIdByBuyerId(userId);
-		//		System.out.println(roomId);
-		//		List<ChatContentsDTO> list = ccdao.selectByRoomID(roomId);
-		//		System.out.println("list의 사이즈는 : " +list.size());
-		//		if(list.size()==0) {
-		//			crdao.deleteByRoomId(roomId);
-		//		}
+				String userId = (String)this.hSession.getAttribute("loginID");
+				
+				int roomId = crdao.bringRoomIdByBuyerId(userId);
+				System.out.println(roomId);
+				List<ChatContentsDTO> list = ccdao.selectByRoomID(roomId);
+				System.out.println("list의 사이즈는 : " +list.size());
+				if(list.size()==0) {
+					crdao.deleteByRoomId(roomId);
+					System.out.println("삭제 완료!!");
+				}
 		System.out.println("user 전의 사이즈는 : "+users.size());
 		//		clients.remove(session);
 		

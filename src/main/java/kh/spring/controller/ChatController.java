@@ -154,9 +154,22 @@ public class ChatController {
 	
 	@RequestMapping("delSuccess")
 	public String delSuccess(int roomId,Model model){
+		String id = (String)session.getAttribute("loginID");
+		
+		//채팅방에 대한 룸 정보 가져오기
+		ChatRoomDTO dto = new ChatRoomDTO();
+		dto.setBuyerId(id);
+		dto.setSellerId(id);
+		List<ChatRoomDTO> list = crService.selectByBothId(dto);
+		for(int i =0; i<list.size();i++) {	
+			
+			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
+		}
+		
 		System.out.println(roomId);
 		System.out.println("종료완료");
 		model.addAttribute("roomId",roomId);
+		model.addAttribute("list",list);
 		return  "talk/talk";
 	}
 	

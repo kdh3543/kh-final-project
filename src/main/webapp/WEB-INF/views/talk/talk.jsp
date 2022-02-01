@@ -38,130 +38,127 @@
 
     <body>
       <header>
-			<div class="header_Container">
-				<c:choose>
-					<c:when test="${loginID != null}">
-						<ul class="header-list-after-login">
-							<li>이미지 부분 : ${dto.profile_image}</li>
-							<li>${loginID}님안녕하세요</li>
+        <div class="header_Container">
+          <c:choose>
+            <c:when test="${loginID != null}">
+              <ul class="header-list-after-login">
+                <li>이미지 부분 : ${dto.profile_image}</li>
+                <li>${loginID}님안녕하세요</li>
 
-							<li><a href="/items/myPage">마이페이지</a></li>
-							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
-							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
-							
-							
-						</ul>
-					</c:when>
-					<c:otherwise>
-						<ul class="header_list">
-							<li><a href="signIn">로그인</a></li>
-							<li><a href="join">회원가입</a></li>
-						</ul>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<div class="div-wrap">
-				<div class="nav_div">
-					<div class="logo">
-						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
-					</div>
-					
-					
-					<div class="searchBar">
-						<div class="input-group mb-3">
+                <li><a href="/items/myPage">마이페이지</a></li>
+                <li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
+                <li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
-	
-	<!-- 검색창 관련 -->
-							<div class="btn-group ">
-								<input type="text" name="keyword" class="form-control"
-									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
-									aria-label="Recipient's username"
-									aria-describedby="button-addon2" id="search"
-									data-bs-toggle="dropdown" aria-expanded="false">
 
-								<!-- 돋보기-->
-								<button class="btn btn-outline-secondary" type="submit"
-									id="button-addon2">
-									<i class="fas fa-search fa-2x"></i>
-								</button>
-								<!--  돋보기 끝-->
-								
-								<input type=hidden name="user_id" value="${loginID}">
-								
+              </ul>
+            </c:when>
+            <c:otherwise>
+              <ul class="header_list">
+                <li><a href="signIn">로그인</a></li>
+                <li><a href="join">회원가입</a></li>
+              </ul>
+            </c:otherwise>
+          </c:choose>
+        </div>
+        <div class="div-wrap">
+          <div class="nav_div">
+            <div class="logo">
+              <i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+            </div>
 
-								<!-- 최신검색어-->
-								<!--  수정 -->
 
-								<div class="dropdown-menu" id=recent>
-									<!-- <a class="dropdown-item" href="/"
+            <div class="searchBar">
+              <div class="input-group mb-3">
+
+
+                <!-- 검색창 관련 -->
+                <div class="btn-group ">
+                  <input type="text" name="keyword" class="form-control" placeholder="상점명 또는 물품명 등을 검색해 보세요!"
+                    aria-label="Recipient's username" aria-describedby="button-addon2" id="search"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+
+                  <!-- 돋보기-->
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                    <i class="fas fa-search fa-2x"></i>
+                  </button>
+                  <!--  돋보기 끝-->
+
+                  <input type=hidden name="user_id" value="${loginID}">
+
+
+                  <!-- 최신검색어-->
+                  <!--  수정 -->
+
+                  <div class="dropdown-menu" id=recent>
+                    <!-- <a class="dropdown-item" href="/"
 										style="text-align: center"> -->
-										<div class="list-search-div">
-									<div class="list-search-div">
-									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
-										style="text-align: center">
-											<nav>
-												<div class="nav nav-tabs" id="nav-tab" role="tablist">
-													
-													<button class="nav-link active" id="nav-home-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-home"
-														type="button" role="tab" aria-controls="nav-home"
-														aria-selected="true">최근검색어</button>
-														
-														
-													<button class="nav-link" id="nav-profile-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-profile"
-														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어</button>
+                    <div class="list-search-div">
+                      <div class="list-search-div">
+                        <a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
+                          style="text-align: center">
+                          <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-												</div>
-											</nav>
-											<!-- 최근검색어 -->
-											<div class="tab-content" id="nav-tabContent">
-												<div class="tab-pane fade show active" id="nav-home"
-													role="tabpanel" aria-labelledby="nav-home-tab">
+                              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                aria-selected="true">최근검색어</button>
 
-													<!-- 내용 채워넣기 -->
-													<div id=text>
-													
-													<button type=button id=delBtn class="dropdown-item"
-														style="display: inline"><b><h5>검색어 전체삭제</h5></b></button>												
-													</div>
-																	
-														
-												</div>
-												<!--  인기검색어-->
-												  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-												
-												  </div>
-													
-												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">
-													<div class="hotkeyword-title">인기검색어 순위</div>
-													<div class=hotkeyword-contents>
-													
-													
-													<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
-														
-														<div>
-															<span class="hotkeyword-num">${statusHS.count}.</span>
-															<span class="hotkeyword-word">${hs.keyword}</span>
-														</div>
-														
-														
-														</c:forEach>
-													</div>
-												</div>
 
-											</div>
-											</a>
-										</div>
-								</div>
-							</div>
-							</div>
-							</div>
-						</div>
-					</div>
-		</header>
+                              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                                aria-selected="false">인기검색어</button>
+
+                            </div>
+                          </nav>
+                          <!-- 최근검색어 -->
+                          <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                              aria-labelledby="nav-home-tab">
+
+                              <!-- 내용 채워넣기 -->
+                              <div id=text>
+
+                                <button type=button id=delBtn class="dropdown-item" style="display: inline"><b>
+                                    <h5>검색어 전체삭제</h5>
+                                  </b></button>
+                              </div>
+
+
+                            </div>
+                            <!--  인기검색어-->
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                              aria-labelledby="nav-contact-tab">
+
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                              aria-labelledby="nav-profile-tab">
+                              <div class="hotkeyword-title">인기검색어 순위</div>
+                              <div class=hotkeyword-contents>
+
+
+                                <c:forEach var="hs" items="${hslist}" varStatus="statusHS">
+
+                                  <div>
+                                    <span class="hotkeyword-num">${statusHS.count}.</span>
+                                    <span class="hotkeyword-word">${hs.keyword}</span>
+                                  </div>
+
+
+                                </c:forEach>
+                              </div>
+                            </div>
+
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </header>
       <main>
         <div class="talk-container">
           <div class="talk-left">
@@ -215,10 +212,10 @@
 
                       <input type=hidden value="${list.roomId }" id="hiddenRoomId" class="hiddenRoomId${delCount.count}"
                         pid=${list.productId}>
-                      <input type=hidden value="${list.productId }" id="hiddenProductId">
-                      <input type=hidden value="${list.sellerId}" id="hiddenSellerId">
-                      <input type=hidden value="${list.productName}" id="hiddenProductName">
-                      <input type=hidden value="${list.buyerId}" id="hiddenBuyerId">
+                      <input type=hidden value="${list.productId }" id="hiddenProductId" >
+                      <input type=hidden value="${list.sellerId}" id="hiddenSellerId" class="hiddenSellerId${delCount.count}">
+                      <input type=hidden value="${list.productName}" id="hiddenProductName" class="hiddenProductName${delCount.count}">
+                      <input type=hidden value="${list.buyerId}" id="hiddenBuyerId" class="hiddenBuyerId${delCount.count}">
                       <input type=hidden value="${id}" id="hiddenId">
                     </div>
 
@@ -235,12 +232,36 @@
                 test = $("#chatDelBtn${delCount.count}").val()
                 $("#chatDelBtn${delCount.count}").on("click", function () {
 
-                  console.log("되라: " + $("#chatDelBtn${delCount.count}").val());
+                  console.log("id값은: " +hiddenSellerId.val());
+                  console.log("상품이름은: " +hiddenProductName.val());
                   if (confirm("정말 채팅방을 나가시겠습니까?")) {
-                    // location.href="/chat/delChatRoom?roomId="+$(".hiddenRoomId${delCount.current}").val();
-                    // location.href = "/chat/delChatRoom?buyerId=" + $("#hiddenId").val() + "&sellerId=" + $("#hiddenSellerId").val()
-                    //   + "&productId=" + $("#hiddenProductId");
+                    
+                    let hiddenSellerId = $(".hiddenSellerId${delCount.count}");
+                    let hiddenRoomId = $("#hiddenRoomId");
+                    let hiddenProductId = $("#hiddenProductId");
+                    let hiddenProductName = $(".hiddenProductName${delCount.count}");
+                    let productId = $("#productId");
+                    let hiddenBuyerId = $(".hiddenBuyerId${delCount.count}");
+                    let hiddenId = $("#hiddenId").val();
 
+                    let url = window.location.href;
+                    
+                    let urlParams = new URLSearchParams(url);
+                    
+                    console.log("id값은: " +hiddenSellerId.val());
+                    console.log("상품이름은: " +hiddenProductName.val());
+
+                    let roomId = urlParams.get('roomId');
+                    if (roomId == 0) {
+                      roomId = $("#roomId").val();
+                      ws.send("상대방이 채팅방에서 나갔습니다." + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+                    } else {
+                      ws.send("상대방이 채팅방에서 나갔습니다." + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+                    }
+                    
+
+                    alert("채팅방 내용이 모두 삭제되었습니다.");
+                    
                     $.ajax({
                       url: "/chat/delChatRoom",
                       data: {
@@ -248,8 +269,6 @@
                       }
                     }).done(function (resp) {
                       if (resp > 0) {
-                        // ws.send("대화하는 사람이 나갔습니다." + '<br>' + $("#hiddenSellerId").val() + '<br>' + $("#hiddenProductName").val() + '<br>' + "" + '<br>' + roomId);
-
                         location.href = "/chat/delSuccess?roomId=0";
                       }
                     })
@@ -261,25 +280,25 @@
 
           </div>
 
-          
 
 
-            <c:choose>
-              <c:when test="${roomId == 0}">
-                <div class="talk-right">
-                  <div class="right-top">
-                    <div class="right-title-left">
-                      <div class="title-img">
-                        <i class="fas fa-camera fa-2x"></i>
-                      </div>
-                      <div class="title-name">
-                        00톡 첫페이지입니다
-                      </div>
+
+          <c:choose>
+            <c:when test="${roomId == 0}">
+              <div class="talk-right">
+                <div class="right-top">
+                  <div class="right-title-left">
+                    <div class="title-img">
+                      <i class="fas fa-camera fa-2x"></i>
                     </div>
-                    <div class="right-title-right">
-                      <div class="title-alarms"></div>
+                    <div class="title-name">
+                      00톡 첫페이지입니다
                     </div>
                   </div>
+                  <div class="right-title-right">
+                    <div class="title-alarms"></div>
+                  </div>
+                </div>
                 <div class="right-middle">
                   <div class="initial-page">
                     <div class="initial-page-line">
@@ -296,25 +315,25 @@
                   <button type="button">전송불가</button>
 
                 </div>
-              </c:when>
-              <c:otherwise>
-                <div class="talk-right">
-                  <div class="right-top">
-                    <div class="right-title-left">
-                      <div class="title-img">
-                        <i class="fas fa-camera fa-2x"></i>
-                      </div>
-      
-                      <div class="title-name">
-                        ${productName}
-                        <input type=hidden value="${productId}" id="productId">
-                      </div>
-      
+            </c:when>
+            <c:otherwise>
+              <div class="talk-right">
+                <div class="right-top">
+                  <div class="right-title-left">
+                    <div class="title-img">
+                      <i class="fas fa-camera fa-2x"></i>
                     </div>
-                    <div class="right-title-right">
-                      <div class="title-alarms"></div>
+
+                    <div class="title-name">
+                      ${productName}
+                      <input type=hidden value="${productId}" id="productId">
                     </div>
+
                   </div>
+                  <div class="right-title-right">
+                    <div class="title-alarms"></div>
+                  </div>
+                </div>
                 <div class="right-middle">
 
                   대화내용
@@ -364,7 +383,7 @@
                               </div>
                               <div class="chatTime">
                                 <div class="chatRead">
-                                  
+
                                 </div>
                                 <div class="time">
                                   ${cList.formDate }
@@ -383,14 +402,14 @@
                 <div class="right-bottom">
                   <div contenteditable="true" id="message"></div>
 
-                  <button id="send">전송하기${roomId }</button>
+                  <button id="send">전송하기</button>
                   <input type=hidden value="${roomId}" id="roomId">
                 </div>
 
-              </c:otherwise>
-            </c:choose>
+            </c:otherwise>
+          </c:choose>
 
-          </div>
+        </div>
 
         </div>
       </main>
@@ -442,12 +461,20 @@
           let jsonProductId = jsonObject.productId;
           let jsonRoomId = jsonObject.roomId;
 
-          // 채팅 쳤을 때 input type text가 사라지는 이유 
-
+          
           $("#hiddenRoomId[pid=" + jsonProductId + "]").val(jsonRoomId);
           $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
 
-
+          if(message == "상대방이 채팅방에서 나갔습니다."){
+            chatMessage.attr("contenteditable","false");
+            console.log("확인완료");
+            function Event(){
+              if(e.keyCode==116){
+              location.href = "/chat/delSuccess?roomId=0";
+              }
+            }
+            
+          }
           let url = window.location.href;
           console.log(url);
           let urlParams = new URLSearchParams(url);
@@ -524,7 +551,7 @@
           }, 1000);
 
         }
-        
+
 
         //전송하기 버튼을 클릭했을 때
         send.on("click", function () {
@@ -534,8 +561,19 @@
           let text = chatMessage.html();
           chatMessage.html("");
           chatMessage.focus();
-          console.log(hiddenSellerId);
-          ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + test);
+
+          let url = window.location.href;
+          console.log(url);
+          let urlParams = new URLSearchParams(url);
+          console.log(urlParams);
+
+          let roomId = urlParams.get('roomId');
+          if (roomId == 0) {
+            roomId = $("#roomId").val();
+            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+          } else {
+            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+          }
 
           rightMiddle.stop().animate({
             scrollTop: rightMiddle[0].scrollHeight

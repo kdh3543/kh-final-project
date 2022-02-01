@@ -248,43 +248,40 @@
 				</div>
 
 
-				<c:forEach var="i" items="${ilist}" varStatus="status">
-					<div class="detail-btns">
-						<c:choose>
-							<c:when test="${i.sellerID eq loginID}">
-								<button type="button" id="btn-myPage"
-									class="btn btn-lg btn-light">내상점관리</button>
-							</c:when>
-							<c:otherwise>
-								<button id="btn-like" class="btn btn-lg btn-light">찜</button>
-								<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
-								<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
-							</c:otherwise>
+				<c:forEach var="i" items="${ilist}" varStatus="status">	
+							<div class="detail-btns">
+					<c:choose> 
+						<c:when test = "${i.sellerID eq loginID}">
+					<button type="button" id="btn-myPage" class="btn btn-lg btn-light">내상점관리</button>
+						</c:when>
+						<c:otherwise>
+						<button id="btn-like" class="btn btn-lg btn-light">찜</button>
+						<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
+						<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
+						</c:otherwise>
 						</c:choose>
 					</div>
-				</c:forEach>
-				<!-- 진행중 -->
-			</div>
-
+					
+					<!--  동현이형 -->
+           			 <!-- 연락하기 버튼을 눌렀을 때의 script -->
+			        <input type=hidden value="베이직후드티" id="hiddenProduct">
+			        <input type=hidden value="2" id="hiddenProductId">
+			        <script>
+			        	let hiddenProduct = $("#hiddenProduct").val();
+			        	let hiddenProductId = $("#hiddenProductId").val();
+			            let roomId = 0;
+			        	$("#btn-talk").on("click",function(){
+			        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
+			        	})
+			        </script> 
+			        <!-- 동현이형 /// -->
+					</c:forEach>	
+					<!-- 진행중 -->
+				</div>
+			
 		</div>
-
-
-		<!--  동현이형 -->
-		<!-- 연락하기 버튼을 눌렀을 때의 script -->
-		<input type=hidden value="베이직후드티" id="hiddenProduct"> <input
-			type=hidden value="2" id="hiddenProductId">
-		<script>
-        	let hiddenProduct = $("#hiddenProduct").val();
-        	let hiddenProductId = $("#hiddenProductId").val();
-            let roomId = 0;
-        	$("#btn-talk").on("click",function(){
-        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
-        	})
-        </script>
-
-
-		<!-- 동현이형 /// -->
-		<script>
+        
+        <script>
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){
         		location.href = "/items/itemsOrder";
@@ -324,7 +321,7 @@
 						</c:forEach>
 
 					</c:forEach>
-
+				
 
 
 
@@ -373,7 +370,6 @@
 											<div class="tagy-contents">${i.tag}</div>
 										</div>
 									</div>
-
 								</c:forEach>
 								<!-- 시현이형 부분 -->
 								<div class="write-title-div">상품문의</div>
@@ -409,8 +405,7 @@
 														<li>
 															<h6 class="dropdown-header">메뉴</h6>
 														</li>
-														<li>
-															<a class="dropdown-item" id="deleteQNA"
+														<li><a class="dropdown-item" id="deleteQNA"
 															href="/items/deleteQNAProc?qseq=${q.items_qna_seq}&iseq=${q.iseq}">삭제</a>
 														</li>
 													</ul>
