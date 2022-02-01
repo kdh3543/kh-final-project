@@ -61,7 +61,7 @@
 					<div class="searchBar">
 						<div class="input-group mb-3">
 
-							<div class="btn-group ">
+						<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
 									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
 									aria-label="Recipient's username"
@@ -74,67 +74,119 @@
 									<i class="fas fa-search fa-2x"></i>
 								</button>
 								<!--  돋보기 끝-->
-								<input type=hidden name="user_id" value="test33">
+								
+								<input type=hidden name="user_id" value="${loginID}">
+								
 
 								<!-- 최신검색어-->
+								<!--  수정 -->
 
 								<div class="dropdown-menu" id=recent>
+									<!-- <a class="dropdown-item" href="/"
+										style="text-align: center"> -->
+										<div class="list-search-div">
+									<div class="list-search-div">
 									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
 										style="text-align: center">
-										<div class="list-search-div">
 											<nav>
 												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													
 													<button class="nav-link active" id="nav-home-tab"
 														data-bs-toggle="tab" data-bs-target="#nav-home"
 														type="button" role="tab" aria-controls="nav-home"
 														aria-selected="true">최근검색어</button>
+														
+														
 													<button class="nav-link" id="nav-profile-tab"
 														data-bs-toggle="tab" data-bs-target="#nav-profile"
 														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어보기</button>
+														aria-selected="false">인기검색어</button>
 
 												</div>
 											</nav>
+											<!-- 최근검색어 -->
 											<div class="tab-content" id="nav-tabContent">
 												<div class="tab-pane fade show active" id="nav-home"
 													role="tabpanel" aria-labelledby="nav-home-tab">
 
 													<!-- 내용 채워넣기 -->
-													<div id=text></div>
+													<div id=text>
+													
 													<button type=button id=delBtn class="dropdown-item"
-														style="display: inline">검색어 전체삭제</button>
+														style="display: inline"><b><h5>검색어 전체삭제</h5></b></button>												
+													</div>
+																	
+														
 												</div>
+												<!--  인기검색어-->
+												  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+												
+												  </div>
+													
 												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">인기검색어보기</div>
+													aria-labelledby="nav-profile-tab">
+													<div class="hotkeyword-title">인기검색어 순위</div>
+													<div class=hotkeyword-contents>
+													
+													
+													<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
+														
+														<div>
+															<span class="hotkeyword-num">${statusHS.count}.</span>
+															<span class="hotkeyword-word">${hs.keyword}</span>
+														</div>
+														
+														
+														</c:forEach>
+													</div>
+												</div>
 
 											</div>
+											</a>
 										</div>
-									</a>
 								</div>
-
-
-								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 							</div>
-
+							</div>
+							</div>
 						</div>
+					</div>
+		</header>
+	</form>
+
+
+
+<!-- 검색어 전체 삭제 -->
+								<script>
+								
+									$("#delBtn").on("click", function() {
+										$.ajax({
+											url : "/items/deleteAll",
+										}).done(function(resp) {
+											console.log(resp);
+											$("#text").empty();
+										})
+									})
+								</script>
+								
+								<!-- 검색어 하나 눌렀을때 검색되게 -->
+
+								<script>
+									$('#text').on("click",	".delBtnOne",function() {
+										/*버튼 X 제거하고 값 추출  */
+														var str = $(this).parent().text().slice(0, -1);
+														$(this).parent().remove();
+
+														$.ajax({
+															url : "/items/deleteByKeyword?keyword="+ str
+																	}).done(function(resp) {
+																		
+																	})
+																})
+								</script>
+								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 
 						<script>
-							$("#delBtn").on("click", function() {
-
-								$.ajax({
-									url : "/items/deleteAll",
-
-								}).done(function(resp) {
-									console.log(resp);
-
-									$("#text").empty();
-
-								})
-
-							})
-						</script>
-
-						<script>
+						// 검색버튼 눌렀을 때, 
 							$(function() {
 
 								$("#search").one("click", function() {
@@ -146,14 +198,15 @@
 
 										resp = JSON.parse(resp);
 
-										for (let i = 0; i < resp.length; i++) {
+										for (let i = 0; i < 5; i++) {
 											let text = $("#text");
 
 											let line = $("<div>");
 											line.addClass("line");
-											/*  line.css("background-color" ,"white").css("width","80%").css("padding","0px").css("margin","0px").css("border-radius","3px").css("float","left"); */
 
-											let textLine = $("<div>");
+										
+											 let textLine= $("<div>");
+											
 
 											textLine.append(resp[i].keyword);
 
@@ -166,59 +219,66 @@
 
 											textLine.append(text.val());
 											textLine.append(delButton);
+										
 
 											line.append(textLine);
 
 											$("#text").append(line);
-											$("#recent").on('click', function (e) {
-					                             e.stopPropagation();
-					                           });
 
 										}
 
 									})
 								})
 							})
+							/*드랍다운 꺼지는 것 방지 */
+							$("#recent").on('click', function (e) {
+					                             e.stopPropagation();
+					                           });
+					// 삭제할 때, 
+							$('#text').on("click",".delBtnOne",function() {
+								/*버튼 X 제거하고 값 추출  */
+								var str = $(this).parent().text().slice(0, -1);
+								$(this).parent().remove();
+								$.ajax({
+								url : "/items/deleteByKeyword?keyword="+ str
+								}).done(function(resp) {
+
+
+								})
+
+							})
+			
+						</script>
+						
+						<!-- 검색시 공백 막기-->
+							<script>
+						
+						function frmSubmit() {
+							let searchValue = $("#search").val();
+							console.log(searchValue);
+							if(searchValue ==null || searchValue == "" ){
+								alert("상품명 또는 @상점명을 검색하세요")
+								return false;
+								
+							}
+							
+							}
+							
+							
 						</script>
 
-						<script>
-							$('#text')
-									.on(
-											"click",
-											".delBtnOne",
-											function() {
-
-												/*버튼 X 제거하고 값 추출  */
-												var str = $(this).parent()
-														.text().slice(0, -1);
-												$(this).parent().remove();
-
-												$
-														.ajax(
-																{
-																	url : "/items/deleteByKeyword?keyword="
-																			+ str
-
-																}).done(
-																function(resp) {
-
-																})
-
-											})
-						</script>
-
-						<!-- 인기 검색어 -->
-						<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
+								<!-- 인기 검색어 -->
+									<!-- <ul class="dropdown-menu" style="min-width: 400px;" >
 									<li><a class="dropdown-item" href="#"><span>1.</span> Action</a></li>
 									<li><a class="dropdown-item" href="#"> actisadfasdfasdfon</a></li>
 									<li><a class="dropdown-item" href="#">Something else
 											here</a></li>
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" href="#">검색어 전체삭제</a></li>
-								</ul> -->
+								</ul>  -->
 
-						<!-- Default dropend button -->
-						<!-- <div class="btn-group dropend">
+								<!-- Default dropend button -->
+								<!-- <div class="btn-group dropend">
   <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     Dropright
   </button>
@@ -227,13 +287,8 @@
   </ul>
 </div> -->
 
+			
 
-					</div>
-
-
-
-				</div>
-			</div>
 
 
 

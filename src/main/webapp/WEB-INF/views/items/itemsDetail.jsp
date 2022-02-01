@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,11 +37,27 @@
 	<!--  Header -->
 	<header>
 		<div class="header_Container">
-			<ul class="header_list">
-				<li><a href="signIn">로그인</a></li>
-				<li><a href="join">회원가입</a></li>
-			</ul>
+			<c:choose>
+				<c:when test="${loginID != null}">
+					<ul class="header-list-after-login">
+						<li>이미지 부분 : ${dto.profile_image}</li>
+						<li>${loginID}님안녕하세요</li>
+						<li><a href="/myPage">마이페이지</a></li>
+						<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
+						<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<ul class="header_list">
+						<li><a href="signIn">로그인</a></li>
+						<li><a href="join">회원가입</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
 		</div>
+
+
+
 		<div class="div-wrap">
 			<div class="nav_div">
 				<div class="logo">
@@ -47,7 +66,7 @@
 				<div class="searchBar">
 					<div class="input-group mb-3">
 						<input type="text" class="form-control"
-							placeholder="동네 이름, 물품명 등을 검색해 보세요!"
+							placeholder="상점명, 물품명 등을 검색해 보세요!"
 							aria-label="Recipient's username"
 							aria-describedby="button-addon2">
 						<button class="btn btn-outline-secondary" type="button"
@@ -66,38 +85,86 @@
 					<!-- <i class="fas fa-camera fa-2x"></i> -->
 					<div id="carouselExampleIndicators" class="carousel slide"
 						data-bs-ride="carousel">
+
 						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="0" class="active" aria-current="true"
-								aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="1" aria-label="Slide 2"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="2" aria-label="Slide 3"></button>
+							<c:forEach var="f" items="${flist}" varStatus="status">
+
+								<c:choose>
+
+									<c:when test="${status.first}">
+
+										<button type="button"
+											data-bs-target="#carouselExampleIndicators"
+											data-bs-slide-to="0" class="active" aria-current="true"
+											aria-label="Slide 1"></button>
+									</c:when>
+									<c:otherwise>
+										<button type="button"
+											data-bs-target="#carouselExampleIndicators"
+											data-bs-slide-to="${status.index}" aria-label="${status.count}"></button>
+										
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+
+
 						</div>
+
+
+
+
+
+
 						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="/imgs/t-shirt.jpeg" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/imgs/testPic.png" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="/imgs/testPic.png" class="d-block w-100" alt="...">
-							</div>
+							<c:forEach var="f" items="${flist}" varStatus="status">
+
+								<c:choose>
+
+									<c:when test="${status.first}">
+
+										<div class="carousel-item active">
+											<img src="${f.sysName} " class="d-block w-100" alt="..."
+												style="max-width: 300px; max-height: 300px;">
+										</div>
+
+									</c:when>
+
+									<c:otherwise>
+										<div class="carousel-item">
+											<img src="${f.sysName }" class="d-block w-100" alt="..."
+												style="max-width: 300px; max-height: 300px;">
+										</div>
+									</c:otherwise>
+
+								</c:choose>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="detail-right">
-				<div class="productName">300티셔츠</div>
-				<div class="productPrice">3,000원</div>
-				<div class="product-status">
-					<div class="status-like">좋아요</div>
-					<div class="status-view">조회수</div>
-					<div class="status-view">작성일</div>
-				</div>
+
+
+
+
+
+<div class="detail-right">
+<c:forEach var="i" items="${ilist}" varStatus="status">
+
+				
+					<div class="productName">${i.name}</div>
+					<div class="productPrice">${i.price}원</div>
+					<div class="product-status">
+						<div class="status-like">좋아요</div>
+						
+						<div class="status-view">조회수 : ${i.view_cnt}</div>
+						<div class="status-view">작성일 : ${i.detailDate}</div>
+					</div>
+					
+			
+			</c:forEach>	
 				<div class="product-detail">
+				
 					<div class="detail-report">
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
@@ -143,11 +210,10 @@
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="radio"
-												name="flexRadioDefault" id="flexRdioDefault5" value="r5"> 
-												<label
-												class="form-check-label" for="flexRadioDefault5">
-												기타(사유) </label>
-											<input type="text" placeholder="사유를 입력해주세요." class="reasonInput" disabled>
+												name="flexRadioDefault" id="flexRdioDefault5" value="r5">
+											<label class="form-check-label" for="flexRadioDefault5">
+												기타(사유) </label> <input type="text" placeholder="사유를 입력해주세요."
+												class="reasonInput" disabled>
 										</div>
 										<script>
 										  $("input:radio[name=flexRadioDefault]").click(function(){
@@ -163,43 +229,100 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">닫기</button>
-										<button type="submit" class="btn btn-primary" id="reportSubmitBtn">전송하기</button>
+										<button type="submit" class="btn btn-primary"
+											id="reportSubmitBtn">전송하기</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="detail-product-status">배송비</div>
-					<div class="detail-exchange">교환여부</div>
-					<div class="detail-delivery">거래지역</div>
-					<div class="detail-location">상품상태</div>
+					
+			<c:forEach var="i" items="${ilist}" varStatus="status">		
+					<div class="detail-product-status">상품 상태 : ${i.condition}</div>
+						<div class="detail-exchange">교환 여부 : ${i.refundable}</div>
+						<div class="detail-delivery">거래 희망 지역 : ${i.exarea}</div>
+						<div class="detail-location"></div>
+				
+					</c:forEach>
 				</div>
-				<div class="detail-btns">
-					<button id="btn-like" class="btn btn-lg btn-light">찜</button>
-					<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
-					<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
+			
+				
+				<c:forEach var="i" items="${ilist}" varStatus="status">	
+							<div class="detail-btns">
+					<c:choose> 
+						<c:when test = "${i.sellerID eq loginID}">
+					<button type="button" id="btn-myPage" class="btn btn-lg btn-light">내상점관리</button>
+						</c:when>
+						<c:otherwise>
+						<button id="btn-like" class="btn btn-lg btn-light">찜</button>
+						<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
+						<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
+						</c:otherwise>
+						</c:choose>
+					</div>
+					</c:forEach>	
+					<!-- 진행중 -->
 				</div>
-			</div>
+			
 		</div>
+		
+		<!--  동현이형 -->
+          <input type=hidden value="300티셔츠" id="hiddenProduct">
+        <input type=hidden value="1" id="hiddenProductId">
+       <script>
+        	let hiddenProduct = $("#hiddenProduct").val();
+        	let hiddenProductId = $("#hiddenProductId").val();
+        	$("#btn-talk").on("click",function(){
+        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId;
+        	})
+        </script>
+          
+           
+        <!-- 동현이형 /// -->
+        <script>
+        <!-- 바로구매 버튼을 눌렀을 때의 script -->
+        	$("#btn-buy").on("click",function(){
+        		location.href = "/items/itemsOrder";
+        	})
+        	
+        	<!-- 내상점관리 버튼을 눌렀을 때의 script -->
+        	  $("#btn-myPage").on("click",function(){
+    		location.href = "/items/myPage";
+    	})
+  
+        </script>
+      
+        
+     
+        
+		
 		<div class="detail-bottom-div">
 			<div class="bottom-top">
 				<div class="bottom-top-title">연관상품</div>
 				<div class="bottom-top-img">
-					<div class="bottom-top-imglist">
-						<img src="/imgs/t-shirt.jpeg"> <a href="#">상품1</a>
-					</div>
-					<div class="bottom-top-imglist">
-						<img src="/imgs/200Pic.png" alt=""> <a href="#">상품2</a>
-					</div>
-					<div class="bottom-top-imglist">
-						<img src="/imgs/200Pic.png" alt=""> <a href="#">상품3</a>
-					</div>
-					<div class="bottom-top-imglist">
-						<img src="/imgs/200Pic.png" alt=""> <a href="#">상품4</a>
-					</div>
-					<div class="bottom-top-imglist">
-						<img src="/imgs/200Pic.png" alt=""> <a href="#">상품5</a>
-					</div>
+				
+				
+				
+				<c:forEach var="ri" items="${rilist}"  varStatus="statusRI">
+						<c:forEach var="rf" items="${rflist}"  varStatus="statusRF">
+						
+						<c:if test = "${statusRF.index eq statusRI.index }" >
+	
+							<%--  <c:if test= "${rf.parentSeq == ri.iseq}"> --%>
+							<div class="bottom-top-imglist">
+								<a href="/items/itemsDetail?iseq=${ri.iseq}"><img src="${rf.sysName}" style="max-width:200px; max-height:200px;"> <a href="javascript:void(0);">${ri.name}</a></a>
+						<script>
+						
+								</script>		
+								
+							</div>
+							</c:if>
+							</c:forEach>
+					
+						</c:forEach>
+
+
+
 
 				</div>
 			</div>
@@ -218,39 +341,53 @@
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
 					<!-- 상품정보 -->
+					
+					
 					<div class="tab-pane fade show active" id="nav-profile"
 						role="tabpanel" aria-labelledby="nav-profile-tab">
 						<div class="product-section">
+						
+						
 							<div class="product-section1">
+							<c:forEach var="i" items="${ilist}" varStatus="status">		
+
 								<div class="product-info-title">상품정보</div>
 								<div class="product-info-contents">
-									새제품 택제거 안함 <br>거래구함 <br>거래구함 <br>거래구함
+									${i.info}
 								</div>
 								<div class="product-middle">
 									<div class="middle-location">
 										<div class="location-title">거래지역</div>
-										<div class="location-contents">ex)경기도 남양주시 와부읍</div>
+										<div class="location-contents">${i.exarea}</div>
 									</div>
 									<div class="middle-category">
 										<div class="category-title">카테고리</div>
 										<div class="category-contents">
-											<a href="#">ex)티셔츠</a>
+											<a href="#">${i.category}</a>
 										</div>
 									</div>
 									<div class="middle-tag">
 										<div class="tag-title">태그</div>
-										<div class="tagy-contents">#태그1 #태그2</div>
+										<div class="tagy-contents">${i.tag}</div>
 									</div>
 								</div>
+								
+								</c:forEach>
+								<!-- 시현이형 부분 -->
 								<div class="write-title-div">상품문의</div>
 								<div class="product-question">
-									<div class="write-div">
-										<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요."></textarea>
-									</div>
-									<div class="write-bottom-div">
-										<div>1/100</div>
-										<button type="button" class="writeBtn">등록</button>
-									</div>
+									<form action="/items/QNAWriteProc" method="post" enctype="multipart/form-data">
+										<div class="write-div">
+											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요." name="contents"></textarea>
+										</div>
+										<div class="write-bottom-div">
+											<div>1/100</div>
+											<button type="submit" class="writeBtn" name="submit">등록</button>
+											<c:forEach var="i" items="${ilist}" varStatus="status">		
+											<input type="hidden" name="iseq" value="${i.iseq}">
+											</c:forEach>
+										</div>
+									</form>
 								</div>
 							</div>
 							<div class="product-section2">
@@ -291,21 +428,26 @@
 							</div>
 						</div>
 					</div>
-					<!-- 판매내역-->
-					<!-- <div class="tab-pane fade" id="nav-ask" role="tabpanel" aria-labelledby="nav-ask-tab">
+					
+					
+					<!-- <!— 판매내역—>
+					<!— <div class="tab-pane fade" id="nav-ask" role="tabpanel" aria-labelledby="nav-ask-tab">
                         페이지2
-                    </div> -->
-					<!-- 구매내역 -->
-					<!-- <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
+                    </div> —>
+					<!— 구매내역 —>
+					<!— <div class="tab-pane fade" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
                         페이지3
-                    </div>  -->
+                    </div>  —> -->
 
 				</div>
+				
+				
 			</div>
 
 		</div>
+	
 	</main>
-	<!-- footer -->
+	<!-- <!— footer —> -->
 	<footer>
 		<div class="footer-box">
 			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight

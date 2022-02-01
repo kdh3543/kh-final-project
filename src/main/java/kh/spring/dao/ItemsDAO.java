@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.ItemsDTO;
+import kh.spring.dto.ItemsQNADTO;
 
 
 
@@ -31,9 +32,9 @@ public class ItemsDAO {
 		System.out.println(result);
 		return dto.getIseq();
 	}
-	
 
-	
+
+
 	//	상품 
 	public List<ItemsDTO> selectAll(){		
 
@@ -76,13 +77,13 @@ public class ItemsDAO {
 		return mybatis.selectOne("Items.sellCount",id);
 	}
 	public int updateProc(String deal, int iseq) {
-		
+
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("iseq", iseq);
 		map.put("deal", deal);
 		return mybatis.update("Items.updateProc",map);
 	}
-	
+
 
 	public int itemsModifyProc(ItemsDTO dto) {
 		// TODO Auto-generated method stub
@@ -105,23 +106,53 @@ public class ItemsDAO {
 	public List<ItemsDTO> selectById(String id){
 		return mybatis.selectList("Items.selectById",id);
 	}
-	
+
 	// 해당 아이디의 판매상품 개수 불러오기
 	public int ItemsCount(String id) {
 		return mybatis.selectOne("Items.ItemsCount",id);
 	}	
-	
+
 	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
 	public String selectByProductId(int productId) {
 		return mybatis.selectOne("Items.selectByProductId",productId);
 	}
-	
-//	 public int insert(ItemsDTO dto) { String loginId =
-//	 (String)session.getAttribute("loginId"); dto.setSeller_id(loginId); return
-//	 mybatis.insert("Item.insert", dto);}
-//	 public ItemsDTO selectBySeq(int iseq) { return
-//	 mybatis.selectOne("Item.selectBySeq",iseq);}	
-	
-	
+
+
+
+	public int addViewCount(int iseq) {
+		return mybatis.update("Items.addViewCount", iseq);
+	}
+
+
+
+	public List<ItemsDTO> selectByCategory(String category) {
+		return mybatis.selectList("Items.selectByCategory", category);
+
+	}
+
+
+
+	public List<ItemsDTO> selectByIName(String name) {
+		return mybatis.selectList("Items.selectByIName", name);
+	}
+
+	//	 public int insert(ItemsDTO dto) { String loginId =
+	//	 (String)session.getAttribute("loginId"); dto.setSeller_id(loginId); return
+	//	 mybatis.insert("Item.insert", dto);}
+	//	 public ItemsDTO selectBySeq(int iseq) { return
+	//	 mybatis.selectOne("Item.selectBySeq",iseq);}	
+
+	// 신규 상품 문의 삽입
+	public int insertQNA(ItemsQNADTO dto) {
+		mybatis.insert("Items.insertQNA", dto);
+		return dto.getItems_qna_seq();
+	}
+
+	// 시퀀스로 상품 문의 삭제
+	public int deleteQNA(int seq) {
+		return mybatis.delete("Items.deleteQNA", seq);
+	}
+
+
 
 }
