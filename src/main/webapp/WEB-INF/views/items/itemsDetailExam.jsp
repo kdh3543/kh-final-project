@@ -101,17 +101,7 @@
         
       
         
-         <!-- 연락하기 버튼을 눌렀을 때의 script -->
-        <input type=hidden value="베이직후드티" id="hiddenProduct">
-        <input type=hidden value="2" id="hiddenProductId">
-        <script>
-        	let hiddenProduct = $("#hiddenProduct").val();
-        	let hiddenProductId = $("#hiddenProductId").val();
-            let roomId = 0;
-        	$("#btn-talk").on("click",function(){
-        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
-        	})
-        </script> 
+         
          
        <!-- 연락하기 버튼을 눌렀을 때의 script -->
         <input type=hidden value="300티셔츠" id="hiddenProduct">

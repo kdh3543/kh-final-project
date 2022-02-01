@@ -260,28 +260,26 @@
 						</c:otherwise>
 						</c:choose>
 					</div>
+					
+					<!--  동현이형 -->
+           			 <!-- 연락하기 버튼을 눌렀을 때의 script -->
+			        <input type=hidden value="베이직후드티" id="hiddenProduct">
+			        <input type=hidden value="2" id="hiddenProductId">
+			        <script>
+			        	let hiddenProduct = $("#hiddenProduct").val();
+			        	let hiddenProductId = $("#hiddenProductId").val();
+			            let roomId = 0;
+			        	$("#btn-talk").on("click",function(){
+			        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
+			        	})
+			        </script> 
+			        <!-- 동현이형 /// -->
 					</c:forEach>	
 					<!-- 진행중 -->
 				</div>
 			
 		</div>
-		
-
-		<!--  동현이형 -->
-            <!-- 연락하기 버튼을 눌렀을 때의 script -->
-        <input type=hidden value="베이직후드티" id="hiddenProduct">
-        <input type=hidden value="2" id="hiddenProductId">
-        <script>
-        	let hiddenProduct = $("#hiddenProduct").val();
-        	let hiddenProductId = $("#hiddenProductId").val();
-            let roomId = 0;
-        	$("#btn-talk").on("click",function(){
-        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
-        	})
-        </script> 
-          
-           
-        <!-- 동현이형 /// -->
+        
         <script>
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){

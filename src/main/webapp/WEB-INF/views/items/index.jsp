@@ -368,7 +368,7 @@
 
 										<c:if test="${f.parentSeq == i.iseq}">
 
-											<a href="/items/itemsDetail?iseq=${i.iseq}">
+											<a href="/items/itemsDetailExam">
 												<div class="detail-img">
 													<img src="${f.sysName}" style="width: 100%; height: 100%;">
 												</div>
