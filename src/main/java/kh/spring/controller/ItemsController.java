@@ -16,14 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import kh.spring.dao.SearchKeywordDAO;
 import kh.spring.dto.FilesDTO;
 import kh.spring.dto.ItemsDTO;
+import kh.spring.dto.ItemsQNADTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.SearchKeywordDTO;
 import kh.spring.service.FilesService;
 import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
+import kh.spring.service.SearchService;
 
 
 @Controller
@@ -36,8 +37,9 @@ public class ItemsController {
 	@Autowired
 	public FilesService fservice;
 
+
 	@Autowired
-	public SearchKeywordDAO sdao;
+	public SearchService sservice;
 
 	@Autowired
 	HttpSession session;
@@ -59,7 +61,16 @@ public class ItemsController {
 
 		model.addAttribute("flist",flist);
 
-	
+		//검색기록을 위한 아이디 넘기기
+		String id =(String)session.getAttribute("loginID");
+		model.addAttribute("loginID",id);
+
+		//인기검색어 넘겨주기 hot search =hs
+
+		List<SearchKeywordDTO> hslist = sservice.selectByHot();
+		model.addAttribute("hslist",hslist);
+
+
 
 		return "/items/index";
 	}
@@ -168,58 +179,70 @@ public class ItemsController {
 
 	@RequestMapping("itemsModifyProc")
 
-	public String itemsModifyProc(ItemsDTO dto,MultipartFile[] file,Model model)throws Exception {
+	public String itemsModifyProc(String countImg, ItemsDTO dto,MultipartFile[] file,Model model)throws Exception {
 
 
-		//		상품번호 추출
-		int iseq = dto.getIseq();
-		
-		 
 
-		//		ilist 는 dto(받아온 값으로) 수정해야 하지만.
-		//		flist 는 그대로 쓰면된다.
 		// 해당 상품과 이미지들
 		System.out.println(dto.getCondition());
 		System.out.println(dto.getName());
 
 		int resultI =iservice.itemsModifyProc(dto);
 		//사진은 지워야함 업데이트하고 (delete & update) parentSeq 에서
-//		List<FilesDTO> flist = fservice.selectBySeq(iseq);
+		//		List<FilesDTO> flist = fservice.selectBySeq(iseq);
 
 		System.out.println("업데이트 완료 : " + resultI);
-		
+
 		String id =(String)session.getAttribute("loginID");
 
 		model.addAttribute("loginID",id);
 
-//		int parentSeq = iservice.insert(dto);
-		
-		System.out.println("입력파일 길이   : " +file.toString());
 
-		
-// file.length 1아니면 지웠다 다시만들기.
-		//파일 다시 넣기
+
+
+		System.out.println("사진 올린 개수는 String 값으로  " +countImg);
+		int countImgInt = Integer.parseInt(countImg);
+
+
+		//		상품번호 추출
+		int iseq = dto.getIseq();
+		int parentSeq= iseq;
+
+
+		if(countImgInt !=0 ) {//file 개수가 0이 아니면 즉, 1개이상 들어와서 수정요청이 있다면
+			//			기존 사진들 삭제하고(file delete)
+			int resultFD= fservice.deleteBySeq(iseq);
+			System.out.println("사진 지워졌는가? "+ resultFD);
+			//			올린 사진들로 업데이트
+
+			//파일 다시 넣기
+
+			for(MultipartFile mf : file) {
+				if(!mf.isEmpty()) { //  업로드 된 파일 중 첫번째 파일이 비어있지 않다면,
+					String realPath = session.getServletContext().getRealPath("");
+					File realPathFile = new File(realPath);
+					if(!realPathFile.exists()) {realPathFile.mkdir();}
+
+
+					String oriName = mf.getOriginalFilename(); //클라이언트에게 보여주는 목적 - 사용자가 업로드 한 파일의 원본 이름
+					String sysName = "/upload/"+UUID.randomUUID()+"_"+oriName; // 절대 겹치지 않는 무작위의 이름 - 서버쪽에 저장할 파일 이름
+
+
+					// 서버에 업로드되어 메모리에 적재된 파일의 내용을 어디에 저장할지 결정하는 부분
+					mf.transferTo(new File(realPath+"/"+sysName));
+					fservice.modifyProc(new FilesDTO(0,oriName,sysName,parentSeq)); //첨부된 파일 정보를 DB에 저장하는 부분
+				}
+			}
+
+
+
+
+		}
 
 
 		return "redirect:/myPage";		
 	}
-	 //		for(MultipartFile mf : file) {
-	//			if(!mf.isEmpty()) { //  업로드 된 파일 중 첫번째 파일이 비어있지 않다면,
-	//				String realPath = session.getServletContext().getRealPath("");
-	//				File realPathFile = new File(realPath);
-	//				if(!realPathFile.exists()) {realPathFile.mkdir();}
-	//
-	//
-	//				String oriName = mf.getOriginalFilename(); //클라이언트에게 보여주는 목적 - 사용자가 업로드 한 파일의 원본 이름
-	//				String sysName = "/upload/"+UUID.randomUUID()+"_"+oriName; // 절대 겹치지 않는 무작위의 이름 - 서버쪽에 저장할 파일 이름
-	//
-	//
-	//				// 서버에 업로드되어 메모리에 적재된 파일의 내용을 어디에 저장할지 결정하는 부분
-	//				mf.transferTo(new File(realPath+"/"+sysName));
-	//				fservice.insert(new FilesDTO(0,oriName,sysName,parentSeq)); //첨부된 파일 정보를 DB에 저장하는 부분
-	//			}
-	//		}
-	//
+
 
 	//		return "/items/index";
 	//	}
@@ -235,6 +258,10 @@ public class ItemsController {
 
 	public String itemsDetail(int iseq ,Model model) {
 
+
+		// 조회수 올리기
+		int result = iservice.addViewCount(iseq);
+
 		// 해당 상품과 이미지들
 		List<ItemsDTO> ilist =iservice.selectBySeq(iseq);
 		List<FilesDTO> flist = fservice.selectBySeq(iseq);
@@ -247,6 +274,7 @@ public class ItemsController {
 		String targetStr =ilist.get(0).getName(); 
 		/* System.out.println(targetStr); */
 
+		System.out.println("targetStr :  "+targetStr);
 		String[] str = targetStr.split(" ");
 
 
@@ -261,34 +289,71 @@ public class ItemsController {
 		//관련상품 이름 뽑기
 		List<ItemsDTO> rilist = iservice.selectByName(targetList,iseq);
 
-		System.out.println(rilist.size());
+		System.out.println("연관상품 이름구분 개수 : " + rilist.size());
 		// 관련상품 이미지 뽑기
 		List<ItemsDTO> NameToSeq = iservice.selectNameToSeq(rilist);
+
 		/*
 		 * for(int i=0 ; i<NameToSeq.size();i++) {
 		 * 
-		 * System.out.println(NameToSeq.get(i).getName()); }
+		 * System.out.println("test:" +NameToSeq.get(i).getName()); }
 		 */
+
 
 
 		List<FilesDTO> rflist = fservice.selectBySeqR(NameToSeq);
 
 		for(int i=0 ; i<rflist.size();i++) {
 
-			System.out.println(rflist.get(i).getSysName()); }
-		System.out.println(rflist.size());
+			System.out.println("연관상품 사진 이름" +rflist.get(i).getSysName()); }
+		System.out.println("연관상품 사진 개수 " +rflist.get(0));
 
 		model.addAttribute("rilist",rilist);
 		model.addAttribute("rflist",rflist);
 
 		String id =(String)session.getAttribute("loginID");
 		model.addAttribute("loginID",id);
-		
+
 		return "/items/itemsDetail";
 
 	}
 
+//아이템 상세페이지 하나 클릭했을때 - 문의글
+	
+	@RequestMapping("QNAWriteProc")
+	public String writeProc(ItemsQNADTO dto) throws Exception {
+		System.out.println("QNAWriteProc 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		dto.setWriter((String) session.getAttribute("loginID"));
+		int result = iservice.insertQNA(dto);
 
+		// bservice.addCommentCount(dto.getBoard_seq());
+		// items 테이블에 상품문의 달린 개수 필요없지?
+		
+		return "redirect:/items/itemsDetail?iseq=" + dto.getIseq();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
@@ -323,21 +388,86 @@ public class ItemsController {
 
 
 
-	//최근 검색어 data 넣기
+	//
 
-	
-	
-//최근 검색어 data 넣기
+
+	// 검색어 파트입니다-----------------------------------------------------------
+
+	//최근 검색어 data 넣기
+	//NI = name items/files
 
 	@RequestMapping("searchByInput")	
 	public String input(SearchKeywordDTO dto,Model model) {
 
+		System.out.println("검색 결과 : " +dto.getKeyword());
+
 		//검색 목록에 값 저장
-		sdao.insert(dto);
+	
+		if (dto.getUser_id() != null && !dto.getUser_id().isEmpty()) {
+			sservice.insert(dto);
+			}
+
+		//검색내용
+		String name = dto.getKeyword().trim();
+		String id = (String)session.getAttribute("loginID");
+		//상점명 검색시
 
 
 
-		return "items/index";
+		//상품명 검색시
+		List<ItemsDTO> NIlist = iservice.selectByIName(name);
+		System.out.println(NIlist.size());
+		List<FilesDTO> NFlist = fservice.selectByIName(name);
+		
+		
+		//인기검색어 넘겨주기 hot search =hs
+
+				List<SearchKeywordDTO> hslist = sservice.selectByHot();
+				model.addAttribute("hslist",hslist);
+
+
+		model.addAttribute("NIlist",NIlist);
+		model.addAttribute("NFlist",NFlist);
+		model.addAttribute("hslist",hslist);
+		model.addAttribute("loginID",id);
+		model.addAttribute("name",name);
+		
+
+
+		System.out.println("seerawerwerawerawer"+NIlist.size());
+
+		if(name.substring(0, 1).equals("@")) {
+			return "/items/storeList";
+
+		}else {
+			return "/items/itemsList";
+		}
+		
+	}
+
+	//	CF = category file / items
+	@RequestMapping("searchByCategory")
+	public String category(String category,Model model) {
+
+		System.out.println("카테고리 검색 결과 : " +category);
+
+		//해당 id 의 상품목록들 가져오기
+		List<ItemsDTO> CLlist = iservice.selectByCategory(category);
+		//해당 상품목록의 사진들도 가져오기
+		List<FilesDTO> CFlist = fservice.selectByCategory(category);
+
+		//session
+
+		String id = (String)session.getAttribute("loginID");
+
+
+
+		model.addAttribute("CIlist",CLlist);
+		model.addAttribute("CFlist",CFlist);
+		model.addAttribute("loginID",id);
+		model.addAttribute("category",category);
+
+		return "/items/itemsList";
 	}
 
 
@@ -346,7 +476,7 @@ public class ItemsController {
 	@RequestMapping(value ="deleteAll", produces="text/html; charset=utf8")
 	public String deleteAll() throws Exception{
 
-		int result =sdao.deleteAll();
+		int result =sservice.deleteAll();
 		return String.valueOf(result);
 
 	}
@@ -356,7 +486,9 @@ public class ItemsController {
 	@RequestMapping(value ="listing", produces="text/html; charset=utf8")
 	public String listing() throws Exception{
 
-		List<SearchKeywordDTO> slist = sdao.selectAll();
+		String id =(String)session.getAttribute("loginID"); 
+
+		List<SearchKeywordDTO> slist = sservice.selectAll(id);
 
 		Gson gson = new Gson();
 
@@ -373,13 +505,41 @@ public class ItemsController {
 	@RequestMapping(value ="deleteByKeyword", produces="text/html; charset=utf8")
 	public String deleteByKeyword(String keyword) throws Exception{
 
-		int result = sdao.deleteByKeyword(keyword);
+		int result = sservice.deleteByKeyword(keyword);
 
 
 		return String.valueOf(result);
 
 
 	}
+
+
+	// 검색어 파트입니다 끝-----------------------------------------------------------
+
+
+
+
+
+
+	//구매하기 
+
+	@RequestMapping("itemsOrder")
+	public String itemsOrder() {
+
+		return "/items/itemsOrder";
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	//메인화면 홈-상품전체 끌고오기
@@ -452,6 +612,11 @@ public class ItemsController {
 	//		model.addAttribute("ilist",ilist);
 	//		model.addAttribute("flist",flist);
 
+
+
+
+
+
 	@RequestMapping("findInfo")
 	public String findInfo() {
 
@@ -465,21 +630,16 @@ public class ItemsController {
 
 
 	//	상품등록시 이동 
-	
 
-	
+
+
 	@RequestMapping("itemsDetailExam")
 	public String itemsDetail2() {
 		return "/items/itemsDetailExam";
 
 	}
-	
-	
-	@RequestMapping("itemsOrder")
-	public String itemsOrder() {
-		return "/items/itemsOrder";
 
-	}
+
 
 
 

@@ -23,12 +23,14 @@
 
 	<select id="selectAll" resultType="kh.spring.dto.ItemsDTO">
 
-		SELECT * FROM ITEMS WHERE DEAL ='Y' ORDER BY ISEQ DESC 
+		SELECT * FROM ITEMS WHERE DEAL
+		='Y' ORDER BY ISEQ DESC
 	</select>
 
 	<select id="selectBySeq" resultType="kh.spring.dto.ItemsDTO">
 
-		SELECT * FROM ITEMS WHERE ISEQ = #{iseq}
+		SELECT * FROM ITEMS WHERE
+		ISEQ = #{iseq}
 	</select>
 
 
@@ -60,42 +62,88 @@
 
 	<!-- 해당 회원의 상품들 찾기 -->
 	<select id="selectMineById" resultType="kh.spring.dto.ItemsDTO">
-		SELECT * FROM ITEMS WHERE SELLERID = #{id}
+		SELECT * FROM ITEMS WHERE
+		SELLERID = #{id}
 	</select>
-	
-	
+
+
 	<!--해당 회원이 등록한 상품 개수 -->
-	
-	
+
+
 	<select id="sellCount" resultType="int">
-		SELECT COUNT(*) FROM ITEMS WHERE SELLERID = #{id}
+		SELECT COUNT(*) FROM ITEMS
+		WHERE SELLERID = #{id}
 	</select>
-	
-	<!-- 상품 거래상태 수정 시-->
-<update id="updateProc">
-   
-   UPDATE ITEMS SET DEAL=#{deal} WHERE ISEQ=#{iseq}
-</update>
+
+	<!-- 상품 거래상태 수정 시 -->
+	<update id="updateProc">
+
+		UPDATE ITEMS SET DEAL=#{deal} WHERE ISEQ=#{iseq}
+	</update>
 
 	<!-- 상품 자체 수정 시 -->
-	
-	
-<update id="itemsModifyProc">
-   
-   UPDATE ITEMS SET NAME=#{name}, CATEGORY=#{category}, EXAREA=#{exarea},CONDITION=#{condition}, REFUNDABLE=#{refundable},PRICE=#{price},INFO=#{info},TAG=#{tag},CNT=#{cnt},WRITE_DATE=DEFAULT  WHERE ISEQ=#{iseq}
-</update>
 
 
-		
+	<update id="itemsModifyProc">
+
+		UPDATE ITEMS SET NAME=#{name}, CATEGORY=#{category},
+		EXAREA=#{exarea},CONDITION=#{condition},
+		REFUNDABLE=#{refundable},PRICE=#{price},INFO=#{info},TAG=#{tag},CNT=#{cnt},WRITE_DATE=DEFAULT
+		WHERE ISEQ=#{iseq}
+	</update>
+
+
+
 	<select id="ItemsCount" resultType="int">
-		SELECT COUNT(*) FROM ITEMS WHERE SELLERID = #{value}
+		SELECT COUNT(*) FROM ITEMS
+		WHERE SELLERID = #{value}
 	</select>
 	<select id="selectById" resultType="kh.spring.dto.ItemsDTO">
-		SELECT * FROM ITEMS WHERE SELLERID = #{value}
+		SELECT * FROM ITEMS WHERE
+		SELLERID = #{value}
 	</select>
 	<!-- 채팅에서 상품아이디 통해서 판매자 아이디 가져오기 -->
 	<select id="selectByProductId" resultType="String">
-		SELECT SELLERID FROM ITEMS WHERE ISEQ = #{value}
+		SELECT SELLERID FROM
+		ITEMS WHERE ISEQ = #{value}
 	</select>
+
+	<!-- 조회수 추가 -->
+
+	<update id="addViewCount">
+		UPDATE ITEMS SET VIEW_CNT = VIEW_CNT + 1
+		WHERE
+		ISEQ =
+		${value}
+	</update>
+
+	<!-- 검색창 관련 부분입니다. -->
+	<!-- 카테고리로 검색하기 -->
+
+	<select id="selectByCategory"
+		resultType="kh.spring.dto.ItemsDTO">
+
+
+		SELECT * FROM ITEMS WHERE CATEGORY =#{value} ORDER BY ISEQ
+		DESC
+	</select>
+
+	<!--상품명으로 검색하기 -->
+	<select id="selectByIName"
+		resultType="kh.spring.dto.ItemsDTO">
+		
+			SELECT * FROM ITEMS WHERE name =#{value} ORDER BY ISEQ
+		DESC
+		
+		</select>
+		<!-- 검색창 관련 부분입니다. -->
+		
+		<insert id="insertQNA">
+		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL, #{iseq},
+		#{writer}, #{contents}, CURRENT_DATE)
+	</insert>
+		
+		
+		
 
 </mapper>

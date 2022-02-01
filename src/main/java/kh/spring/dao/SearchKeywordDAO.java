@@ -17,9 +17,9 @@ public class SearchKeywordDAO {
 	
 	
 	
-	public List<SearchKeywordDTO> selectAll(){
+	public List<SearchKeywordDTO> selectAll(String id){
 		
-		return mybatis.selectList("Search.selectAll");
+		return mybatis.selectList("Search.selectAll",id);
 	}
 	
 
@@ -40,6 +40,13 @@ public class SearchKeywordDAO {
 		
 		
 		return mybatis.delete("Search.deleteByKeyword",keyword);
+	}
+
+
+
+	public List<SearchKeywordDTO> selectByHot() {
+		return mybatis.selectList("Search.selectByHot");
+
 	}
 
 	

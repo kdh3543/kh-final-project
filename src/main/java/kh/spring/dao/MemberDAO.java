@@ -1,6 +1,7 @@
 package kh.spring.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -91,6 +92,16 @@ public class MemberDAO {
       map.put("pw", pw);
       map.put("id",id);
       return mybatis.update("Member.updatePw",map);
+   }
+   
+   //모든 계정 조회
+   public List<MemberDTO> selectAll() {
+	   return mybatis.selectList("Member.selectAll");
+   }
+   
+   // 관리자 계정에서 회원 탈퇴 
+   public int deleteBySeq(int seq) {
+	   return mybatis.delete("Member.deleteBySeq",seq);
    }
 
 

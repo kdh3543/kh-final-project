@@ -60,5 +60,14 @@
 	</update>
 
 	<delete id="delete">delete from member where id=#{value} </delete>
+	
+	<!-- 전체 회원 조회 -->
+	<select id="selectAll" resultType="kh.spring.dto.MemberDTO">
+		select * from member order by seq
+	</select>
+	<!-- 관리자 계정에서 계정 삭제 -->
+	<delete id="deleteBySeq">
+		delete from member where seq=#{value}
+	</delete>
 </mapper>
 

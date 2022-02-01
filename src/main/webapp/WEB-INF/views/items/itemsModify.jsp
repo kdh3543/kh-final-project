@@ -152,7 +152,7 @@
 
 
 						<form action="/items/itemsModifyProc" method="post"
-							enctype="multipart/form-data">
+							enctype="multipart/form-data" onsubmit="jbSubmit();">
 							<div class="add-contents">
 								<table class="contents-table">
 
@@ -162,9 +162,9 @@
 										<!-- 파일 넘기기 / 파일 미리보기  -->
 										<td>
 											<div id='att_zone'>
-												  <label for =btnAtt><img src="/imgs/inputIMG.png"></label> 
-												 <input type=file   class="btn btn-primary" name=file
-													id="btnAtt" multiple style="display: none;">
+												  <label for =btnAtt><img src="/imgs/inputIMG.png"> </label>
+												  <input type=file  id="btnAtt" class="btn btn-primary" name=file
+													id="btnAtt" multiple style="display: none;" onchange="fileUpload(this)" > 
 												
 
 											</div> 
@@ -181,9 +181,14 @@
 
 												</c:forEach>
 											</div>
+											
+											<input type =hidden name=countImg id= countImg > 
+											
 											<script>
 
 											$("#btnAtt").on("click",function(){
+											
+										
 												
 												alert("주의!! 파일 재업로드시  기존이미지들은 사라집니다.");
 													$(this).parent;
@@ -192,13 +197,32 @@
 												
 											});
 											
+											function jbSubmit(){
+												
+												let testfilelength = $('#btnAtt')[0].files.length ;
+												
+											    $("#countImg").val(testfilelength);
+												
+											}
+											
+											
+											
+											
+											
+											
+									
+											
 											
 											</script>
 											
+											<!--unclick  -->
+										
 											
 											
 											
-											<!--미리보기 script --> <script>
+											
+<!--미리보기 script -->											
+ <script>
 ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
   imageView = function imageView(att_zone, btn){
 
@@ -219,7 +243,6 @@
     var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
                   + 'right:0px;bottom:0px;z-index:999;border:1px ; background-color:#c4ffff;color:#FF8383';
   
-    
     btnAtt.onchange = function(e){
       var files = e.target.files;
       var fileArr = Array.prototype.slice.call(files)
@@ -308,6 +331,7 @@
 										</td>
 
 									</tr>
+
 
 
 									<!-- ilist 뿌리기 -->

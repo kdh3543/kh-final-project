@@ -11,7 +11,7 @@ html,body{
 /* header */
 header{
     width: 100%; 
-    height: 200px; 
+    height: 170px; 
     justify-content: flex-end;
     background-color: #24a6a4;
     z-index: 2;
@@ -36,13 +36,13 @@ header .header_list li:nth-child(1) a{
     text-decoration: none;
     color: whitesmoke;
     font-family:'OTWelcomeRA';
-    font-size: 20px;
+    font-size: 15px;
 }
 header .header_list li:nth-child(2) a{
     text-decoration: none;
     color: #f8d200;
     font-family:'OTWelcomeRA';
-    font-size: 20px;
+    font-size: 15px;
 }
 
 header .div-wrap{
