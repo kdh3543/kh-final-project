@@ -10,6 +10,7 @@ import kh.spring.dao.ItemsDAO;
 import kh.spring.dto.CommentDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
+import kh.spring.utils.DateParseUtils;
 
 @Service
 public class ItemsService {
@@ -79,6 +80,19 @@ public class ItemsService {
 		return idao.selectByProductId(productId);
 	}
 
+	public int addViewCount(int iseq) {
+		return idao.addViewCount(iseq);
+	}
+
+	public List<ItemsDTO> selectByCategory(String category) {
+
+		return idao.selectByCategory(category);
+	}
+
+	public List<ItemsDTO> selectByIName(String name) {
+		return idao.selectByIName(name);
+	}
+
 	// 신규 상품 문의 삽입
 	public int insertQNA(ItemsQNADTO dto) {
 		return idao.insertQNA(dto);
@@ -87,6 +101,15 @@ public class ItemsService {
 	// 시퀀스로 상품 문의 삭제
 	public int deleteQNA(int seq) {
 		return idao.deleteQNA(seq);
+	}
+
+	// 시퀀스로 상품 문의 검색
+	public List<ItemsQNADTO> selectQNABySeq(int seq) {
+		List<ItemsQNADTO> list = idao.selectQNABySeq(seq);
+		for (ItemsQNADTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
 	}
 
 }

@@ -50,7 +50,8 @@ public class ChatController {
 		List<ChatContentsDTO> cList = cService.selectByRoomID(roomId);
 		// list로부터 producId를 가져와 그 productId에 해당하는 마지막 메세지를 list에 세팅
 		for(int i =0; i<list.size();i++) {
-			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getProductId()));
+			
+			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}	
 		
 		model.addAttribute("list",list);
@@ -64,7 +65,7 @@ public class ChatController {
 	}
 	
 	@RequestMapping("talk")
-	public String talk(String productName, int productId,Model model) {
+	public String talk(String productName, int productId, int roomId,Model model) {
 		//챗봇에 대한 룸 정보 불러오기
 		int chatBotRoomId = 0;
 		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
@@ -80,6 +81,7 @@ public class ChatController {
 		crdto.setProductId(productId);
 		boolean existRoomId = crService.selectByProductId(crdto);
 		
+		
 		if(!existRoomId) {
 			crdto.setSellerId(sellerId);
 			crdto.setProductName(productName);
@@ -88,10 +90,13 @@ public class ChatController {
 		}
 		
 		List<ChatRoomDTO> list =  crService.selectByBuyerId(userId);
-		List<ChatContentsDTO> cList = cService.selectByProductId(productId);
+		ChatContentsDTO cdto = new ChatContentsDTO();
+		cdto.setBuyerId(userId);
+		cdto.setProductId(productId);
+		List<ChatContentsDTO> cList = cService.selectByProductId(cdto);
 		
 		for(int i =0; i<list.size();i++) {		
-			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getProductId()));
+			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}
 		
 		model.addAttribute("productName",productName);
@@ -99,6 +104,7 @@ public class ChatController {
 		model.addAttribute("list",list);
 		model.addAttribute("cList",cList);
 		model.addAttribute("id",userId);
+		model.addAttribute("roomId",roomId);
 		
 		return "talk/talk";
 	}
@@ -121,7 +127,8 @@ public class ChatController {
 		dto.setSellerId(id);
 		List<ChatRoomDTO> list = crService.selectByBothId(dto);
 		for(int i =0; i<list.size();i++) {	
-			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getProductId()));
+			
+			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}
 		 
 		int roomId = 0;
@@ -146,10 +153,11 @@ public class ChatController {
 	}
 	
 	@RequestMapping("delSuccess")
-	public String delSuccess(int roomId){
+	public String delSuccess(int roomId,Model model){
 		System.out.println(roomId);
 		System.out.println("종료완료");
-		return  "redirect:/chat/talk";
+		model.addAttribute("roomId",roomId);
+		return  "talk/talk";
 	}
 	
 	

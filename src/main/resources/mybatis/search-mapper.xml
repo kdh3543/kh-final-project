@@ -8,15 +8,25 @@
    
    	 <select id="selectAll" resultType="kh.spring.dto.SearchKeywordDTO">
    	
-   			SELECT * FROM (SELECT * FROM SEARCH_KEYWORD ORDER BY SEQ DESC) WHERE ROWNUM &lt; 10
+   			SELECT * FROM (SELECT * FROM SEARCH_KEYWORD ORDER BY SEQ DESC) WHERE ROWNUM &lt; 10 AND USER_ID = #{value}
+
    		
    	</select>
    
    
+   <!-- 최근검색어에 insert 하면서 인기검색어에도 insert 하는 쿼리 (두개의테이블에 집어넣음) -->
    <insert id="insert">
+   {call
+   	declare
+   	begin
    	
-   	INSERT INTO SEARCH_KEYWORD VALUES(SEARCH_KEYWORD_SEQ.NEXTVAL, #{keyword}, SYSDATE, #{user_id})
+   	INSERT INTO SEARCH_KEYWORD VALUES(SEARCH_KEYWORD_SEQ.NEXTVAL, #{keyword}, SYSDATE, #{user_id});
    	
+   	
+   		INSERT INTO SEARCH_HOTKEYWORD VALUES(SEARCH_HOTKEYWORD_SEQ.NEXTVAL, #{keyword}, SYSDATE, #{user_id});
+   	
+   	end
+   	}	
    </insert>
    
    <delete id ="deleteAll">
@@ -30,6 +40,17 @@
    
    DELETE FROM SEARCH_KEYWORD WHERE keyword = #{keyword}
    </delete>
+   
+   <select id= "selectByHot" resultType="kh.spring.dto.SearchKeywordDTO">
+   	
+   
+   SELECT KEYWORD
+FROM
+(select keyword,count(keyword) as count from search_keyword group by keyword order by count desc)
+WHERE ROWNUM &lt; 6
+
+   
+   </select>
    
     </mapper>
   

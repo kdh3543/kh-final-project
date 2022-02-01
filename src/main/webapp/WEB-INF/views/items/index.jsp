@@ -32,9 +32,9 @@
 </head>
 
 <body>
-	<!-- form 태그 추가 button type=submit 변경 -->
-	<form action="/items/searchByInput" method="post">
-
+	
+<!-- form 태그 추가 button type=submit 변경 -->
+	<form action="/items/searchByInput" name =inputForm method="post" onsubmit="return frmSubmit()">
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
@@ -43,9 +43,12 @@
 						<ul class="header-list-after-login">
 							<li>이미지 부분 : ${dto.profile_image}</li>
 							<li>${loginID}님안녕하세요</li>
-							<li><a href="/member/myPage">마이페이지</a></li>
+
+							<li><a href="/items/myPage">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+							
+							
 						</ul>
 					</c:when>
 					<c:otherwise>
@@ -61,9 +64,13 @@
 					<div class="logo">
 						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 					</div>
+					
+					
 					<div class="searchBar">
 						<div class="input-group mb-3">
 
+	
+	<!-- 검색창 관련 -->
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
 									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
@@ -77,20 +84,29 @@
 									<i class="fas fa-search fa-2x"></i>
 								</button>
 								<!--  돋보기 끝-->
-								<input type=hidden name="user_id" value="test33">
+								
+								<input type=hidden name="user_id" value="${loginID}">
+								
 
 								<!-- 최신검색어-->
+								<!--  수정 -->
 
 								<div class="dropdown-menu" id=recent>
+									<!-- <a class="dropdown-item" href="/"
+										style="text-align: center"> -->
+										<div class="list-search-div">
 									<div class="list-search-div">
 									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
 										style="text-align: center">
 											<nav>
 												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+													
 													<button class="nav-link active" id="nav-home-tab"
 														data-bs-toggle="tab" data-bs-target="#nav-home"
 														type="button" role="tab" aria-controls="nav-home"
 														aria-selected="true">최근검색어</button>
+														
+														
 													<button class="nav-link" id="nav-profile-tab"
 														data-bs-toggle="tab" data-bs-target="#nav-profile"
 														type="button" role="tab" aria-controls="nav-profile"
@@ -98,39 +114,40 @@
 
 												</div>
 											</nav>
+											<!-- 최근검색어 -->
 											<div class="tab-content" id="nav-tabContent">
 												<div class="tab-pane fade show active" id="nav-home"
 													role="tabpanel" aria-labelledby="nav-home-tab">
 
 													<!-- 내용 채워넣기 -->
-													<div id=text></div>
+													<div id=text>
+													
 													<button type=button id=delBtn class="dropdown-item"
-														style="display: inline">검색어 전체삭제</button>
+														style="display: inline"><b><h5>검색어 전체삭제</h5></b></button>												
+													</div>
+																	
+														
 												</div>
+												<!--  인기검색어-->
+												  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+												
+												  </div>
+													
 												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 													aria-labelledby="nav-profile-tab">
 													<div class="hotkeyword-title">인기검색어 순위</div>
 													<div class=hotkeyword-contents>
+													
+													
+													<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
+														
 														<div>
-															<span class="hotkeyword-num">1.</span>
-															<span class="hotkeyword-word">곰돌이</span>
+															<span class="hotkeyword-num">${statusHS.count}.</span>
+															<span class="hotkeyword-word">${hs.keyword}</span>
 														</div>
-															<div>
-															<span class="hotkeyword-num">2.</span>
-															<span class="hotkeyword-word">곰돌이</span>
-														</div>
-															<div>
-															<span class="hotkeyword-num">3.</span>
-															<span class="hotkeyword-word">곰돌이</span>
-														</div>
-															<div>
-															<span class="hotkeyword-num">4.</span>
-															<span class="hotkeyword-word">곰돌이</span>
-														</div>
-															<div>
-															<span class="hotkeyword-num">5.</span>
-															<span class="hotkeyword-word">곰돌이</span>
-														</div>
+														
+														
+														</c:forEach>
 													</div>
 												</div>
 
@@ -138,28 +155,45 @@
 											</a>
 										</div>
 								</div>
-
-
-								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 							</div>
-
+							</div>
+							</div>
 						</div>
+					</div>
+		</header>
+	</form>
 
-						<script>
-							$("#delBtn").on("click", function() {
 
-								$.ajax({
-									url : "/items/deleteAll",
 
-								}).done(function(resp) {
-									console.log(resp);
+<!-- 검색어 전체 삭제 -->
+								<script>
+								
+									$("#delBtn").on("click", function() {
+										$.ajax({
+											url : "/items/deleteAll",
+										}).done(function(resp) {
+											console.log(resp);
+											$("#text").empty();
+										})
+									})
+								</script>
+								
+								<!-- 검색어 하나 눌렀을때 검색되게 -->
 
-									$("#text").empty();
+								<script>
+									$('#text').on("click",	".delBtnOne",function() {
+										/*버튼 X 제거하고 값 추출  */
+														var str = $(this).parent().text().slice(0, -1);
+														$(this).parent().remove();
 
-								})
-
-							})
-						</script>
+														$.ajax({
+															url : "/items/deleteByKeyword?keyword="+ str
+																	}).done(function(resp) {
+																		
+																	})
+																})
+								</script>
+								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 
 						<script>
 						// 검색버튼 눌렀을 때, 
@@ -174,13 +208,15 @@
 
 										resp = JSON.parse(resp);
 
-										for (let i = 0; i < resp.length; i++) {
+										for (let i = 0; i < 5; i++) {
 											let text = $("#text");
 
 											let line = $("<div>");
 											line.addClass("line");
 
-											let textLine = $("<div>");
+										
+											 let textLine= $("<div>");
+											
 
 											textLine.append(resp[i].keyword);
 
@@ -193,19 +229,21 @@
 
 											textLine.append(text.val());
 											textLine.append(delButton);
+										
 
 											line.append(textLine);
 
 											$("#text").append(line);
-											$("#recent").on('click', function (e) {
-					                             e.stopPropagation();
-					                           });
 
 										}
 
 									})
 								})
 							})
+							/*드랍다운 꺼지는 것 방지 */
+							$("#recent").on('click', function (e) {
+					                             e.stopPropagation();
+					                           });
 					// 삭제할 때, 
 							$('#text').on("click",".delBtnOne",function() {
 								/*버튼 X 제거하고 값 추출  */
@@ -215,44 +253,31 @@
 								url : "/items/deleteByKeyword?keyword="+ str
 								}).done(function(resp) {
 
+
 								})
 
 							})
 			
 						</script>
+						
+						<!-- 검색시 공백 막기-->
+							<script>
+						
+						function frmSubmit() {
+							let searchValue = $("#search").val();
+							console.log(searchValue);
+							if(searchValue ==null || searchValue == "" ){
+								alert("상품명 또는 @상점명을 검색하세요")
+								return false;
+								
+							}
+							
+							}
+							
+							
+						</script>
 
-						<!-- 인기 검색어 -->
-						<!-- 	<ul class="dropdown-menu" style="min-width: 400px;" >
-									<li><a class="dropdown-item" href="#"><span>1.</span> Action</a></li>
-									<li><a class="dropdown-item" href="#"> actisadfasdfasdfon</a></li>
-									<li><a class="dropdown-item" href="#">Something else
-											here</a></li>
-									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="#">검색어 전체삭제</a></li>
-								</ul> -->
-
-						<!-- Default dropend button -->
-						<!-- <div class="btn-group dropend">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropright
-  </button>
-  <ul class="dropdown-menu">
-    Dropdown menu links
-  </ul>
-</div> -->
-
-
-					</div>
-
-
-
-				</div>
-			</div>
-
-
-
-		</header>
-	</form>
+							
 
 
 
@@ -260,7 +285,7 @@
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
-			<div class="top-div .d-sm-none .d-md-block">
+			<div class="d-none d-md-block d-lg-block" id="top-div">
 				<div class="div-wrap2">
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary-light"
@@ -271,28 +296,28 @@
 
 							<!-- Dropdown menu links -->
 							<li><h6 class="dropdown-header">전체 카테고리</h6></li>
-							<li><a class="dropdown-item" href="itemsList" id="c01">여성의류</a></li>
-							<li><a class="dropdown-item" href="#" id="c02">남성의류</a></li>
-							<li><a class="dropdown-item" href="#" id="c03">신발</a></li>
-							<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
-							<li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
-							<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
-							<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
-							<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
-							<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
+							<li><a class="dropdown-item" href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
 						</ul>
 					</div>
 					<div class="rightList">
 
 						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="myPage" class="btn-myshop"> <i
+						</a> | <a href="/items/myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="chat/directTalk" class="btn-talk"> <i
+						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
-						</a> | <a href="board/boardList" class="btn-talk"> <i
+						</a> | <a href="/board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
@@ -331,90 +356,35 @@
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
 
-
+						
+								
 						<div class="imgBox  col-sm-3">
 
-							<!--상품 반복 시작 -->
-
-							<c:forEach var="i" items="${ilist}">
-								<c:forEach var="f" items="${flist }">
-
-									<c:if test="${f.parentSeq == i.iseq}">
+  <!--상품 반복 시작 -->
 
 
+								<c:forEach var="i" items="${ilist}">
+									<c:forEach var="f" items="${flist}">
 
-										<a href="/items/itemsDetail">
-											<div class="detail-img">
+										<c:if test="${f.parentSeq == i.iseq}">
 
+											<a href="/items/itemsDetail?iseq=${i.iseq}">
+												<div class="detail-img">
+													<img src="${f.sysName}" style="width: 100%; height: 100%;">
+												</div>
+												<div class="detail-container">
+													<div class="title">${i.name}</div>
+													<div class="price">${i.price}원</div>
+													<div class="date">${i.detailDate}</div>
+													<%-- <div class="title">${flist.oriname}</div> --%>
+												</div>
+											</a>
 
-												<!-- <img src="/upload/91da5422-7796-442a-90ff-e175bd71320f_징징이.jpg "> -->
-												<img src="${f.sysName}" style="width: 100%; height: 100%;">
+										</c:if>
 
+									</c:forEach>
 
-
-											</div>
-
-											<div class="detail-container">
-												<div class="title">${i.name}</div>
-												<div class="price">${i.price}원</div>
-												<div class="date">${i.detailDate}</div>
-												<%-- <div class="title">${flist.oriname}</div> --%>
-
-											</div>
-
-
-										</a>
-									</c:if>
-									<%-- </c:if> ^^--%>
-									<%-- </c:if> --%>
 								</c:forEach>
-							</c:forEach>
-
-
-							<!-- </a> <a href="#"> -->
-
-
-
-							<!-- imgBox 2 구간 -->
-							<!-- <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-dd
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> <a href="#">
-								<div class="detail-img">
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-
-							</a> <a href="#">
-								<div>
-									<img src="/imgs/200Pic.png">
-								</div>
-								<div class="detail-container">
-									<div class="title">상품명</div>
-									<div class="price">0000원</div>
-									<div class="date">0일전</div>
-								</div>
-							</a> -->
 
 						</div>
 
@@ -431,16 +401,16 @@ dd
 						id="likeProductBtn">
 						찜한상품<br> <i class="fas fa-heart">개수</i>
 					</button>
-					
-				</a> 
-				<div class="sidebar-resently-div">
-						<div class="sidebar-title-div">최근 본 상품</div>
-						<div class="sidebar-product-div">
-							<img src="">
-							<img src="">
-						</div>
 
+				</a>
+				<div class="sidebar-resently-div">
+					<div class="sidebar-title-div">최근 본 상품</div>
+					<div class="sidebar-product-div">
+						<img src=""> 
+						<img src="">
 					</div>
+
+				</div>
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>

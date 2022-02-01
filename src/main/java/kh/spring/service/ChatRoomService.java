@@ -15,7 +15,8 @@ public class ChatRoomService {
 	private ChatRoomDAO dao;
 
 	public int insert(ChatRoomDTO dto) {
-		return dao.insert(dto);
+		int result = dao.insert(dto);
+		return dto.getRoomId();
 	}
 
 	public List<ChatRoomDTO> selectByBuyerId(String id){

@@ -32,12 +32,19 @@ public class AdminController {
 		
 		
 	}
-	
 	 @RequestMapping("leave")
 	   public String leave(String seqNum) {
 		 int seq = Integer.parseInt(seqNum);
 	      int result = mservice.deleteBySeq(seq);
 	      System.out.println("회원이 탈퇴되었습니다.");
-	      return "forward:/admin/adminIndex";
+	      return "redirect:/admin/adminIndex";
+	   }
+	 
+	 @RequestMapping("updatePage")
+	   public String updatePage(String seqNum) {
+		 	int seq = Integer.parseInt(seqNum);
+	      int result = mservice.deleteBySeq(seq);
+	      System.out.println("회원이 탈퇴되었습니다.");
+	      return "redirect:/admin/adminIndex";
 	   }
 }

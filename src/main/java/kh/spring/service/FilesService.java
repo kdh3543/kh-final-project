@@ -40,6 +40,24 @@ public class FilesService {
 		// 
 		return fdao.selectMineById(id);
 	}
+
+	public int deleteBySeq(int iseq) {
+		return fdao.deleteBySeq(iseq);
+	}
+
+	public int modifyProc(FilesDTO fdto) {
+		return fdao.modifyProc(fdto);
+		
+	}
+
+	public List<FilesDTO> selectByCategory(String category) {
+		return fdao.selectByCategory(category);
+		
+	}
+
+	public List<FilesDTO> selectByIName(String name) {
+		return fdao.selectByIName(name);
+	}
 	
 	/*
 	 * public List<FilesDTO> selectBySeq(int parentSeq) {
