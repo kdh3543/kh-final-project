@@ -94,10 +94,6 @@
 
 
 
-	<select id="ItemsCount" resultType="int">
-		SELECT COUNT(*) FROM ITEMS
-		WHERE SELLERID = #{value}
-	</select>
 	<select id="selectById" resultType="kh.spring.dto.ItemsDTO">
 		SELECT * FROM ITEMS WHERE
 		SELLERID = #{value}
@@ -128,20 +124,37 @@
 		DESC
 	</select>
 
-	<!--상품명으로 검색하기 -->
-	<select id="selectByIName" resultType="kh.spring.dto.ItemsDTO">
 
-		SELECT * FROM ITEMS WHERE name =#{value} ORDER BY ISEQ
-		DESC
-
+<!-- 상품명으로 검색하기 -->
+	<select id="selectByIName"
+		resultType="kh.spring.dto.ItemsDTO">
+		
+			SELECT * FROM ITEMS WHERE NAME LIKE '%'||#{value}||'%'  OR  CATEGORY  LIKE '%'||#{value}||'%' OR EXAREA  LIKE '%'||#{value}||'%' ORDER BY 1 DESC
+		
+		</select>
+		
+		
+		<!-- detail페이지에 우측 하단  -->
+		
+		<!--해당 상품올린 상점(id) 로 등록된 상품의 총 개수  -->
+	<select id="ItemsCount" resultType="int">
+		SELECT COUNT(*) FROM ITEMS
+		WHERE SELLERID in (select sellerid from items where iseq=#{value})
 	</select>
-	<!-- 검색창 관련 부분입니다. -->
-
-	<!-- 상품 문의 관련 -->
-	<insert id="insertQNA">
-		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL,
-		#{iseq},
-		#{writer}, #{contents}, CURRENT_DATE)
+		
+		
+		
+		<select id="selectByIseq" resultType="kh.spring.dto.ItemsDTO">
+		SELECT * FROM ITEMS
+		WHERE SELLERID IN (SELECT SELLERID FROM ITEMS WHERE ISEQ =#{value} ) 
+	</select>
+		
+		
+		
+		<!-- 검색창 관련 부분입니다. -->
+		
+		<insert id="insertQNA">
+		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL, #{iseq},#{writer}, #{contents}, CURRENT_DATE)
 	</insert>
 	
 	<delete id="deleteQNA">

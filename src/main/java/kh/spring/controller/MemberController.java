@@ -120,7 +120,7 @@ public class MemberController {
 
 			model.addAttribute("dto", dto);
 
-			return "forward:/items/";
+			return "forward:/items/?dto=dto";
 
 		}else {
 			return "redirect:/signIn";
@@ -157,8 +157,9 @@ public class MemberController {
    //마이페이지 수정기능
    @RequestMapping("updateInfo")
    public String modify(MemberDTO dto,MultipartFile file) {
-     // String encPw = EncryptionUtils.getSHA512(dto.getPw());
-     // dto.setPw(encPw);
+      
+      
+	      
       try {
     	  System.out.println(file);
     	  System.out.println(dto.getId());
@@ -169,12 +170,13 @@ public class MemberController {
     	  
 		int result = mservice.modify(dto,file);
 		
+		
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
       System.out.println("컨트롤러 정보수정완료");
-      return "/items/index";   
+      return "redirect:/";   
    }
    @RequestMapping("findID")
    public String selectID(String email,String phone,Model model) {
@@ -203,7 +205,7 @@ public class MemberController {
       if(result>0) {
           String host = "smtp.naver.com";
             String user = "wishstar1998"; //자신의 네이버 계정
-            String password = "wishstar199";//자신의 네이버 패스워드
+            String password = "wnsgh15412";//자신의 네이버 패스워드
             //  메일 받을 주소
             String to_email = inputEmail;
             System.out.println(to_email);
@@ -297,4 +299,7 @@ public class MemberController {
        System.out.println(result+"비밀번호 변경에 성공하였습니다.");
        return "redirect:/";
    }
+   
+   
+   
 }

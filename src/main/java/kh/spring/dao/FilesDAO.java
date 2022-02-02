@@ -83,6 +83,19 @@ public class FilesDAO {
 		return mybatis.selectList("Files.selectByIName",name);
 
 	}
+
+
+	public List<FilesDTO> selectLikeImg(String id) {
+		
+		return mybatis.selectList("Files.selectLikeImg",id);
+
+	}
+
+
+	public FilesDTO selectBySeqOrder(int iseq) {
+		return mybatis.selectOne("Files.selectBySeqOrder",iseq);
+
+	}
 	
 
 		

@@ -25,6 +25,7 @@ import kh.spring.service.FilesService;
 import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
 import kh.spring.service.SearchService;
+import kh.spring.service.WishListService;
 
 
 @Controller
@@ -47,10 +48,21 @@ public class ItemsController {
 	@Autowired
 	public MemberService mservice;
 
+	//	@Autowired
+	//	   public FollowingService fwservice;
+
+	@Autowired
+	public WishListService wlservice;
+	
+
+
+
+
 
 	@RequestMapping("")	
-	public String home(Model model) {
-
+	public String home( Model model) {
+		
+	
 
 		List<ItemsDTO>ilist =iservice.selectAll();
 
@@ -61,16 +73,28 @@ public class ItemsController {
 
 		model.addAttribute("flist",flist);
 
-		//검색기록을 위한 아이디 넘기기
-		String id =(String)session.getAttribute("loginID");
-		model.addAttribute("loginID",id);
+		
 
 		//인기검색어 넘겨주기 hot search =hs
 
 		List<SearchKeywordDTO> hslist = sservice.selectByHot();
 		model.addAttribute("hslist",hslist);
+		
+		
+		//검색기록을 위한 아이디 넘기기
+		String id =(String)session.getAttribute("loginID");
+		if(id != null) {
+		model.addAttribute("loginID",id);
+		//헤더 부분 프로필 넘기기
+		
+		MemberDTO dto = mservice.select(id);
 
-
+		model.addAttribute("dto",dto);
+		System.out.println("메인이미지는 ?  : "+dto.getProfile_image());
+		 
+		
+		}
+		
 
 		return "/items/index";
 	}
@@ -310,64 +334,72 @@ public class ItemsController {
 			System.out.println("연관상품 사진 이름" +rflist.get(i).getSysName()); }
 		System.out.println("연관상품 사진 개수 " +rflist.get(0));
 
+
+		//좋아요 넘겨주기 count
+
+		int wishCount=wlservice.wishListCountDetail(iseq);
 		model.addAttribute("rilist",rilist);
 		model.addAttribute("rflist",rflist);
+		model.addAttribute("wishCount",wishCount);
 
 		String id =(String)session.getAttribute("loginID");
 		model.addAttribute("loginID",id);
+		
+		
+//		detailpage 오른쪽하단
+		
+		//상점 정보에 대한 추가정보 넘겨주기 iseq 로 받아야함
+		MemberDTO mdto =mservice.selectByIseq(iseq);
+		model.addAttribute("mdto",mdto);
+		//상점 정보를 iseq 의 sellerid 로 찾기
+		int detailICount = iservice.ItemsCount(iseq);
+		model.addAttribute("detailICount",detailICount);
+		
+		
+		List<ItemsDTO> detailIlist = iservice.selectByIseq(iseq);
+		
+		model.addAttribute("detailIlist",detailIlist);
+		
+//		String id 값 추출 (해당 상점의)
+		String sellerID =detailIlist.get(0).getSellerID();
+
+		List<FilesDTO> detailFlist = fservice.selectMineById(sellerID);
+		
+		model.addAttribute("detailFlist",detailFlist);
+		
+		
+		
+//		
+
+//		model.addAttribute("detailFlist",detailFlist);
+		
+		
+		
+
+
+		
 
 		return "/items/itemsDetail";
 
 	}
 
-//아이템 상세페이지 하나 클릭했을때 - 문의글
-	
+	//아이템 상세페이지 하나 클릭했을때 - 문의글
+
 	@RequestMapping("QNAWriteProc")
 	public String writeProc(ItemsQNADTO dto) throws Exception {
 		System.out.println("QNAWriteProc 로 들어온 요청은 이 메서드를 실행합니다.");
-		
+
 		dto.setWriter((String) session.getAttribute("loginID"));
 		int result = iservice.insertQNA(dto);
 
 		// bservice.addCommentCount(dto.getBoard_seq());
 		// items 테이블에 상품문의 달린 개수 필요없지?
-		
+
 		return "redirect:/items/itemsDetail?iseq=" + dto.getIseq();
 	}
-	
-	@RequestMapping("deleteQNAProc")
-	public String deleteProc(int qseq, int iseq) {
-		System.out.println("deleteQNAProc 로 들어온 요청은 이 메서드를 실행합니다.");
 
-		int result = iservice.deleteQNA(qseq);
-		
-		return "redirect:/items/itemsDetail?iseq=" + iseq;
-	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
 	//	상품등록시 이동 
 
 	@RequestMapping("itemsSell")
@@ -411,11 +443,21 @@ public class ItemsController {
 
 		System.out.println("검색 결과 : " +dto.getKeyword());
 
-		//검색 목록에 값 저장
-	
-		if (dto.getUser_id() != null && !dto.getUser_id().isEmpty()) {
-			sservice.insert(dto);
+		//최근검색어 목록에 값 저장
+
+		if (dto.getUser_id() != null && !dto.getUser_id().isEmpty() ) {
+
+			String keyword = dto.getKeyword();
+
+			int existCount = sservice.searchExistCount(keyword);
+
+			if(existCount==0) {
+				sservice.insert(dto);
+
+
 			}
+
+		}
 
 		//검색내용
 		String name = dto.getKeyword().trim();
@@ -426,14 +468,14 @@ public class ItemsController {
 
 		//상품명 검색시
 		List<ItemsDTO> NIlist = iservice.selectByIName(name);
-		System.out.println(NIlist.size());
+		System.out.println(NIlist.get(0).getName());
 		List<FilesDTO> NFlist = fservice.selectByIName(name);
-		
-		
+
+
 		//인기검색어 넘겨주기 hot search =hs
 
-				List<SearchKeywordDTO> hslist = sservice.selectByHot();
-				model.addAttribute("hslist",hslist);
+		List<SearchKeywordDTO> hslist = sservice.selectByHot();
+		model.addAttribute("hslist",hslist);
 
 
 		model.addAttribute("NIlist",NIlist);
@@ -441,7 +483,7 @@ public class ItemsController {
 		model.addAttribute("hslist",hslist);
 		model.addAttribute("loginID",id);
 		model.addAttribute("name",name);
-		
+
 
 
 		System.out.println("seerawerwerawerawer"+NIlist.size());
@@ -452,7 +494,7 @@ public class ItemsController {
 		}else {
 			return "/items/itemsList";
 		}
-		
+
 	}
 
 	//	CF = category file / items
@@ -534,7 +576,23 @@ public class ItemsController {
 	//구매하기 
 
 	@RequestMapping("itemsOrder")
-	public String itemsOrder() {
+	public String itemsOrder(int iseq,Model model) {
+		
+		
+		List<ItemsDTO> ilist =iservice.selectBySeq(iseq);
+		FilesDTO fdto = fservice.selectBySeqOrder(iseq);
+
+		String id = (String)session.getAttribute("loginID");
+		
+		
+		MemberDTO mdto = mservice.select(id);
+		
+		model.addAttribute("ilist",ilist);
+		model.addAttribute("fdto",fdto);
+		model.addAttribute("mdto",mdto);
+		model.addAttribute("loginID",id);
+
+
 
 		return "/items/itemsOrder";
 	}
@@ -584,6 +642,32 @@ public class ItemsController {
 		//해당 상품목록의 사진들도 가져오기
 		List<FilesDTO> flist = fservice.selectMineById(id);
 
+		//찜 목록 가져오기
+		List<ItemsDTO> wishlist = new ArrayList<ItemsDTO>();
+		
+		
+		
+		
+		//iseq 값 가져옴 여러개나옴 이 값은 ITEMSDTO 와 연관
+		wishlist = wlservice.mywishList(id);
+		
+	
+		//마이페이지-찜목록 사진 출력
+		List<FilesDTO> likeImg = fservice.selectLikeImg(id);
+		
+		
+		model.addAttribute("wlist",wishlist);
+		//찜 개수 가져오기
+		int wishlistCount = wlservice.wishlistCount(id);
+		model.addAttribute("wCount",wishlistCount);
+		model.addAttribute("likeImg",likeImg);
+		
+
+		
+		
+
+
+
 		//판매내역 건수 보내기
 
 		int sellCount = iservice.sellCount(id);
@@ -592,6 +676,9 @@ public class ItemsController {
 		model.addAttribute("flist",flist);
 		model.addAttribute("sellCount",sellCount);
 		return "/member/myPage";
+		
+		
+		
 
 	}
 	//	상품의 상태 예약중/ 판매완료/판매중
@@ -649,7 +736,14 @@ public class ItemsController {
 
 	}
 
+	@RequestMapping("deleteQNAProc")
+	public String deleteProc(int qseq, int iseq) {
+		System.out.println("deleteQNAProc 로 들어온 요청은 이 메서드를 실행합니다.");
 
+		int result = iservice.deleteQNA(qseq);
+		
+		return "redirect:/items/itemsDetail?iseq=" + iseq;
+	}
 
 
 

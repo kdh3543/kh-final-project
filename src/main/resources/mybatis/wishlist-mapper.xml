@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WishList">
+<select id="checkList" resultType="int">
+   select count(*) from wishlist where seller=#{seller} and buyer=#{buyer} and ITEMS_NO=#{iseq}
+</select>
+<insert id="addList">
+   insert into wishlist values(wishlist_seq.nextval,#{iseq},#{seller},#{buyer})
+</insert>
+<delete id="deleteList">
+   delete from wishlist where seller=#{seller} and buyer=#{buyer} and ITEMS_NO = #{iseq}
+</delete>
+<select id="mywishList" resultType="kh.spring.dto.ItemsDTO">
+   select * from items where iseq in (select ITEMS_NO from wishlist where buyer=#{id} ) order by 1 desc
+</select>
+<select id="wishListCount" resultType="int">
+   select count(*) from items where iseq in (select ITEMS_NO from wishlist where buyer=#{id})
+</select>
+
+
+<!-- detail 페이지 좋아요 -->
+<select id="wishListCountDetail" resultType="int">
+   select count(items_no) from wishlist where items_no = #{value}
+</select>
+
+<!-- mypage 좋아요 총 개수 -->
+<select id="wishListCountMypage" resultType="int">
+   select count(items_no) from wishlist where buyer = #{value}
+</select>
+
+
+</mapper>

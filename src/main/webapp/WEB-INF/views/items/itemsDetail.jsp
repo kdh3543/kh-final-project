@@ -154,10 +154,11 @@
 
 
 					<div class="productName">${i.name}</div>
+					<!-- ajax로 데이터 보내기 위한 코드-->
+					<input type="hidden" id="iseq" value="${i.iseq }">
 					<div class="productPrice">${i.price}원</div>
 					<div class="product-status">
-						<div class="status-like">좋아요</div>
-
+						<div class="status-like" id='like_count'>찜 : ${wishCount}</div>
 						<div class="status-view">조회수 : ${i.view_cnt}</div>
 						<div class="status-view">작성일 : ${i.detailDate}</div>
 					</div>
@@ -248,43 +249,146 @@
 				</div>
 
 
-				<c:forEach var="i" items="${ilist}" varStatus="status">	
-							<div class="detail-btns">
-					<c:choose> 
-						<c:when test = "${i.sellerID eq loginID}">
-					<button type="button" id="btn-myPage" class="btn btn-lg btn-light">내상점관리</button>
-						</c:when>
-						<c:otherwise>
-						<button id="btn-like" class="btn btn-lg btn-light">찜</button>
-						<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
-						<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
-						</c:otherwise>
+<<<<<<< HEAD
+				<c:forEach var="i" items="${ilist}" varStatus="status">
+					<div class="detail-btns">
+						<c:choose>
+							<c:when test="${i.sellerID eq loginID}">
+								<button type="button" id="btn-myPage"
+									class="btn btn-lg btn-light">내상점관리</button>
+							</c:when>
+							<c:otherwise>
+								<input type="button" id="btn-like"
+									class="btn btn-lg btn-light choose" value="찜">
+								<!--  sellerID정보 ajax로 보내기-->
+								<input type=hidden id="sellerID" value="${i.sellerID}">
+								<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
+								<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
+							</c:otherwise>
 						</c:choose>
 					</div>
 					
-					<!--  동현이형 -->
-           			 <!-- 연락하기 버튼을 눌렀을 때의 script -->
-			        <input type=hidden value="베이직후드티" id="hiddenProduct">
-			        <input type=hidden value="2" id="hiddenProductId">
-			        <script>
-			        	let hiddenProduct = $("#hiddenProduct").val();
-			        	let hiddenProductId = $("#hiddenProductId").val();
-			           	let roomId=0;
-			        	$("#btn-talk").on("click",function(){
-			        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
-			        	})
-			        </script> 
-			        <!-- 동현이형 /// -->
-					</c:forEach>	
-					<!-- 진행중 -->
-				</div>
-			
+				</c:forEach>
+				<!-- 진행중 -->
+			</div>
+
 		</div>
-        
-        <script>
+
+		<!-- 서호 찜 부분-->
+		<!-- 찜 버튼 기능 구현 추가 -->
+		<script>
+   
+   $("#btn-like").on(
+               "click",
+               function() {
+                  if(${loginID!=null}){
+                  
+                   $.ajax({
+                           url:"/wishlist/checkwishlist",
+                           data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+                        }).done(function(resp){
+                           if(resp>0){
+                             let readd = $("#btn-like").val();
+                             console.log(readd);
+                             if(readd=="찜해제"){
+                                $.ajax({
+                                    url:"/wishlist/deletewishlist",
+                                    data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+                                 }).done(function(resp2){
+                                    if(resp2>0){
+                                       $("#btn-like").val("찜하기");
+                                         $("#btn-like").css("background-color","blue");
+                                         
+                                         /*찜 recount */
+                                         
+                                         $.ajax({
+                                        	 url: "/wishlist/reCount",
+                                        	data: {iseq:$("#iseq").val()}
+                                         
+                                         }).done(function(resp3){
+                                        	
+                                        	 let like_count = document.getElementById("like_count");
+                                        	 like_count.innerHTML = ("찜 : " +resp3);
+                                         
+                                         })
+                                         
+                                    }else{
+                                    }
+                                 });
+                             }
+                            
+                           }else{
+                            $.ajax({
+                                 url:"/wishlist/addwishlist",
+                                 data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+                              }).done(function(resp1){
+                                 if(resp1>0){
+                                    $("#btn-like").val("찜해제");
+                                      $("#btn-like").css("background-color","red");
+                                      
+                                      /*찜 recount  */
+                                      $.ajax({
+                                     	 url: "/wishlist/reCount",
+                                     	data: {iseq:$("#iseq").val()}
+                                      
+                                      }).done(function(resp3){
+                                     	
+                                     	 let like_count = document.getElementById("like_count");
+                                     	 like_count.innerHTML = ("찜 : " +resp3);
+                                      
+                                      })
+                                      
+                                      
+                                 }else{
+                                 }
+                              });
+                           }
+                        });
+                  }else{
+                  }
+                     });
+   
+   window.onload=function(){
+      
+      $.ajax({
+            url:"/wishlist/checkwishlist",
+            data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+         }).done(function(resp){
+            if(resp>0){
+               $("#btn-like").val("찜해제");
+                 $("#btn-like").css("background-color","red");
+            }else{
+               $("#btn-like").val("찜하기");
+                 $("#btn-like").css("background-color","blue");
+            }
+         });
+      
+      
+      
+      
+   }
+
+   </script>
+
+		<!--  동현이형 -->
+		<input type=hidden value="${ilist[0].name}" id="hiddenProduct">
+		<input type=hidden value="${ilist[0].iseq}" id="hiddenProductId">
+		<script>
+		let hiddenProduct = $("#hiddenProduct").val();
+        let hiddenProductId = $("#hiddenProductId").val();
+           let roomId=0;
+        $("#btn-talk").on("click",function(){
+           location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
+        })0
+        </script>
+
+
+		<!-- 동현이형 /// -->
+		<script>
+
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){
-        		location.href = "/items/itemsOrder";
+        		location.href = "/items/itemsOrder?iseq=${ilist[0].iseq}";
         	})
         	
         	<!-- 내상점관리 버튼을 눌렀을 때의 script -->
@@ -293,6 +397,7 @@
     	})
   
         </script>
+
 
 		<div class="detail-bottom-div">
 			<div class="bottom-top">
@@ -321,7 +426,6 @@
 						</c:forEach>
 
 					</c:forEach>
-				
 
 
 
@@ -370,6 +474,7 @@
 											<div class="tagy-contents">${i.tag}</div>
 										</div>
 									</div>
+
 								</c:forEach>
 								<!-- 시현이형 부분 -->
 								<div class="write-title-div">상품문의</div>
@@ -415,31 +520,85 @@
 									</div>
 								</div>
 							</div>
+
+
 							<div class="product-section2">
+
+
 								<div class="shop-info-title">상점정보</div>
-								<div class="shop-info-div">
-									<div class="info-left-div">
-										<i class="fas fa-camera fa-1x"></i>
-									</div>
-									<div class="info-right-div">
-										<div class="right-div-title">상점이름</div>
-										<div class="right-div-contents">
-											<span>상품 10 </span>| <span>팔로워 1</span>
+
+								<!-- 수정중 -->
+								<a href="/iitems/itemsDetail">
+									<div class="shop-info-div">
+										<div class="info-left-div">
+											<!-- <i class="fas fa-camera fa-1x"></i> -->
+											<!-- 수정중 -->
+											<img src="${mdto.profile_image}"
+												style="max-width: 80px; max-height: 80px;">
+										</div>
+										<div class="info-right-div">
+											<div class="right-div-title">${mdto.id}</div>
+											<div class="right-div-contents">
+												<span>상품 : ${detailICount} </span>| <span>팔로워 1</span>
+											</div>
 										</div>
 									</div>
+								</a>
+
+								<%-- 						<c:forEach var="ri" items="${rilist}" varStatus="statusRI">
+						<c:forEach var="rf" items="${rflist}" varStatus="statusRF">
+
+							<c:if test="${statusRF.index eq statusRI.index }">
+
+								 <c:if test= "${rf.parentSeq == ri.iseq}">
+								<div class="bottom-top-imglist">
+									<a href="/items/itemsDetail?iseq=${ri.iseq}"><img
+										src="${rf.sysName}"
+										style="max-width: 200px; max-height: 200px;"> <a
+										href="javascript:void(0);">${ri.name}</a></a>
+									<script>
+						
+								</script>
+
 								</div>
+							</c:if>
+						</c:forEach>
+
+					</c:forEach> --%>
+
+
+
 								<div class="follow-btn-div">
 									<button type="button" class="followBtn">
 										<i class="fas fa-user-plus"></i> 팔로우
 									</button>
 								</div>
 								<div class="shop-info-images">
-									<img src=""> <img src="">
+									<c:forEach var="di" items="${detailIlist}" varStatus="statusDI">
+										<c:forEach var="df" items="${detailFlist}"
+											varStatus="statusDF">
+
+											<c:if test="${di.iseq eq df.parentSeq }" >
+												<c:if test = "${statusDI.index <2}">
+
+
+												<a style = "text-decoration :none;' "href ="/items/itemsDetail?iseq=${di.iseq}"><img src="${df.sysName}" style = "min-width:150px; min-height:100px;"></a>
+												&nbsp;
+												</c:if>
+
+
+											</c:if>
+										</c:forEach>
+
+									</c:forEach>
+
 								</div>
+							<br>
 								<div class="more-btn-div">
-									<button type="button" class="moreBtn">?개의 상품 더보기 ></button>
+									<button type="button" class="moreBtn">${detailICount}개의
+										상품 더보기 ></button>
 								</div>
-								<div class="shop-info-review">
+								<!-- <div class="shop-info-review">
 									<div class="review-title-div">상점후기</div>
 									<div class="review-title-contents">
 										<div class="review-contents-left">
@@ -449,8 +608,10 @@
 											<button type="button" class="reviewBtn">후기작성</button>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
+
+
 						</div>
 					</div>
 
@@ -479,5 +640,7 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
+
+
 </body>
 </html>
