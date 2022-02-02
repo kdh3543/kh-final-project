@@ -109,6 +109,7 @@
                       <div class="talk-list-right">
                         <div class="talk-name">${list.buyerId}(${list.productName})(${list.latestDate})</div>
     
+
                         <div class="talk-last-conversation" >
                           (${list.roomId})${list.lastMessage}
     
@@ -155,8 +156,6 @@
                 test = $("#chatDelBtn${delCount.count}").val()
                 $("#chatDelBtn${delCount.count}").on("click", function () {
 
-                  console.log("id값은: " +hiddenSellerId.val());
-                  console.log("상품이름은: " +hiddenProductName.val());
                   if (confirm("정말 채팅방을 나가시겠습니까?")) {
                     
                     let hiddenSellerId = $(".hiddenSellerId${delCount.count}");
@@ -170,9 +169,6 @@
                     let url = window.location.href;
                     
                     let urlParams = new URLSearchParams(url);
-                    
-                    console.log("id값은: " +hiddenSellerId.val());
-                    console.log("상품이름은: " +hiddenProductName.val());
 
                     let roomId = urlParams.get('roomId');
                     if (roomId == 0) {
@@ -182,7 +178,6 @@
                       ws.send("상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다." + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
                     }
                     
-
                     alert("채팅방 내용이 모두 삭제되었습니다.");
                     
                     $.ajax({
@@ -233,7 +228,6 @@
                 <div class="right-bottom">
                   <input type=text placeholder="이 페이지는 입력할 수 없는 페이지입니다." id="preventInput" disabled>
                   <button type="button">전송불가</button>
-
                 </div>
             </c:when>
             <c:otherwise>

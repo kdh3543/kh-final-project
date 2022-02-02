@@ -1,12 +1,10 @@
 package kh.spring.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.ChatContentsDTO;
 import kh.spring.dto.ChatRoomDTO;
+import kh.spring.dto.FilesDTO;
 import kh.spring.service.ChatContentsService;
 import kh.spring.service.ChatRoomService;
+import kh.spring.service.FilesService;
 import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
 import kh.spring.utils.DateParseUtils;
@@ -35,6 +35,8 @@ public class ChatController {
 	private HttpSession session;
 	@Autowired
 	private ItemsService iService;
+	@Autowired
+	private FilesService fService;
 	
 	private Date time = new Date();
 	
@@ -101,12 +103,21 @@ public class ChatController {
 			
 		}		
 		
+		
 		List<ChatRoomDTO> list =  crService.selectByBuyerId(userId);
 		ChatContentsDTO cdto = new ChatContentsDTO();
 		cdto.setBuyerId(userId);
 		cdto.setProductId(productId);
 		List<ChatContentsDTO> cList = cService.selectByProductId(cdto);
 		System.out.println("리스트의 사이즈는: "+list.size());
+		
+		
+		
+		// chatImg 세팅
+//		System.out.println("상품 id는: "+productId);
+//		FilesDTO fDTO = fService.selectBySeqOrder(productId);		
+//		System.out.println("이미지 이름은: "+fDTO.getSysName());
+		
 		
 		for(int i =0; i<list.size();i++) {			
 			System.out.println("현재시간은: "+cService.selectLastDate(list.get(i).getRoomId()));
@@ -115,7 +126,11 @@ public class ChatController {
 			}else {			
 				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
 			}	
+			
+			// chat 마지막 채팅글 세팅
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
+			
+			
 		}
 		
 		model.addAttribute("productName",productName);
