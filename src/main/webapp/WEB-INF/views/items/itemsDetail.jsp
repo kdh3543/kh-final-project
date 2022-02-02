@@ -268,7 +268,7 @@
 			        <script>
 			        	let hiddenProduct = $("#hiddenProduct").val();
 			        	let hiddenProductId = $("#hiddenProductId").val();
-			            let roomId = 0;
+			           	let roomId=0;
 			        	$("#btn-talk").on("click",function(){
 			        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
 			        	})

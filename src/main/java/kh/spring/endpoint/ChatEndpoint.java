@@ -134,16 +134,16 @@ public class ChatEndpoint{
 	@OnClose
 	public void onClose(Session session) throws IOException {
 
-				String userId = (String)this.hSession.getAttribute("loginID");
-				
-				int roomId = crdao.bringRoomIdByBuyerId(userId);
-				System.out.println(roomId);
-				List<ChatContentsDTO> list = ccdao.selectByRoomID(roomId);
-				System.out.println("list의 사이즈는 : " +list.size());
-				if(list.size()==0) {
-					crdao.deleteByRoomId(roomId);
-					System.out.println("삭제 완료!!");
-				}
+//				String userId = (String)this.hSession.getAttribute("loginID");
+//				
+//				int roomId = crdao.bringRoomIdByBuyerId(userId);
+//				System.out.println(roomId);
+//				List<ChatContentsDTO> list = ccdao.selectByRoomID(roomId);
+//				System.out.println("list의 사이즈는 : " +list.size());
+//				if(list.size()==0) {
+//					crdao.deleteByRoomId(roomId);
+//					System.out.println("삭제 완료!!");
+//				}
 		System.out.println("user 전의 사이즈는 : "+users.size());
 		//		clients.remove(session);
 		

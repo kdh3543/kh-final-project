@@ -1,9 +1,12 @@
 package kh.spring.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,7 @@ import kh.spring.service.ChatContentsService;
 import kh.spring.service.ChatRoomService;
 import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
+import kh.spring.utils.DateParseUtils;
 
 @Controller
 @RequestMapping("/chat/")
@@ -31,7 +35,9 @@ public class ChatController {
 	private HttpSession session;
 	@Autowired
 	private ItemsService iService;
-
+	
+	private Date time = new Date();
+	
 	@RequestMapping("moveChatRoom")
 	public String moveChatRoom(String sellerId, int productId, String productName, int roomId, Model model) {
 		//챗봇에 대한 룸 정보 불러오기
@@ -50,9 +56,14 @@ public class ChatController {
 		List<ChatContentsDTO> cList = cService.selectByRoomID(roomId);
 		// list로부터 producId를 가져와 그 productId에 해당하는 마지막 메세지를 list에 세팅
 		for(int i =0; i<list.size();i++) {
-			
+			System.out.println("현재시간은: "+list.get(i).getUpdateTime());
+			if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+				list.get(i).setLatestDate(DateParseUtils.nowDate(time));				
+			}else {		
+				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
+			}
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
-		}	
+		}
 		
 		model.addAttribute("list",list);
 		model.addAttribute("cList",cList);
@@ -67,10 +78,10 @@ public class ChatController {
 	@RequestMapping("talk")
 	public String talk(String productName, int productId, int roomId,Model model) {
 		//챗봇에 대한 룸 정보 불러오기
-		int chatBotRoomId = 0;
-		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
-		model.addAttribute("chatBot",chatBot);
-		System.out.println(chatBot.get(0).getRoomId());
+//		int chatBotRoomId = 0;
+//		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
+//		model.addAttribute("chatBot",chatBot);
+//		System.out.println(chatBot.get(0).getRoomId());
 
 		//채팅방에 대한 룸 정보 가져오기
 		System.out.println(productId);
@@ -81,21 +92,29 @@ public class ChatController {
 		crdto.setProductId(productId);
 		boolean existRoomId = crService.selectByProductId(crdto);
 		
-		
+		//채팅방이 없을 때 채팅방 생성
 		if(!existRoomId) {
 			crdto.setSellerId(sellerId);
 			crdto.setProductName(productName);
-
+			
 			crService.insert(crdto);
-		}
+			
+		}		
 		
 		List<ChatRoomDTO> list =  crService.selectByBuyerId(userId);
 		ChatContentsDTO cdto = new ChatContentsDTO();
 		cdto.setBuyerId(userId);
 		cdto.setProductId(productId);
 		List<ChatContentsDTO> cList = cService.selectByProductId(cdto);
+		System.out.println("리스트의 사이즈는: "+list.size());
 		
-		for(int i =0; i<list.size();i++) {		
+		for(int i =0; i<list.size();i++) {			
+			System.out.println("현재시간은: "+cService.selectLastDate(list.get(i).getRoomId()));
+			if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+				list.get(i).setLatestDate(DateParseUtils.nowDate(time));			
+			}else {			
+				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
+			}	
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}
 		
@@ -126,8 +145,21 @@ public class ChatController {
 		dto.setBuyerId(id);
 		dto.setSellerId(id);
 		List<ChatRoomDTO> list = crService.selectByBothId(dto);
-		for(int i =0; i<list.size();i++) {	
-			
+		
+		ChatContentsDTO cdto = new ChatContentsDTO();
+		cdto.setBuyerId(id);
+		for(int i = 0; i<list.size();i++) {
+			cdto.setProductId(list.get(i).getProductId());
+		}
+		List<ChatContentsDTO> cList = cService.selectByProductId(cdto);
+		
+		for(int i =0; i<list.size();i++) {
+			if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+				list.get(i).setLatestDate(DateParseUtils.nowDate(time));
+			}else {
+				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
+			}
+			System.out.println("현재시간은: "+list.get(i).getUpdateTime());
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}
 		 
@@ -161,8 +193,13 @@ public class ChatController {
 		dto.setBuyerId(id);
 		dto.setSellerId(id);
 		List<ChatRoomDTO> list = crService.selectByBothId(dto);
-		for(int i =0; i<list.size();i++) {	
-			
+		for(int i =0; i<list.size();i++) {
+			if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+				list.get(i).setLatestDate(DateParseUtils.nowDate(time));
+			}else {
+				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
+			}
+			System.out.println("현재시간은: "+list.get(i).getUpdateTime());
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 		}
 		

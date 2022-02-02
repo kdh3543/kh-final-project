@@ -104,7 +104,18 @@ public class ChatContentsDTO {
 	}
 	
 	public String getFormDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mma");
+		
+		return sdf.format(updateTime);
+	}
+	
+	public String getLatestDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+		
+		return sdf.format(updateTime);
+	}
+	public String getOtherLatestDate(Timestamp updateTime) {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
 		
 		return sdf.format(updateTime);
 	}

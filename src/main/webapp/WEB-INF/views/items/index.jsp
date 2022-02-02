@@ -362,13 +362,12 @@
 
   <!--상품 반복 시작 -->
 
-
 								<c:forEach var="i" items="${ilist}">
 									<c:forEach var="f" items="${flist}">
 
 										<c:if test="${f.parentSeq == i.iseq}">
 
-											<a href="/items/itemsDetailExam">
+											<a href="/items/itemsDetail?iseq=${i.iseq}">
 												<div class="detail-img">
 													<img src="${f.sysName}" style="width: 100%; height: 100%;">
 												</div>

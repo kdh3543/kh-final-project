@@ -1,8 +1,7 @@
 package kh.spring.dao;
 
-import java.util.HashMap;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +59,6 @@ public class ChatRoomDAO {
 	public boolean keyCount(ChatRoomDTO dto) {
 		return mybatis.selectOne("ChatRoom.keyCount",dto);
 	}
+	
 	
 }

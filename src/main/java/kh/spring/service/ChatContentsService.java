@@ -1,5 +1,6 @@
 package kh.spring.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,9 @@ public class ChatContentsService {
 	
 	public int deleteByRoomId(int roomId) {
 		return dao.deleteByRoomId(roomId);
+	}
+	
+	public Timestamp selectLastDate(int roomId) {
+		return dao.selectLastDate(roomId);
 	}
 }

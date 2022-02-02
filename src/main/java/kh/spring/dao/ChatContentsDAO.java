@@ -1,5 +1,6 @@
 package kh.spring.dao;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,5 +40,9 @@ public class ChatContentsDAO {
 	
 	public int deleteByRoomId(int roomId) {
 		return mybatis.delete("ChatContents.deleteByRoomId",roomId);
+	}
+	
+	public Timestamp selectLastDate(int roomId) {
+		return mybatis.selectOne("ChatContents.selectLastDate",roomId);
 	}
 }
