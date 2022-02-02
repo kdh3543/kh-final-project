@@ -21,6 +21,24 @@
 		    )
 		ORDER BY A.BOARD_SEQ DESC
 	</select>
+	
+	<select id="searchByAll" resultType="kh.spring.dto.BoardDTO">
+		SELECT * FROM BOARD WHERE SUBJECT = #{subject} ORDER BY BOARD_SEQ DESC
+	</select>
+	
+	<select id="searchByUser" resultType="kh.spring.dto.BoardDTO" parameterType="HashMap">
+		SELECT
+		    A.BOARD_SEQ, A.WRITER, A.CONTENTS, A.SUBJECT, A.WRITE_DATE, A.VIEW_COUNT, A.LIKE_COUNT, A.COMMENT_COUNT, B.USER_ID
+		FROM
+		    (
+		    BOARD A
+		    LEFT OUTER JOIN
+		    (SELECT BOARD_SEQ, USER_ID FROM BOARD_LIKE WHERE USER_ID = #{user_id}) B
+		    ON A.BOARD_SEQ = B.BOARD_SEQ
+		    )
+		WHERE SUBJECT = #{subject}
+		ORDER BY A.BOARD_SEQ DESC
+	</select>
 
 	<select id="selectBySeq" resultType="kh.spring.dto.BoardDTO">
 		SELECT * FROM BOARD WHERE

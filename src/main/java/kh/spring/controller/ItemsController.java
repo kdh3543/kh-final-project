@@ -265,9 +265,11 @@ public class ItemsController {
 		// 해당 상품과 이미지들
 		List<ItemsDTO> ilist =iservice.selectBySeq(iseq);
 		List<FilesDTO> flist = fservice.selectBySeq(iseq);
+		List<ItemsQNADTO> qlist = iservice.selectQNABySeq(iseq);
 
 		model.addAttribute("ilist",ilist);
 		model.addAttribute("flist",flist);
+		model.addAttribute("qlist",qlist);
 
 		//	관련 상품과 이미지들 (rlist = related item list)
 		//상품 한개이므로 get (0) 또한 해당상품은 연관상품에 안떠야하니까 iseq 가져간다.
@@ -333,6 +335,14 @@ public class ItemsController {
 		return "redirect:/items/itemsDetail?iseq=" + dto.getIseq();
 	}
 	
+	@RequestMapping("deleteQNAProc")
+	public String deleteProc(int qseq, int iseq) {
+		System.out.println("deleteQNAProc 로 들어온 요청은 이 메서드를 실행합니다.");
+
+		int result = iservice.deleteQNA(qseq);
+		
+		return "redirect:/items/itemsDetail?iseq=" + iseq;
+	}
 	
 	
 	

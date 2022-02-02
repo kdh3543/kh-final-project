@@ -111,7 +111,7 @@
 						<h3 id="comment-writer">
 							<i class="fas fa-arrow-right"></i>${cdto.writer}
 						</h3>
-						<c:if test="${dto.writer == loginID}">
+						<c:if test="${cdto.writer == loginID}">
 							<div class="btn-group">
 								<button type="button" class="btn btn-secondary-light" data-bs-toggle="dropdown"
 									aria-expanded="false">
@@ -123,7 +123,7 @@
 									<li>
 										<h6 class="dropdown-header">메뉴</h6>
 									</li>
-									<li><a class="dropdown-item" id="modifyComment">수정</a> <a class="dropdown-item"
+									<li><a class="dropdown-item"
 											id="deleteComment"
 											href="/comment/deleteProc?cseq=${cdto.comment_seq}&bseq=${dto.board_seq}">삭제</a>
 									</li>

@@ -49,6 +49,27 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
+	@RequestMapping("boardSearch")
+	public String boardSearch(Model model, String subject) {
+		System.out.println("boardSearch 로 들어온 요청은 이 메서드를 실행합니다.");
+		
+		System.out.println("subject : " + subject);
+		
+		String user_id = (String) session.getAttribute("loginID");
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		
+		if(user_id != null) {
+			// 로그인
+			list = bservice.searchByUser(user_id, subject);
+		} else {
+			// 비로그인
+			list = bservice.searchByAll(subject);
+		}
+		
+		model.addAttribute("list", list);
+		return "board/boardList";
+	}
+	
 	@RequestMapping("writeForm")
 	public String writeForm() {
 		System.out.println("writeForm 로 들어온 요청은 이 메서드를 실행합니다.");
