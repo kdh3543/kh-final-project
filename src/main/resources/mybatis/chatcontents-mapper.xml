@@ -20,15 +20,19 @@
  	</select>
  	
  	<select id="selectByProductId" resultType="kh.spring.dto.ChatContentsDTO">
- 		select * from chatcontents where productId = #{value} order by 1
+ 		select * from chatcontents where productId = #{productId} and buyerId = #{buyerId} order by 1
  	</select>
 	
 	<select id="selectLastTalk" resultType="String">
-		SELECT chatcontents FROM chatcontents WHERE contentsid IN (SELECT Max(contentsid) FROM chatcontents where productid = #{value}) order by 1
+		SELECT chatcontents FROM chatcontents WHERE contentsid IN (SELECT Max(contentsid) FROM chatcontents where roomid = #{value}) order by 1
 	</select>
 	
 	<delete id="deleteByRoomId">
 		delete from chatcontents where roomid = #{value}
 	</delete>
+	
+	<select id="selectLastDate" resultType="java.sql.Timestamp">
+ 		SELECT updateTime FROM chatcontents WHERE contentsid IN (SELECT Max(contentsid) FROM chatcontents where roomid = #{value}) order by 1 
+ 	</select>
  </mapper>
  

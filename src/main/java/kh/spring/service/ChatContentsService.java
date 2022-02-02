@@ -1,5 +1,6 @@
 package kh.spring.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +27,19 @@ public class ChatContentsService {
 		return dao.selectByRoomID(roomID);
 	}
 	
-	public List<ChatContentsDTO> selectByProductId(int productId){
-		return dao.selectByProductId(productId);
+	public List<ChatContentsDTO> selectByProductId(ChatContentsDTO dto){
+		return dao.selectByProductId(dto);
 	}
 	
-	public String selectLastTalk(int productId) {
-		return dao.selectLastTalk(productId);
+	public String selectLastTalk(int roomId) {
+		return dao.selectLastTalk(roomId);
 	}
 	
 	public int deleteByRoomId(int roomId) {
 		return dao.deleteByRoomId(roomId);
+	}
+	
+	public Timestamp selectLastDate(int roomId) {
+		return dao.selectLastDate(roomId);
 	}
 }

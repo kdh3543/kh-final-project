@@ -159,7 +159,6 @@
 					<div class="productPrice">${i.price}원</div>
 					<div class="product-status">
 						<div class="status-like" id='like_count'>찜 : ${wishCount}</div>
-
 						<div class="status-view">조회수 : ${i.view_cnt}</div>
 						<div class="status-view">작성일 : ${i.detailDate}</div>
 					</div>
@@ -250,6 +249,7 @@
 				</div>
 
 
+<<<<<<< HEAD
 				<c:forEach var="i" items="${ilist}" varStatus="status">
 					<div class="detail-btns">
 						<c:choose>
@@ -267,6 +267,7 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
+					
 				</c:forEach>
 				<!-- 진행중 -->
 			</div>
@@ -384,6 +385,7 @@
 
 		<!-- 동현이형 /// -->
 		<script>
+
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){
         		location.href = "/items/itemsOrder?iseq=${ilist[0].iseq}";
@@ -395,9 +397,6 @@
     	})
   
         </script>
-
-
-
 
 
 		<div class="detail-bottom-div">
@@ -427,7 +426,6 @@
 						</c:forEach>
 
 					</c:forEach>
-
 
 
 
@@ -495,6 +493,31 @@
 											</c:forEach>
 										</div>
 									</form>
+									<div>
+										<c:forEach var="q" items="${qlist}" varStatus="status">
+										${q.writer}
+										${q.contents}
+										${q.parsed_date}
+										<c:if test="${q.writer == loginID}">
+												<div class="btn-group">
+													<button type="button" class="btn btn-secondary-light"
+														data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="fas fa-ellipsis-v fa-2x"></i>
+													</button>
+													<ul class="dropdown-menu">
+
+														<!-- Dropdown menu links -->
+														<li>
+															<h6 class="dropdown-header">메뉴</h6>
+														</li>
+														<li><a class="dropdown-item" id="deleteQNA"
+															href="/items/deleteQNAProc?qseq=${q.items_qna_seq}&iseq=${q.iseq}">삭제</a>
+														</li>
+													</ul>
+												</div>
+											</c:if>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
 

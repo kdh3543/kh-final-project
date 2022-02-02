@@ -1,6 +1,7 @@
 package kh.spring.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class ChatRoomDTO {
 	private int roomId;
@@ -13,6 +14,7 @@ public class ChatRoomDTO {
 	private int productId;
 	private String productName;
 	private String lastMessage;
+	private String latestDate;
 	
 	public ChatRoomDTO() {}
 
@@ -110,6 +112,16 @@ public class ChatRoomDTO {
 		this.lastMessage = lastMessage;
 	}
 	
+	public void setLatestDate(String latestDate) {
+		this.latestDate = latestDate;
+	}
+	public String getLatestDate() {
+		return latestDate;
+	}
+	
+	public void setNowDate() {
+		
+	}
 }
 
 

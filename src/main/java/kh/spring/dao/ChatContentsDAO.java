@@ -1,6 +1,9 @@
 package kh.spring.dao;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +29,20 @@ public class ChatContentsDAO {
 		return mybatis.selectList("ChatContents.selectByroomID",roomID);
 	}
 	
-	public List<ChatContentsDTO> selectByProductId(int productId){
-		return mybatis.selectList("ChatContents.selectByProductId",productId);
+	public List<ChatContentsDTO> selectByProductId(ChatContentsDTO dto){
+		
+		return mybatis.selectList("ChatContents.selectByProductId",dto);
 	}
 	
-	public String selectLastTalk(int productId) {
-		return mybatis.selectOne("ChatContents.selectLastTalk",productId);
+	public String selectLastTalk(int roomId) {
+		return mybatis.selectOne("ChatContents.selectLastTalk",roomId);
 	}
 	
 	public int deleteByRoomId(int roomId) {
 		return mybatis.delete("ChatContents.deleteByRoomId",roomId);
+	}
+	
+	public Timestamp selectLastDate(int roomId) {
+		return mybatis.selectOne("ChatContents.selectLastDate",roomId);
 	}
 }

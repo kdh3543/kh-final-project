@@ -80,11 +80,6 @@ main>div {
 	width: 100%;
 }
 
-.initial-page div {
-	margin: auto;
-	margin-top: 400px;
-}
-
 #preventInput {
 	height: 100%;
 	width: 100%;
@@ -161,6 +156,32 @@ main>div {
 	width: fit-content;
 	max-width: 60%;
 	opacity: 0.8;
+}
+
+.initial-page{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    height:100%;
+}
+
+
+
+.initial-page-line{
+    border-radius: 5px;
+	margin: 3px;
+	background-color: #24a6a4;
+	font-weight: bold;
+	font-size: 20px;
+	font-family: 'OTWelcomeRA';
+	padding: 3px;
+	padding-left: 4px;
+	padding-top: 3px;
+	width: fit-content;
+	max-width: 80%;
+	opacity: 0.8;
+    text-align: center;
 }
 
 .talk-right .right-bottom {

@@ -6,6 +6,9 @@
  <mapper namespace="ChatRoom">
  	<insert id="insert">
  		insert into chatroom values(roomid_seq.nextval,default,default,default,default,#{sellerId},#{buyerId},#{productId},#{productName})
+ 		<selectKey resultType="int" order="AFTER" keyProperty="roomId">
+ 			select roomid_seq.currval from dual
+ 		</selectKey>
  	</insert>
  	<select id="selectByBuyerId" resultType="kh.spring.dto.ChatRoomDTO">
  		select * from chatroom where buyerid = #{value} order by 1
@@ -33,6 +36,9 @@
  	</delete>
  	<select id="bringRoomIdByBuyerId" resultType="int">
  		select roomid from chatroom where roomid in (select max(roomid) from chatroom where buyerid = #{value})
+ 	</select>
+ 	<select id="keyCount" resultType="boolean">
+ 		select count(*) from chatroom where (buyerId = #{buyerId} or sellerId = #{sellerId}) and roomId = #{roomId}
  	</select>
  	
  </mapper>

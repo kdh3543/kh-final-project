@@ -1,8 +1,7 @@
 package kh.spring.dao;
 
-import java.util.HashMap;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,8 @@ public class ChatRoomDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public int insert(ChatRoomDTO dto) {
-		return mybatis.insert("ChatRoom.insert",dto);
+		 int result = mybatis.insert("ChatRoom.insert",dto);
+		 return dto.getRoomId();
 	}
 	
 	public List<ChatRoomDTO> selectByBuyerId(String id){
@@ -55,5 +55,10 @@ public class ChatRoomDAO {
 	public int bringRoomIdByBuyerId(String buyerId) {
 		return mybatis.selectOne("ChatRoom.bringRoomIdByBuyerId",buyerId);
 	}
+	
+	public boolean keyCount(ChatRoomDTO dto) {
+		return mybatis.selectOne("ChatRoom.keyCount",dto);
+	}
+	
 	
 }

@@ -7,18 +7,18 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.FilesDAO;
 import kh.spring.dao.ItemsDAO;
+import kh.spring.dto.CommentDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
-
+import kh.spring.utils.DateParseUtils;
 
 @Service
 public class ItemsService {
 
-
 	@Autowired
 	public ItemsDAO idao;
 
-	@Autowired	
+	@Autowired
 	public FilesDAO fdao;
 
 	public int insert(ItemsDTO dto) {
@@ -27,23 +27,22 @@ public class ItemsService {
 
 	}
 
-	public List<ItemsDTO> selectAll(){
+	public List<ItemsDTO> selectAll() {
 
 		return idao.selectAll();
 	}
-
 
 	public List<ItemsDTO> selectBySeq(int iseq) {
 		return idao.selectBySeq(iseq);
 
 	}
 
-	public List<ItemsDTO> selectByName(List<String> targetList,int iseq){
+	public List<ItemsDTO> selectByName(List<String> targetList, int iseq) {
 
-		return idao.selectByName(targetList,iseq);
+		return idao.selectByName(targetList, iseq);
 	}
 
-	public List<ItemsDTO> selectNameToSeq(List<ItemsDTO> rilist){
+	public List<ItemsDTO> selectNameToSeq(List<ItemsDTO> rilist) {
 
 		return idao.selectNameToSeq(rilist);
 	}
@@ -60,21 +59,15 @@ public class ItemsService {
 
 	public int updateProc(String deal, int iseq) {
 
-		return idao.updateProc(deal,iseq);
+		return idao.updateProc(deal, iseq);
 	}
-
-
-
 
 	public int itemsModifyProc(ItemsDTO dto) {
 		// TODO Auto-generated method stub
 		return idao.itemsModifyProc(dto);
 	}
 
-
-
-
-	public List<ItemsDTO> selectById(String id){
+	public List<ItemsDTO> selectById(String id) {
 		return idao.selectById(id);
 	}
 
@@ -90,11 +83,11 @@ public class ItemsService {
 
 	public List<ItemsDTO> selectByCategory(String category) {
 
-		return idao.selectByCategory(category);	
+		return idao.selectByCategory(category);
 	}
 
 	public List<ItemsDTO> selectByIName(String name) {
-		return idao.selectByIName(name);	
+		return idao.selectByIName(name);
 	}
 
 	// 신규 상품 문의 삽입
@@ -119,9 +112,13 @@ public class ItemsService {
 
 	
 
-
-
-
-
+	// 시퀀스로 상품 문의 검색
+	public List<ItemsQNADTO> selectQNABySeq(int seq) {
+		List<ItemsQNADTO> list = idao.selectQNABySeq(seq);
+		for (ItemsQNADTO dto : list) {
+			dto.setParsed_date(DateParseUtils.parseDate(dto.getWrite_date()));
+		}
+		return list;
+	}
 
 }

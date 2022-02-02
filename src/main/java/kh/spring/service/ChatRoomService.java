@@ -1,5 +1,6 @@
 package kh.spring.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ public class ChatRoomService {
 	private ChatRoomDAO dao;
 
 	public int insert(ChatRoomDTO dto) {
-		return dao.insert(dto);
+		int result = dao.insert(dto);
+		return dto.getRoomId();
 	}
 
 	public List<ChatRoomDTO> selectByBuyerId(String id){
@@ -45,4 +47,6 @@ public class ChatRoomService {
 	public int deleteByRoomId(int roomId) {
 		return dao.deleteByRoomId(roomId);
 	}
+	
+	
 }

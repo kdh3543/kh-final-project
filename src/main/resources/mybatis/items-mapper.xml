@@ -125,6 +125,7 @@
 	</select>
 
 
+<!-- 상품명으로 검색하기 -->
 	<select id="selectByIName"
 		resultType="kh.spring.dto.ItemsDTO">
 		
@@ -150,18 +151,20 @@
 		
 		
 		
-		
-		
-		
-		
 		<!-- 검색창 관련 부분입니다. -->
 		
 		<insert id="insertQNA">
-		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL, #{iseq},
-		#{writer}, #{contents}, CURRENT_DATE)
+		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL, #{iseq},#{writer}, #{contents}, CURRENT_DATE)
 	</insert>
-		
-		
-		
+	
+	<delete id="deleteQNA">
+		DELETE FROM ITEMS_QNA WHERE ITEMS_QNA_SEQ = ${value}
+	</delete>
+
+	<select id="selectQNABySeq" resultType="kh.spring.dto.ItemsQNADTO">
+		SELECT * FROM ITEMS_QNA WHERE ISEQ = ${value}
+		ORDER BY ITEMS_QNA_SEQ
+	</select>
+
 
 </mapper>

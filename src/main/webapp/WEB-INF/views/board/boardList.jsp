@@ -78,14 +78,14 @@
 				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
 			</div>
 			<div class="subject-menu">
-				<button class="btn btn-primary" type="button" id="question">동네질문</button>
-				<button class="btn btn-primary" type="button" id="incident">동네사건사고</button>
-				<button class="btn btn-primary" type="button" id="restaurant">동네맛집</button>
-				<button class="btn btn-primary" type="button" id="news">동네소식</button>
-				<button class="btn btn-primary" type="button" id="lost">분실/실종센터</button>
-				<button class="btn btn-primary" type="button" id="cat">고양이</button>
-				<button class="btn btn-primary" type="button" id="dog">강아지</button>
-				<button class="btn btn-primary" type="button" id="others">기타</button>
+				<button class="btn btn-primary search" type="button" id="question">동네질문</button>
+				<button class="btn btn-primary search" type="button" id="incident">동네사건사고</button>
+				<button class="btn btn-primary search" type="button" id="restaurant">동네맛집</button>
+				<button class="btn btn-primary search" type="button" id="news">동네소식</button>
+				<button class="btn btn-primary search" type="button" id="lost">분실/실종센터</button>
+				<button class="btn btn-primary search" type="button" id="cat">고양이</button>
+				<button class="btn btn-primary search" type="button" id="dog">강아지</button>
+				<button class="btn btn-primary search" type="button" id="others">기타</button>
 			</div>
 			<c:forEach var="dto" items="${list}" varStatus="status">
 				<div class="contents">
@@ -102,7 +102,7 @@
 						if (div${ status.count }.length > 100) {
 							$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
 						}
-				
+
 					</script>
 					<div class="contents-container">
 						<div class="contents-div-writer">${dto.writer} ·</div>
@@ -179,7 +179,7 @@
 		// 	}
 		// }
 	</script>
-	
+
 	<script>
 		$("#toWrite").on("click", function () {
 			location.href = "writeForm";
@@ -222,6 +222,13 @@
 				})
 			}
 			return false;
+		})
+	</script>
+	<script>
+		$(".search").on("click", function () {
+			var subject = $(this).html();
+			console.log(subject);
+			location.href = "boardSearch?subject=" + subject;
 		})
 	</script>
 </body>

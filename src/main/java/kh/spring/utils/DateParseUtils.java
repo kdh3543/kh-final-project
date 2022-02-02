@@ -2,6 +2,7 @@ package kh.spring.utils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateParseUtils {
 
@@ -23,5 +24,10 @@ public class DateParseUtils {
 			return sdf.format(write_date);
 		}
 
+	}
+	
+	public static String nowDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd");
+		return sdf.format(date);
 	}
 }
