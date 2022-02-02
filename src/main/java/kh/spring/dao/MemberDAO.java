@@ -43,7 +43,9 @@ public class MemberDAO {
    }
    //회원정보 변경
    public int modify(MemberDTO dto) {
+	      System.out.println("dao pw 값은?  : " +dto.getPw());
       return mybatis.update("Member.modify",dto);
+
    }
    //회원 탈퇴
    public int delete(String id) {
@@ -103,6 +105,12 @@ public class MemberDAO {
    public int deleteBySeq(int seq) {
 	   return mybatis.delete("Member.deleteBySeq",seq);
    }
+
+   //디테일 오른쪽 하단 정보
+
+public MemberDTO selectByIseq(int iseq) {
+	return mybatis.selectOne("Member.selectByIseq",iseq);
+}
 
 
 }

@@ -44,4 +44,12 @@ public List<SearchKeywordDTO>selectByHot(){
 	return sdao.selectByHot();
 }
 
+// 최근검색어 중복되는지 확인
+
+public int searchExistCount(String keyword) {
+	
+	return sdao.searchExistCount(keyword);
+
+}
+
 }

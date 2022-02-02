@@ -107,10 +107,7 @@ public class ItemsDAO {
 		return mybatis.selectList("Items.selectById",id);
 	}
 
-	// 해당 아이디의 판매상품 개수 불러오기
-	public int ItemsCount(String id) {
-		return mybatis.selectOne("Items.ItemsCount",id);
-	}	
+	
 
 	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
 	public String selectByProductId(int productId) {
@@ -152,6 +149,21 @@ public class ItemsDAO {
 	public int deleteQNA(int seq) {
 		return mybatis.delete("Items.deleteQNA", seq);
 	}
+
+	
+//	detail 페이지 우측 하단 정보
+	// 해당 아이디의 판매상품 개수 불러오기
+		public int ItemsCount(int iseq) {
+			return mybatis.selectOne("Items.ItemsCount",iseq);
+		}
+
+
+
+		public List<ItemsDTO> selectByIseq(int iseq) {
+			return mybatis.selectList("Items.selectByIseq",iseq);
+		}	
+
+
 
 
 

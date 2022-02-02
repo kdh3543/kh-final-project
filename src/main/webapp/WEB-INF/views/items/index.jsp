@@ -41,10 +41,11 @@
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li>이미지 부분 : ${dto.profile_image}</li>
-							<li>${loginID}님안녕하세요</li>
-
-							<li><a href="/items/myPage">마이페이지</a></li>
+							<li>  <img src="${dto.profile_image}" style ="max-width:30px; max-height:30px;"></li>
+															
+							<li>${loginID}</li>
+<!-- 수정중 -->
+							<li><a href="/items/myPage?">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 							

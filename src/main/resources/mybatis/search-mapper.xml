@@ -29,6 +29,14 @@
    	}	
    </insert>
    
+   <!-- 최근검색어에 중복된 값이 있는지 확인 -->
+   
+   <select id="searchExistCount" resultType="int">
+   
+   select count(*) from search_keyword where keyword = #{keyword}
+   
+   </select>
+   
    <delete id ="deleteAll">
    
    

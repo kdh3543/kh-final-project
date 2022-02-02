@@ -46,7 +46,7 @@
 		FROM ITEMS I
 		INNER JOIN FILES F ON(I.ISEQ =F.PARENTSEQ)
 		WHERE SELLERID =#{id} AND
-		SEQ IN (SELECT MIN(SEQ) FROM FILES  
+		SEQ IN (SELECT MIN(SEQ) FROM FILES
 		GROUP BY PARENTSEQ)
 		ORDER BY 1 DESC
 
@@ -83,33 +83,57 @@
 		FROM
 		(SELECT F.*, I.CATEGORY
 		FROM FILES F
-		LEFT OUTER JOIN ITEMS I ON F.PARENTSEQ = I.ISEQ
+		LEFT OUTER JOIN ITEMS I ON
+		F.PARENTSEQ = I.ISEQ
 		WHERE CATEGORY = #{value}
 		ORDER BY 1 DESC)
-		GROUP BY PARENTSEQ)
+		GROUP BY
+		PARENTSEQ)
 
 	</select>
 
 	<!--검색창 제목 검색시 -->
 	<select id="selectByIName" resultType="kh.spring.dto.FilesDTO">
+
 		SELECT * FROM FILES WHERE SEQ IN (SELECT MIN(SEQ) AS SEQ
 		FROM
-		(SELECT F.*, I.NAME
+		(SELECT
+		F.*, I.NAME
 		FROM FILES F
 		LEFT OUTER JOIN ITEMS I ON F.PARENTSEQ = I.ISEQ
- 		WHERE NAME LIKE '%'||#{value}||'%' 
+		WHERE NAME LIKE '%'||#{value}||'%' OR CATEGORY LIKE '%'||#{value}||'%'
+		OR EXAREA LIKE '%'||#{value}||'%'
 		<!-- WHERE NAME =#{value} -->
 
 		ORDER BY 1 DESC)
 		GROUP BY PARENTSEQ)
 
 
-
-
-
 	</select>
 	<!-- 검색창 관련 부분입니다. -->
 
+	<!-- mypage 찜 내역 표시 -->
+
+	<select id="selectLikeImg" resultType="kh.spring.dto.FilesDTO">
+
+		select * from files where
+		seq in(
+		select min(seq) from files where parentseq in
+		(select iseq from
+		items where iseq in
+		(select ITEMS_NO from wishlist where
+		buyer=#{value}))
+		group by parentseq)
+
+
+	</select>
+
+	<!-- itemsorder image 하나뽑기 -->
+	<select id="selectBySeqOrder"
+		resultType="kh.spring.dto.FilesDTO">
+		SELECT * FROM FILES WHERE
+		parentSeq = #{value} and rownum=1 
+	</select>
 
 </mapper>
 

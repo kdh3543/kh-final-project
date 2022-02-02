@@ -58,6 +58,15 @@ public class FilesService {
 	public List<FilesDTO> selectByIName(String name) {
 		return fdao.selectByIName(name);
 	}
+
+	public List<FilesDTO> selectLikeImg(String id) {
+		return fdao.selectLikeImg(id);
+
+	}
+
+	public FilesDTO selectBySeqOrder(int iseq) {
+		return fdao.selectBySeqOrder(iseq);
+	}
 	
 	/*
 	 * public List<FilesDTO> selectBySeq(int parentSeq) {

@@ -101,8 +101,9 @@
 									<c:otherwise>
 										<button type="button"
 											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide-to="${status.index}" aria-label="${status.count}"></button>
-										
+											data-bs-slide-to="${status.index}"
+											aria-label="${status.count}"></button>
+
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -148,23 +149,25 @@
 
 
 
-<div class="detail-right">
-<c:forEach var="i" items="${ilist}" varStatus="status">
+			<div class="detail-right">
+				<c:forEach var="i" items="${ilist}" varStatus="status">
 
-				
+
 					<div class="productName">${i.name}</div>
+					<!-- ajax로 데이터 보내기 위한 코드-->
+					<input type="hidden" id="iseq" value="${i.iseq }">
 					<div class="productPrice">${i.price}원</div>
 					<div class="product-status">
-						<div class="status-like">좋아요</div>
-						
+						<div class="status-like" id='like_count'>찜 : ${wishCount}</div>
+
 						<div class="status-view">조회수 : ${i.view_cnt}</div>
 						<div class="status-view">작성일 : ${i.detailDate}</div>
 					</div>
-					
-			
-			</c:forEach>	
+
+
+				</c:forEach>
 				<div class="product-detail">
-				
+
 					<div class="detail-report">
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-primary"
@@ -236,53 +239,154 @@
 							</div>
 						</div>
 					</div>
-					
-			<c:forEach var="i" items="${ilist}" varStatus="status">		
-					<div class="detail-product-status">상품 상태 : ${i.condition}</div>
+
+					<c:forEach var="i" items="${ilist}" varStatus="status">
+						<div class="detail-product-status">상품 상태 : ${i.condition}</div>
 						<div class="detail-exchange">교환 여부 : ${i.refundable}</div>
 						<div class="detail-delivery">거래 희망 지역 : ${i.exarea}</div>
 						<div class="detail-location"></div>
-				
+
 					</c:forEach>
 				</div>
-			
-				
-				<c:forEach var="i" items="${ilist}" varStatus="status">	
-							<div class="detail-btns">
-					<c:choose> 
-						<c:when test = "${i.sellerID eq loginID}">
-					<button type="button" id="btn-myPage" class="btn btn-lg btn-light">내상점관리</button>
-						</c:when>
-						<c:otherwise>
-						<button id="btn-like" class="btn btn-lg btn-light">찜</button>
-						<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
-						<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
-						</c:otherwise>
+
+
+				<c:forEach var="i" items="${ilist}" varStatus="status">
+					<div class="detail-btns">
+						<c:choose>
+							<c:when test="${i.sellerID eq loginID}">
+								<button type="button" id="btn-myPage"
+									class="btn btn-lg btn-light">내상점관리</button>
+							</c:when>
+							<c:otherwise>
+								<input type="button" id="btn-like"
+									class="btn btn-lg btn-light choose" value="찜">
+								<!--  sellerID정보 ajax로 보내기-->
+								<input type=hidden id="sellerID" value="${i.sellerID}">
+								<button id="btn-talk" class="btn btn-lg btn-light">연락하기</button>
+								<button id="btn-buy" class="btn btn-lg btn-light">바로구매</button>
+							</c:otherwise>
 						</c:choose>
 					</div>
-					</c:forEach>	
-					<!-- 진행중 -->
-				</div>
-			
+				</c:forEach>
+				<!-- 진행중 -->
+			</div>
+
 		</div>
-		
+
+		<!-- 서호 찜 부분-->
+		<!-- 찜 버튼 기능 구현 추가 -->
+		<script>
+   
+   $("#btn-like").on(
+               "click",
+               function() {
+                  if(${loginID!=null}){
+                  
+                   $.ajax({
+                           url:"/wishlist/checkwishlist",
+                           data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+                        }).done(function(resp){
+                           if(resp>0){
+                             let readd = $("#btn-like").val();
+                             console.log(readd);
+                             if(readd=="찜해제"){
+                                $.ajax({
+                                    url:"/wishlist/deletewishlist",
+                                    data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+                                 }).done(function(resp2){
+                                    if(resp2>0){
+                                       $("#btn-like").val("찜하기");
+                                         $("#btn-like").css("background-color","blue");
+                                         
+                                         /*찜 recount */
+                                         
+                                         $.ajax({
+                                        	 url: "/wishlist/reCount",
+                                        	data: {iseq:$("#iseq").val()}
+                                         
+                                         }).done(function(resp3){
+                                        	
+                                        	 let like_count = document.getElementById("like_count");
+                                        	 like_count.innerHTML = ("찜 : " +resp3);
+                                         
+                                         })
+                                         
+                                    }else{
+                                    }
+                                 });
+                             }
+                            
+                           }else{
+                            $.ajax({
+                                 url:"/wishlist/addwishlist",
+                                 data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+                              }).done(function(resp1){
+                                 if(resp1>0){
+                                    $("#btn-like").val("찜해제");
+                                      $("#btn-like").css("background-color","red");
+                                      
+                                      /*찜 recount  */
+                                      $.ajax({
+                                     	 url: "/wishlist/reCount",
+                                     	data: {iseq:$("#iseq").val()}
+                                      
+                                      }).done(function(resp3){
+                                     	
+                                     	 let like_count = document.getElementById("like_count");
+                                     	 like_count.innerHTML = ("찜 : " +resp3);
+                                      
+                                      })
+                                      
+                                      
+                                 }else{
+                                 }
+                              });
+                           }
+                        });
+                  }else{
+                  }
+                     });
+   
+   window.onload=function(){
+      
+      $.ajax({
+            url:"/wishlist/checkwishlist",
+            data:{seller:$("#sellerID").val(),iseq:$("#iseq").val()}
+         }).done(function(resp){
+            if(resp>0){
+               $("#btn-like").val("찜해제");
+                 $("#btn-like").css("background-color","red");
+            }else{
+               $("#btn-like").val("찜하기");
+                 $("#btn-like").css("background-color","blue");
+            }
+         });
+      
+      
+      
+      
+   }
+
+   </script>
+
 		<!--  동현이형 -->
-          <input type=hidden value="300티셔츠" id="hiddenProduct">
-        <input type=hidden value="1" id="hiddenProductId">
-       <script>
-        	let hiddenProduct = $("#hiddenProduct").val();
-        	let hiddenProductId = $("#hiddenProductId").val();
-        	$("#btn-talk").on("click",function(){
-        		location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId;
-        	})
+		<input type=hidden value="${ilist[0].name}" id="hiddenProduct">
+		<input type=hidden value="${ilist[0].iseq}" id="hiddenProductId">
+		<script>
+		let hiddenProduct = $("#hiddenProduct").val();
+        let hiddenProductId = $("#hiddenProductId").val();
+           let roomId=0;
+        $("#btn-talk").on("click",function(){
+           location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
+        })0
         </script>
-          
-           
-        <!-- 동현이형 /// -->
-        <script>
+
+
+		<!-- 동현이형 /// -->
+		<script>
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){
-        		location.href = "/items/itemsOrder";
+        		location.href = "/items/itemsOrder?iseq=${ilist[0].iseq}";
         	})
         	
         	<!-- 내상점관리 버튼을 눌렀을 때의 script -->
@@ -291,35 +395,38 @@
     	})
   
         </script>
-      
-        
-     
-        
-		
+
+
+
+
+
 		<div class="detail-bottom-div">
 			<div class="bottom-top">
 				<div class="bottom-top-title">연관상품</div>
 				<div class="bottom-top-img">
-				
-				
-				
-				<c:forEach var="ri" items="${rilist}"  varStatus="statusRI">
-						<c:forEach var="rf" items="${rflist}"  varStatus="statusRF">
+
+
+
+					<c:forEach var="ri" items="${rilist}" varStatus="statusRI">
+						<c:forEach var="rf" items="${rflist}" varStatus="statusRF">
+
+							<c:if test="${statusRF.index eq statusRI.index }">
+
+								<%--  <c:if test= "${rf.parentSeq == ri.iseq}"> --%>
+								<div class="bottom-top-imglist">
+									<a href="/items/itemsDetail?iseq=${ri.iseq}"><img
+										src="${rf.sysName}"
+										style="max-width: 200px; max-height: 200px;"> <a
+										href="javascript:void(0);">${ri.name}</a></a>
+									<script>
 						
-						<c:if test = "${statusRF.index eq statusRI.index }" >
-	
-							<%--  <c:if test= "${rf.parentSeq == ri.iseq}"> --%>
-							<div class="bottom-top-imglist">
-								<a href="/items/itemsDetail?iseq=${ri.iseq}"><img src="${rf.sysName}" style="max-width:200px; max-height:200px;"> <a href="javascript:void(0);">${ri.name}</a></a>
-						<script>
-						
-								</script>		
-								
-							</div>
+								</script>
+
+								</div>
 							</c:if>
-							</c:forEach>
-					
 						</c:forEach>
+
+					</c:forEach>
 
 
 
@@ -341,80 +448,134 @@
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
 					<!-- 상품정보 -->
-					
-					
+
+
 					<div class="tab-pane fade show active" id="nav-profile"
 						role="tabpanel" aria-labelledby="nav-profile-tab">
 						<div class="product-section">
-						
-						
-							<div class="product-section1">
-							<c:forEach var="i" items="${ilist}" varStatus="status">		
 
-								<div class="product-info-title">상품정보</div>
-								<div class="product-info-contents">
-									${i.info}
-								</div>
-								<div class="product-middle">
-									<div class="middle-location">
-										<div class="location-title">거래지역</div>
-										<div class="location-contents">${i.exarea}</div>
-									</div>
-									<div class="middle-category">
-										<div class="category-title">카테고리</div>
-										<div class="category-contents">
-											<a href="#">${i.category}</a>
+
+							<div class="product-section1">
+								<c:forEach var="i" items="${ilist}" varStatus="status">
+
+									<div class="product-info-title">상품정보</div>
+									<div class="product-info-contents">${i.info}</div>
+									<div class="product-middle">
+										<div class="middle-location">
+											<div class="location-title">거래지역</div>
+											<div class="location-contents">${i.exarea}</div>
+										</div>
+										<div class="middle-category">
+											<div class="category-title">카테고리</div>
+											<div class="category-contents">
+												<a href="#">${i.category}</a>
+											</div>
+										</div>
+										<div class="middle-tag">
+											<div class="tag-title">태그</div>
+											<div class="tagy-contents">${i.tag}</div>
 										</div>
 									</div>
-									<div class="middle-tag">
-										<div class="tag-title">태그</div>
-										<div class="tagy-contents">${i.tag}</div>
-									</div>
-								</div>
-								
+
 								</c:forEach>
 								<!-- 시현이형 부분 -->
 								<div class="write-title-div">상품문의</div>
 								<div class="product-question">
-									<form action="/items/QNAWriteProc" method="post" enctype="multipart/form-data">
+									<form action="/items/QNAWriteProc" method="post"
+										enctype="multipart/form-data">
 										<div class="write-div">
-											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요." name="contents"></textarea>
+											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요."
+												name="contents"></textarea>
 										</div>
 										<div class="write-bottom-div">
 											<div>1/100</div>
 											<button type="submit" class="writeBtn" name="submit">등록</button>
-											<c:forEach var="i" items="${ilist}" varStatus="status">		
-											<input type="hidden" name="iseq" value="${i.iseq}">
+											<c:forEach var="i" items="${ilist}" varStatus="status">
+												<input type="hidden" name="iseq" value="${i.iseq}">
 											</c:forEach>
 										</div>
 									</form>
 								</div>
 							</div>
+
+
 							<div class="product-section2">
+
+
 								<div class="shop-info-title">상점정보</div>
-								<div class="shop-info-div">
-									<div class="info-left-div">
-										<i class="fas fa-camera fa-1x"></i>
-									</div>
-									<div class="info-right-div">
-										<div class="right-div-title">상점이름</div>
-										<div class="right-div-contents">
-											<span>상품 10 </span>| <span>팔로워 1</span>
+
+								<!-- 수정중 -->
+								<a href="/iitems/itemsDetail">
+									<div class="shop-info-div">
+										<div class="info-left-div">
+											<!-- <i class="fas fa-camera fa-1x"></i> -->
+											<!-- 수정중 -->
+											<img src="${mdto.profile_image}"
+												style="max-width: 80px; max-height: 80px;">
+										</div>
+										<div class="info-right-div">
+											<div class="right-div-title">${mdto.id}</div>
+											<div class="right-div-contents">
+												<span>상품 : ${detailICount} </span>| <span>팔로워 1</span>
+											</div>
 										</div>
 									</div>
+								</a>
+
+								<%-- 						<c:forEach var="ri" items="${rilist}" varStatus="statusRI">
+						<c:forEach var="rf" items="${rflist}" varStatus="statusRF">
+
+							<c:if test="${statusRF.index eq statusRI.index }">
+
+								 <c:if test= "${rf.parentSeq == ri.iseq}">
+								<div class="bottom-top-imglist">
+									<a href="/items/itemsDetail?iseq=${ri.iseq}"><img
+										src="${rf.sysName}"
+										style="max-width: 200px; max-height: 200px;"> <a
+										href="javascript:void(0);">${ri.name}</a></a>
+									<script>
+						
+								</script>
+
 								</div>
+							</c:if>
+						</c:forEach>
+
+					</c:forEach> --%>
+
+
+
 								<div class="follow-btn-div">
 									<button type="button" class="followBtn">
 										<i class="fas fa-user-plus"></i> 팔로우
 									</button>
 								</div>
 								<div class="shop-info-images">
-									<img src=""> <img src="">
+									<c:forEach var="di" items="${detailIlist}" varStatus="statusDI">
+										<c:forEach var="df" items="${detailFlist}"
+											varStatus="statusDF">
+
+											<c:if test="${di.iseq eq df.parentSeq }" >
+												<c:if test = "${statusDI.index <2}">
+
+
+												<a style = "text-decoration :none;' "href ="/items/itemsDetail?iseq=${di.iseq}"><img src="${df.sysName}" style = "min-width:150px; min-height:100px;"></a>
+												&nbsp;
+												</c:if>
+
+
+											</c:if>
+										</c:forEach>
+
+									</c:forEach>
+
 								</div>
+							<br>
 								<div class="more-btn-div">
-									<button type="button" class="moreBtn">?개의 상품 더보기 ></button>
+									<button type="button" class="moreBtn">${detailICount}개의
+										상품 더보기 ></button>
 								</div>
-								<div class="shop-info-review">
+								<!-- <div class="shop-info-review">
 									<div class="review-title-div">상점후기</div>
 									<div class="review-title-contents">
 										<div class="review-contents-left">
@@ -424,12 +585,14 @@
 											<button type="button" class="reviewBtn">후기작성</button>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
+
+
 						</div>
 					</div>
-					
-					
+
+
 					<!-- <!— 판매내역—>
 					<!— <div class="tab-pane fade" id="nav-ask" role="tabpanel" aria-labelledby="nav-ask-tab">
                         페이지2
@@ -440,12 +603,12 @@
                     </div>  —> -->
 
 				</div>
-				
-				
+
+
 			</div>
 
 		</div>
-	
+
 	</main>
 	<!-- <!— footer —> -->
 	<footer>
@@ -454,5 +617,7 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
+
+
 </body>
 </html>

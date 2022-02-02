@@ -27,8 +27,8 @@
 		resultType="kh.spring.dto.MemberDTO">
 		select * from member where kakao=#{value}
 	</select>
-	<select id="mypage" resultType="kh.spring.dto.MemberDTO">select * from member where
-		id=#{value} </select>
+	<select id="mypage" resultType="kh.spring.dto.MemberDTO">
+	select * from member where id=#{value} </select>
 
 	<select id="signDate" resultType="int">
 		select trunc(sysdate-signup_date+1,0) from member where id= #{id}
@@ -50,8 +50,13 @@
 	<select id="AccountExist" resultType="int">
 		select count(*) from member where id=#{inputID} and email=#{inputEmail}
 	</select>
-
-	<update id="modify">update member set pw=#{pw}, profile_image=#{profile_image}, zipcode=#{zipcode},address1=#{address1},address2=#{address2},
+ 
+	<update id="modify">update member SET
+	<trim prefixOverrides="SET" suffixOverrides=",">
+      <if test="profile_image != null">profile_image = #{profile_image}</if>
+   </trim>
+	
+	 ,pw=#{pw}, zipcode=#{zipcode},address1=#{address1},address2=#{address2},
 		phone=#{phone}, prefer_location=#{prefer_location} where id=#{id} </update>
 
 	<!-- 비밀번호 변경 -->
@@ -69,5 +74,15 @@
 	<delete id="deleteBySeq">
 		delete from member where seq=#{value}
 	</delete>
+	
+	<!-- detail 페이지에서 뿌려줄 상점정보  -->
+	
+	
+	<select id="selectByIseq" resultType="kh.spring.dto.MemberDTO">
+		SELECT * FROM MEMBER WHERE ID in (select sellerid from items where iseq =#{value})
+	
+	</select>
+	
+	
 </mapper>
 

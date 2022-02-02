@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +44,14 @@
 			</div>
 		</div>
 	</header>
+	
+	
+	
+	
+	
+	
+	
+	
 	<main>
 		<div class="container-div">
 
@@ -53,21 +62,24 @@
 			</div>
 			<div class="items-div">
 				<div class="img-container">
-				<img src="/imgs/200Pic.png">
+				
+				<img src="${fdto.sysName}" style="min-width:200px; min-height:200px;">
 				</div>
 				<div class="items-contents">
-					<div>상품가격</div>
-					<div>상품명</div>
+				
+				
+					<div>상품가격 :${ilist[0].price} </div>
+					<div>상품명 : ${ilist[0].name}</div>
 				</div>
 			</div>
 
 			<div class="point-div">
-				<div class="point-title-div">00 포인트</div>
+				<div class="point-title-div">잔여 포인트</div>
 				<div class="point-contents">
 					<input type="text" placeholder="0">
 					<button type="button">전액사용</button>
 				</div>
-				<span>사용 가능한 00 포인트</span>
+				<span>사용 가능한 포인트: ${mdto.cash}</span>
 
 
 			</div>
@@ -76,33 +88,33 @@
 			<div class="order-contents">
 				<div class="itemsprice-div">
 					<div>상품금액</div>
-					<div>70000원</div>
+					<div>${ilist[0].price}</div>
 				</div>
 				<div class="fees-div">
-					<div>정산 수수료</div>
+					<div>안심 수수료</div>
 					<div>
-					<span>70000</span>
+					<span>2500</span>
 					<span>원</span>
 					</div>
 				</div>
 				<div class="payprice-div">
 					<div>결제 금액</div>
 					<div>
-					<span>70000</span>
+					<span>${ilist[0].price+2500}</span>
 					<span>원</span>
 					</div>
 				</div>
-				<div class="usingpoint-div">
+			<!-- 	<div class="usingpoint-div">
 					<div>포인트 사용</div>
 					<div>
 					<span>70000</span>
 					<span>원</span>
 					</div>
-				</div>
+				</div> -->
 				<div class="final-div">
 					<div> 총 결제 금액</div>
 					<div>
-					<span>70000</span>
+					<span>${ilist[0].price+2500}</span>
 					<span>원</span>
 					</div>
 				</div>

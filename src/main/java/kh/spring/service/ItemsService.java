@@ -78,10 +78,7 @@ public class ItemsService {
 		return idao.selectById(id);
 	}
 
-	public int ItemsCount(String id) {
-		return idao.ItemsCount(id);
-	}
-
+	
 	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
 	public String selectByProductId(int productId) {
 		return idao.selectByProductId(productId);
@@ -109,6 +106,18 @@ public class ItemsService {
 	public int deleteQNA(int seq) {
 		return idao.deleteQNA(seq);
 	}
+	
+	public int ItemsCount(int iseq) {
+		return idao.ItemsCount(iseq);
+	}
+
+	public List<ItemsDTO> selectByIseq(int iseq) {
+		return idao.selectByIseq(iseq);
+
+	}
+
+
+	
 
 
 

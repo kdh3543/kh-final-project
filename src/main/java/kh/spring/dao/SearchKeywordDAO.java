@@ -49,6 +49,13 @@ public class SearchKeywordDAO {
 
 	}
 
+
+
+	public int searchExistCount(String keyword) {
+		return mybatis.selectOne("Search.searchExistCount",keyword);
+		
+	}
+
 	
 
 }
