@@ -55,8 +55,8 @@
 				<div class="top-div">관리자페이지</div>
 				<div class="middle-div">
 					<button type="button" class="control-btn">회원관리</button>
-					<button type="button" class="question-btn">1:1문의</button>
-					<button type="button" class="report-btn">신고관리</button>
+					<button type="button" class="question-btn">게시글 관리</button>
+					<button type="button" class="report-btn">신고 관리</button>
 					<button type="button" class="sell-statics-btn">회원통계</button>
 					<button type="button" class="sell-statics-btn">판매통계</button>
 				</div>
