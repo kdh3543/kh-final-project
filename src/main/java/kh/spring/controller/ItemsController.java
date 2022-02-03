@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -743,6 +745,62 @@ public class ItemsController {
       int result = iservice.deleteQNA(qseq);
       
       return "redirect:/items/itemsDetail?iseq=" + iseq;
+   }
+   
+   //  관리자 - 회원정보 수정 이동기능
+   @RequestMapping("adminUpdateMem")
+   public String adminUpdateMem(Model model, @RequestParam String loginID) {
+	  
+ 
+      MemberDTO dto = mservice.select(loginID);
+      //가입한지 몇일 째인지 확인
+      int signDate = mservice.signDate(loginID);
+      model.addAttribute("signDate",signDate);
+      model.addAttribute("dto", dto);
+
+      //해당 id 의 상품목록들 가져오기
+      List<ItemsDTO> ilist = iservice.selectMineById(loginID);
+      //해당 상품목록의 사진들도 가져오기
+      List<FilesDTO> flist = fservice.selectMineById(loginID);
+
+      //찜 목록 가져오기
+      List<ItemsDTO> wishlist = new ArrayList<ItemsDTO>();
+      
+      
+      
+      
+      //iseq 값 가져옴 여러개나옴 이 값은 ITEMSDTO 와 연관
+      wishlist = wlservice.mywishList(loginID);
+      
+   
+      //마이페이지-찜목록 사진 출력
+      List<FilesDTO> likeImg = fservice.selectLikeImg(loginID);
+      
+      
+      model.addAttribute("wlist",wishlist);
+      //찜 개수 가져오기
+      int wishlistCount = wlservice.wishlistCount(loginID);
+      model.addAttribute("wCount",wishlistCount);
+      model.addAttribute("likeImg",likeImg);
+      
+
+      
+      
+
+
+
+      //판매내역 건수 보내기
+
+      int sellCount = iservice.sellCount(loginID);
+
+      model.addAttribute("ilist",ilist);
+      model.addAttribute("flist",flist);
+      model.addAttribute("sellCount",sellCount);
+      return "/member/myPage";
+      
+      
+      
+
    }
 
 
