@@ -122,7 +122,7 @@
     
 
                         <div class="talk-last-conversation" >
-                          (${list.roomId})${list.lastMessage}
+                         ${list.lastMessage}
     
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId" class="hiddenRoomId${delCount.count}"
                             pid=${list.productId}>
@@ -143,7 +143,7 @@
                        	 </div>
     
                         <div class="talk-last-conversation" pid=${list.roomId}>
-                          (${list.roomId})${list.lastMessage}
+                          ${list.lastMessage}
     
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId" class="hiddenRoomId${delCount.count}"
                             pid=${list.productId}>
