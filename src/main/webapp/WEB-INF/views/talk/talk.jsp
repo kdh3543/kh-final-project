@@ -121,7 +121,7 @@
                         </div>
     
 
-                        <div class="talk-last-conversation" >
+                        <div class="talk-last-conversation" pid=${list.roomId}>
                          ${list.lastMessage}
     
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId" class="hiddenRoomId${delCount.count}"
@@ -137,7 +137,7 @@
                     <c:otherwise>
                       <div class="talk-list-right" pid=${list.roomId}>
                         <div class="talk-name">
-                        	<div class="talk-name-div">${list.buyerId}(${list.productName})</div>
+                        	<div class="talk-name-div">${list.sellerId}(${list.productName})</div>
                         	<div class="talk-time">(${list.latestDate})</div>
                         
                        	 </div>
@@ -358,7 +358,7 @@
         rightMiddle.scrollTop(rightMiddle[0].scrollHeight);
 
         // 메세지 읽음 카운터
-        let readCount = 1;
+        // let readCount = 1;
 
         // 메세지를 받았을 때
         let anker = $("<a>");
@@ -384,12 +384,13 @@
           let jsonRoomId = jsonObject.roomId;
           
           $("#hiddenRoomId[pid=" + jsonProductId + "]").val(jsonRoomId);
-          if(userId == hiddenId){
-            $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
-          }else{
-            $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message + readCount);
-            readCount++;
-          }
+          $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
+          // if(userId == hiddenId){
+          //   $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
+          // }else{
+          //   $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message + readCount);
+          //   // readCount++;
+          // }
           
           if(message == "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다."){
             chatMessage.attr("contenteditable","false");
