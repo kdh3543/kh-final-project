@@ -60,11 +60,13 @@ public class AdminController {
 	      return "redirect:/items/adminUpdateMem/?loginID=" + dto.getId();
 	   }
 	 
-	 @RequestMapping("selectProc")
-	 public String selectProc(String selectedVal, Model model) {
-		 List<BoardDTO> selectList = bservice.selectBySubject(selectedVal);
-		 model.addAttribute("selectList",selectList);
-		 return "redirect:/admin/adminIndex";
+
+	 @RequestMapping("deleteBySeqBoard")
+	 public String deleteBtSeqBoard(String seqNum) {
+		 int seq = Integer.parseInt(seqNum);
+		 bservice.delete(seq);
+		  return "redirect:/admin/adminIndex";
+		 
 	 }
 	 
 

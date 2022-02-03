@@ -74,6 +74,7 @@
 					<button type="button" class="sell-statics-btn">판매통계</button>
 				</div>
 			</div>
+			<!-- 회원 관리 페이지 -->
 			<div class="main-right-container">
 				<div class="control-page">
 					<div class="control-top-div">회원관리</div>
@@ -114,31 +115,43 @@
 						</table>
 					</div>
 				</div>
+
+				<!-- 게시글 관리 페이지 -->
 				<div class="question-page">
 					<div class="question-top-div">게시글 관리</div>
 					<div class="question-contents-div">
 						<select class="selectSubject">
+							<option value="전체보기">전체보기</option>
 							<c:forEach var="blist" items="${blist}">
 								<option value="${blist.subject}">${blist.subject}</option>
 							</c:forEach>
 						</select>
-						<!-- <script>
-						let option = $(".selectSubject option:selected").val();
-						console.log(option);
-						
-						$(".selectSubject").on("change",function(){
-							let option = $(".selectSubject option:selected").val();
-							$.ajax({
-								url:"/admin/selectProc",
-								data: { selectedVal:$(".selectSubject option:selected").val() }
-							}).done(function(resp){
-								cosole.log
-							
-							})
-						})
-						
-						</script> -->
-						<table>
+						<script>
+							// select 문 바뀔 때,
+							$(".selectSubject")
+									.on(
+											"change",
+											function() {
+												let option = $(
+														".selectSubject option:selected")
+														.val();
+												$(
+														"#boardListTable > tbody > tr:nth-child(n+2)")
+														.hide();
+												let temp = $("#boardListTable > tbody > tr > td:nth-child(3n):contains('"
+														+ option + "')");
+												$(temp).parent().show();
+
+												if (option == "전체보기") {
+													$(
+															"#boardListTable > tbody > tr")
+															.show();
+												}
+
+											});
+						</script>
+
+						<table id="boardListTable">
 							<tr>
 								<th><input type="checkbox" id="chkBoardAll">
 								<th>글번호
@@ -147,35 +160,26 @@
 								<th>작성자
 								<th>조회수
 							</tr>
-							 <c:choose>
-								<c:when test="${selectList.subject eq blist.subject}">
-								<c:forEach var="blist" items="${blist}" varStatus="boardcount">
+
+							<c:forEach var="blist" items="${blist}" varStatus="boardcount">
 								<tr>
-									<td><input type="checkbox" class="boardCheckBox${boardcount.count}">
-									<td>${selectList.board_seq}
-									<td>${selectList.subject}
-									<td>${selectList.contents}
-									<td>${selectList.writer}
-									<td>${selectList.view_count}
-									</tr>
-							</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-									<td><input type="checkbox" class="boardCheckBox${boardcount.count}">
+									<td><input type="checkbox"
+										class="boardCheckBox${boardcount.count}" name="checkboxBoard[]" value="${blist.board_seq}">
 									<td>${blist.board_seq}
 									<td>${blist.subject}
 									<td>${blist.contents}
 									<td>${blist.writer}
 									<td>${blist.view_count}
-									</tr>
-								</c:otherwise>
-							</c:choose>
-							
+								</tr>
+
+							</c:forEach>
 						</table>
+						<div class="btn-div">
+							<button type="button" class="deleteBoardBtn">게시물삭제</button>
+						</div>
 					</div>
 				</div>
-				
+
 				<div class="report-page">
 					<div class="report-top-div">신고 페이지</div>
 					<div class="report-contents-div">신고내용</div>
@@ -183,43 +187,27 @@
 				<div class="statistics-page">
 					<div class="statistics-top-div">회원 통계</div>
 					<div class="statistics-contents-div">
-						<canvas id="myChart" width="300" height="300">가입추이</canvas>
+						<div>
+							<canvas id="myChart"></canvas>
+						</div>
+
 						<script>
-							const ctx = document.getElementById('myChart')
-									.getContext('2d');
-							const myChart = new Chart(ctx, {
-								type : 'bar',
-								data : {
-									labels : [ 'Red', 'Blue', 'Yellow',
-											'Green', 'Purple', 'Orange' ],
-									datasets : [ {
-										label : '# of Votes',
-										data : [ 12, 19, 3, 5, 2, 3 ],
-										backgroundColor : [
-												'rgba(255, 99, 132, 0.2)',
-												'rgba(54, 162, 235, 0.2)',
-												'rgba(255, 206, 86, 0.2)',
-												'rgba(75, 192, 192, 0.2)',
-												'rgba(153, 102, 255, 0.2)',
-												'rgba(255, 159, 64, 0.2)' ],
-										borderColor : [
-												'rgba(255, 99, 132, 1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(75, 192, 192, 1)',
-												'rgba(153, 102, 255, 1)',
-												'rgba(255, 159, 64, 1)' ],
-										borderWidth : 1
-									} ]
-								},
-								options : {
-									scales : {
-										y : {
-											beginAtZero : true
-										}
-									}
-								}
-							});
+							const labels = [ 'January', 'February', 'March',
+									'April', 'May', 'June', ];
+							const data = {
+								labels : labels,
+								datasets : [ {
+									label : 'My First dataset',
+									backgroundColor : 'rgb(255, 99, 132)',
+									borderColor : 'rgb(255, 99, 132)',
+									data : [ 0, 10, 5, 2, 20, 30, 45 ],
+								} ]
+							};
+							const config = {
+								type : 'line',
+								data : data,
+								options : {}
+							};
 						</script>
 
 					</div>
@@ -237,7 +225,7 @@
 	<script>
 		// 페이지 변경 스크립트
 		$(".control-btn").on("click", function() {
-			$(".control-btn").css("background-color:#fff","color:#24a6a4");
+			$(".control-btn").css("background-color:#fff", "color:#24a6a4");
 			$(".control-page").css("display", "block");
 			$(".question-page").css("display", "none");
 			$(".report-page").css("display", "none");
@@ -264,6 +252,14 @@
 		})
 
 		// checkbox 스크립트
+		$("#chkBoardAll").on("click", function() {
+			if ($(this).prop('checked')) {
+				$("input[type=checkbox]").prop("checked", true);
+			} else {
+				$("input[type=checkbox]").prop("checked", false);
+			}
+		})
+
 		$("#checkAll").on("click", function() {
 			if ($(this).prop('checked')) {
 				$("input[type=checkbox]").prop("checked", true);
@@ -273,10 +269,8 @@
 		})
 
 		// 회원 탈퇴
-
 		$(".deleteBtn").on("click", function() {
 			$("input[name='checkbox[]']:checked").each(function() {
-
 				var checkVal = $(this).val();
 
 				if (confirm("회원을 탈퇴시키겠습니까?")) {
@@ -298,8 +292,8 @@
 					}
 				}
 
-			})
-		})
+			});
+		});
 		// 회원 정보 수정 
 		$(".updateBtn").on("click", function() {
 			console.log($("input[name='checkbox[]']:checked"));
@@ -321,7 +315,36 @@
 
 		})
 
-		//
+		// 게시글 삭제하기
+
+		$(".deleteBoardBtn").on("click", function() {
+			$("input[name='checkboxBoard[]']:checked").each(function() {
+
+				var checkVal = $(this).val();
+				console.log(checkVal);
+
+				if (confirm("게시물을 삭제하시겠습니까?")) {
+					if (checkVal != null) {
+						$.ajax({
+							url : "/admin/deleteBySeqBoard",
+							data : {
+								seqNum : checkVal
+							}
+
+						}).done(function(resp) {
+							console.log(resp);
+							if (resp > 0) {
+								alert("삭제가 완료 되었습니다.");
+							} else {
+								alert("삭제가 불가 합니다.");
+								return false;
+							}
+						});
+					}
+				}
+			})
+
+		})
 	</script>
 </body>
 </html>
