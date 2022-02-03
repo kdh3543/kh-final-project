@@ -32,24 +32,39 @@
 </head>
 
 <body>
-	
-<!-- form 태그 추가 button type=submit 변경 -->
-	<form action="/items/searchByInput" name =inputForm method="post" onsubmit="return frmSubmit()">
+
+	<!-- form 태그 추가 button type=submit 변경 -->
+	<form action="/items/searchByInput" name=inputForm method="post"
+		onsubmit="return frmSubmit()">
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li>  <img src="${dto.profile_image}" style ="max-width:30px; max-height:30px;"></li>
-															
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
 							<li>${loginID}</li>
-<!-- 수정중 -->
+							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
-							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
-							
-							
+
+
+						</ul>
+					</c:when>
+
+					<c:when test="${Admin != null}">
+						<!----- admin 로그인 되었을 때,  ----->
+						<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
+							<li>${Admin}</li>
+							<!-- 수정중 -->
+							<li><a href="/admin/adminIndex">관리페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
 						</ul>
 					</c:when>
 					<c:otherwise>
@@ -65,13 +80,13 @@
 					<div class="logo">
 						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 					</div>
-					
-					
+
+
 					<div class="searchBar">
 						<div class="input-group mb-3">
 
-	
-	<!-- 검색창 관련 -->
+
+							<!-- 검색창 관련 -->
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
 									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
@@ -85,9 +100,9 @@
 									<i class="fas fa-search fa-2x"></i>
 								</button>
 								<!--  돋보기 끝-->
-								
+
 								<input type=hidden name="user_id" value="${loginID}">
-								
+
 
 								<!-- 최신검색어-->
 								<!--  수정 -->
@@ -95,79 +110,80 @@
 								<div class="dropdown-menu" id=recent>
 									<!-- <a class="dropdown-item" href="/"
 										style="text-align: center"> -->
-										<div class="list-search-div">
 									<div class="list-search-div">
-									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
-										style="text-align: center">
-											<nav>
-												<div class="nav nav-tabs" id="nav-tab" role="tablist">
-													
-													<button class="nav-link active" id="nav-home-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-home"
-														type="button" role="tab" aria-controls="nav-home"
-														aria-selected="true">최근검색어</button>
-														
-														
-													<button class="nav-link" id="nav-profile-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-profile"
-														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어</button>
+										<div class="list-search-div">
+											<a class="dropdown-item" id="search-dropdown"
+												href="javascript:void(0);" style="text-align: center">
+												<nav>
+													<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-												</div>
-											</nav>
-											<!-- 최근검색어 -->
-											<div class="tab-content" id="nav-tabContent">
-												<div class="tab-pane fade show active" id="nav-home"
-													role="tabpanel" aria-labelledby="nav-home-tab">
+														<button class="nav-link active" id="nav-home-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-home"
+															type="button" role="tab" aria-controls="nav-home"
+															aria-selected="true">최근검색어</button>
 
-													<!-- 내용 채워넣기 -->
-													<div id=text>
-													
-													<button type=button id=delBtn class="dropdown-item"
-														style="display: inline"><b><h5>검색어 전체삭제</h5></b></button>												
+
+														<button class="nav-link" id="nav-profile-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-profile"
+															type="button" role="tab" aria-controls="nav-profile"
+															aria-selected="false">인기검색어</button>
+
 													</div>
-																	
-														
-												</div>
-												<!--  인기검색어-->
-												  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-												
-												  </div>
-													
-												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">
-													<div class="hotkeyword-title">인기검색어 순위</div>
-													<div class=hotkeyword-contents>
-													
-													
-													<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
-														
-														<div>
-															<span class="hotkeyword-num">${statusHS.count}.</span>
-															<span class="hotkeyword-word">${hs.keyword}</span>
+												</nav> <!-- 최근검색어 -->
+												<div class="tab-content" id="nav-tabContent">
+													<div class="tab-pane fade show active" id="nav-home"
+														role="tabpanel" aria-labelledby="nav-home-tab">
+
+														<!-- 내용 채워넣기 -->
+														<div id=text>
+
+															<button type=button id=delBtn class="dropdown-item"
+																style="display: inline">
+																<b><h5>검색어 전체삭제</h5></b>
+															</button>
 														</div>
-														
-														
-														</c:forEach>
-													</div>
-												</div>
 
-											</div>
+
+													</div>
+													<!--  인기검색어-->
+													<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+														aria-labelledby="nav-contact-tab"></div>
+
+													<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+														aria-labelledby="nav-profile-tab">
+														<div class="hotkeyword-title">인기검색어 순위</div>
+														<div class=hotkeyword-contents>
+
+
+															<c:forEach var="hs" items="${hslist}"
+																varStatus="statusHS">
+
+																<div>
+																	<span class="hotkeyword-num">${statusHS.count}.</span>
+																	<span class="hotkeyword-word">${hs.keyword}</span>
+																</div>
+
+
+															</c:forEach>
+														</div>
+													</div>
+
+												</div>
 											</a>
 										</div>
+									</div>
 								</div>
-							</div>
-							</div>
 							</div>
 						</div>
 					</div>
+				</div>
 		</header>
 	</form>
 
 
 
-<!-- 검색어 전체 삭제 -->
-								<script>
+	<!-- 검색어 전체 삭제 -->
+	<script>
 								
 									$("#delBtn").on("click", function() {
 										$.ajax({
@@ -178,10 +194,10 @@
 										})
 									})
 								</script>
-								
-								<!-- 검색어 하나 눌렀을때 검색되게 -->
 
-								<script>
+	<!-- 검색어 하나 눌렀을때 검색되게 -->
+
+	<script>
 									$('#text').on("click",	".delBtnOne",function() {
 										/*버튼 X 제거하고 값 추출  */
 														var str = $(this).parent().text().slice(0, -1);
@@ -194,9 +210,9 @@
 																	})
 																})
 								</script>
-								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
+	<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 
-						<script>
+	<script>
 						// 검색버튼 눌렀을 때, 
 							$(function() {
 
@@ -260,9 +276,9 @@
 							})
 			
 						</script>
-						
-						<!-- 검색시 공백 막기-->
-							<script>
+
+	<!-- 검색시 공백 막기-->
+	<script>
 						
 						function frmSubmit() {
 							let searchValue = $("#search").val();
@@ -278,7 +294,7 @@
 							
 						</script>
 
-							
+
 
 
 
@@ -297,17 +313,28 @@
 
 							<!-- Dropdown menu links -->
 							<li><h6 class="dropdown-header">전체 카테고리</h6></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
 						</ul>
 					</div>
 					<div class="rightList">
@@ -357,34 +384,34 @@
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
 
-						
-								
+
+
 						<div class="imgBox  col-sm-3">
 
-  <!--상품 반복 시작 -->
+							<!--상품 반복 시작 -->
 
-								<c:forEach var="i" items="${ilist}">
-									<c:forEach var="f" items="${flist}">
+							<c:forEach var="i" items="${ilist}">
+								<c:forEach var="f" items="${flist}">
 
-										<c:if test="${f.parentSeq == i.iseq}">
+									<c:if test="${f.parentSeq == i.iseq}">
 
-											<a href="/items/itemsDetail?iseq=${i.iseq}">
-												<div class="detail-img">
-													<img src="${f.sysName}" style="width: 100%; height: 100%;">
-												</div>
-												<div class="detail-container">
-													<div class="title">${i.name}</div>
-													<div class="price">${i.price}원</div>
-													<div class="date">${i.detailDate}</div>
-													<%-- <div class="title">${flist.oriname}</div> --%>
-												</div>
-											</a>
+										<a href="/items/itemsDetail?iseq=${i.iseq}">
+											<div class="detail-img">
+												<img src="${f.sysName}" style="width: 100%; height: 100%;">
+											</div>
+											<div class="detail-container">
+												<div class="title">${i.name}</div>
+												<div class="price">${i.price}원</div>
+												<div class="date">${i.detailDate}</div>
+												<%-- <div class="title">${flist.oriname}</div> --%>
+											</div>
+										</a>
 
-										</c:if>
-
-									</c:forEach>
+									</c:if>
 
 								</c:forEach>
+
+							</c:forEach>
 
 						</div>
 
@@ -406,8 +433,7 @@
 				<div class="sidebar-resently-div">
 					<div class="sidebar-title-div">최근 본 상품</div>
 					<div class="sidebar-product-div">
-						<img src=""> 
-						<img src="">
+						<img src=""> <img src="">
 					</div>
 
 				</div>
