@@ -10,6 +10,9 @@ html, body {
 	box-sizing: border-box;
 	font-family: 'OTWelcomeRA';
 }
+p{
+    margin-bottom: 0 !important;
+}
 
 .main-container {
 	width: 98%;
@@ -63,6 +66,11 @@ html, body {
 	color: #24a6a4;
 	border: 1px solid #24a6a4;
 }
+.main-left-container .middle-div button:focus{
+	background-color: #fff;
+	color: #24a6a4;
+	border: 1px solid #24a6a4;
+}
 
 /* 회원관리 */
 .main-right-container .control-page {
@@ -108,6 +116,16 @@ html, body {
 	width: 30px;
 }
 
+.control-page .control-contents-div table tr:nth-child(1) th:nth-child(2)
+	{
+	width: 5%;
+}
+
+.control-page .control-contents-div table tr:nth-child(1) th:nth-child(5)
+	{
+	width: 6%;
+}
+
 .control-page .control-contents-div table tr:nth-child(n+1) {
 	height: 50px;
 	border-bottom: 1px solid lightgray;
@@ -141,7 +159,7 @@ html, body {
 }
 
 .question-page .question-contents-div {
-	width: 90%;
+	width: 100%;
 	height: 90%;
 	margin: auto;
 	overflow-y: auto;
@@ -153,11 +171,23 @@ html, body {
 	margin: auto;
 	text-align: center;
 	margin-top: 20px;
+	font-size: 13px;
+}
+
+.question-page .question-contents-div table tr th:nth-child(n+1) {
+	height: 50px;
+	border-bottom: 1px solid lightgray;
+}
+
+.question-page .question-contents-div table tr:nth-child(n+1) {
+	height: 50px;
+	border-bottom: 1px solid lightgray;
 }
 
 .question-page .question-contents-div table tr th:nth-child(1) {
 	width: 1%;
 }
+
 .question-page .question-contents-div table tr th:nth-child(2) {
 	width: 6%;
 }
@@ -165,14 +195,47 @@ html, body {
 .question-page .question-contents-div table tr th:nth-child(3) {
 	width: 15%;
 }
+
 .question-page .question-contents-div table tr th:nth-child(4) {
 	width: 58%;
 }
+
 .question-page .question-contents-div table tr th:nth-child(5) {
 	width: 10%;
 }
+
 .question-page .question-contents-div table tr th:nth-child(6) {
 	width: 10%;
+}
+
+.question-page .question-contents-div table tr td input[type=checkbox] {
+	width: 10px;
+	height: 10px;
+}
+
+#chkBoardAll {
+	width: 10px;
+	height: 10px;
+}
+
+.selectSubject {
+	width: 20%;
+	height: 20px;
+	float: right;
+	margin-top: 3%;
+	margin-bottom: 3%;
+	margin-right: 7%;
+}
+.btn-div{
+    width: 100%;
+    height: 100px;
+    float: right;
+}
+.deleteBoardBtn{
+	float: right;
+    margin-top: 2%;
+    margin-right: 7%;
+
 }
 /* 신고관리 */
 .main-right-container .report-page {

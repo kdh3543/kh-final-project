@@ -115,7 +115,7 @@
 	<!-- 관리자 - 주제로 찾기 -->
 	
 	<select id="selectBySubject" resultType="kh.spring.dto.BoardDTO">
-		select * from board where subject = #{value}
+		select * from board where subject = #{value} ORDER BY BOARD_SEQ
 	
 	</select>
 
