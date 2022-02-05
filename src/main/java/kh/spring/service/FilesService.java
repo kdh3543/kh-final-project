@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.FilesDAO;
 import kh.spring.dto.FilesDTO;
+import kh.spring.dto.FollowDTO;
 import kh.spring.dto.ItemsDTO;
 
 @Service
@@ -68,6 +69,14 @@ public class FilesService {
 	public FilesDTO selectBySeqOrder(int iseq) {
 		return fdao.selectBySeqOrder(iseq);
 	}
+
+	//구매사진
+	public List<FilesDTO> buyFList(String id) {
+		return fdao.buyFList(id);
+		
+	}
+
+
 	
 	/*
 	 * public List<FilesDTO> selectBySeq(int parentSeq) {

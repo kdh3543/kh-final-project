@@ -34,4 +34,33 @@
 	</beans:bean>
 	
 	
+	
+	 <!--  <interceptors>
+		<interceptor>
+		items
+			<mapping path="/items/itemsSell"/>
+			<mapping path="/items/myPage"/>
+			
+			board
+			<mapping path="/board/writeForm"/>
+			<mapping path="/comment/writeProc"/>
+			chat
+			<mapping path="/chat/directTalk"/>
+			
+			
+			<exclude-mapping path="/**"/>
+			<exclude-mapping path="/board/boardList"/>
+			<exclude-mapping path="/login"/>
+			<exclude-mapping path="member/join"/>
+			<exclude-mapping path="member/signup"/>
+			<exclude-mapping path="/images/**"/>
+			<exclude-mapping path="/css/**"/>
+			
+			제어권누가 갖고있는지
+			<beans:bean class="kh.spring.interceptor.TestInterceptor"/>
+					
+		</interceptor>
+	</interceptors>  -->
+	
+	
 </beans:beans>

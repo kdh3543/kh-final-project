@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Report">
+
+
+	<insert id="insertReport">
+
+		INSERT INTO REPORT
+		VALUES(REPORT_SEQ.NEXTVAL,#{buyerid},#{sellerid},#{iseq},#{reason},DEFAULT)
+
+
+	</insert>
+
+	<select id="selectAll" resultType="kh.spring.dto.ReportDTO">
+
+		SELECT * FROM REPORT ORDER BY
+		SEQ DESC
+	</select>
+	
+	<select id="selectById" resultType="kh.spring.dto.ReportDTO">
+
+		SELECT * FROM REPORT WHERE BUYERID =#{id} AND ISEQ =#{iseq}
+	</select>
+	
+	
+
+</mapper>

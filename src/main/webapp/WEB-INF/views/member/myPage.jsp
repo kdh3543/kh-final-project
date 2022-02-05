@@ -84,9 +84,10 @@ img {
 					<div class="left-Container">
 						<!-- <div class="img-Container"> -->
 						<!-- 수정중 -->
-						
-						<img src="${dto.profile_image}" style ="width:400px; height:300px;">
-							<!-- <button class="btn btn-lg btn-light" id="myShopBtn">내 상점
+
+						<img src="${dto.profile_image}"
+							style="width: 400px; height: 300px;">
+						<!-- <button class="btn btn-lg btn-light" id="myShopBtn">내 상점
 								관리</button> -->
 						<!-- </div> -->
 					</div>
@@ -96,13 +97,14 @@ img {
 							<label>
 								<div>상점오픈일 : ${signDate }일째 오픈중!</div>
 							</label>
-							<div>상점방문수</div>
-							<div>상품판매</div>
-							<div>택배발송</div>
+							<div>상점방문수: ${dto.view_count}</div>
+							<div>상품판매 : ${sellCount}건</div>
+							<div></div>
+							
 						</div>
 						<div class="right-introduce">
 							소개글
-							<textarea cols="30" rows="5"> 소개글을 작성하세요.</textarea>
+							<textarea cols="30" rows="5" readonly> 새해복 많이 받으세요!</textarea>
 						</div>
 					</div>
 				</div>
@@ -158,18 +160,15 @@ img {
 										<tr>
 											<td>비밀번호</td>
 											<!-- ^^^ -->
-											<td>
-											<input type="hidden" class="input Password" id="pw"
-												name="pw" value="${dto.pw}"> 
-												
-												<input type="text"
+											<td><input type="hidden" class="input Password" id="pw"
+												name="pw" value="${dto.pw}"> <input type="text"
 												class="input Password" id="cpw" name="pw"
 												placeholder="최소 한개의 문자, 한개의 숫자 , 한개의 특수 문자를 포함한 8~20자리"
 												value="비밀번호를 변경하시려면 버튼을 눌러주세요"
 												pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$"
 												required disabled>
-												
-												
+
+
 												<button type="button" class=" btn btn-lg btn-light"
 													id="pwChange">비밀번호 변경</button></td>
 										</tr>
@@ -211,10 +210,9 @@ img {
 												id="prefer_location" name=prefer_location
 												value="${dto.prefer_location }" required></td>
 										</tr>
-											<tr>
+										<tr>
 											<td>잔여포인트</td>
-											<td><input type="text" class=""
-												id="" name=cash
+											<td><input type="text" class="" id="" name=cash
 												value="${dto.cash}" disabled></td>
 										</tr>
 										<tr>
@@ -235,7 +233,7 @@ img {
 		<!-- 판매내역-->
 		<div class="tab-pane fade" id="nav-sell" role="tabpanel"
 			aria-labelledby="nav-sell-tab">
-			<div class="sell-top">판매내역 ${sellCount} 건</div>
+			<div class="sell-top" id="sellCount">판매내역 : ${sellCount} 건</div>
 			<div class="sell-section">
 				<table>
 					<tr>
@@ -274,8 +272,8 @@ img {
 
 								<tr>
 									<td id="target" style="display: none;">${i.iseq}</td>
-									<td><img src="${f.sysName} " class="d-block w-100"
-										alt="..." style="max-width: 100px; max-height: 100px;"></td>
+									<td><a href="/items/itemsDetail?iseq=${i.iseq}"><img src="${f.sysName} " class="d-block w-100"
+										alt="..." style="max-width: 100px; max-height: 100px;"></a></td>
 
 									<td><select class="sellBoxes">
 
@@ -288,13 +286,21 @@ img {
 
 									</select></td>
 									<!-- onchange="alert(this.value)" -->
-									<td>${i.name }</td>
+									<td id="targetName">${i.name }</td>
 									<td>${i.price }</td>
 									<td>${i.like_cnt }</td>
 									<td>문의수들어갈자리</td>
 									<td>${i.detailDate}</td>
-									<td><a href="/items/itemsModify?iseq=${i.iseq}"><button
-												type="button" class=" btn btn-lg btn-light">수정하기</button></a></td>
+									
+									<td>
+									<a href="/items/itemsModify?iseq=${i.iseq}">
+									<button	type="button" class=" btn btn-lg btn-light">수정하기</button></a>
+									
+									
+									<button	type="button" class=" btn btn-lg btn-light deleteBtn">삭제하기</button></a>
+									
+									
+									</td>
 
 
 								</tr>
@@ -308,119 +314,335 @@ img {
 				</table>
 			</div>
 		</div>
+		
+		
+		<!-- 삭제하기 Script -->
+		<script>
+		$(document)
+		.ready(
+				function() {
+					$('.deleteBtn').on("click",function() {
+						
+						//삭제할 상품명+seq
+						let targetSeq =$(this).closest("tr").children("#target").text();
+						let targetName =$(this).closest("tr").children("#targetName").text();
+						
+						console.log($(this).closest("tr").children("#target").text());
+						console.log($(this).closest("tr").children("#targetName").text());
+						
+						if(confirm("해당 상품을 삭제하시겠습니까 ? : "+targetName )){
+
+							$.ajax({
+										url : "/items/itemsDeleteBySeq",
+										context: this,
+										data : {
+											iseq : targetSeq,
+										},
+										
+
+									}).done(
+									function(resp) {
+										console.log(resp);
+										if(resp>0){
+											$(this).closest("tr").remove();
+											$("#sellCount").text("판매내역 : " +${sellCount-1}+"건");
+										}
+										
+									});
+							
+						
+						}else{
+							
+							return false;
+						}
+
+					})
+					
+				})
+				
+				
+				
+		
+		</script>
+		<!-- 상품 삭제하기 script -->
 
 		<script>
+			$(document)
+					.ready(
+							function() {
 
-                  $(document).ready(
-                        function() {
+								//코드 변경
 
-                           //코드 변경
+								var prev_val;
 
-                           var prev_val;
+								$('.sellBoxes')
+										.focus(function() {
 
-                           $('.sellBoxes').focus(function() {
+											console.log($(this).val());
 
-                              console.log($(this).val());
+											prev_val = $(this).val();
 
-                              prev_val = $(this).val();
+										})
+										.change(
+												function() {
 
-                           }).change(
-                                 function() {
-                                    
-                                    //선택된 selectBox 의 index 추출
-                                     var index = $('.sellBoxes').index(this);   
-                                    
-                                    console.log(index+ " 번째 값 ");
-                                    
-                                    //해당 selectBox의 선택된 option 값 추출 
-                                    var targetSelect = $('.sellBoxes').get(index); 
-                                    var cur_val = targetSelect.options[targetSelect.selectedIndex].text
-                                    console.log(cur_val+ " 로 변경합니다");
+													//선택된 selectBox 의 index 추출
+													var index = $('.sellBoxes')
+															.index(this);
 
-                                    $(this).blur();
+													console.log(index
+															+ " 번째 값 ");
 
-                                    if (confirm("거래상태를 " + cur_val
-                                          + "(으)로 변경하시겠습니까?")) {
-                                       
-                                       console.log("바뀌는 값  : " +$(this).val());
-                                       var targetDeal = $(this).val();
-                                       /*해당상품의 seq 찾아내기 */
-                                       var targetIseq = $(this).parent().parent().children("#target").text();
-                                       
-                                       console.log(targetIseq);
-                                       
+													//해당 selectBox의 선택된 option 값 추출 
+													var targetSelect = $(
+															'.sellBoxes').get(
+															index);
+													var cur_val = targetSelect.options[targetSelect.selectedIndex].text
+													console.log(cur_val
+															+ " 로 변경합니다");
 
-                                       alert('변경 완료');
-                                        $.ajax({
-                                          url:"/items/updateProc",
-                                          data: {piseq:targetIseq,pdeal:targetDeal},
-                                             
-                                          
-                                          
-                                       }).done(function(resp){
-                                          console.log(resp);
-                                       }); 
-                                        
-                                        /* var sendData = "name="+iseq+'&phone='+iseq;
-                                        name=2&phone=2
-                                       console.log(sendData); */
-                                       
-                                       /* $("#delBtn").on("click",function(){
-                                          
-                                          $.ajax({
-                                             url:"/items/deleteAll",
-                                             
-                                          }).done(function(resp){
-                                             console.log(resp);
-                                             
-                                             $("#text").empty();
-                                             
-                                          })
-                                          
-                                          }) */
-                                    } else {
+													$(this).blur();
 
-                                       // 기존에 선택한 값으로 Undo
+													if (confirm("거래상태를 "
+															+ cur_val
+															+ "(으)로 변경하시겠습니까?")) {
 
-                                       $(this).val(prev_val);
+														console
+																.log("바뀌는 값  : "
+																		+ $(
+																				this)
+																				.val());
+														var targetDeal = $(this)
+																.val();
+														/*해당상품의 seq 찾아내기 */
+														var targetIseq = $(this)
+																.parent()
+																.parent()
+																.children(
+																		"#target")
+																.text();
 
-                                       alert('변경취소');
+														console.log(targetIseq);
 
-                                       return false;
+														alert('변경 완료');
+														$.ajax(
+																		{
+																			url : "/items/updateProc",
+																			data : {
+																				piseq : targetIseq,
+																				pdeal : targetDeal
+																			},
 
-                                    }
+																		})
+																.done(
+																		function(
+																				resp) {
+																			console
+																					.log(resp);
+																		});
 
-                                 });
+														/* var sendData = "name="+iseq+'&phone='+iseq;
+														name=2&phone=2
+														console.log(sendData); */
 
-                        });
-               </script>
+														/* $("#delBtn").on("click",function(){
+														   
+														   $.ajax({
+														      url:"/items/deleteAll",
+														      
+														   }).done(function(resp){
+														      console.log(resp);
+														      
+														      $("#text").empty();
+														      
+														   })
+														   
+														   }) */
+													} else {
+
+														// 기존에 선택한 값으로 Undo
+
+														$(this).val(prev_val);
+
+														alert('변경취소');
+
+														return false;
+
+													}
+
+												});
+
+							});
+		</script>
 
 		<!-- 구매내역 -->
 		<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
 			aria-labelledby="nav-purchase-tab">
-			<div class="purchase-top">구매내역 1건</div>
+			<div class="purchase-top" id="buyCount">구매내역 ${buyCount}건</div>
 			<div class="purchase-section">
+
+
 				<table>
 					<tr>
 						<th>사진</th>
-						<th>구매상태</th>
+						<th>거래상태</th>
 						<th>상품명</th>
-						<th>가격</th>
-						<th>후기</th>
+						<th>가격(안전결제수수료 미포함)</th>
+						<th>거래확정!</th>
+						<th>기능</th>
 					</tr>
-					<tr>
-						<td><i class="fas fa-camera fa-3x"></i></td>
-						<td>구매완료</td>
-						<td>귤</td>
-						<td>35000원</td>
-						<th>
-							<button class=" btn btn-lg btn-light" id="writeReviewBtn">후기작성</button>
-							<button class=" btn btn-lg btn-light" id="readReviewBtn" hidden>후기작성완료</button>
-						</th>
-					</tr>
+					
+					<c:forEach var="i" items="${buyIlist}" varStatus="statusI">
+						<c:forEach var="f" items="${buyFlist}" varStatus="statusF">
+							<c:if test="${i.iseq == f.parentSeq}">
+								<tr>
+									<td><a href=/items/itemsDetail?iseq=${i.iseq}><img
+											src="${f.sysName}"></a></td>
+									<c:if test="${i.deal2 =='R'}">
+									<td>구매중</td>
+									</c:if>		
+									<c:if test="${i.deal2 =='Y'}">
+									<td>구매완료</td>
+									</c:if>		
+									<td>구매중</td>
+									<td>${i.name}</td>
+									<td>${i.price}원</td>
+									<td style="display: none;">${i.iseq}</td>
+									<th><c:choose>
+											<c:when test="${i.deal2 == 'Y'}">
+												<button class=" btn btn-lg btn-light " id=""
+													style="background-color: rgb(220,20,60)">구매확정</button>
+											</c:when>
+											<c:otherwise>
+												<button class="btn btn-lg btn-light buyOk" id="">구매확정</button>
+												<button class="btn btn-lg btn-light buyCancel" id="">구매취소</button>
+
+											</c:otherwise>
+										</c:choose> <!-- <button class=" btn btn-lg btn-light" id="readReviewBtn" hidden>거래완료</button> -->
+									</th>
+
+								</tr>
+							</c:if>
+
+						</c:forEach>
+					</c:forEach>
+
 				</table>
 			</div>
 		</div>
+
+		<script>
+		
+	
+			
+			$(".buyOk").on(
+					"click",
+					function() {
+
+						console.log($(this).text());
+						/*iseq 찾기  */
+						console.log("해당 iseq 는 ? : "
+								+ $(this).closest("tr").find('td:nth-child(5)')
+										.text());
+
+						if (confirm("구매확정시 되돌릴 수 없습니다. 해당 구매를 확정하시겠습니까?")) {
+							$(this).css("background-color", "rgb(220,20,60)");
+							$(this).next().css("display", "none");
+							/* $(this).css("disabled","true"); */
+							
+	
+							let iseq = $(this).closest("tr").find(
+									'td:nth-child(6)').text();
+							console.log($(this));
+							
+							
+
+							$.ajax({
+								url : "/safeDeal/dealOk",
+								data : {
+									iseq : iseq
+								},
+								context : this,
+							}).done(function(resp) {
+								console.log("확정완료");
+								 $(this).attr("disabled","true"); 
+
+							})
+							
+						}
+						
+
+					})
+
+			/* 판매자에게 돈들어가기 , deal2 Y 변경 ,  */
+
+			$(".buyCancel").on(
+					"click",
+					function() {
+
+						console.log($(this).text());
+						/*이름 찾기  */
+						console.log($(this).closest("tr").find(
+								'td:nth-child(6)').text());
+						
+						
+						
+						if (confirm("구매취소시 되돌릴 수 없습니다. 해당 구매를 취소하시겠습니까?")) {
+
+							/* 취소시 tr 영역 통째로 날림 */
+
+							$(this).closest("tr").remove();
+							
+
+							let iseq = $(this).closest("tr").find(
+									'td:nth-child(6)').text();
+							
+						 
+						
+							
+							$.ajax({
+								url : "/safeDeal/dealCancel",
+								data : {
+									iseq : iseq
+								}
+							}).done(function(resp) {
+								console.log("취소완료");
+								console.log(resp);
+								
+								$("#buyCount").text("구매내역 : " +${buyCount-1}+"건");
+								
+
+							})
+						}
+						
+						
+						
+						
+						
+
+						/* 구매내역 건수 줄이기 + 환불 + db삭제 */
+
+						/* $.ajax({
+							
+							url : "/safeDeal/cancel",
+							data : { iseq : }
+							
+						})
+						 */
+
+					})
+
+			$("#btn-talk").on(
+					"click",
+					function() {
+						location.href = "/chat/talk?productName="
+								+ hiddenProduct + "&productId="
+								+ hiddenProductId + "&roomId=" + roomId;
+					})
+
+			/* $("#btn-like").css("background-color","blue"); */
+		</script>
+
 
 		<!-- 찜 내역 -->
 		<div class="tab-pane fade" id="nav-like" role="tabpanel"
@@ -432,33 +654,34 @@ img {
 
 					<c:if test="${wl.iseq == li.parentSeq}">
 						<!-- 수정중 -->
-						
+
 						<%-- <a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}"> --%>
-						
+
 						<div class="like-section">
-							
+
 							<div class="like-left">
-							<a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
-								<img src="${li.sysName}" style="width: 236.26px; height: 101.9px">
-									</a>
+								<a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
+									<img src="${li.sysName}"
+									style="width: 236.26px; height: 101.9px">
+								</a>
 							</div>
-						
-						
+
+
 							<div class="like-middle">
 								<div class="like-title">상품명:${wl.name }</div>
 
 								<div class="like-seller">판매자:${wl.sellerID }</div>
-								
+
 								<div class="like-price">가격:${wl.price }</div>
 							</div>
-							
-							
+
+
 							<div class="like-right">
 
-								<a href="javascript:void(0);" id="${wl.sellerID}" class="dellist on"> <input
-									type=hidden id="iseq" value="${wl.iseq}"> <input
-									type=button value="X" class="deleteXL"
-									style="background-color: #24a6a4"> <%-- <a href="#" id="${wl.sellerID}" class="dellist on">
+								<a href="javascript:void(0);" id="${wl.sellerID}"
+									class="dellist on"> <input type=hidden id="iseq"
+									value="${wl.iseq}"> <input type=button value="X"
+									class="deleteXL" style="background-color: #24a6a4"> <%-- <a href="#" id="${wl.sellerID}" class="dellist on">
 							 <input	type=hidden id="iseq" value="${wl.iseq }"> 
 							 <input	type=button value="X" class="deleteXL"
 								style="background-color: #24a6a4"> --%>
@@ -473,92 +696,217 @@ img {
 			</c:forEach>
 
 
-<script>
+			<script>
+				$("#rmvStyle").removeAttr('style');
 
-$("#rmvStyle").removeAttr('style');
+				//찜 해제
+				$(".dellist")
+						.on(
+								"click",
+								function() {
+									if ($(this).hasClass('on')) {
+										$
+												.ajax({
+													url : "/wishlist/deletewishlist",
+													context : this,
+													data : {
+														seller : $(this).attr(
+																"id"),
+														iseq : $(this)
+																.children()
+																.val()
+													},
+													success : function(resp) {
+														if (resp > 0) {
+
+															$
+																	.ajax(
+																			{
+																				url : "/wishlist/reMycount",
+																				data : {
+																					iseq : $(
+																							this)
+																							.children()
+																							.val()
+																				}
+
+																			})
+																	.done(
+																			function(
+																					resp3) {
+
+																				/* 수정중 */
+																				let like_count = document
+																						.getElementById("like_count");
+																				like_count.innerHTML = ("찜 내역 : " + resp3);
+
+																			})
+
+															$(this)
+																	.closest(
+																			".like-section")
+																	.remove();
+
+														} else {
+															alert("삭제실패");
+														}
+													}
+												})
+									}
+
+								})
+			</script>
+
+		</div>
 
 
-  //찜 해제
-    $(".dellist").on("click",function(){
-       if ($(this).hasClass('on')){
-          $.ajax({
-             url : "/wishlist/deletewishlist",
-             context : this,
-             data : {
-                seller : $(this).attr("id"),iseq:$(this).children().val()
-             },
-             success : function(resp) {
-                if(resp>0){
-                   
-                   $.ajax({
-                  	 url: "/wishlist/reMycount",
-                  	data : {iseq:$(this).children().val()}
-                  	 
-                  	                   
-                   }).done(function(resp3){
-                  	
-                	   /* 수정중 */
-                  	 let like_count = document.getElementById("like_count");
-                  	 like_count.innerHTML = ("찜 내역 : " +resp3);
-                   
-                   })
-                   
-                   
-                   $(this).closest(".like-section").remove();
-                   
-                   
-                }else{
-                   alert("삭제실패");
-                }
-             }
-       })
-       }
-       
-       })
+
+
+
+<!-- 팔로워  -->
+      <div class="tab-pane fade" id="nav-following" role="tabpanel"
+         aria-labelledby="nav-following-tab">
+         <div class="following-top">팔로워 수: ${fCount}</div>
+         <c:forEach var="f" items="${followlist}">
+            <div class="following-section">
+               <div class="follower-left">
+                  <img src="${f.profile_image}" style="width: 100%; height: 100%">
+               </div>
+               <div class="following-middle">${f.name }</div>
+               <div class="following-right">
                
-               </script>
+                     <a href="#" fid="${f.id}" class=" btnFollow followed"> <input
+                        type=button  value="팔로우" class="unfollow"
+                        style="background-color: #24a6a4">
+                     </a>
 
-		</div>
+               </div>
+            </div>
+         </c:forEach>
+      </div>
+      
+      <!-- 팔로워에 대한 스크립트 -->
+      <script>
+      
+      /* 수정중 */
+      
 
+      $(".btnFollow").on(
+              "click",
+              function() {
+              
+                 if ($(this).hasClass('followed')) {
+                    $.ajax({
+                       url : "/follow/following",
+                       context : this,
+                       data : {
+                          sellerID : $(this).attr("fid")
+                       },
+                       success : function(resp) {
+                    	   
+                          $(this).children('input.unfollow').val(
+                                "언팔로우");
+                          $(this).children('input.unfollow').css(
+                                "background-color", "#ef4444");
+                          $(this).removeClass('followed');
+                          $(this).addClass('unfollow');
+                          
+                       }
+                    })
+                 }
 
+                 else if ($(this).hasClass('unfollow')) {
+                    $.ajax({
+                       url : "/follow/following",
+                       context : this,
+                       data : {
+                          sellerID : $(this).attr("fid")
+                       },
+                       success : function(resp) {
+                          $(this).children('input.unfollow').val(
+                                "팔로우");
+                          $(this).children('input.unfollow').css(
+                                "background-color", "#24a6a4");
+                          $(this).removeClass('unfollow');
+                          $(this).addClass('followed');
+                       }
+                    })
+                 }
+                 return false;
+              })
+      
+      </script>
+      
+      <!-- 팔로우 -->
+      <div class="tab-pane fade" id="nav-follower" role="tabpanel"
+         aria-labelledby="nav-follower-tab">
+         <div class="follower-top">팔로우 수 : ${followedCount }</div>
+         <c:forEach var="j" items="${followedList }">
+            <div class="follower-section">
+               <div class="follower-left">
+                  <img src="${j.profile_image}" style="width: 100%; height: 100%">
+               </div>
+               <div class="follower-middle">${j.name }</div>
+               <div class="follower-right">
+                  <a href="#" jid="${j.id}" class="jbtnFollow unfollowed"> <input
+                     type=button value="언팔로우" class="junfollow"
+                     style="background-color: #ef4444">
+                  </a>
+               </div>
+            </div>
+         </c:forEach>
+      </div>
+      
+      <script>
+    //내가 팔로우한 사람들 목록
+      $(".jbtnFollow").on(
+            "click",
+            function() {
+               if ($(this).hasClass('unfollowed')) {
+                  $.ajax({
+                    url : "/follow/followed",
+                     context : this,
+                     data : {
+                        sellerID : $(this).attr("jid")
+                     },
+                     success : function(resp) {
+                        $(this).children('input.junfollow').val(
+                              "팔로우");
+                        $(this).children('input.junfollow').css(
+                              "background-color", "#24a6a4");
+                       $(this).removeClass('unfollowed');
+                        $(this).addClass('follow');
+                     }
+                  })
+               }
 
+              else if ($(this).hasClass('follow')) {
+                  $.ajax({
+                     url : "/follow/followed",
+                     context : this,
+                     data : {
+                        sellerID : $(this).attr("jid")
+                    },
+                    success : function(resp) {
+                        $(this).children('input.junfollow').val(
+                             "언팔로우");
+                        $(this).children('input.junfollow').css(
+                             "background-color", "#ef4444");
+                        $(this).removeClass('follow');
+                       $(this).addClass('unfollowed');
+                    }
+                  })
+               }
+               return false;
+            })
+      
+      
+      </script>
+      
+      
+       
 
-
-
-		<!-- 팔로잉  -->
-		<div class="tab-pane fade" id="nav-following" role="tabpanel"
-			aria-labelledby="nav-following-tab">
-			<div class="following-top">팔로잉 수 1</div>
-			<div class="following-section">
-				<div class="following-left">
-					<div class="following-img">
-						<i class="fas fa-camera fa-2x"></i>
-					</div>
-				</div>
-				<div class="following-middle">판매자명</div>
-				<div class="following-right">
-					<button class=" btn btn-lg btn-light" id="unfollowBtn">팔로잉</button>
-				</div>
-			</div>
-		</div>
-
-		<!-- 팔로워 -->
-		<div class="tab-pane fade" id="nav-follower" role="tabpanel"
-			aria-labelledby="nav-follower-tab">
-			<div class="follower-top">팔로워 수 1</div>
-			<div class="follower-section">
-				<div class="follower-left">
-					<div class="follower-img">
-						<i class="fas fa-camera fa-2x"></i>
-					</div>
-				</div>
-				<div class="follower-middle">판매자명</div>
-				<div class="follower-right">
-					<button class=" btn btn-lg btn-light" id="isFollowing">팔로잉</button>
-				</div>
-			</div>
-		</div>
-
+		
 
 
 	</main>
@@ -570,45 +918,43 @@ $("#rmvStyle").removeAttr('style');
 		</div>
 	</footer>
 	<script>
-    
-    $("#deleteInfo").on("click",function(){
-       if(confirm("정말 탈퇴하시겠습니까?")){
-          location.href= "/member/leave";
-       }else{
-          return false;
-       }
-    })
-     $("#pwChange").on("click",function(){
-       $("#pw").attr("disabled",true);
-       $("#cpw").attr("disabled",false);
-       document.getElementById("cpw").value ="";
-       
-    })
-          //이미지 삽입 후 바뀜
-$(document).ready(function(){
-   $("#imgfile").change(function(event){
-      var tmppath=URL.createObjectURL(event.target.files[0]);
-      $('#profile').attr('src',tmppath);
-   });
-});
-    $("#phoneChange").on("click",function(){
-       $("#phone").attr("readonly",false);
-    })
-     //주소지 값 자동 추가해주는 함수
-    document.getElementById("findAddress").onclick = function(){
-        new daum.Postcode({
-            oncomplete: function(data) {
-                document.getElementById('inputZipcode').value = data.zonecode;
-                   document.getElementById("inputAddress1").value = data.roadAddress;
-                    document.getElementById("inputAddress1").value = data.jibunAddress;
-            }  
-        }).open();
-    }
-     
-       
-    </script>
-<!--^^^  -->
-	
+		$("#deleteInfo").on("click", function() {
+			if (confirm("정말 탈퇴하시겠습니까?")) {
+				location.href = "/member/leave";
+			} else {
+				return false;
+			}
+		})
+		$("#pwChange").on("click", function() {
+			$("#pw").attr("disabled", true);
+			$("#cpw").attr("disabled", false);
+			document.getElementById("cpw").value = "";
+
+		})
+		//이미지 삽입 후 바뀜
+		$(document).ready(function() {
+			$("#imgfile").change(function(event) {
+				var tmppath = URL.createObjectURL(event.target.files[0]);
+				$('#profile').attr('src', tmppath);
+			});
+		});
+		$("#phoneChange").on("click", function() {
+			$("#phone").attr("readonly", false);
+		})
+		//주소지 값 자동 추가해주는 함수
+		document.getElementById("findAddress").onclick = function() {
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							document.getElementById('inputZipcode').value = data.zonecode;
+							document.getElementById("inputAddress1").value = data.roadAddress;
+							document.getElementById("inputAddress1").value = data.jibunAddress;
+						}
+					}).open();
+		}
+	</script>
+	<!--^^^  -->
+
 
 
 

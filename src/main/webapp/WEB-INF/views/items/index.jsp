@@ -25,6 +25,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<script src="/js/paginga.jquery.js"></script>
+
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
 <link rel="stylesheet" href="/css/index.css">
@@ -89,7 +91,7 @@
 							<!-- 검색창 관련 -->
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
-									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
+									placeholder="@상점명 또는 물품명 등을 검색해 보세요!"
 									aria-label="Recipient's username"
 									aria-describedby="button-addon2" id="search"
 									data-bs-toggle="dropdown" aria-expanded="false">
@@ -339,18 +341,53 @@
 					</div>
 					<div class="rightList">
 
-						<a href="/items/itemsSell" class="btn-sell"> <i
+						<a href="/items/itemsSell" class="btn-sell" id="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="/items/myPage" class="btn-myshop"> <i
-							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
-							class="fas fa-comment fa-2x"></i> 00톡
+						</a> | <a href="/items/myPage" class="btn-myshop" id="btn-myshop">
+							<i class="fas fa-store fa-2x"></i> 내상점
+						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
+							<i class="fas fa-comment fa-2x"></i> 00톡
 						</a> | <a href="/board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
 
 					</div>
+
+
+					<script>
+					
+					$("#btn-sell").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					$("#btn-myshop").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					$("#btn-talk").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					
+					
+					
+					</script>
+
+
+
+
+
+
 				</div>
 			</div>
 			<div class="middle-div">
@@ -381,41 +418,33 @@
 					</div>
 					<article>
 
+						<!-- 상품-->
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
 
 
+								<div class="imgBox  col-sm-3">
+									<!--상품 반복 시작 -->
+									<c:forEach var="i" items="${ilist}">
+										<c:forEach var="f" items="${flist}">
 
-						<div class="imgBox  col-sm-3">
+											<c:if test="${f.parentSeq == i.iseq}">
 
-							<!--상품 반복 시작 -->
-
-							<c:forEach var="i" items="${ilist}">
-								<c:forEach var="f" items="${flist}">
-
-									<c:if test="${f.parentSeq == i.iseq}">
-
-										<a href="/items/itemsDetail?iseq=${i.iseq}">
-											<div class="detail-img">
-												<img src="${f.sysName}" style="width: 100%; height: 100%;">
-											</div>
-											<div class="detail-container">
-												<div class="title">${i.name}</div>
-												<div class="price">${i.price}원</div>
-												<div class="date">${i.detailDate}</div>
-												<%-- <div class="title">${flist.oriname}</div> --%>
-											</div>
-										</a>
-
-									</c:if>
-
-								</c:forEach>
-
-							</c:forEach>
-
-						</div>
-
-
+												<a href="/items/itemsDetail?iseq=${i.iseq}">
+													<div class="detail-img">
+														<img src="${f.sysName}" style="width: 100%; height: 100%;">
+													</div>
+													<div class="detail-container">
+														<div class="title">${i.name}</div>
+														<div class="price">${i.price}원</div>
+														<div class="date">${i.detailDate}</div>
+														<%-- <div class="title">${flist.oriname}</div> --%>
+													</div>
+												</a>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
+								</div>
 					</article>
 				</section>
 
@@ -433,7 +462,7 @@
 				<div class="sidebar-resently-div">
 					<div class="sidebar-title-div">최근 본 상품</div>
 					<div class="sidebar-product-div">
-						<img src=""> <img src="">
+						<img src="/imgs/comingSoon.png"> <img src="/imgs/comingSoon.png">
 					</div>
 
 				</div>

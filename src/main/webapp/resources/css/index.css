@@ -413,6 +413,11 @@ section article .article_title {
 	text-align: right;
 	color: #aaa69d;
 }
+.imgBox a .detail-container .exarea{
+	text-align: center;
+	color: #aaa69d;
+	
+}
 
 .detail-container {
 	width: 100%;

@@ -137,8 +137,8 @@
 			</c:forEach>
 			<div class="writecomments-div">
 				<form action="/comment/writeProc" method="post" enctype="multipart/form-data">
-					<textarea rows="" cols="100%" placeholder="댓글을 입력해주세요." name="contents"></textarea>
-					<button type="submit" name="submit">등록</button>
+					<textarea rows="" cols="100%" placeholder="댓글을 입력해주세요." name="contents" id="contents"></textarea>
+					<button type="submit" name="submit" id=submitBtn onsubmit="return frmSubmit()">등록</button>
 					<input type="hidden" name="board_seq" value="${dto.board_seq}">
 				</form>
 			</div>
@@ -150,9 +150,33 @@
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
-
+	
+	<script>
+	
+	$("#submitBtn").on("click",function(){
+	
+		if(${loginID ==null}){
+			alert("로그인 후 이용가능합니다.");
+			return false;
+		}else{
+			
+			if($("#contents").val()==""){
+				
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+		}
+		
+	})
+	
+	</script>
+	
+	
 	<script>
 
+
+		
+	
 		$("#back").on("click", function () {
 			location.href = "/board/boardList";
 		})

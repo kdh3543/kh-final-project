@@ -27,6 +27,13 @@
         <link href="/css/member/signIn.css" rel="stylesheet">
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- input Type password 보이게 하는 거 -->
+        <style>
+         input[type=password]{
+        font-family:"굴림";
+    }
+        </style>
+       
 
 </head>
 
@@ -58,7 +65,7 @@
 
     <main>
         <div class="form-signin">
-            <form action="/member/login" method="get">
+            <form action="/member/login" method="post">
                 <h1 class="h3 mb-3 fw-normal">로그인</h1>
 
                 <div class="form-floating">
@@ -66,9 +73,12 @@
                     <label for="floatingInput">아이디</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingPassword" name="logpw" placeholder="Password">
+                    <input type="password" class="form-control" id="floatingPassword" name="logpw" placeholder="Password" style="z-index:3;">
                     <label for="floatingPassword">비밀번호</label>
                 </div>
+               
+ 
+ 
 
                 <div class="checkbox mb-3">
                     <label>
@@ -80,16 +90,20 @@
                     <button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호 찾기</button>
                 </div>
                 <div class="form-group socialimage" id="kakaoBtn">
-               <a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:8080/kakaologin&response_type=code">
+               <a href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:80/kakaologin&response_type=code">
                   <img id="socialimage" src="/imgs/kakao_login_large_wide.png" width="100%" height="100%"/ >
                </a>
+     
             </div>
                 </form>
                 <div class="buttons">
                 
+                
                </div>
                
         </div>
+        
+       
     </main>
     <footer>
         <div class="footer-box">

@@ -58,7 +58,7 @@
 
 	<main>
 		<div class="contents-box">
-			<form action="/board/writeProc" method="post" enctype="multipart/form-data">
+			<form action="/board/writeProc" method="post" enctype="multipart/form-data" id="form" onsubmit="return frmSubmit()">
 				<div class="contents">
 					<select id="subject" name="subject">
 						<option>게시글의 주제를 선택해주세요</option>
@@ -73,7 +73,7 @@
 					</select>
 					<button type="submit" id="submit">완료</button>
 				</div>
-				<textarea id="summernote" name="contents"></textarea>
+				<textarea id="summernote" name="contents" ></textarea>
 			</form>
 		</div>
 	</main>
@@ -94,6 +94,26 @@
 			});
 
 		});
+	</script>
+	<script>
+
+	function frmSubmit() {
+		let summernote = $("#summernote").val();
+		
+		if(summernote ==""){
+			alert("내용을 입력해주세요.");
+			return false;
+
+		}
+		
+		if($("#subject").val()=="게시글의 주제를 선택해주세요"){
+			alert("주제를 선택해주세요.");
+			return false;
+		}
+		
+	}
+		
+		
 	</script>
 </body>
 

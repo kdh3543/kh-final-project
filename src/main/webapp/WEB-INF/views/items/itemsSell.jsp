@@ -130,7 +130,7 @@
 						<button class="nav-link active" id="nav-add-tab"
 							data-bs-toggle="tab" data-bs-target="#nav-add" type="button"
 							role="tab" aria-controls="nav-add" aria-selected="true">상품등록</button>
-					<!-- 	<button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
+						<!-- <button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
 							data-bs-target="#nav-control" type="button" role="tab"
 							aria-controls="nav-control" aria-selected="false">상품관리</button>
 						<button class="nav-link" id="nav-purchase-tab"
@@ -307,11 +307,11 @@
 									<tr>
 										<td>거래지역</td>
 										<td>
-											<button>내위치</button>
-											<button>최근지역</button>
-											<button type="button" id="findAddress">주소검색</button>
-											<button>지역설정안함</button> <br> <input type="text"
+										
+										<input type="text"
 											placeholder="주소" id="input-address" name="exarea">
+											<button type="button" id="findAddress">주소검색</button>
+											
 
 										</td>
 									</tr>
@@ -381,7 +381,7 @@
 
 					</div>
 					<!-- 판매내역-->
-				<!-- 	<div class="tab-pane fade" id="nav-control" role="tabpanel"
+					<!-- <div class="tab-pane fade" id="nav-control" role="tabpanel"
 						aria-labelledby="nav-control-tab">
 						<div class="control-title">
 							<div class="left-title">상품관리</div>
@@ -412,16 +412,12 @@
 										<td>
 									</tr>
 									
-									<tr>
-										<td colsapn="7">표시할 내용이 없습니다.
-									</tr> 
-									
 								</table>
 							</div>
 						</div>
-					</div>
-					구매내역
-					<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+					</div> -->
+					<!-- 구매내역 -->
+				<!-- 	<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
 						aria-labelledby="nav-purchase-tab">페이지3</div>
 				</div> -->
 			</div>
@@ -445,13 +441,7 @@
 		}
 	
 	</script>
-	<script>
-		
-			${"#imageUpload"}.on{"click",function(){
-				
-			}}
-		
-		</script>
+	
 
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.FilesDTO;
+import kh.spring.dto.FollowDTO;
 import kh.spring.dto.ItemsDTO;
 
 @Repository
@@ -96,4 +97,10 @@ public class FilesDAO {
 		return mybatis.selectOne("Files.selectBySeqOrder",iseq);
 
 	}
+
+
+	public List<FilesDTO> buyFList(String id) {
+		return mybatis.selectList("Files.buyFList",id);
+	}
+
 }

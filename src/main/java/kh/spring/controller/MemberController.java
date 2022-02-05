@@ -63,7 +63,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/";
+		return "forward:/signIn";
 	}
 	//kakao 회원가입 
 	@RequestMapping("kakaosignup")
@@ -96,7 +96,7 @@ public class MemberController {
 	public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
 		logpw = EncryptionUtils.getSHA512(logpw);
 		int result = mservice.login(logid,logpw);
-		System.out.println(remember_userID);
+		System.out.println("로그인 기억 안하면 null 이옵니다 ." +remember_userID);
 		Cookie cookie = new Cookie("logid", logid); //쿠키 생성
 		cookie.setDomain("localhost");
 		cookie.setPath("/signIn");
@@ -224,7 +224,7 @@ public class MemberController {
       if(result>0) {
           String host = "smtp.naver.com";
             String user = "wishstar1998"; //자신의 네이버 계정
-            String password = "wnsgh15412";//자신의 네이버 패스워드
+            String password = "1q2w3e4r!";//자신의 네이버 패스워드
             //  메일 받을 주소
             String to_email = inputEmail;
             System.out.println(to_email);
@@ -318,6 +318,10 @@ public class MemberController {
        System.out.println(result+"비밀번호 변경에 성공하였습니다.");
        return "redirect:/";
    }
+   
+   
+	
+
    
    
    
