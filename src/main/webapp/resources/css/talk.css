@@ -160,10 +160,13 @@ main>div {
 
 .right-line .chatRead {
 	text-align: right;
+	
 }
 
 .time {
-	text-align: end;
+	
+	display: flex;
+	align-items: flex-end;
 }
 
 .line {

@@ -96,6 +96,4 @@ public class FilesDAO {
 		return mybatis.selectOne("Files.selectBySeqOrder",iseq);
 
 	}
-
-	
 }

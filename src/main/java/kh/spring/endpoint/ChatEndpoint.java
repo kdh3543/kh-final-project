@@ -45,8 +45,9 @@ public class ChatEndpoint{
 		ChatRoomDTO crdto = new ChatRoomDTO();
 		String userId = (String)hSession.getAttribute("loginID");
 //		crdto.set
+		System.out.println("users의 전 사이즈는: "+users.size());
 		users.put(userId,session);
-//		 
+		System.out.println("users의 후 사이즈는: "+users.size());
 		
 	}
 
@@ -104,13 +105,15 @@ public class ChatEndpoint{
 				crdto.setRoomId(roomId);
 				System.out.println("존재 여부는: "+crdao.keyCount(crdto)); 
 				
-				if(crdao.keyCount(crdto)) {
-					try {
-						users.get(key).getBasicRemote().sendText(obj.toString());
-					}catch(IOException e) {
-						e.printStackTrace();
+				
+				try {
+					if(crdao.keyCount(crdto)) {
+					users.get(key).getBasicRemote().sendText(obj.toString());
 					}
+				}catch(IOException e) {
+					e.printStackTrace();
 				}
+			
 				
 			}
 		}
@@ -146,7 +149,7 @@ public class ChatEndpoint{
 //				}
 		System.out.println("user 전의 사이즈는 : "+users.size());
 		//		clients.remove(session);
-		
+//		System.out.println("나가는 id는 "+(String)hSession.getAttribute("loginID"));
 		users.remove(session.getId());
 
 		
