@@ -65,24 +65,8 @@
           <div class="talk-left">
 
             <div class="talk-title">대화목록</div>
-            <!-- 관리자 챗봇에 대한 div -->
-            <!-- <c:forEach var="chatBot" items="${chatBot}">
-              <div class="talk-list">
-                <a class="talk-list-btn"
-                  href="/chat/moveChatRoom?sellerId=${chatBot.sellerId}&productId=${chatBot.productId}&productName=${chatBot.productName}&roomId=${chatBot.roomId}">
-                  <div class="talk-list-left">
-                    <i class="fas fa-camera fa-2x"></i>
-                  </div>
-                  <div class="talk-list-right">
-                    <div class="talk-name">${chatBot.sellerId}</div>
-                    <div class="talk-last-conversation">${chatBot.roomId}</div>
-                  </div>
-                </a>
-              </div>
-            </c:forEach> -->
-
             <div class="talk-list">
-              <a class="talk-list-btn" href="#">
+              <a class="talk-list-btn" href="/chat/toChatBot?roomId=-1">
                 <div class="talk-list-left">
                   <i class="fas fa-camera fa-2x"></i>
                 </div>
@@ -95,8 +79,9 @@
             <!-- 생성된 대화방에 대한 div -->
             <c:forEach var="list" items="${list}" varStatus="delCount">
               <div class="talk-list" pid="${list.productId}" id="delNo${delCount.count}">
+
                 <a class="talk-list-btn" pid="${list.roomId}"
-                  href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}">
+                  href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}&sysName=${list.chatImg}">
                   <div class="talk-list-left">
                     <img src="${list.chatImg }">
                   </div>
@@ -147,6 +132,7 @@
                           <input type=hidden value="${list.buyerId}" id="hiddenBuyerId"
                             class="hiddenBuyerId${delCount.count}">
                           <input type=hidden value="${id}" id="hiddenId">
+
                         </div>
                       </div>
                     </c:otherwise>
@@ -221,13 +207,14 @@
           </div>
 
           <c:choose>
+
             <c:when test="${roomId == 0}">
               <div class="talk-right">
                 <div class="right-top">
                   <div class="right-title-left">
-                    <div class="title-img">
+                    <!-- <div class="title-img">
                       <i class="fas fa-camera fa-2x"></i>
-                    </div>
+                    </div> -->
                     <div class="title-name">00톡 첫페이지입니다</div>
                   </div>
                   <div class="right-title-right">
@@ -248,12 +235,124 @@
                   <button type="button">전송불가</button>
                 </div>
             </c:when>
-            <c:otherwise>
+
+
+            <c:when test="${roomId==-1}">
               <div class="talk-right">
                 <div class="right-top">
                   <div class="right-title-left">
-                    <div class="title-img">
+                    <!-- <div class="title-img">
                       <i class="fas fa-camera fa-2x"></i>
+                    </div> -->
+                    <div class="title-name">챗봇 페이지입니다.</div>
+                  </div>
+                  <div class="right-title-right">
+                    <div class="title-alarms"></div>
+                  </div>
+                </div>
+                <div class="right-middle">
+                  <div class="right-middle-title">챗봇</div>
+                  <div class="right-line">
+                    <div class="line">
+                      챗봇 페이지입니다.
+                    </div>
+                  </div>
+                  <div class="right-line">
+                    <div class="line">
+                      궁금하신 사항에 대해 선택해주시면 답변해드립니다.
+                    </div>
+                  </div>
+                  <div class="right-line">
+                    <div class="line">
+                      <input type="radio" value="q1" name="selectQuestion">1번 구매방법<br>
+                      <input type="radio" value="q2" name="selectQuestion">2번 판매방법<br>
+                      <input type="radio" value="q3" name="selectQuestion">3번 검색방법<br>
+                      <input type="radio" value="q4" name="selectQuestion">4번 팔로잉/팔로워 방법<br>
+                      <input type="radio" value="q5" name="selectQuestion">5번 게시판 이용 방법
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="right-bottom">
+                  <input type=text placeholder="이 페이지는 입력할 수 없는 페이지입니다." id="preventInput" disabled>
+                  <button type="button">전송불가</button>
+                </div>
+                <script>
+                  
+                  
+                  $(document).ready(function () {
+                    $("input:radio[name='selectQuestion']").click(function () {
+                      if($(this).val()=='q1'){
+                        let chatLeftDiv = $("<div>");
+                        chatLeftDiv.addClass("left-line");
+                        let chatLine = $("<div>");
+                        chatLine.addClass("line");
+
+                        chatLine.append("1. 바로구매"+"<br>");
+                        chatLine.append("원하는 상품 페이지에서 바로구매 버튼 클릭 후 계좌이체를 통해 결제가 가능합니다."+"<br>");
+                        chatLine.append("2. 연락하기를 통한 거래"+"<br>");
+                        chatLine.append("원하는 상품 페이지에서 연락하기 버튼 클릭 후 판매자와 연락한 후에 직거래로 거래하시면 됩니다.");
+                        
+                        chatLeftDiv.append(chatLine);
+                        $(".right-middle").append(chatLeftDiv);
+                      }else if($(this).val()=='q2'){
+                        let chatLeftDiv = $("<div>");
+                        chatLeftDiv.addClass("left-line");
+                        let chatLine = $("<div>");
+                        chatLine.addClass("line");
+
+                        chatLine.append("2번");
+                        chatLeftDiv.append(chatLine);
+                        $(".right-middle").append(chatLeftDiv);
+                      }else if($(this).val()=='q3'){
+                        let chatLeftDiv = $("<div>");
+                        chatLeftDiv.addClass("left-line");
+                        let chatLine = $("<div>");
+                        chatLine.addClass("line");
+
+                        chatLine.append("3번");
+                        chatLeftDiv.append(chatLine);
+                        $(".right-middle").append(chatLeftDiv);
+                      }else if($(this).val()=='q4'){
+                        let chatLeftDiv = $("<div>");
+                        chatLeftDiv.addClass("left-line");
+                        let chatLine = $("<div>");
+                        chatLine.addClass("line");
+
+                        chatLine.append("4번");
+                        chatLeftDiv.append(chatLine);
+                        $(".right-middle").append(chatLeftDiv);
+                      }else if($(this).val()=='q5'){
+                        let chatLeftDiv = $("<div>");
+                        chatLeftDiv.addClass("left-line");
+                        let chatLine = $("<div>");
+                        chatLine.addClass("line");
+
+                        chatLine.append("5번");
+                        chatLeftDiv.append(chatLine);
+                        $(".right-middle").append(chatLeftDiv);
+                      }
+                    })
+                  });
+
+                  // let chatRightDiv = $("<div>");
+                  // chatRightDiv.addClass("right-line");
+                  // chatRightDiv.append(chatLine);
+                  // $(".right-middle").append(chatRightDiv);
+                </script>
+            </c:when>
+
+
+
+
+            <c:otherwise>
+              <div class="talk-right">
+                <div class="right-top">
+
+                  <div class="right-title-left">
+                    <div class="title-img">
+                      <img src="/imgs/banner.png" style="height: 40px; width: 40px;">
                     </div>
 
                     <div class="title-name">
@@ -267,49 +366,37 @@
                 </div>
                 <div class="right-middle">
                   <div class="right-middle-title">대화가 시작되었습니다.</div>
+                  <div class="right-line">
+
+                    <div class="line">
+                      <a href="/items/itemsDetail?iseq=${productId}">
+                        <img src="/imgs/banner.png" style="height: 80px; width: 80px;">
+                        <span>제품 상세보기</span>
+                      </a>
+                    </div>
+                  </div>
                   <c:forEach var="cList" items="${cList}">
                     <c:choose>
-                      <c:when test="${cList.roomId==0}">
-                        <div class="left-line" id="chatBot-Left">
-                          <div class="line">관리자 챗봇입니다. 무엇을 도와드릴까요?</div>
-                        </div>
-                        <div class="right-line" id="chatBot-Right">
-                          <div class="line">
-                            <input type="radio" name=select id=1번>1번 항목<br>
-                            <input type="radio" name=select id=2번>2번 항목<br>
-                            <input type="radio" name=select id=3번>3번 항목<br>
-                            <input type="radio" name=select id=4번>4번 항목
-
+                      <c:when test="${id eq cList.buyerId}">
+                        <div class="right-line">
+                          <div class="chatTime">
+                            <div class="chatRead"></div>
+                            <div class="time">${cList.formDate }</div>
 
                           </div>
+                          <div class="line">${cList.chatContents}</div>
                         </div>
                       </c:when>
+
                       <c:otherwise>
-
-                        <c:choose>
-                          <c:when test="${id eq cList.buyerId}">
-                            <div class="right-line">
-                              <div class="chatTime">
-                                <div class="chatRead"></div>
-                                <div class="time">${cList.formDate }</div>
-
-                              </div>
-                              <div class="line">${cList.chatContents}</div>
-                            </div>
-                          </c:when>
-
-                          <c:otherwise>
-                            <div class="left-line">
-                              <div class="line">${cList.chatContents}</div>
-                              <div class="chatTime">
-                                <div class="chatRead"></div>
-                                <div class="time">${cList.formDate }</div>
-                              </div>
-                            </div>
-                          </c:otherwise>
-                        </c:choose>
+                        <div class="left-line">
+                          <div class="line">${cList.chatContents}</div>
+                          <div class="chatTime">
+                            <div class="chatRead"></div>
+                            <div class="time">${cList.formDate }</div>
+                          </div>
+                        </div>
                       </c:otherwise>
-
                     </c:choose>
                   </c:forEach>
 
@@ -379,12 +466,6 @@
 
           $("#hiddenRoomId[pid=" + jsonProductId + "]").val(jsonRoomId);
           $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
-          // if(userId == hiddenId){
-          //   $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
-          // }else{
-          //   $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message + readCount);
-          //   // readCount++;
-          // }
 
           if (message == "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다.") {
             chatMessage.attr("contenteditable", "false");
@@ -402,8 +483,11 @@
             history.pushState(null, null, "http://localhost/chat/delSuccess?roomId=0");
             window.onpopstate = function (event) {
               history.go(1);
-              return false;
             };
+            $(".talk-list-btn[pid=" + jsonRoomId + "]").on("click", function () {
+              alert("삭제된 채팅방입니다.");
+              return false;
+            })
           }
           let url = window.location.href;
           console.log(url);
