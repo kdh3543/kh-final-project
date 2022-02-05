@@ -30,7 +30,8 @@
 		select * from member where kakao=#{value}
 	</select>
 	<select id="mypage" resultType="kh.spring.dto.MemberDTO">
-		select * from member where id=#{value}
+		select * from member where
+		id=#{value}
 	</select>
 
 	<select id="signDate" resultType="int">
@@ -95,12 +96,14 @@
 
 	<!-- 관리자 계정에서 가입일 카운트 -->
 	<select id="countMember" resultType="kh.spring.dto.GraphDTO">
-		select count(*) count from member group by to_char(signup_date,'yyyy-mm')
+		select count(*) count from
+		member group by to_char(signup_date,'yyyy-mm')
 	</select>
 
 	<!-- 관리자 계정에서 월/일 카운트 -->
 	<select id="groupByMonth" resultType="kh.spring.dto.GraphDTO">
-		select to_char(signup_date,'yyyy-mm') month 
+		select
+		to_char(signup_date,'yyyy-mm') month
 		from member group by to_char(signup_date,'yyyy-mm')
 	</select>
 	<!-- detail 페이지에서 뿌려줄 상점정보 -->
@@ -110,6 +113,32 @@
 		ID in (select sellerid from items where iseq =#{value})
 	</select>
 
+	<select id="selectAllStoreList"
+		resultType="kh.spring.dto.JoinDTO">
+		SELECT *
+		FROM
+		((SELECT SC.SELLERID, M.*
+		FROM MEMBER M
+		LEFT OUTER JOIN
+		(SELECT SELLERID,COUNT(SELLERID) AS SELLCOUNTALL FROM ITEMS GROUP BY
+		SELLERID) SC
+		ON(M.ID=SC.SELLERID)) MSC
+		LEFT OUTER JOIN
+		(SELECT SELLERID,COUNT(FOLLOWINGID) AS FOLLOWCOUNTALL FROM FOLLOW GROUP BY
+		SELLERID) FC
+		ON (MSC.SELLERID = FC.SELLERID))WHERE ID LIKE '%'||#{value}||'%' OR Name
+		LIKE '%'||#{items}||'%'
+
+	</select>
+
+	<!-- 조회수 추가할 정보 -->
+	<update id="addViewCount">
+
+		UPDATE MEMBER SET VIEW_COUNT = VIEW_COUNT + 1
+		WHERE
+		ID =#{value}
+
+	</update>
 
 </mapper>
 

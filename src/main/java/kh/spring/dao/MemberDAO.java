@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.dto.GraphDTO;
+import kh.spring.dto.JoinDTO;
 import kh.spring.dto.MemberDTO;
 
 @Repository
@@ -127,5 +128,14 @@ public MemberDTO selectByIseq(int iseq) {
 	return mybatis.selectOne("Member.selectByIseq",iseq);
 }
 
+public List<JoinDTO> selectAllStoreList(String keyword) {
+    return mybatis.selectList("Member.selectAllStoreList",keyword);
+
+}
+
+public int addViewCount(String id) {
+ return mybatis.update("Member.addViewCount", id);
+
+}
 
 }
