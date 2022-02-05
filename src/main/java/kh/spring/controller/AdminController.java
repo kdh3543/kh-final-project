@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kh.spring.dto.BoardDTO;
+import kh.spring.dto.GraphDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.BoardService;
 import kh.spring.service.MemberService;
@@ -41,7 +42,16 @@ public class AdminController {
 		// 게시물 관리 부분 호출
 		List<BoardDTO> blist = bservice.selectAll();
 		model.addAttribute("blist", blist);
+		// 월일 호출 
+		List<GraphDTO> monthList = mservice.groupByMonth();
+		model.addAttribute("monthList",monthList);
 	
+		// 월일 가입자 수 호출 
+		List<GraphDTO> countMember = mservice.countMember();
+		model.addAttribute("countMember",countMember);
+			
+		System.out.println(monthList.get(0));
+		System.out.println(countMember);
 	
 		return "/admin/adminIndex";
 		
@@ -68,6 +78,7 @@ public class AdminController {
 		  return "redirect:/admin/adminIndex";
 		 
 	 }
+	 
 	 
 
 }
