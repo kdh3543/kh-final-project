@@ -112,15 +112,34 @@ public class MemberController {
 		}
 
 		//로그인 성공 시
-		if(result>0) {
-			session.setAttribute("loginID", logid);
-			String id = (String)session.getAttribute("loginID");
+		if(result > 0) {
+			
+			// 관리자 ID 넣어야만 관리자로 인식 가능
+			
+			if(logid.contains("Admin")) {
+				session.setAttribute("Admin",logid);
+				
+				String id = (String)session.getAttribute("Admin");
 
-			MemberDTO dto = mservice.select(id);
+				MemberDTO dto = mservice.select(id);
 
-			model.addAttribute("dto", dto);
+				model.addAttribute("dto", dto);
 
-			return "forward:/items/?dto=dto";
+				return "forward:/mem/?dto=dto";
+			}else {
+				session.setAttribute("loginID", logid);
+				
+				String id = (String)session.getAttribute("loginID");
+
+				MemberDTO dto = mservice.select(id);
+
+				model.addAttribute("dto", dto);
+
+				return "forward:/items/?dto=dto";
+				
+			}
+			
+			
 
 		}else {
 			return "redirect:/signIn";
