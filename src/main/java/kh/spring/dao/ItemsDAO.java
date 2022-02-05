@@ -117,13 +117,6 @@ public class ItemsDAO {
 		return mybatis.selectList("Items.buyIList", id);
 
 	}
-
-	
-	
-	
-	
-	
-	
 	
 
 	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
