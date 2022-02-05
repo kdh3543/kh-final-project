@@ -50,9 +50,22 @@
 							<li>${loginID}</li>
 							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
-							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
+
+						</ul>
+					</c:when>
+
+					<c:when test="${Admin != null}">
+						<!----- admin 로그인 되었을 때,  ----->
+						<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
+							<li>${Admin}</li>
+							<!-- 수정중 -->
+							<li><a href="/admin/adminIndex">관리페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
 						</ul>
 					</c:when>

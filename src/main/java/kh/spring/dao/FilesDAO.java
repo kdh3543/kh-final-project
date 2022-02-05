@@ -92,7 +92,7 @@ public class FilesDAO {
 
 	}
 
-
+	//동현93 채팅 이미지 가져오기
 	public FilesDTO selectBySeqOrder(int iseq) {
 		return mybatis.selectOne("Files.selectBySeqOrder",iseq);
 
@@ -103,9 +103,4 @@ public class FilesDAO {
 		return mybatis.selectList("Files.buyFList",id);
 	}
 
-
-
-
-		
-	
 }

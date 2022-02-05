@@ -106,6 +106,11 @@ public class MemberDAO {
    public int deleteBySeq(int seq) {
 	   return mybatis.delete("Member.deleteBySeq",seq);
    }
+   
+   // 관리자 계정에서 아이디 조회
+   public MemberDTO findIdBySeq(int seq) {
+	   return mybatis.selectOne("Member.findIdBySeq",seq);
+   }
 
    //디테일 오른쪽 하단 정보
 

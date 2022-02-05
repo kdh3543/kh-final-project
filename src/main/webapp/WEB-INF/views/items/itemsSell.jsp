@@ -371,7 +371,7 @@
 
 								<div class="add-btns-div">
 									<input type="submit" class="btn btn-outline-secondary"
-										id="productAddBtn">상품등록
+										id="productAddBtn" value="상품등록">
 									<button class="btn btn-outline-secondary" id="resetBtn"
 										type="reset">초기화</button>
 								</div>

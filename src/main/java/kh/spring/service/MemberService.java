@@ -146,6 +146,11 @@ public class MemberService {
 	public int deleteBySeq(int seq) {
 		return mdao.deleteBySeq(seq);
 	}
+	
+	// 관리자 계정에서 Id 조회
+	public MemberDTO findIdBySeq(int seq) {
+		return mdao.findIdBySeq(seq);
+	}
 
 	//detail 에서 보여줄 오른쪽하단 상점정보
 

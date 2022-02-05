@@ -55,7 +55,7 @@ public class ItemsDAO {
 
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("rilist", rilist);
-
+		
 		return mybatis.selectList("Items.selectNameToSeq", map);
 	}
 

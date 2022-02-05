@@ -101,4 +101,10 @@ public class BoardService {
 	public int subtractCommentCount(int seq) {
 		return dao.subtractCommentCount(seq);
 	}
+	
+	// 관리자 -> 주제로 찾기
+	public List<BoardDTO> selectBySubject(String selectedVal) {
+		return dao.selectBySubject(selectedVal);
+	}
+	
 }

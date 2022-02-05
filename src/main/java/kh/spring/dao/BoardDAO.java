@@ -104,4 +104,9 @@ public class BoardDAO {
 	public int subtractCommentCount(int seq) {
 		return mybatis.update("Board.subtractCommentCount", seq);
 	}
+	
+	// 관리자 - 주제 찾기
+	public  List<BoardDTO> selectBySubject(String selectedVal){
+		return mybatis.selectList("Board.selectBySubject",selectedVal);
+	}
 }

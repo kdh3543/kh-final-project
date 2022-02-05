@@ -36,14 +36,13 @@ main>div {
 }
 
 .talk-list {
-	overflow: scroll;
+	overflow: none;
 }
-
 
 .talk-list, .talk-add-list {
 	display: flex;
 	border: 1px solid black;
-	overflow-y: auto;
+	overflow-y: none;
 }
 
 .talk-list-btn {
@@ -68,6 +67,30 @@ main>div {
 .talk-list-right .talk-name {
 	font-family: OTWelcomeBA;
 	font-size: 15px;
+	height: 30px;
+}
+
+.talk-list-right .talk-name {
+	font-family: OTWelcomeBA;
+	font-size: 15px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+}
+
+
+.talk-name-div {
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+}
+
+.talk-time {
+	font-size: 10px;
+	color: gray;
+	padding-left: 10px;
+	align-items: center;
+	display: flex;
 }
 
 .talk-left {
@@ -126,9 +149,9 @@ main>div {
 .chatTime {
 	height: 100%;
 	font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .left-line .chatRead {
@@ -140,13 +163,15 @@ main>div {
 }
 
 .time {
-	text-align: end;
+	
+	height: 40px;
+	line-height: 60px;
 }
 
 .line {
 	border-radius: 5px;
 	margin: 3px;
-	background-color: #24a6a4;
+	background-color: #c7ecee;
 	font-weight: bold;
 	font-size: 20px;
 	font-family: 'OTWelcomeRA';
@@ -158,20 +183,18 @@ main>div {
 	opacity: 0.8;
 }
 
-.initial-page{
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    align-items: center;
-    height:100%;
+.initial-page {
+	display: flex;
+	justify-content: center;
+	margin: auto;
+	align-items: center;
+	height: 100%;
 }
 
-
-
-.initial-page-line{
-    border-radius: 5px;
+.initial-page-line {
+	border-radius: 5px;
 	margin: 3px;
-	background-color: #24a6a4;
+	background-color: #c7ecee;
 	font-weight: bold;
 	font-size: 20px;
 	font-family: 'OTWelcomeRA';
@@ -181,7 +204,8 @@ main>div {
 	width: fit-content;
 	max-width: 80%;
 	opacity: 0.8;
-    text-align: center;
+	text-align: center;
+	color:#fff;
 }
 
 .talk-right .right-bottom {
@@ -206,7 +230,7 @@ main>div {
 }
 
 .talk-right .right-bottom button:hover {
-	background-color: #24a6a4;
+	background-color: #c7ecee;
 	color: #fff;
 }
 
@@ -221,6 +245,8 @@ main>div {
 
 .title-name {
 	width: 80%;
+	line-height: 40px;
+	
 }
 
 .talk-list-left>img {
@@ -245,8 +271,20 @@ a:hover {
 
 .right-middle-title {
 	width: 100%;
-	height: 20px;
+	height: 30px;
 	text-align: center;
 	font-size: 15px;
-	color: gray;
+	color: #808080;
+	padding-top:10px;
+}
+
+/* 버튼 */
+.btn-group ul li button {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.talk-last-conversation {
+	padding-bottom: 10px;
 }

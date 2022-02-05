@@ -132,6 +132,7 @@
 	</select>
 
 	<!-- itemsorder image 하나뽑기 -->
+	<!--  동현 93 채팅방 관련 이미지 가져오기 -->
 	<select id="selectBySeqOrder"
 		resultType="kh.spring.dto.FilesDTO">
 		SELECT * FROM FILES WHERE
@@ -149,6 +150,7 @@ WHERE SEQ IN
 	
 	</select>
 
-</mapper>
+
+	</mapper>
 
 

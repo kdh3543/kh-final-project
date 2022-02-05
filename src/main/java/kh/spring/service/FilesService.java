@@ -65,6 +65,7 @@ public class FilesService {
 
 	}
 
+	//동현93 채팅 이미지 가져오기
 	public FilesDTO selectBySeqOrder(int iseq) {
 		return fdao.selectBySeqOrder(iseq);
 	}
@@ -82,6 +83,5 @@ public class FilesService {
 	 * 
 	 * return fdao.selectBySeq(parentSeq); }
 	 */
-
 
 }

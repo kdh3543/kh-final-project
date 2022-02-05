@@ -75,6 +75,11 @@
 		delete from member where seq=#{value}
 	</delete>
 	
+	<!-- 관리자 계정에서 아이디 조회-->
+	<select id="findIdBySeq" resultType="kh.spring.dto.MemberDTO">
+		select * from member where seq = #{seq}
+	</select>
+	
 	<!-- detail 페이지에서 뿌려줄 상점정보  -->
 	
 	
