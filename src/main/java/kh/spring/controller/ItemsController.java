@@ -662,22 +662,7 @@ public class ItemsController {
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	//메인화면 홈-상품전체 끌고오기
-
-
-
 
 	@RequestMapping("join")
 	public String join() {

@@ -50,9 +50,10 @@ public class AdminController {
 		List<GraphDTO> countMember = mservice.countMember();
 		model.addAttribute("countMember",countMember);
 			
-		System.out.println(monthList.get(0));
-		System.out.println(countMember);
-	
+		// 총 등록된 상품 수 
+		// 거래 완료 
+		// 당일 거래 금액
+		// 당일 판매 수 
 		return "/admin/adminIndex";
 		
 		

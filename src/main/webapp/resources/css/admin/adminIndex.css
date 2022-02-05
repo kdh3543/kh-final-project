@@ -266,7 +266,7 @@ p {
 	line-height: 100px;
 }
 
-/* 통계 */
+/* 회원 통계 */
 .statistics-page {
 	display: none;
 	width: 100%;
@@ -292,4 +292,26 @@ p {
 .chart-div{
 	width:100%;
 	height:100%;
+}
+/* 판매 통계 */
+.sell-Statistics-page{
+	display: none;
+	width: 100%;
+	height: 100%;
+}
+.sell-Statistics-page .sell-Statistics-top-div {
+	width: 90%;
+	height: 10%;
+	padding: 1%;
+	color: black;
+	border-bottom: 1px solid #b2bec3;
+	display: flex;
+	align-items: flex-end;
+	margin: auto;
+}
+.sell-Statistics-page .sell-statistics-contents-div{
+	width: 100%;
+	height: 90%;
+	margin: auto;
+	overflow: auto;
 }
