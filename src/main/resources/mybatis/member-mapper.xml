@@ -8,56 +8,67 @@
 	<!-- DB에 회원가입정보 저장 -->
 	<insert id="insert">
 		insert into member values(member_seq.nextval,#{id},
-		#{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,0,default
+		#{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,0
 		)
 	</insert>
 	<!-- kakao 회원정보 입력 -->
 	<insert id="kakaoinsert">
 		insert into member
-		values(member_seq.nextval,#{id},0,#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,#{kakao},default)
+		values(member_seq.nextval,#{id},0,#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,#{kakao})
 	</insert>
 	<!-- id중복확인 -->
 	<select id="idCheck" resultType="int">
-		select count(id) from member where id = #{id}
+		select count(id) from member
+		where id = #{id}
 	</select>
 	<select id="login" resultType="int">select count(*) from member where
-		id =#{id} and pw=#{pw} </select>
+		id =#{id} and pw=#{pw}
+	</select>
 	<!-- 이미 가입한 카카오 계정 로그인 -->
 	<select id="selectBykakaoemail"
 		resultType="kh.spring.dto.MemberDTO">
 		select * from member where kakao=#{value}
 	</select>
 	<select id="mypage" resultType="kh.spring.dto.MemberDTO">
-	select * from member where id=#{value} </select>
+		select * from member where id=#{value}
+	</select>
 
 	<select id="signDate" resultType="int">
-		select trunc(sysdate-signup_date+1,0) from member where id= #{id}
+		select
+		trunc(sysdate-signup_date+1,0) from member where id= #{id}
 	</select>
 
 
 	<select id="selectBykakao" resultType="int">
-		select count(kakao) from member where kakao = #{kakaoemail}
+		select count(kakao) from
+		member where kakao = #{kakaoemail}
 	</select>
 
 	<!-- id찾기 -->
 	<select id="selectID" resultType="kh.spring.dto.MemberDTO">
-		select * from member where email=#{email} and phone=#{phone}
+		select * from member where
+		email=#{email} and phone=#{phone}
 	</select>
 	<select id="selectIDexist" resultType="int">
-		select count(id) from member where email=#{email} and phone=#{phone}
+		select count(id) from
+		member where email=#{email} and phone=#{phone}
 	</select>
 	<!-- 계정 존재여부확인 -->
 	<select id="AccountExist" resultType="int">
-		select count(*) from member where id=#{inputID} and email=#{inputEmail}
+		select count(*) from member
+		where id=#{inputID} and email=#{inputEmail}
 	</select>
- 
-	<update id="modify">update member SET
-	<trim prefixOverrides="SET" suffixOverrides=",">
-      <if test="profile_image != null">profile_image = #{profile_image}</if>
-   </trim>
-	
-	 ,pw=#{pw}, zipcode=#{zipcode},address1=#{address1},address2=#{address2},
-		phone=#{phone}, prefer_location=#{prefer_location} where id=#{id} </update>
+
+	<update id="modify">
+		update member SET
+		<trim prefixOverrides="SET" suffixOverrides=",">
+			<if test="profile_image != null">profile_image = #{profile_image}</if>
+		</trim>
+
+		,pw=#{pw},
+		zipcode=#{zipcode},address1=#{address1},address2=#{address2},
+		phone=#{phone}, prefer_location=#{prefer_location} where id=#{id}
+	</update>
 
 	<!-- 비밀번호 변경 -->
 	<update id="updatePw">
@@ -65,63 +76,40 @@
 	</update>
 
 	<delete id="delete">delete from member where id=#{value} </delete>
-	
+
 	<!-- 전체 회원 조회 -->
 	<select id="selectAll" resultType="kh.spring.dto.MemberDTO">
-		select * from member order by seq
+		select * from member order by
+		seq
 	</select>
 	<!-- 관리자 계정에서 계정 삭제 -->
 	<delete id="deleteBySeq">
 		delete from member where seq=#{value}
 	</delete>
-	
-	<!-- 관리자 계정에서 아이디 조회-->
+
+	<!-- 관리자 계정에서 아이디 조회 -->
 	<select id="findIdBySeq" resultType="kh.spring.dto.MemberDTO">
-		select * from member where seq = #{seq}
+		select * from member where
+		seq = #{seq}
 	</select>
-	
-	<!-- detail 페이지에서 뿌려줄 상점정보  -->
-	
-	
+
+	<!-- 관리자 계정에서 가입일 카운트 -->
+	<select id="countMember" resultType="kh.spring.dto.GraphDTO">
+		select count(*) count from member group by to_char(signup_date,'yyyy-mm')
+	</select>
+
+	<!-- 관리자 계정에서 월/일 카운트 -->
+	<select id="groupByMonth" resultType="kh.spring.dto.GraphDTO">
+		select to_char(signup_date,'yyyy-mm') month 
+		from member group by to_char(signup_date,'yyyy-mm')
+	</select>
+	<!-- detail 페이지에서 뿌려줄 상점정보 -->
+
 	<select id="selectByIseq" resultType="kh.spring.dto.MemberDTO">
-		SELECT * FROM MEMBER WHERE ID in (select sellerid from items where iseq =#{value})
-	
+		SELECT * FROM MEMBER WHERE
+		ID in (select sellerid from items where iseq =#{value})
 	</select>
-	
-	<!-- detail 페이지에서 뿌려줄 상점정보  -->
-	
-	
-	
-	
-		<select id="selectAllStoreList" resultType="kh.spring.dto.JoinDTO">
-		SELECT *
-FROM
-    ((SELECT SC.SELLERID, M.*
-    FROM MEMBER M
-    LEFT OUTER JOIN
-    (SELECT SELLERID,COUNT(SELLERID) AS SELLCOUNTALL FROM ITEMS GROUP BY SELLERID) SC
-    ON(M.ID=SC.SELLERID)) MSC
-    LEFT OUTER JOIN
-    (SELECT SELLERID,COUNT(FOLLOWINGID) AS FOLLOWCOUNTALL FROM FOLLOW GROUP BY SELLERID) FC
-    ON (MSC.SELLERID = FC.SELLERID))WHERE ID LIKE '%'||#{value}||'%' OR Name LIKE '%'||#{items}||'%'  
-	
-		
 
-			
-	
-	</select>
-	
-	<!-- 조회수 추가할 정보  -->
-	<update id="addViewCount">
-		
-		UPDATE MEMBER SET VIEW_COUNT = VIEW_COUNT + 1
-		WHERE
-		ID =#{value}
 
-	
-	</update>
-	
-	
-	
 </mapper>
 

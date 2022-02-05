@@ -25,8 +25,7 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <!-- chart.js -->
-<script
-	src=https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
 <link rel="stylesheet" href="/css/header.css">
@@ -74,7 +73,9 @@
 					<button type="button" class="sell-statics-btn">판매통계</button>
 				</div>
 			</div>
+
 			<!-- 회원 관리 페이지 -->
+
 			<div class="main-right-container">
 				<div class="control-page">
 					<div class="control-top-div">회원관리</div>
@@ -117,6 +118,7 @@
 				</div>
 
 				<!-- 게시글 관리 페이지 -->
+
 				<div class="question-page">
 					<div class="question-top-div">게시글 관리</div>
 					<div class="question-contents-div">
@@ -164,7 +166,8 @@
 							<c:forEach var="blist" items="${blist}" varStatus="boardcount">
 								<tr>
 									<td><input type="checkbox"
-										class="boardCheckBox${boardcount.count}" name="checkboxBoard[]" value="${blist.board_seq}">
+										class="boardCheckBox${boardcount.count}"
+										name="checkboxBoard[]" value="${blist.board_seq}">
 									<td>${blist.board_seq}
 									<td>${blist.subject}
 									<td>${blist.contents}
@@ -180,35 +183,88 @@
 					</div>
 				</div>
 
+				<!-- 신고 페이지 -->
 				<div class="report-page">
 					<div class="report-top-div">신고 페이지</div>
-					<div class="report-contents-div">신고내용</div>
 				</div>
+
+				<!-- 회원통계 페이지 -->
 				<div class="statistics-page">
 					<div class="statistics-top-div">회원 통계</div>
 					<div class="statistics-contents-div">
-						<div>
-							<canvas id="myChart"></canvas>
+						<!-- monthList 뽑아오기 -->
+						<c:forEach var="monthList" items="${monthList}"
+							varStatus="getMonth">
+							<input type="text" name="getMonth"
+								class="getMonth${getMonth.count}" value="${monthList.month}" hidden>
+						</c:forEach>
+						<!-- month에 따른 가입자 수 뽑아오기 -->
+						<c:forEach var="countMember" items="${countMember}"
+							varStatus="countMem">
+							<input type="text" name="countMem"
+								class="getCountMem${countMem.count}"
+								value="${countMember.count}" hidden>
+						</c:forEach>
+						<div class="chart-div">
+							<canvas id="myChart" style="width:1000;height:500;"></canvas>
 						</div>
 
 						<script>
-							const labels = [ 'January', 'February', 'March',
-									'April', 'May', 'June', ];
+							// 길이 값 불러오기 
+							let monthLeg = $("input[name='getMonth']").length;
+							let countLeg = $("input[name='countMem']").length;
+				
+							
+							let monthArr = [];
+							let countArr = [];
+							for(let i=0; i < monthLeg; i++ ){
+							  let temp = $(".getMonth"+(i+1)+"").val();
+							  let temp1 = $(".getCountMem"+(i+1)+"").val();
+							  monthArr [i] = temp;
+							  countArr [i] = temp1;
+							} 
+					
+							 
+							/* 	let yearArr = [];
+								let monthArr = [];
+								
+								$(document).ready(function(){
+										for(let i=0; i < count; i++){
+											let temp = $(".statistics-contents-div > .signupDate"+(i+1)+"").val();
+											console.log(temp);
+											yearArr [i] = temp.substr(0,4);
+											monthArr[i] = temp.substr(5,2);
+
+										}			
+										
+										console.log(yearArr);
+										console.log(monthArr);
+										
+										 
+									
+								});*/
+							/* 'January', 'February', 'March',
+							'April', 'May', 'June', 'July','Agust','September','October','Nomember','December' */
+							// chart 부분
+							const labels = monthArr;
 							const data = {
 								labels : labels,
 								datasets : [ {
-									label : 'My First dataset',
+									label : '회원가입 월별 추이',
 									backgroundColor : 'rgb(255, 99, 132)',
 									borderColor : 'rgb(255, 99, 132)',
-									data : [ 0, 10, 5, 2, 20, 30, 45 ],
+									data : countArr,
 								} ]
 							};
 							const config = {
 								type : 'line',
 								data : data,
-								options : {}
+								options : {/* responsive:false */}
 							};
+							const myChart = new Chart(document
+									.getElementById('myChart'), config);
 						</script>
+
 
 					</div>
 				</div>
@@ -218,12 +274,15 @@
 	</main>
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
 	<script>
 		// 페이지 변경 스크립트
+		if ($(".control-page").css("display", "block")) {
+			$(".control-btn").focus();
+		}
 		$(".control-btn").on("click", function() {
 			$(".control-btn").css("background-color:#fff", "color:#24a6a4");
 			$(".control-page").css("display", "block");

@@ -10,8 +10,9 @@ html, body {
 	box-sizing: border-box;
 	font-family: 'OTWelcomeRA';
 }
-p{
-    margin-bottom: 0 !important;
+
+p {
+	margin-bottom: 0 !important;
 }
 
 .main-container {
@@ -66,7 +67,8 @@ p{
 	color: #24a6a4;
 	border: 1px solid #24a6a4;
 }
-.main-left-container .middle-div button:focus{
+
+.main-left-container .middle-div button:focus {
 	background-color: #fff;
 	color: #24a6a4;
 	border: 1px solid #24a6a4;
@@ -226,16 +228,17 @@ p{
 	margin-bottom: 3%;
 	margin-right: 7%;
 }
-.btn-div{
-    width: 100%;
-    height: 100px;
-    float: right;
-}
-.deleteBoardBtn{
-	float: right;
-    margin-top: 2%;
-    margin-right: 7%;
 
+.btn-div {
+	width: 100%;
+	height: 100px;
+	float: right;
+}
+
+.deleteBoardBtn {
+	float: right;
+	margin-top: 2%;
+	margin-right: 7%;
 }
 /* 신고관리 */
 .main-right-container .report-page {
@@ -259,9 +262,34 @@ p{
 	width: 90%;
 	height: 90%;
 	margin: auto;
+	text-align: center;
+	line-height: 100px;
 }
 
 /* 통계 */
 .statistics-page {
 	display: none;
+	width: 100%;
+	height: 100%;
+}
+.statistics-page .statistics-top-div {
+	width: 90%;
+	height: 10%;
+	padding: 1%;
+	color: black;
+	border-bottom: 1px solid #b2bec3;
+	display: flex;
+	align-items: flex-end;
+	margin: auto;
+}
+
+.statistics-page .statistics-contents-div {
+	width: 100%;
+	height: 90%;
+	margin: auto;
+	overflow: auto;
+}
+.chart-div{
+	width:100%;
+	height:100%;
 }
