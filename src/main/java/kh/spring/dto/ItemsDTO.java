@@ -19,6 +19,7 @@ public class ItemsDTO {
 	private String sellerID;
 	private String buyerID;
 	private String deal;
+	private String deal2;
 	private int like_cnt;
 	private int view_cnt;
 	private String items_img1;
@@ -66,7 +67,8 @@ public class ItemsDTO {
 
 	public ItemsDTO(int iseq, String name, String category, String exarea, String condition, String refundable,
 			String price, String info, Timestamp write_date, String tag, int cnt, String sellerID, String buyerID,
-			String deal, int like_cnt, int view_cnt, String items_img1, String items_img2, String items_img3) {
+			String deal, String deal2, int like_cnt, int view_cnt, String items_img1, String items_img2,
+			String items_img3) {
 		super();
 		this.iseq = iseq;
 		this.name = name;
@@ -82,6 +84,7 @@ public class ItemsDTO {
 		this.sellerID = sellerID;
 		this.buyerID = buyerID;
 		this.deal = deal;
+		this.deal2 = deal2;
 		this.like_cnt = like_cnt;
 		this.view_cnt = view_cnt;
 		this.items_img1 = items_img1;
@@ -201,6 +204,14 @@ public class ItemsDTO {
 		this.deal = deal;
 	}
 
+	public String getDeal2() {
+		return deal2;
+	}
+
+	public void setDeal2(String deal2) {
+		this.deal2 = deal2;
+	}
+
 	public int getLike_cnt() {
 		return like_cnt;
 	}
@@ -240,9 +251,7 @@ public class ItemsDTO {
 	public void setItems_img3(String items_img3) {
 		this.items_img3 = items_img3;
 	}
-	
-	
-	
+
 	
 		
 	

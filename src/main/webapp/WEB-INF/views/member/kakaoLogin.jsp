@@ -71,15 +71,16 @@
             <label for="inputName" class="form-label">이름</label>
             <input type="text" class="form-control" id="inputName" name="name" placeholder="이름을 입력하세요" pattern="^[가-힣]{2,5}$" required>
           </div>     
-          <div class="mb-3">
+         
+          <div class="addressDiv mb-3">
+            <label for="inputAddress1" class="form-label">주소</label>
+            <input type="text" class="form-control mb-2" id="inputAddress1" name="address1" placeholder="지번 주소를 클릭해주세요." required>
+            <button type="button" class="btn btn-primary mb-1" id="findAddress">주소찾기</button>
+        </div>
+         <div class="mb-3">
             <label for="inputZipcode" class="form-label">우편번호</label>
             <input type="text" class="form-control" id="inputZipcode" name="zipcode" placeholder="우편번호를 검색하세요." required>
           </div>
-          <div class="addressDiv mb-3">
-            <label for="inputAddress1" class="form-label">주소</label>
-            <input type="text" class="form-control mb-2" id="inputAddress1" name="address1" placeholder="" required>
-            <button type="button" class="btn btn-primary mb-1" id="findAddress">주소찾기</button>
-        </div>
           <div class="mb-3">
             <label for="inputAddress2" class="form-label">상세주소</label>
             <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="상세주소를 입력하세요" required>
@@ -90,7 +91,7 @@
           </div>
           <div class="mb-3">
             <label for="inputEmail" class="form-label">이메일</label>
-            <input type="email" class="form-control" id="inputEmail" name="email" value="${kakaoemail }" readonly>
+            <input type="email" class="form-control" id="inputEmail" name="email" value="${kakaoemail}" readonly>
           </div>
           <div class="mb-3">
             <label for="deallocation" class="form-label">거래희망지역</label>

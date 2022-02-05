@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  
+  
+  <mapper namespace="SafeDeal">
+  
+  
+  
+  <insert id="insert">
+  
+  {call
+  declare
+  begin
+  
+  INSERT INTO SAFEDEAL VALUES(SAFEDEAL_SEQ.NEXTVAL,#{buyer},#{seller},#{items_no},#{cash},default);
+  
+	UPDATE MEMBER SET CASH= CASH-#{cash}-2500   WHERE ID =#{buyer};
+	
+	UPDATE ITEMS SET DEAL2 ='R' WHERE ISEQ = #{items_no};  
+  
+  end
+  }
+  </insert>
+  
+  
+  
+ <select id="selectAllDealOkBySeq" resultType="kh.spring.dto.SafeDealDTO">
+ 
+ SELECT * FROM SAFEDEAL WHERE ITEMS_NO = #{value}
+  
+  </select>
+  
+  <update id="dealOk" parameterType="kh.spring.dto.SafeDealDTO">
+{call
+  declare
+  begin
+  
+  
+  	update member set cash= cash+#{cash} where id = #{seller};
+  	
+  	 UPDATE ITEMS SET DEAL2 ='Y' , BUYERID=#{buyer}  WHERE ISEQ=#{items_no};
+  	 
+  	 end
+  	 }
+  </update>
+
+  
+   
+   <update id ="dealCancel">
+  
+   
+  BEGIN
+  
+	UPDATE MEMBER SET CASH= CASH+#{cash}+2500 WHERE ID = #{buyer};
+	
+	UPDATE ITEMS SET DEAL2 ='N' , BUYERID=DEFAULT  WHERE ISEQ=#{items_no};
+	
+	DELETE FROM SAFEDEAL WHERE ITEMS_NO = #{items_no};
+  
+  
+   END;
+ 
+  
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
+  

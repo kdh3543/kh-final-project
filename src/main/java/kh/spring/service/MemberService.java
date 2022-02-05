@@ -4,11 +4,6 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dao.MemberDAO;
+import kh.spring.dto.JoinDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.utils.EncryptionUtils;
 
@@ -78,34 +74,34 @@ public class MemberService {
 	}
 	//회원 정보 수정
 	public int modify(MemberDTO dto,MultipartFile file) throws Exception{
-		
-		
+
+
 		if(!file.isEmpty()) { //  업로드 된 파일 중 첫번째 파일이 비어있지 않다면,
 
-		String realPath = session.getServletContext().getRealPath("");
-		File realPathFile = new File(realPath);
-		if(!realPathFile.exists()) {
-			realPathFile.mkdir();
-		}
-		String oriName = file.getOriginalFilename();
-		String sysName = "/signup/"+UUID.randomUUID()+"_"+ oriName;
+			String realPath = session.getServletContext().getRealPath("");
+			File realPathFile = new File(realPath);
+			if(!realPathFile.exists()) {
+				realPathFile.mkdir();
+			}
+			String oriName = file.getOriginalFilename();
+			String sysName = "/signup/"+UUID.randomUUID()+"_"+ oriName;
 
-		file.transferTo(new File(realPath+"/"+sysName));
-		dto.setProfile_image(sysName);
+			file.transferTo(new File(realPath+"/"+sysName));
+			dto.setProfile_image(sysName);
 		}
-		
+
 		System.out.println(dto.getProfile_image()+"사진 정보수정완료");
-		
+
 		//비번 수정 안했을때 암호화 x 
 		if(dto.getPw().length()<16) {
 			String encPw = EncryptionUtils.getSHA512(dto.getPw());
 			dto.setPw(encPw);
-			
+
 		}
-		
-		
-		
-		
+
+
+
+
 		return mdao.modify(dto);
 	}
 	//가입 날짜
@@ -152,10 +148,19 @@ public class MemberService {
 	}
 
 	//detail 에서 보여줄 오른쪽하단 상점정보
-	
+
 	public MemberDTO selectByIseq(int iseq) {
 		return mdao.selectByIseq(iseq);
 	}
-	
+	//storeLIst
+	public List<JoinDTO> selectAllStoreList(String keyword) {
+		return mdao.selectAllStoreList(keyword);
+
+	}
+
+	public int addViewCount(String id) {
+		return mdao.addViewCount(id);
+	}
+
 
 }

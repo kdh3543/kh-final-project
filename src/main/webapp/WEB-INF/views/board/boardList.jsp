@@ -77,6 +77,7 @@
 				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
 				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
 			</div>
+			
 			<div class="subject-menu">
 				<button class="btn btn-primary search" type="button" id="question">동네질문</button>
 				<button class="btn btn-primary search" type="button" id="incident">동네사건사고</button>
@@ -182,7 +183,14 @@
 
 	<script>
 		$("#toWrite").on("click", function () {
-			location.href = "writeForm";
+			
+			if(${loginID==null}){
+				alert("로그인 후 이용가능합니다.");
+				return false;
+			}else{
+				location.href = "writeForm";
+			}
+			
 		})
 
 		$(".like-unclickable").on("click", function () {

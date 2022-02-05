@@ -19,11 +19,15 @@ import com.google.gson.Gson;
 import kh.spring.dto.FilesDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
+import kh.spring.dto.JoinDTO;
 import kh.spring.dto.MemberDTO;
+import kh.spring.dto.ReportDTO;
 import kh.spring.dto.SearchKeywordDTO;
 import kh.spring.service.FilesService;
+import kh.spring.service.FollowingService;
 import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
+import kh.spring.service.ReportService;
 import kh.spring.service.SearchService;
 import kh.spring.service.WishListService;
 
@@ -48,11 +52,14 @@ public class ItemsController {
 	@Autowired
 	public MemberService mservice;
 
-	//	@Autowired
-	//	   public FollowingService fwservice;
+	@Autowired
+   public FollowingService fwservice;
 
 	@Autowired
 	public WishListService wlservice;
+	
+	@Autowired
+	public ReportService rservice;
 	
 
 
@@ -171,6 +178,21 @@ public class ItemsController {
 		return "/items/itemsModify";
 
 	}
+	@ResponseBody
+	@RequestMapping("itemsDeleteBySeq")
+	public int itemsDelete(int iseq)throws Exception {
+		
+		
+		int deleteResult = iservice.itemsDeleteBySeq(iseq);
+		
+		System.out.println("삭제결과는? :" +deleteResult);
+		
+		return deleteResult;
+		
+	}
+	
+	
+	
 	//아이템 수정시 proc
 
 	//	@RequestMapping("itemsModifyProc")
@@ -281,7 +303,9 @@ public class ItemsController {
 	@RequestMapping("itemsDetail")
 
 	public String itemsDetail(int iseq ,Model model) {
-
+		
+		
+		
 
 		// 조회수 올리기
 		int result = iservice.addViewCount(iseq);
@@ -300,7 +324,7 @@ public class ItemsController {
 		String targetStr =ilist.get(0).getName(); 
 		/* System.out.println(targetStr); */
 
-		System.out.println("targetStr :  "+targetStr);
+		System.out.println("targetStr :"+targetStr);
 		String[] str = targetStr.split(" ");
 
 
@@ -312,34 +336,29 @@ public class ItemsController {
 			targetList.add(str[i]);
 		}
 
-		//관련상품 이름 뽑기
+		//연관상품 이름 뽑기
 		List<ItemsDTO> rilist = iservice.selectByName(targetList,iseq);
 
 		System.out.println("연관상품 이름구분 개수 : " + rilist.size());
-		// 관련상품 이미지 뽑기
+		// 연관상품 이미지 뽑기
+		
+		if(rilist.size()!=0) {
+			
+		
 		List<ItemsDTO> NameToSeq = iservice.selectNameToSeq(rilist);
-
-		/*
-		 * for(int i=0 ; i<NameToSeq.size();i++) {
-		 * 
-		 * System.out.println("test:" +NameToSeq.get(i).getName()); }
-		 */
-
+		
 
 
 		List<FilesDTO> rflist = fservice.selectBySeqR(NameToSeq);
-
-		for(int i=0 ; i<rflist.size();i++) {
-
-			System.out.println("연관상품 사진 이름" +rflist.get(i).getSysName()); }
-		System.out.println("연관상품 사진 개수 " +rflist.get(0));
+		model.addAttribute("rilist",rilist);
+		model.addAttribute("rflist",rflist);
+		}
 
 
 		//좋아요 넘겨주기 count
 
 		int wishCount=wlservice.wishListCountDetail(iseq);
-		model.addAttribute("rilist",rilist);
-		model.addAttribute("rflist",rflist);
+		
 		model.addAttribute("wishCount",wishCount);
 
 		String id =(String)session.getAttribute("loginID");
@@ -369,7 +388,19 @@ public class ItemsController {
 		
 		
 		
-//		
+//		신고하기
+		
+		//List<ReportDTO> rlist = rservice.selectAll();
+		
+		if(id !=null) {
+		ReportDTO rdto = rservice.selectById(id,iseq);
+		model.addAttribute("rdto",rdto);
+		}
+		
+		
+		
+		
+		
 
 //		model.addAttribute("detailFlist",detailFlist);
 		
@@ -441,9 +472,8 @@ public class ItemsController {
 	@RequestMapping("searchByInput")	
 	public String input(SearchKeywordDTO dto,Model model) {
 
-		System.out.println("검색 결과 : " +dto.getKeyword());
 
-		//최근검색어 목록에 값 저장
+		//최근검색어 목록에 값 저장 회원일 경우만
 
 		if (dto.getUser_id() != null && !dto.getUser_id().isEmpty() ) {
 
@@ -451,47 +481,72 @@ public class ItemsController {
 
 			int existCount = sservice.searchExistCount(keyword);
 
-			if(existCount==0) {
+			System.out.println("existCOunt : "+ existCount );
+			if(existCount ==0) {
+				//넣는작업
 				sservice.insert(dto);
 
 
 			}
 
 		}
+		
+		
 
 		//검색내용
-		String name = dto.getKeyword().trim();
+		 String keyword = dto.getKeyword().trim(); 
+		 
+		 
 		String id = (String)session.getAttribute("loginID");
-		//상점명 검색시
-
-
-
-		//상품명 검색시
-		List<ItemsDTO> NIlist = iservice.selectByIName(name);
-		System.out.println(NIlist.get(0).getName());
-		List<FilesDTO> NFlist = fservice.selectByIName(name);
-
+		
+		if(id !=null ) {
+			model.addAttribute("loginID",id);
+			
+		}
+	
 
 		//인기검색어 넘겨주기 hot search =hs
 
 		List<SearchKeywordDTO> hslist = sservice.selectByHot();
 		model.addAttribute("hslist",hslist);
-
-
-		model.addAttribute("NIlist",NIlist);
-		model.addAttribute("NFlist",NFlist);
-		model.addAttribute("hslist",hslist);
-		model.addAttribute("loginID",id);
-		model.addAttribute("name",name);
+		
 
 
 
-		System.out.println("seerawerwerawerawer"+NIlist.size());
+//		System.out.println("seerawerwerawerawer"+NIlist.size());
 
-		if(name.substring(0, 1).equals("@")) {
+		//상점명 검색시
+		if(keyword.substring(0, 1).equals("@")) {
+			//멤버 + 상품개수 + 팔로워수 넘겨줘야함
+			int end =keyword.length();
+			
+			//기존 검색어에는 @가 붙어있기에 뗴주는 작업
+			keyword =keyword.substring(1, end);
+			
+			
+			List<JoinDTO> mlist = mservice.selectAllStoreList(keyword);
+			
+			//멤버별 총 상품수
+//			List<ItemsDTO> sellCountAll = iservice.sellCountAll();
+			
+			//멤버별 총 팔로워수
+//			List<FollowDTO> followCountAll = fwservice.followCountAll();
+			
+			model.addAttribute("mlist",mlist);
+			model.addAttribute("keyword",keyword);
+			
 			return "/items/storeList";
+			
 
 		}else {
+			//상품명 검색시
+			List<ItemsDTO> NIlist = iservice.selectByIName(keyword);
+			
+			List<FilesDTO> NFlist = fservice.selectByIName(keyword);
+			model.addAttribute("NIlist",NIlist);
+			model.addAttribute("NFlist",NFlist);
+			model.addAttribute("keyword",keyword);
+			
 			return "/items/itemsList";
 		}
 
@@ -538,16 +593,25 @@ public class ItemsController {
 	@RequestMapping(value ="listing", produces="text/html; charset=utf8")
 	public String listing() throws Exception{
 
-		String id =(String)session.getAttribute("loginID"); 
+		String id =(String)session.getAttribute("loginID");
+		if(id ==null) {
+			
+			return "";
+			
+		}else {
+			
+			
+			List<SearchKeywordDTO> slist = sservice.selectAll(id);
 
-		List<SearchKeywordDTO> slist = sservice.selectAll(id);
+			Gson gson = new Gson();
 
-		Gson gson = new Gson();
+			String listJson = gson.toJson(slist, List.class).toString();
 
-		String listJson = gson.toJson(slist, List.class).toString();
+			/* System.out.println(listJson); */
+			return listJson;
+		}
 
-		/* System.out.println(listJson); */
-		return listJson;
+
 
 
 
@@ -614,11 +678,6 @@ public class ItemsController {
 
 
 
-	@RequestMapping("signIn")
-	public String login() {
-
-		return "/member/signIn";
-	}
 
 	@RequestMapping("join")
 	public String join() {
@@ -636,6 +695,10 @@ public class ItemsController {
 		int signDate = mservice.signDate(id);
 		model.addAttribute("signDate",signDate);
 		model.addAttribute("dto", dto);
+		
+		
+		
+
 
 		//해당 id 의 상품목록들 가져오기
 		List<ItemsDTO> ilist = iservice.selectMineById(id);
@@ -645,6 +708,7 @@ public class ItemsController {
 		//찜 목록 가져오기
 		List<ItemsDTO> wishlist = new ArrayList<ItemsDTO>();
 		
+	
 		
 		
 		
@@ -661,10 +725,6 @@ public class ItemsController {
 		int wishlistCount = wlservice.wishlistCount(id);
 		model.addAttribute("wCount",wishlistCount);
 		model.addAttribute("likeImg",likeImg);
-		
-
-		
-		
 
 
 
@@ -675,12 +735,160 @@ public class ItemsController {
 		model.addAttribute("ilist",ilist);
 		model.addAttribute("flist",flist);
 		model.addAttribute("sellCount",sellCount);
+		
+		
+		//구매내역 건수 보내기
+		
+		//구매내역 보내기
+		
+		List<ItemsDTO> buyIlist = iservice.buyIList(id);
+		List<FilesDTO> buyFlist = fservice.buyFList(id);
+		int buyCount = iservice.buyCount(id);
+		
+		
+		model.addAttribute("buyIlist",buyIlist);
+		model.addAttribute("buyFlist",buyFlist);
+		
+		model.addAttribute("buyCount",buyCount);
+		
+		
+		
+	//   팔로워 리스트
+	      List<MemberDTO> followlist =new ArrayList<MemberDTO>();
+	      followlist = fwservice.selectfollowing(id);            
+	      model.addAttribute("followlist",followlist);
+	      
+	    //내가 팔로워 한 수 가져오기
+	      int followingCount = fwservice.followingCount(id);
+	      
+	      model.addAttribute("fCount",followingCount);
+	      
+	    //팔로우 목록
+	      List<MemberDTO> followedList = new ArrayList<MemberDTO>();
+	      followedList = fwservice.selectfollowed(id);
+	      model.addAttribute("followedList",followedList);
+	      //팔로우 수 가져오기
+	      int followedCount = fwservice.followedCount(id);
+	      model.addAttribute("followedCount",followedCount);
+			
+
+		
+		
+		
 		return "/member/myPage";
-		
-		
-		
 
 	}
+	
+	// 다른사람 페이지임 여기로 진입시에 해당 id 값을 가져와서 동일하게 뿌림.
+	// 기능들에는 disabled 를 적절히 배치. 회원정보 수정은 안보이게끔 설정한다.
+	
+	@RequestMapping("otherPage")
+	public String otherPage(String id,Model model) {
+		
+		
+		MemberDTO dto = mservice.select(id);
+	    //가입한지 몇일 째인지 확인
+	    int signDate = mservice.signDate(id);
+	    model.addAttribute("signDate",signDate);
+	    model.addAttribute("dto", dto);
+	    
+	  //해당 id 의 상품목록들 가져오기
+	    List<ItemsDTO> ilist = iservice.selectMineById(id);
+	    //해당 상품목록의 사진들도 가져오기
+	    List<FilesDTO> flist = fservice.selectMineById(id);
+
+	    //찜 목록 가져오기
+	    List<ItemsDTO> wishlist = new ArrayList<ItemsDTO>();
+	    
+	    
+	    
+	    
+	    //iseq 값 가져옴 여러개나옴 이 값은 ITEMSDTO 와 연관
+	    wishlist = wlservice.mywishList(id);
+	    
+
+	    //마이페이지-찜목록 사진 출력
+	    List<FilesDTO> likeImg = fservice.selectLikeImg(id);
+	    
+	    
+	    model.addAttribute("wlist",wishlist);
+	    //찜 개수 가져오기
+	    int wishlistCount = wlservice.wishlistCount(id);
+	    model.addAttribute("wCount",wishlistCount);
+	    model.addAttribute("likeImg",likeImg);
+	    
+	    
+	  //상점방문수 추가 otherpage 왔을때 추가
+	    
+	  		int result = mservice.addViewCount(id);
+	  		
+	  	//판매내역 건수 보내기
+
+	  	    int sellCount = iservice.sellCount(id);
+
+	  	    model.addAttribute("ilist",ilist);
+	  	    model.addAttribute("flist",flist);
+	  	    model.addAttribute("sellCount",sellCount);
+	  	    
+	  	    
+	  	    //구매내역 건수 보내기
+	  	    
+	  	    //구매내역 보내기
+	  	    
+	  	    List<ItemsDTO> buyIlist = iservice.buyIList(id);
+	  	    List<FilesDTO> buyFlist = fservice.buyFList(id);
+	  	    int buyCount = iservice.buyCount(id);
+	  	    
+	  	    
+	  	    model.addAttribute("buyIlist",buyIlist);
+	  	    model.addAttribute("buyFlist",buyFlist);
+	  	    
+	  	    model.addAttribute("buyCount",buyCount);
+	  	    
+	  	    
+	  	    
+	  	//   팔로워 리스트
+	  	      List<MemberDTO> followlist =new ArrayList<MemberDTO>();
+	  	      followlist = fwservice.selectfollowing(id);            
+	  	      model.addAttribute("followlist",followlist);
+	  	      
+	  	    //내가 팔로워 한 수 가져오기
+	  	      int followingCount = fwservice.followingCount(id);
+	  	      
+	  	      model.addAttribute("fCount",followingCount);
+	  	      
+	  	    //팔로우 목록
+	  	      List<MemberDTO> followedList = new ArrayList<MemberDTO>();
+	  	      followedList = fwservice.selectfollowed(id);
+	  	      model.addAttribute("followedList",followedList);
+	  	      //팔로우 수 가져오기
+	  	      int followedCount = fwservice.followedCount(id);
+	  	      model.addAttribute("followedCount",followedCount);
+	  		
+		   
+	  		
+		
+		
+	
+		return "/member/otherPage";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//	상품의 상태 예약중/ 판매완료/판매중
 	@ResponseBody
 	@RequestMapping(value="updateProc", produces="text/html; charset=utf8")
@@ -709,7 +917,11 @@ public class ItemsController {
 	//		model.addAttribute("ilist",ilist);
 	//		model.addAttribute("flist",flist);
 
+	@RequestMapping("signIn")
+	public String login() {
 
+		return "/member/signIn";
+	}
 
 
 

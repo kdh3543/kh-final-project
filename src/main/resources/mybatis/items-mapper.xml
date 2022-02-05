@@ -9,7 +9,7 @@
 		INSERT INTO ITEMS VALUES(ITEMS_ISEQ.NEXTVAL,
 		#{name},#{category},#{exarea},#{condition},#{refundable}
 		,#{price},#{info},DEFAULT,#{tag},#{cnt},#{sellerID},DEFAULT, DEFAULT,
-		DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT,DEFAULT)
 
 		<selectKey resultType="int" order="AFTER" keyProperty="iseq">
 
@@ -34,6 +34,7 @@
 	</select>
 
 
+	<!-- 연관상품 이름다듬기 -->
 
 	<select id="selectByName" resultType="kh.spring.dto.ItemsDTO">
 
@@ -49,6 +50,7 @@
 
 	</select>
 
+
 	<select id="selectNameToSeq" resultType="kh.spring.dto.ItemsDTO">
 
 		SELECT * FROM ITEMS WHERE ISEQ IN
@@ -60,10 +62,15 @@
 
 	</select>
 
+
+	<!-- 연관상품 -->
+	<!-- <select id="selectBySeqR" resultType="kh.spring.dto.ItemsDTO"> SELECT 
+		* FROM ITEMS WHERE ISEQ IN <foreach collection="rilist" index="index" item="items" 
+		open="(" close=")" separator=","> #{items.iseq} </foreach> </select> -->
 	<!-- 해당 회원의 상품들 찾기 -->
 	<select id="selectMineById" resultType="kh.spring.dto.ItemsDTO">
 		SELECT * FROM ITEMS WHERE
-		SELLERID = #{id}
+		SELLERID = #{id} ORDER BY 1 DESC
 	</select>
 
 
@@ -74,6 +81,35 @@
 		SELECT COUNT(*) FROM ITEMS
 		WHERE SELLERID = #{id}
 	</select>
+
+
+
+
+	<!-- 해당 회원이 구매한 상품들 찾기 -->
+
+	<select id="buyCount" resultType="int">
+		SELECT COUNT(*)
+		FROM ITEMS I
+		INNER JOIN SAFEDEAL SD ON(I.ISEQ =SD.ITEMS_NO)
+		WHERE BUYER =#{id}
+	</select>
+
+	<select id="buyIList" resultType="kh.spring.dto.ItemsDTO">
+		SELECT I.*,SD.*
+		FROM ITEMS I
+		INNER JOIN SAFEDEAL SD ON(I.ISEQ =SD.ITEMS_NO)
+		WHERE BUYER =#{id} ORDER
+		BY SD.SEQ DESC
+	</select>
+
+
+	<!-- 해당 회원이 구매한 상품 개수 -->
+
+
+
+
+
+
 
 	<!-- 상품 거래상태 수정 시 -->
 	<update id="updateProc">
@@ -93,10 +129,18 @@
 	</update>
 
 
+	<delete id="itemsDeleteBySeq">
+		
+		DELETE FROM ITEMS WHERE ISEQ=#{value}
+
+
+
+	</delete>
+
 
 	<select id="selectById" resultType="kh.spring.dto.ItemsDTO">
 		SELECT * FROM ITEMS WHERE
-		SELLERID = #{value}
+		SELLERID = #{value} ORDER BY 1 DESC
 	</select>
 	<!-- 채팅에서 상품아이디 통해서 판매자 아이디 가져오기 -->
 	<select id="selectByProductId" resultType="String">
@@ -125,45 +169,58 @@
 	</select>
 
 
-<!-- 상품명으로 검색하기 -->
-	<select id="selectByIName"
-		resultType="kh.spring.dto.ItemsDTO">
-		
-			SELECT * FROM ITEMS WHERE NAME LIKE '%'||#{value}||'%'  OR  CATEGORY  LIKE '%'||#{value}||'%' OR EXAREA  LIKE '%'||#{value}||'%' ORDER BY 1 DESC
-		
-		</select>
-		
-		
-		<!-- detail페이지에 우측 하단  -->
-		
-		<!--해당 상품올린 상점(id) 로 등록된 상품의 총 개수  -->
+	<!-- 상품명으로 검색하기 -->
+	<select id="selectByIName" resultType="kh.spring.dto.ItemsDTO">
+
+		SELECT * FROM ITEMS WHERE NAME LIKE '%'||#{value}||'%' OR CATEGORY LIKE
+		'%'||#{value}||'%' OR EXAREA LIKE '%'||#{value}||'%' ORDER BY 1 DESC
+
+	</select>
+
+
+	<!-- detail페이지에 우측 하단 -->
+
+	<!--해당 상품올린 상점(id) 로 등록된 상품의 총 개수 -->
 	<select id="ItemsCount" resultType="int">
 		SELECT COUNT(*) FROM ITEMS
 		WHERE SELLERID in (select sellerid from items where iseq=#{value})
 	</select>
-		
-		
-		
-		<select id="selectByIseq" resultType="kh.spring.dto.ItemsDTO">
+
+
+
+	<select id="selectByIseq" resultType="kh.spring.dto.ItemsDTO">
 		SELECT * FROM ITEMS
-		WHERE SELLERID IN (SELECT SELLERID FROM ITEMS WHERE ISEQ =#{value} ) 
+		WHERE
+		SELLERID IN (SELECT SELLERID FROM ITEMS WHERE ISEQ =#{value} )
 	</select>
-		
-		
-		
-		<!-- 검색창 관련 부분입니다. -->
-		
-		<insert id="insertQNA">
-		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL, #{iseq},#{writer}, #{contents}, CURRENT_DATE)
+
+
+	<!-- join 을 통한 상점 정보 추출하기 -->
+	<select id="sellCountAll" resultType="kh.spring.dto.ItemsDTO">
+
+		SELECT
+		SELLERID,COUNT(SELLERID)AS COUNT FROM ITEMS GROUP BY SELLERID
+	</select>
+
+
+
+
+	<!-- 검색창 관련 부분입니다. -->
+
+	<insert id="insertQNA">
+		INSERT INTO ITEMS_QNA VALUES(ITEMS_QNA_SEQ.NEXTVAL,
+		#{iseq},#{writer}, #{contents}, CURRENT_DATE)
 	</insert>
-	
+
 	<delete id="deleteQNA">
 		DELETE FROM ITEMS_QNA WHERE ITEMS_QNA_SEQ = ${value}
 	</delete>
 
-	<select id="selectQNABySeq" resultType="kh.spring.dto.ItemsQNADTO">
+	<select id="selectQNABySeq"
+		resultType="kh.spring.dto.ItemsQNADTO">
 		SELECT * FROM ITEMS_QNA WHERE ISEQ = ${value}
-		ORDER BY ITEMS_QNA_SEQ
+		ORDER BY
+		ITEMS_QNA_SEQ
 	</select>
 
 

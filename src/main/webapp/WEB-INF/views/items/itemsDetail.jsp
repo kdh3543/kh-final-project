@@ -167,13 +167,45 @@
 				</c:forEach>
 				<div class="product-detail">
 
+
+
+
 					<div class="detail-report">
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary"
-							data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-							id="reportBtn">
-							<i class="fas fa-bell"></i>신고하기
-						</button>
+
+
+						<c:choose>
+							<c:when test="${loginID==null}">
+								<button type="button" class="btn btn-primary"
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									id="reportBtn" disabled>
+									<i class="fas fa-bell"></i>신고하기
+								</button>
+
+							</c:when>
+
+							<c:when test="${ilist[0].iseq==rdto.iseq}">
+								<button type="button" class="btn btn-primary"
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									id="reportBtn" disabled>
+									<i class="fas fa-bell"></i>신고중
+								</button>
+
+							</c:when>
+
+
+
+							<c:otherwise>
+								<button type="button" class="btn btn-primary"
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									id="reportBtn">
+									<i class="fas fa-bell"></i>신고하기
+								</button>
+							</c:otherwise>
+						</c:choose>
+
+
+
 						<!-- Modal -->
 						<div class="modal fade" id="staticBackdrop"
 							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -185,55 +217,70 @@
 										<button type="button" class="btn-close"
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
-									<div class="modal-body">
-										<div class="form-check">
-											<input class="form-check-input" type="radio"
-												name="flexRadioDefault" id="flexRadioDefault1"> <label
-												class="form-check-label" for="flexRadioDefault1">
-												광고(상점 및 타사이트 홍보, 상품도배) </label>
-										</div>
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" value=""
-												id="flexCheckDefault2"> <label
-												class="form-check-label" for="flexCheckDefault2"> 상품
-												정보 부정확(상품명, 이미지, 가격, 태그 등) </label>
-										</div>
-										<div class="form-check">
-											<input class="form-check-input" type="radio"
-												name="flexRadioDefault" id="flexRadioDefault3"> <label
-												class="form-check-label" for="flexRadioDefault3">거래
-												금지 품목 </label>
-										</div>
-										<div class="form-check">
-											<input class="form-check-input" type="radio"
-												name="flexRadioDefault" id="flexRadioDefault4"> <label
-												class="form-check-label" for="flexRadioDefault4">
-												사기의심(외부채널 유도) </label>
-										</div>
-										<div class="form-check">
+
+									<!-- required 하나 붙임 .1개 필수선택 -->
+									<form action="/report/itemsReport" method="post">
+
+										<input type=hidden name="buyerid" value="${loginID}">
+										<input type=hidden name="sellerid"
+											value="${ilist[0].sellerID}"> <input type=hidden
+											name="iseq" value="${ilist[0].iseq}">
+
+
+										<div class="modal-body">
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													value="광고(상점 및 타사이트 홍보, 상품도배)" name="reason"
+													id="flexRadioDefault1" required> <label
+													class="form-check-label" for="flexRadioDefault1">
+													광고(상점 및 타사이트 홍보, 상품도배) </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio"
+													value="상품정보 부정확(상품명, 이미지, 가격, 태그 등)" name="reason"
+													id="flexCheckDefault2" class="form-check-label"
+													for="flexCheckDefault2"> 상품정보 부정확(상품명, 이미지, 가격, 태그
+												등) </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio" name="reason"
+													id="flexRadioDefault3" value="거래 금지 품목"> <label
+													class="form-check-label" for="flexRadioDefault3">거래
+													금지 품목 </label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio" name="reason"
+													id="flexRadioDefault4" value="사기의심(외부채널 유도)"> <label
+													class="form-check-label" for="flexRadioDefault4">
+													사기의심(외부채널 유도) </label>
+											</div>
+											<!-- <div class="form-check">
 											<input class="form-check-input" type="radio"
 												name="flexRadioDefault" id="flexRdioDefault5" value="r5">
 											<label class="form-check-label" for="flexRadioDefault5">
 												기타(사유) </label> <input type="text" placeholder="사유를 입력해주세요."
 												class="reasonInput" disabled>
-										</div>
-										<script>
+										</div> -->
+
+
+											<!-- 	<script>
 										  $("input:radio[name=flexRadioDefault]").click(function(){
 											  if($("#flexRdioDefault5:checked").val() =="r5"){
 													$(".reasonInput").attr("disabled",false);
 												}
 										  });
-										
-											
-										</script>
+										</script> -->
 
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">닫기</button>
-										<button type="submit" class="btn btn-primary"
-											id="reportSubmitBtn">전송하기</button>
-									</div>
+										</div>
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">닫기</button>
+											<button type="submit" id="confirmBtn" class="btn btn-primary"
+												id="reportSubmitBtn">전송하기</button>
+										</div>
+									</form>
+
 								</div>
 							</div>
 						</div>
@@ -249,13 +296,14 @@
 				</div>
 
 
-<<<<<<< HEAD
+
 				<c:forEach var="i" items="${ilist}" varStatus="status">
 					<div class="detail-btns">
 						<c:choose>
 							<c:when test="${i.sellerID eq loginID}">
 								<button type="button" id="btn-myPage"
 									class="btn btn-lg btn-light">내상점관리</button>
+
 							</c:when>
 							<c:otherwise>
 								<input type="button" id="btn-like"
@@ -267,7 +315,7 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-					
+
 				</c:forEach>
 				<!-- 진행중 -->
 			</div>
@@ -281,6 +329,10 @@
    $("#btn-like").on(
                "click",
                function() {
+            	   if(${loginID==null}){
+            		   alert("로그인후 사용 가능한 기능입니다.");
+            		   return false;
+            	   }
                   if(${loginID!=null}){
                   
                    $.ajax({
@@ -378,17 +430,45 @@
         let hiddenProductId = $("#hiddenProductId").val();
            let roomId=0;
         $("#btn-talk").on("click",function(){
+        	if(${loginID ==null}){
+				 alert("로그인후 사용 가능한 기능입니다.");
+				 return false;
+			 }else{
            location.href = "/chat/talk?productName="+hiddenProduct+"&productId="+hiddenProductId+"&roomId="+roomId;
-        })0
+			 }
+        })
         </script>
 
 
 		<!-- 동현이형 /// -->
 		<script>
+		
+		/* 만약에 deal2 or buyerID != 면 거래중 상품 표시 */
+		  window.onload=function(){
+			if(${ilist[0].deal2 != 'N' }){
+				$("#btn-buy").text("거래중");
+				
+			}
+			  
+			  
+		  }
+		      
 
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
         	$("#btn-buy").on("click",function(){
-        		location.href = "/items/itemsOrder?iseq=${ilist[0].iseq}";
+        		
+        		
+        		if(${loginID ==null}){
+   				 alert("로그인후 사용 가능한 기능입니다.");
+   				 return false;
+   			 }else{
+        		
+        		if($("#btn-buy").text()=="거래중"){
+        			alert("이미 거래중인 상품입니다.");
+        		}else{
+        			location.href = "/items/itemsOrder?iseq=${ilist[0].iseq}";
+        		}
+   			 }
         	})
         	
         	<!-- 내상점관리 버튼을 눌렀을 때의 script -->
@@ -476,18 +556,24 @@
 									</div>
 
 								</c:forEach>
+
+
+
+
+
 								<!-- 시현이형 부분 -->
+								<!-- 상품문의 -->
 								<div class="write-title-div">상품문의</div>
 								<div class="product-question">
 									<form action="/items/QNAWriteProc" method="post"
 										enctype="multipart/form-data">
 										<div class="write-div">
 											<textarea class="write-textarea" placeholder="상품 문의를 작성해주세요."
-												name="contents"></textarea>
+												name="contents" id="contents"></textarea>
 										</div>
 										<div class="write-bottom-div">
 											<div>1/100</div>
-											<button type="submit" class="writeBtn" name="submit">등록</button>
+											<button type="submit" class="writeBtn" id="writeBtn">등록</button>
 											<c:forEach var="i" items="${ilist}" varStatus="status">
 												<input type="hidden" name="iseq" value="${i.iseq}">
 											</c:forEach>
@@ -521,68 +607,163 @@
 								</div>
 							</div>
 
+							<script>
+							$("#writeBtn").on("click",function(){
+								
+								if(${loginID ==null}){
+									alert("로그인 후 이용가능합니다.");
+									return false;
+								}else{
+									
+									if($("#contents").val()==""){
+										
+										alert("내용을 입력해주세요.");
+										return false;
+									}
+								}
+								
+							})
+								
+							
+							</script>
 
+
+
+
+
+							<!-- 상품문의 -->
 							<div class="product-section2">
 
 
 								<div class="shop-info-title">상점정보</div>
 
 								<!-- 수정중 -->
-								<a href="/iitems/itemsDetail">
-									<div class="shop-info-div">
-										<div class="info-left-div">
-											<!-- <i class="fas fa-camera fa-1x"></i> -->
-											<!-- 수정중 -->
-											<img src="${mdto.profile_image}"
-												style="max-width: 80px; max-height: 80px;">
-										</div>
-										<div class="info-right-div">
-											<div class="right-div-title">${mdto.id}</div>
-											<div class="right-div-contents">
-												<span>상품 : ${detailICount} </span>| <span>팔로워 1</span>
+
+								<c:choose>
+									<c:when test="${mdto.id==loginID}">
+										<a href="/items/myPage">
+											<div class="shop-info-div">
+												<div class="info-left-div">
+													<!-- <i class="fas fa-camera fa-1x"></i> -->
+													<!-- 수정중 -->
+													<img src="${mdto.profile_image}"
+														style="max-width: 80px; max-height: 80px;">
+												</div>
+												<div class="info-right-div">
+													<div class="right-div-title">${mdto.id}</div>
+													<div class="right-div-contents">
+														<span>상품 : ${detailICount} </span>| <span>팔로워 1</span>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
-								</a>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href="/items/otherPage?id=${mdto.id}">
+											<div class="shop-info-div">
+												<div class="info-left-div">
+													<!-- <i class="fas fa-camera fa-1x"></i> -->
+													<!-- 수정중 -->
+													<img src="${mdto.profile_image}"
+														style="max-width: 80px; max-height: 80px;">
+												</div>
+												<div class="info-right-div">
+													<div class="right-div-title">${mdto.id}</div>
+													<div class="right-div-contents">
+														<span>상품 : ${detailICount} </span>| <span>팔로워 1</span>
+													</div>
+												</div>
+											</div>
+										</a>
 
-								<%-- 						<c:forEach var="ri" items="${rilist}" varStatus="statusRI">
-						<c:forEach var="rf" items="${rflist}" varStatus="statusRF">
-
-							<c:if test="${statusRF.index eq statusRI.index }">
-
-								 <c:if test= "${rf.parentSeq == ri.iseq}">
-								<div class="bottom-top-imglist">
-									<a href="/items/itemsDetail?iseq=${ri.iseq}"><img
-										src="${rf.sysName}"
-										style="max-width: 200px; max-height: 200px;"> <a
-										href="javascript:void(0);">${ri.name}</a></a>
-									<script>
-						
-								</script>
-
-								</div>
-							</c:if>
-						</c:forEach>
-
-					</c:forEach> --%>
-
+									</c:otherwise>
+								</c:choose>
 
 
 								<div class="follow-btn-div">
-									<button type="button" class="followBtn">
-										<i class="fas fa-user-plus"></i> 팔로우
+									<button type="button" id="followBtn" class="followBtn">
+										<i class="fas fa-user-plus"></i> <span id="followInner">팔로우</span>
 									</button>
+
+									<input type=hidden id="mdtoid" value="${mdto.id}"> <input
+										type=hidden id="loginid" value="${loginID}">
 								</div>
+
+								<script>
+								/*수정중  */
+								   
+   window.onload=function(){
+      let sellerID = $("#mdtoid").val();
+		 let followingID = $("#loginid").val();
+	   $.ajax({
+           url:"/follow/detailFCheck",
+           data:{sellerID:sellerID,followingID: followingID}
+         }).done(function(resp){
+	            if(resp==1){
+	            	 $("#followInner").text("언팔로우");
+	            	 $("#followBtn").css("background-color","rgba(255, 99, 71, 0.2)");
+	            }else{
+	            	 $("#followInner").text("팔로우");
+	            	 $("#followBtn").css("background-color","#24a6a4");
+	            }
+	         });
+      
+   }
+								
+								
+								 $("#followBtn").on("click",function(){
+									 
+									if(${loginID ==null}){
+										 alert("로그인후 사용 가능한 기능입니다.");
+										 return false;
+									 }else if(${loginID == ilist[0].sellerID}){
+											alert("본인 아이디 입니다.");
+											return false;
+									 }else if(${loginID != ilist[0].sellerID}){
+										 
+									 let followInnerVal =  $("#followInner").text();
+									 if(confirm(followInnerVal+" 하시겠습니까?")){
+										 
+										 let sellerID = $("#mdtoid").val();
+										 let followingID = $("#loginid").val();
+										 
+										 
+										 $.ajax({
+									            url:"/follow/detailFollow",
+									            data:{sellerID:sellerID,followingID: followingID}
+									         }).done(function(resp){
+									            if(resp==2){
+									            	 $("#followInner").text("언팔로우");
+									            	 $("#followBtn").css("background-color","rgba(255, 99, 71, 0.2)");
+									            }else{
+									            	 $("#followInner").text("팔로우");
+									            	 $("#followBtn").css("background-color","#24a6a4");
+									            }
+									         });
+										 
+									 }
+										
+									 }
+									
+									 })
+								 
+								      
+								</script>
+
+
 								<div class="shop-info-images">
 									<c:forEach var="di" items="${detailIlist}" varStatus="statusDI">
 										<c:forEach var="df" items="${detailFlist}"
 											varStatus="statusDF">
 
-											<c:if test="${di.iseq eq df.parentSeq }" >
-												<c:if test = "${statusDI.index <2}">
+											<c:if test="${di.iseq eq df.parentSeq }">
+												<c:if test="${statusDI.index <2}">
 
 
-												<a style = "text-decoration :none;' "href ="/items/itemsDetail?iseq=${di.iseq}"><img src="${df.sysName}" style = "min-width:150px; min-height:100px;"></a>
+													<a style="text-decoration: none;' "
+														href="/items/itemsDetail?iseq=${di.iseq}"><img
+														src="${df.sysName}"
+														style="min-width: 150px; min-height: 100px;"></a>
 												&nbsp;
 												</c:if>
 
@@ -593,7 +774,7 @@
 									</c:forEach>
 
 								</div>
-							<br>
+								<br>
 								<div class="more-btn-div">
 									<button type="button" class="moreBtn">${detailICount}개의
 										상품 더보기 ></button>

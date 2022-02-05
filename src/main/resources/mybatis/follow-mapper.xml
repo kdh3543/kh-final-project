@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="follow">
+
+   <select resultType="int" id="followCheck">
+   select count(*) from follow where sellerID =#{followingID} and followingID =#{sellerID}
+   </select>
+
+   <!-- 팔로우 정보확인 -->
+
+
+   <select resultType="int" id="followedCheck">
+   select count(*) from follow where sellerID =#{followedID} and followingID =#{sellerID}
+   </select>
+
+   <delete id="unfollow">
+   delete from follow where sellerID=#{followingID} and followingID=#{sellerID}
+   </delete>
+
+   <!-- 내가 팔로우 한 사람 삭제 -->
+
+
+   <delete id="unfollowed">
+   delete from follow where sellerID=#{followedID} and followingID=#{sellerID}
+   </delete>
+
+   <insert id="follow">
+   insert into follow values(#{followingID},#{sellerID})
+   </insert>
+
+   <!-- <select id ="followid"> -->
+
+
+   <!-- select followingid from follow where sellerid = #{sellerID} -->
+
+
+   <!-- </select> -->
+
+
+   <!-- 나를 팔로우 한 사람 다시 추가 -->
+
+
+   <insert id="followed">
+   insert into follow values(#{followedID},#{sellerID})
+   </insert>
+
+   <!-- 내가 팔로우 한 사람 목록 -->
+
+
+   <select resultType="kh.spring.dto.MemberDTO" id="selectFollowing">
+   select id,name,phone,email,address1,profile_image from member join follow on member.id = follow.sellerid where follow.followingid in (select sellerid from follow where sellerid=#{id})
+   </select>
+
+   <!-- 나를 팔로우 한 사람 목록 -->
+
+
+   <select resultType="kh.spring.dto.MemberDTO" id="selectFollowed">
+   select id,name,phone,email,address1,profile_image from member join follow on member.id = follow.followingid where follow.followingid in (select followingid from follow where sellerid=#{id})
+   </select>
+
+   <!-- 내가 팔로우 한 사람 수 -->
+
+
+   <select resultType="int" id="followingCount">
+   select count(*) from member join follow on member.id = follow.sellerid where follow.sellerid in (select sellerid from follow where followingid= #{id})
+   </select>
+
+   <!-- 나를 팔로우 한 사람 수 -->
+
+
+   <select resultType="int" id="followedCount">
+   select count(*) from member join follow on member.id = follow.followingid where follow.sellerid in (select followingid from follow where followingid= #{id})
+   </select>
+   
+   <!-- storeList 뿌려줄 카운트-->
+   
+     <select resultType="kh.spring.dto.FollowDTO" id="followCountAll">
+     
+     SELECT SELLERID,COUNT(FOLLOWINGID) AS COUNT FROM FOLLOW GROUP BY SELLERID
+   </select>
+
+</mapper>

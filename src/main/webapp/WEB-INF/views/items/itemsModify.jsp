@@ -130,12 +130,12 @@
 						<button class="nav-link active" id="nav-add-tab"
 							data-bs-toggle="tab" data-bs-target="#nav-add" type="button"
 							role="tab" aria-controls="nav-add" aria-selected="true">상품수정</button>
-						<button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
+						<!-- <button class="nav-link" id="nav-control-tab" data-bs-toggle="tab"
 							data-bs-target="#nav-control" type="button" role="tab"
 							aria-controls="nav-control" aria-selected="false">상품관리</button>
 						<button class="nav-link" id="nav-purchase-tab"
 							data-bs-toggle="tab" data-bs-target="#nav-purchase" type="button"
-							role="tab" aria-controls="nav-purchase" aria-selected="false">????</button>
+							role="tab" aria-controls="nav-purchase" aria-selected="false">????</button> -->
 					</div>
 				</nav>
 				<div class="tab-content" id="nav-tabContent">
@@ -458,8 +458,9 @@
 						<!-- 상품등록하기 끝 -->
 
 					</div>
-					<!-- 판매내역-->
-					<div class="tab-pane fade" id="nav-control" role="tabpanel"
+					 <!-- 판매내역-->
+					 
+				<!-- 	<div class="tab-pane fade" id="nav-control" role="tabpanel"
 						aria-labelledby="nav-control-tab">
 						<div class="control-title">
 							<div class="left-title">상품관리</div>
@@ -491,18 +492,18 @@
 										<td>ㅁㅇㄴㅁㄴㅇ
 										<td>ㅁㅇㄴ
 									</tr>
-									<!-- 
+									
 									<tr>
 										<td colsapn="7">표시할 내용이 없습니다.
 									</tr> 
-									-->
+									
 								</table>
 							</div>
 						</div>
-					</div>
+					</div>  -->
 					<!-- 구매내역 -->
-					<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
-						aria-labelledby="nav-purchase-tab">페이지3</div>
+					<!-- <div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+						aria-labelledby="nav-purchase-tab">페이지3</div> -->
 				</div>
 			</div>
 	</main>

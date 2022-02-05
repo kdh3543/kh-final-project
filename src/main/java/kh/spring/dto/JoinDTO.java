@@ -2,7 +2,8 @@ package kh.spring.dto;
 
 import java.sql.Timestamp;
 
-public class MemberDTO {
+public class JoinDTO {
+	
 	private int seq;
 	private String id;
 	private String pw;
@@ -19,13 +20,18 @@ public class MemberDTO {
 	private String login_check;
 	private String kakao;
 	private int view_count;
-	public MemberDTO() {
+	private String sellerid;
+	private int sellcountall;
+	private String sellerid_1;
+	private int followCountall;
+	public JoinDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MemberDTO(int seq, String id, String pw, String name, String phone, String email, String zipcode,
+	public JoinDTO(int seq, String id, String pw, String name, String phone, String email, String zipcode,
 			String address1, String address2, Timestamp signup_date, String prefer_location, String profile_image,
-			int cash, String login_check, String kakao, int view_count) {
+			int cash, String login_check, String kakao, int view_count, String sellerid, int sellcountall,
+			String sellerid_1, int followCountall) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -43,6 +49,10 @@ public class MemberDTO {
 		this.login_check = login_check;
 		this.kakao = kakao;
 		this.view_count = view_count;
+		this.sellerid = sellerid;
+		this.sellcountall = sellcountall;
+		this.sellerid_1 = sellerid_1;
+		this.followCountall = followCountall;
 	}
 	public int getSeq() {
 		return seq;
@@ -140,7 +150,34 @@ public class MemberDTO {
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
 	}
+	public String getSellerid() {
+		return sellerid;
+	}
+	public void setSellerid(String sellerid) {
+		this.sellerid = sellerid;
+	}
+	public int getSellcountall() {
+		return sellcountall;
+	}
+	public void setSellcountall(int sellcountall) {
+		this.sellcountall = sellcountall;
+	}
+	public String getSellerid_1() {
+		return sellerid_1;
+	}
+	public void setSellerid_1(String sellerid_1) {
+		this.sellerid_1 = sellerid_1;
+	}
+	public int getFollowCountall() {
+		return followCountall;
+	}
+	public void setFollowCountall(int followCountall) {
+		this.followCountall = followCountall;
+	}
 	
 	
 	
+	
+	
+
 }

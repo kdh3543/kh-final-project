@@ -47,6 +47,8 @@ public class ItemsService {
 		return idao.selectNameToSeq(rilist);
 	}
 
+
+	//상품 판매내역
 	public List<ItemsDTO> selectMineById(String id) {
 
 		return idao.selectMineById(id);
@@ -57,21 +59,48 @@ public class ItemsService {
 		return idao.sellCount(id);
 	}
 
+	//상품 구매내역
+
+	public List<ItemsDTO> buyIList(String id) {
+
+		return idao.buyIList(id);
+	}
+
+	public int buyCount(String id) {
+		return idao.buyCount(id);
+
+
+	}
+
+
+
+
+
+
+
 	public int updateProc(String deal, int iseq) {
 
 		return idao.updateProc(deal, iseq);
 	}
 
 	public int itemsModifyProc(ItemsDTO dto) {
-		// TODO Auto-generated method stub
 		return idao.itemsModifyProc(dto);
 	}
+
+
+	public int itemsDeleteBySeq(int iseq) {
+
+		return idao.itemsDeleteBySeq(iseq);
+
+	}
+
+
 
 	public List<ItemsDTO> selectById(String id) {
 		return idao.selectById(id);
 	}
 
-	
+
 	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
 	public String selectByProductId(int productId) {
 		return idao.selectByProductId(productId);
@@ -90,6 +119,13 @@ public class ItemsService {
 		return idao.selectByIName(name);
 	}
 
+
+	public List<ItemsDTO> sellCountAll() {
+		return idao.sellCountAll();
+	}
+
+
+
 	// 신규 상품 문의 삽입
 	public int insertQNA(ItemsQNADTO dto) {
 		return idao.insertQNA(dto);
@@ -99,7 +135,7 @@ public class ItemsService {
 	public int deleteQNA(int seq) {
 		return idao.deleteQNA(seq);
 	}
-	
+
 	public int ItemsCount(int iseq) {
 		return idao.ItemsCount(iseq);
 	}
@@ -110,7 +146,7 @@ public class ItemsService {
 	}
 
 
-	
+
 
 	// 시퀀스로 상품 문의 검색
 	public List<ItemsQNADTO> selectQNABySeq(int seq) {
@@ -120,5 +156,9 @@ public class ItemsService {
 		}
 		return list;
 	}
+
+
+
+
 
 }

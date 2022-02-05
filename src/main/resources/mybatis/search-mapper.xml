@@ -54,7 +54,7 @@
    
    SELECT KEYWORD
 FROM
-(select keyword,count(keyword) as count from search_keyword group by keyword order by count desc)
+(SELECT KEYWORD,COUNT(KEYWORD) AS COUNT FROM SEARCH_HOTKEYWORD GROUP BY KEYWORD ORDER BY COUNT DESC)
 WHERE ROWNUM &lt; 6
 
    

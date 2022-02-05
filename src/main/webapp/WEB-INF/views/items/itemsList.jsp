@@ -32,20 +32,24 @@
 </head>
 
 <body>
-	<!-- form 태그 추가 button type=submit 변경 -->
+	
+<!-- form 태그 추가 button type=submit 변경 -->
 	<form action="/items/searchByInput" name =inputForm method="post" onsubmit="return frmSubmit()">
-
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li>이미지 부분 : ${dto.profile_image}</li>
-							<li>${loginID}님안녕하세요</li>
-							<li><a href="/member/myPage">마이페이지</a></li>
+							<li>  <img src="${dto.profile_image}" style ="max-width:30px; max-height:30px;"></li>
+															
+							<li>${loginID}</li>
+<!-- 수정중 -->
+							<li><a href="/items/myPage?">마이페이지</a></li>
 							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+							
+							
 						</ul>
 					</c:when>
 					<c:otherwise>
@@ -61,13 +65,16 @@
 					<div class="logo">
 						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
 					</div>
+					
+					
 					<div class="searchBar">
 						<div class="input-group mb-3">
 
-					<!-- 검색창 관련 -->
+	
+	<!-- 검색창 관련 -->
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
-									placeholder="상점명 또는 물품명 등을 검색해 보세요!"
+									placeholder="@상점명 또는 물품명 등을 검색해 보세요!"
 									aria-label="Recipient's username"
 									aria-describedby="button-addon2" id="search"
 									data-bs-toggle="dropdown" aria-expanded="false">
@@ -271,9 +278,7 @@
 							
 						</script>
 
-								
-
-			
+							
 
 
 
@@ -281,7 +286,7 @@
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
-			<div class="top-div .d-sm-none .d-md-block">
+			<div class="d-none d-md-block d-lg-block" id="top-div">
 				<div class="div-wrap2">
 					<div class="btn-group">
 						<button type="button" class="btn btn-secondary-light"
@@ -309,7 +314,7 @@
 
 						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="myPage" class="btn-myshop"> <i
+						</a> | <a href="/items/myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
 						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
 							class="fas fa-comment fa-2x"></i> 00톡
@@ -331,9 +336,9 @@
 						
 						</c:if>
 						
-						<c:if test="${!empty name}"	>			
+						<c:if test="${!empty keyword}"	>			
 
-						<p class="article_title">상품명 : "${name}"  검색결과</p>
+						<p class="article_title">상품명 : "${keyword}"  검색결과</p>
 						
 						</c:if>
 						
@@ -355,7 +360,8 @@
 													<div class="title">${i.name}</div>
 													<div class="price">${i.price}원</div>
 													<div class="date">${i.detailDate}</div>
-													<div class="exarea" align=center>${i.exarea}</div>
+													<div class="exarea">${i.exarea}</div>
+
 													<%-- <div class="title">${flist.oriname}</div> --%>
 												</div>
 											</a>
@@ -365,11 +371,6 @@
 									</c:forEach>
 
 								</c:forEach>
-								
-								
-								
-								
-								
 								
 											<!--상품 반복 시작    이름검색 일 경우 -->
 							
@@ -386,6 +387,8 @@
 													<div class="title">${i.name}</div>
 													<div class="price">${i.price}원</div>
 													<div class="date">${i.detailDate}</div>
+													<div class="exarea">${i.exarea}</div>
+													
 													<%-- <div class="title">${flist.oriname}</div> --%>
 												</div>
 											</a>
@@ -395,37 +398,8 @@
 									</c:forEach>
 
 								</c:forEach>
-							
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-
 						</div>
 						
-	
-				
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-						
-							
 					</article>
 				</section>
 
@@ -443,154 +417,13 @@
 				<div class="sidebar-resently-div">
 					<div class="sidebar-title-div">최근 본 상품</div>
 					<div class="sidebar-product-div">
-						<img src=""> <img src="">
+						<img src="/imgs/comingSoon.png"> <img src="/imgs/comingSoon.png">
 					</div>
 
 				</div>
-<<<<<<< HEAD
-=======
-				<p class="article_title">일반상품</p>
-				<!-- imgBox 1 구간 -->
-				<div class="imgBox-2">
-					<a href="productDetail">
-						<div class="detail-img">
-							<img src="imgs/t-shirt.jpeg">
-						</div>
-						<div class="detail-container">
-							<div class="title">티셔츠</div>
-							<div class="price">3000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a>
-
-					<!-- imgBox 2 구간 -->
-					<a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-					</a> <a href="#">
-						<div class="detail-img">
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-
-					</a> <a href="#">
-						<div>
-							<img src="imgs/200Pic.png">
-						</div>
-						<div class="detail-container">
-							<div class="title">상품명</div>
-							<div class="price">0000원</div>
-							<div class="date">0일전</div>
-						</div>
-					</a>
-
-				</div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</ul>
-				</nav>
-			</article>
-			<div class="d-none d-lg-block" id="sideBar">
-			<div class="sidebar-div">
-				<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeProductBtn">
-						찜한상품<br> <i class="fas fa-heart">개수</i>
-					</button>
-					
-				</a> 
-				<div class="sidebar-resently-div">
-						<div class="sidebar-title-div">최근 본 상품</div>
-						<div class="sidebar-product-div">
-							<img src="">
-							<img src="">
-						</div>
-
-					</div>
->>>>>>> f38f2e4f44178308c027d194d262a04213d265bb
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
-		</div>
 		</div>
 	</main>
 	<!-- footer -->

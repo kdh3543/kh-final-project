@@ -81,6 +81,10 @@ public class ItemsDAO {
 		// TODO Auto-generated method stub
 		return mybatis.update("Items.itemsModifyProc", dto);
 	}
+	
+	public int itemsDeleteBySeq(int iseq) {
+		return mybatis.delete("Items.itemsDeleteBySeq", iseq);
+	}
 
 	// public int insert(ItemsDTO dto) { String loginId =
 	// (String)session.getAttribute("loginId"); dto.setSeller_id(loginId); return
@@ -101,6 +105,26 @@ public class ItemsDAO {
 		return mybatis.selectOne("Items.ItemsCount", id);
 	}
 
+	
+	//상품 구매내역 불러오기 +개수
+	
+	public int buyCount(String id) {
+		return mybatis.selectOne("Items.buyCount", id);
+
+	}
+
+	public List<ItemsDTO> buyIList(String id) {
+		return mybatis.selectList("Items.buyIList", id);
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
 
 	// 채팅에서 상품아이디 통해서 판매자 아이디 가져오기
 	public String selectByProductId(int productId) {
@@ -158,6 +182,13 @@ public class ItemsDAO {
 	public List<ItemsQNADTO> selectQNABySeq(int seq) {
 		return mybatis.selectList("Items.selectQNABySeq", seq);
 	}
+
+	public List<ItemsDTO> sellCountAll() {
+		return mybatis.selectList("Items.sellCountAll");
+	}
+
+	
+
 
 
 }
