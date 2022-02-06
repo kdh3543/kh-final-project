@@ -112,7 +112,7 @@ public class ChatController {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
 			}	
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
-
+			
 			// chat 마지막 채팅글 세팅
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 
@@ -152,8 +152,9 @@ public class ChatController {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(time));
 			}else {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
+				
 			}
-			System.out.println("현재시간은: "+list.get(i).getUpdateTime());
+			
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
 			
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
