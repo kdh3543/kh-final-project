@@ -54,12 +54,12 @@ input[type=password] {
 			</ul>
 		</div>
 		<div class="div-wrap">
-			<div class="nav_div">
-				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+					<div class="nav_div">
+						<div class="logo">
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
 		<div class="div-wrap3"></div>
 	</header>
 	<main>

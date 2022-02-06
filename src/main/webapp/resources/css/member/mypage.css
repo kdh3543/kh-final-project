@@ -23,7 +23,7 @@ main {
 }
 
 .mypage-container {
-	height: 100%;
+	height: auto;
 	width: 80%;
 }
 
@@ -35,7 +35,7 @@ main {
 }
 
 .section2 {
-	height: 900px;
+	height: auto;
 	width: 100%;
 	margin: auto;
 }
@@ -312,6 +312,20 @@ nav {
 	width: 120px;
 	height: 70%;
 }
+
+#findAddress {
+	border-color: #24a6a4;
+	height: 35px;
+	line-height: 20px;
+	font-size: 17px;
+	font-family: 'OTWelcomeRA';
+	background-color: #fff;
+}
+
+#findAddress:hover {
+	color: #fff;
+	background-color: #24a6a4;
+}
 /* 판매내역 */
 .itemImg {
 	width: 50px;
@@ -337,6 +351,7 @@ nav {
 
 .sell-section table tr:nth-child(n+1) {
 	height: 100px;
+	font-size: 12px;
 }
 
 /* 구매내역 */

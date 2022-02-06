@@ -97,7 +97,7 @@ img {
 							<label>
 								<div>상점오픈일 : ${signDate }일째 오픈중!</div>
 							</label>
-							<div>상점방문수</div>
+							 <div>상점방문수 : ${dto.view_count}회</div> 
 							<div>상품판매 : ${sellCount}건</div>
 							<div></div>
 							

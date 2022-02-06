@@ -8,7 +8,7 @@
 	<!-- DB에 회원가입정보 저장 -->
 	<insert id="insert">
 		insert into member values(member_seq.nextval,#{id},
-		#{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,0
+		#{pw},#{name},#{phone},#{email},#{zipcode},#{address1},#{address2},sysdate,#{prefer_location},#{profile_image},default,default,0,default
 		)
 	</insert>
 	<!-- kakao 회원정보 입력 -->
@@ -112,6 +112,33 @@
 		SELECT * FROM MEMBER WHERE
 		ID in (select sellerid from items where iseq =#{value})
 	</select>
+	
+	<select id="selectAllStoreList"
+      resultType="kh.spring.dto.JoinDTO">
+      SELECT *
+      FROM
+      ((SELECT SC.SELLERID, M.*
+      FROM MEMBER M
+      LEFT OUTER JOIN
+      (SELECT SELLERID,COUNT(SELLERID) AS SELLCOUNTALL FROM ITEMS GROUP BY
+      SELLERID) SC
+      ON(M.ID=SC.SELLERID)) MSC
+      LEFT OUTER JOIN
+      (SELECT SELLERID,COUNT(FOLLOWINGID) AS FOLLOWCOUNTALL FROM FOLLOW GROUP BY
+      SELLERID) FC
+      ON (MSC.SELLERID = FC.SELLERID))WHERE ID LIKE '%'||#{value}||'%' OR Name
+      LIKE '%'||#{items}||'%'
+
+   </select>
+
+   <!-- 조회수 추가할 정보 -->
+   <update id="addViewCount">
+
+      UPDATE MEMBER SET VIEW_COUNT = VIEW_COUNT + 1
+      WHERE
+      ID =#{value}
+
+   </update>
 
 	<select id="selectAllStoreList"
 		resultType="kh.spring.dto.JoinDTO">
