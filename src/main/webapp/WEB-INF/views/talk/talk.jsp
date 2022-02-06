@@ -98,7 +98,6 @@
             </div>
             <!-- 생성된 대화방에 대한 div -->
             <c:forEach var="list" items="${list}" varStatus="delCount">
-
               <div class="talk-list" pid="${list.productId}" id="delNo${delCount.count}">
                 <a class="talk-list-btn" pid=${list.roomId}
                   href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}">
@@ -106,9 +105,9 @@
                     <img src='/imgs/t-shirt.jpeg'>
                   </div>
                   <c:choose>
-                    <c:when test="${list.buyerId eq id}">
+                    <c:when test="${list.sellerId eq id}">
                       <div class="talk-list-right">
-                        <div class="talk-name">${list.sellerId}(${list.productName})(${list.latestDate})</div>
+                        <div class="talk-name">${list.buyerId}(${list.productName})(${list.latestDate})</div>
     
                         <div class="talk-last-conversation" >
                           (${list.roomId})${list.lastMessage}
@@ -125,7 +124,7 @@
                     </c:when>
                     <c:otherwise>
                       <div class="talk-list-right" pid=${list.roomId}>
-                        <div class="talk-name">${list.buyerId}(${list.productName})(${list.latestDate})</div>
+                        <div class="talk-name">${list.sellerId}(${list.productName})(${list.latestDate})</div>
     
                         <div class="talk-last-conversation" pid=${list.roomId}>
                           (${list.roomId})${list.lastMessage}

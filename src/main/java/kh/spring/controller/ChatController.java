@@ -166,7 +166,7 @@ public class ChatController {
 		int roomId = 0;
 		model.addAttribute("roomId",roomId);
 		model.addAttribute("list",list);
-		
+		model.addAttribute("id",id);
 //		List<ChatContentsDTO> lastTalkList = cService.selectLastTalk(productId);
 //		
 //		model.addAttribute("lastTalk",lastTalkList);
@@ -207,6 +207,7 @@ public class ChatController {
 		System.out.println("종료완료");
 		model.addAttribute("roomId",roomId);
 		model.addAttribute("list",list);
+		model.addAttribute("id",id);
 		return  "talk/talk";
 	}
 	
