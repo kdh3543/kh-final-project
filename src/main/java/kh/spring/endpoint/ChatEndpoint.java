@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +13,10 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.google.gson.JsonObject;
 
@@ -34,7 +37,7 @@ public class ChatEndpoint{
 	
 	private ChatContentsDAO ccdao = ApplicationContextProvider.getApplicationContext().getBean(ChatContentsDAO.class);
 	private ChatRoomDAO crdao = ApplicationContextProvider.getApplicationContext().getBean(ChatRoomDAO.class);
-
+	
 	@OnOpen
 	public void onConnect(Session session, EndpointConfig config) {
 		this.hSession = (HttpSession)config.getUserProperties().get("hSession");
@@ -52,15 +55,27 @@ public class ChatEndpoint{
 	}
 
 	@OnMessage
-	public void OnMessage(String message) {		
-		String[] arr = message.split("<br>");
+	public void OnMessage(String message) throws ParseException {		
 		String userId = (String)this.hSession.getAttribute("loginID");
-		String chatMessage = arr[0];
-		String sellerId = arr[1];
-		String productName = arr[2];
-		int productId = Integer.parseInt(arr[3]);
-		int roomId = Integer.parseInt(arr[4]);
 		
+		System.out.println(message);
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject)parser.parse(message);
+		String chatMessage = (String)json.get("text");
+		String sellerId = (String)json.get("hiddenSellerId");
+		String productName = (String)json.get("hiddenProductName");
+		int productId = Integer.parseInt((String)json.get("hiddenProductId"));
+		int roomId = Integer.parseInt((String)json.get("roomId"));
+		
+		
+//		String[] arr = message.split("<br>");
+//		String userId = (String)this.hSession.getAttribute("loginID");
+//		String chatMessage = arr[0];
+//		String sellerId = arr[1];
+//		String productName = arr[2];
+//		int productId = Integer.parseInt(arr[3]);
+//		int roomId = Integer.parseInt(arr[4]);
+//		
 		System.out.println(chatMessage+":"+sellerId+":"+productName+":"+productId+" : " + roomId);
 		JsonObject obj = new JsonObject();
 		

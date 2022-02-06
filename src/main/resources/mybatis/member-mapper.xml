@@ -140,5 +140,10 @@
 
 	</update>
 
+
+	<!-- 김동현93 프로필 이미지 가져오기 -->
+	<select id="selectProfile" resultType="String">
+		select profile_image from member where id = #{value}
+	</select>
 </mapper>
 

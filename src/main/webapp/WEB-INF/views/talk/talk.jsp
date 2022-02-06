@@ -82,11 +82,12 @@
 
                 <a class="talk-list-btn" pid="${list.roomId}"
                   href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}&sysName=${list.chatImg}">
-                  <div class="talk-list-left">
-                    <img src="${list.chatImg }">
-                  </div>
+                  
                   <c:choose>
                     <c:when test="${list.sellerId eq id}">
+                      <div class="talk-list-left">
+                        <img src="${list.myProfile }">
+                      </div>
                       <div class="talk-list-right">
                         <div class="talk-name">
                           <div class="talk-name-div">${list.buyerId}(${list.productName})</div>
@@ -112,6 +113,9 @@
                       </div>
                     </c:when>
                     <c:otherwise>
+                      <div class="talk-list-left">
+                        <img src="${list.otherProfile }">
+                      </div>
                       <div class="talk-list-right" pid=${list.roomId}>
                         <div class="talk-name">
                           <div class="talk-name-div">${list.sellerId}(${list.productName})</div>
@@ -267,8 +271,8 @@
                       <input type="radio" value="q1" name="selectQuestion">1번 구매방법<br>
                       <input type="radio" value="q2" name="selectQuestion">2번 판매방법<br>
                       <input type="radio" value="q3" name="selectQuestion">3번 검색방법<br>
-                      <input type="radio" value="q4" name="selectQuestion">4번 팔로잉/팔로워 방법<br>
-                      <input type="radio" value="q5" name="selectQuestion">5번 게시판 이용 방법
+                      <input type="radio" value="q4" name="selectQuestion">4번 팔로잉방법<br>
+                      <input type="radio" value="q5" name="selectQuestion">5번 게시판 이용방법
                     </div>
                   </div>
 
@@ -289,10 +293,11 @@
                         let chatLine = $("<div>");
                         chatLine.addClass("line");
 
+                        chatLine.append("구매방법<br>")  
                         chatLine.append("1. 바로구매"+"<br>");
-                        chatLine.append("원하는 상품 페이지에서 바로구매 버튼 클릭 후 계좌이체를 통해 결제가 가능합니다."+"<br>");
+                        chatLine.append("원하는 상품 페이지에서 '바로구매' 버튼 클릭 후 계좌이체를 통해 결제가 가능합니다."+"<br>");
                         chatLine.append("2. 연락하기를 통한 거래"+"<br>");
-                        chatLine.append("원하는 상품 페이지에서 연락하기 버튼 클릭 후 판매자와 연락한 후에 직거래로 거래하시면 됩니다.");
+                        chatLine.append("원하는 상품 페이지에서 '연락하기' 버튼 클릭 후 판매자와 연락한 후에 직거래로 거래하시면 됩니다.");
                         
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
@@ -302,7 +307,9 @@
                         let chatLine = $("<div>");
                         chatLine.addClass("line");
 
-                        chatLine.append("2번");
+                        chatLine.append("판매방법<br>");
+                        chatLine.append("메인 페이지에서 '판매하기'버튼 클릭 후 원하는 상품 등록 및 관련 정보 입력 후에 등록하시면 됩니다.");
+
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
                       }else if($(this).val()=='q3'){
@@ -311,7 +318,11 @@
                         let chatLine = $("<div>");
                         chatLine.addClass("line");
 
-                        chatLine.append("3번");
+                        chatLine.append("검색방법<br>");
+                        chatLine.append("1. 상품검색<br>");
+                        chatLine.append("메인페이지에서 원하는 상품에 대해서 검색하시면 해당 검색어가 포함된 상품리스트가 나옵니다.<br>");
+                        chatLine.append("2. 상점검색<br>");
+                        chatLine.append("메인페이지에서 검색어 앞에 @를 붙여서 검색하면 해당 검색어가 포함된 상점들 리스트가 나옵니다.");
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
                       }else if($(this).val()=='q4'){
@@ -320,7 +331,9 @@
                         let chatLine = $("<div>");
                         chatLine.addClass("line");
 
-                        chatLine.append("4번");
+                        chatLine.append("팔로잉 방법<br>");
+                        chatLine.append("내가 자주 이용하거나 마음에 든 상점이 있으면 '팔로잉' 버튼을 누르시면 해당 상점에 대한 팔로잉을 할 수 있으며 좀 더 쉽게 상점을 찾을 수 있습니다.");
+                        
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
                       }else if($(this).val()=='q5'){
@@ -329,7 +342,8 @@
                         let chatLine = $("<div>");
                         chatLine.addClass("line");
 
-                        chatLine.append("5번");
+                        chatLine.append("게시판 이용방법<br>");
+                        chatLine.append("메인페이지에서 '커뮤니티'버튼을 누르시면 게시판 화면으로 이동하고 게시물을 확인하실 수 있고 원하는 게시물을 작성하실 수 있습니다.");
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
                       }
@@ -343,16 +357,13 @@
                 </script>
             </c:when>
 
-
-
-
             <c:otherwise>
               <div class="talk-right">
                 <div class="right-top">
 
                   <div class="right-title-left">
                     <div class="title-img">
-                      <img src="/imgs/banner.png" style="height: 40px; width: 40px;">
+                      <img src="${sysName}" style="height: 40px; width: 40px;">
                     </div>
 
                     <div class="title-name">
@@ -370,7 +381,7 @@
 
                     <div class="line">
                       <a href="/items/itemsDetail?iseq=${productId}">
-                        <img src="/imgs/banner.png" style="height: 80px; width: 80px;">
+                        <img src="${sysName}" style="height: 80px; width: 80px;">
                         <span>제품 상세보기</span>
                       </a>
                     </div>
@@ -589,8 +600,12 @@
           }, 1000);
         });
 
+        
+
         //전송하기 버튼 엔터를 눌렀을 때
         rightBottom.on("keypress", function (e) {
+          
+
           if (e.keyCode == 13 && e.shiftKey == false) {
             if (chatMessage.html() == "") {
               return false;
@@ -605,12 +620,30 @@
             console.log(urlParams);
 
             let roomId = urlParams.get('roomId');
-            if (roomId == 0) {
-              roomId = $("#roomId").val();
-              ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
-            } else {
-              ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
-            }
+
+            // var chatList = new Array();
+            // var chatData = new Object();
+            // chatData.text = text;
+            // chatData.hiddenSellerId = hiddenSellerId.val();
+            // chatData.hiddenProductName = hiddenProductName.val();
+            // chatData.productId = productId.val();
+            // chatData.roomId = roomId;
+            // chatList.push(chatData);
+            
+            let arrayData = {text:text,hiddenSellerId:hiddenSellerId.val(),
+              hiddenProductName:hiddenProductName.val(),
+            hiddenProductId:hiddenProductId.val(),roomId:roomId};
+            
+            ws.send(JSON.stringify(arrayData));
+
+            // if (roomId == 0) {
+            //   roomId = $("#roomId").val();
+            //   ws.send(text + '<br>' + hiddenSellerId.val() + '<br>'
+            //    + hiddenProductName.val() + '<br>' + productId.val()
+            //     + '<br>' + roomId);
+            // } else {
+            //   ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+            // }
 
             rightMiddle.stop().animate({
               scrollTop: rightMiddle[0].scrollHeight
@@ -621,16 +654,7 @@
           }
         });
 
-        /*  ws.onclose = function(){
-            console.log("ws 닫힘");
-            ws = null;
-  
-            setTimeout(function(){
-              <sec:authorize access="hasAndRole('ROLE_ADMIN','ROLE_USER','ROLE_SUPER','ROLE_STOP')">
-                connect();
-              </sec:authorize>
-            },100)
-          }  */
+        
       </script>
     </body>
 

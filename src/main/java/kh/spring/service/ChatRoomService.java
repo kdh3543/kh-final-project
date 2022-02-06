@@ -48,5 +48,12 @@ public class ChatRoomService {
 		return dao.deleteByRoomId(roomId);
 	}
 	
+	public String selectBuyerId(int roomId) {
+		return dao.selectBuyerId(roomId);
+	}
+	
+	public String selectSellerId(int roomId) {
+		return dao.selectSellerId(roomId);
+	}
 	
 }

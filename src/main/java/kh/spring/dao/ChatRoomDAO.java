@@ -60,5 +60,11 @@ public class ChatRoomDAO {
 		return mybatis.selectOne("ChatRoom.keyCount",dto);
 	}
 	
+	public String selectBuyerId(int roomId) {
+		return mybatis.selectOne("ChatRoom.selectBuyerId",roomId);
+	}
 	
+	public String selectSellerId(int roomId) {
+		return mybatis.selectOne("ChatRoom.selectSellerId",roomId);
+	}
 }

@@ -178,6 +178,11 @@ public class MemberService {
 	   public int addViewCount(String id) {
 	      return mdao.addViewCount(id);
 	   }
+	   
+	  //김동현 93 프로필 이미지 가져오기
+	   public String selectProfile(String id) {
+		   return mdao.selectProfile(id);
+	   }
 	
 
 }
