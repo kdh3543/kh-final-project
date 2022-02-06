@@ -129,7 +129,7 @@ main {
 
 nav {
 	padding-top: 5%;
-	height: 50px;
+	height: auto;
 }
 
 .nav {
@@ -158,6 +158,10 @@ nav {
 	display: block;
 	height: auto;
 	padding: 1%;
+}
+
+#nav-profile-tab {
+	width: 15% !important;
 }
 
 /* 회원정보 수정*/
@@ -349,11 +353,38 @@ nav {
 	text-align: center;
 }
 
+.sell-section table tr:nth-child(1) {
+	height: 100px !important;
+	font-size: 15px !important;
+	font-family: 'OTWelcomeBA';
+}
+
 .sell-section table tr:nth-child(n+1) {
 	height: 100px;
 	font-size: 12px;
 }
 
+.sell-section table tr:nth-child(n+1) td:last-child a button {
+	font-size: 12px;
+	border: 1px solid #24a6a4;
+}
+
+.sell-section table tr:nth-child(n+1) td:last-child a button:hover {
+	background-color: #24a6a4;
+	color: #fff;
+}
+
+.sell-section table tr:nth-child(n+1) td:last-child button {
+	font-size: 12px;
+	border: 1px solid #24a6a4;
+}
+
+.sell-section table tr:nth-child(n+1) td:last-child button:hover {
+	background-color: #24a6a4;
+	color: #fff;
+}
+
+}
 /* 구매내역 */
 .purchase-top {
 	height: 15%;
@@ -397,6 +428,27 @@ nav {
 	height: 80%;
 }
 
+#confirmBtn {
+	font-size: 12px;
+	border: 1px solid #24a6a4;
+}
+
+#cancleBtn {
+	font-size: 12px;
+	border: 1px solid #24a6a4;
+}
+
+#otherConfirmBtn {
+	background-color: #f8d200;
+	font-size: 12px;
+	width: 60%;
+	color: black;
+}
+
+#otherConfirmBtn:hover {
+	border: 1px solid #f8d200;
+	background-color: #fff;
+}
 /* 찜내역 */
 .like-top {
 	height: 15%;

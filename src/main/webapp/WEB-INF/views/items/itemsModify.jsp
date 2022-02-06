@@ -339,7 +339,7 @@
 										<tr>
 											<td>제목</td>
 											<td><input type="text" placeholder="상품제목을 입력하세요."
-												class="inputTitle" name="name" value="${i.name }"></td>
+												class="inputTitle" name="name" value="${i.name }" required></td>
 
 											<!-- 상품번호도 히든으로 넘기기 -->
 											<td><input type="hidden" placeholder="상품번호"
@@ -384,7 +384,7 @@
 												<button type="button" id="findAddress">주소검색</button>
 												<button>지역설정안함</button> <br> <input type="text"
 												placeholder="주소" id="input-address" name="exarea"
-												value="${i.exarea}">
+												value="${i.exarea}" required>
 
 											</td>
 										</tr>
@@ -406,24 +406,24 @@
 										</tr>
 										<tr>
 											<td>가격</td>
-											<td><input type="text" placeholder="숫자만 입력하세요"
-												name="price" value="${i.price}"> 원</td>
+											<td><input type="number" placeholder="숫자만 입력하세요"
+												name="price" value="${i.price}" required> 원</td>
 										</tr>
 
 										<tr>
 											<td>상품 소개</td>
 											<td><textarea rows="5" cols="55"
-													placeholder="상품설명을 입력해주세요." name="info">${i.info }</textarea></td>
+													placeholder="상품설명을 입력해주세요." name="info" required>${i.info }</textarea></td>
 										</tr>
 										<tr>
 											<td>연관태그</td>
 											<td><input type="text" placeholder="연관태그를 입력하세요."
-												class="inputTag" name="tag" value="${i.tag}"></td>
+												class="inputTag" name="tag" value="${i.tag}" required></td>
 										</tr>
 										<tr>
 											<td>수량</td>
 											<td><input type="number" placeholder="수량을 입력하세요"
-												class="inputNumber" name="cnt" value="${i.cnt}"> 개</td>
+												class="inputNumber" name="cnt" value=1 disabled required> 개</td>
 										</tr>
 
 									</c:forEach>

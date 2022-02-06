@@ -91,10 +91,6 @@ input[type=password] {
 						name="logpw" placeholder="Password" style="z-index: 3;"> <label
 						for="floatingPassword">비밀번호</label>
 				</div>
-
-
-
-
 				<div class="checkbox mb-3">
 					<label> <input type="checkbox" name="remember_userID">
 						Remember me
