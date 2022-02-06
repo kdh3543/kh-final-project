@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kh.spring.dao.FilesDAO;
 import kh.spring.dao.ItemsDAO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.ItemGraphDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
 import kh.spring.utils.DateParseUtils;
@@ -156,7 +157,11 @@ public class ItemsService {
 		}
 		return list;
 	}
-
+	
+	// 관리자 아이템 카운트 
+	public List<ItemGraphDTO> countItems() {
+		return idao.countItems();
+	}
 
 
 

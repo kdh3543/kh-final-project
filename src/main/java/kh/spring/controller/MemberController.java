@@ -125,7 +125,8 @@ public class MemberController {
 
 				model.addAttribute("dto", dto);
 
-				return "forward:/mem/?dto=dto";
+				return "forward:/items/";
+				
 			}else {
 				session.setAttribute("loginID", logid);
 				
@@ -135,7 +136,7 @@ public class MemberController {
 
 				model.addAttribute("dto", dto);
 
-				return "forward:/items/?dto=dto";
+				return "forward:/items/";
 				
 			}
 			

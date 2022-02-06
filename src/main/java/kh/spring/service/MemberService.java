@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kh.spring.dao.MemberDAO;
 import kh.spring.dto.GraphDTO;
+import kh.spring.dto.JoinDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.utils.EncryptionUtils;
 

@@ -755,6 +755,11 @@ public class ItemsController {
 	      //팔로우 수 가져오기
 	      int followedCount = fwservice.followedCount(id);
 	      model.addAttribute("followedCount",followedCount);
+	      
+	    //인기검색어 넘겨주기 hot search =hs
+
+	      List<SearchKeywordDTO> hslist = sservice.selectByHot();
+	      model.addAttribute("hslist",hslist);
 			
 
 		

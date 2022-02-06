@@ -196,7 +196,8 @@
 						<c:forEach var="monthList" items="${monthList}"
 							varStatus="getMonth">
 							<input type="text" name="getMonth"
-								class="getMonth${getMonth.count}" value="${monthList.month}" hidden>
+								class="getMonth${getMonth.count}" value="${monthList.month}"
+								hidden>
 						</c:forEach>
 						<!-- month에 따른 가입자 수 뽑아오기 -->
 						<c:forEach var="countMember" items="${countMember}"
@@ -206,46 +207,24 @@
 								value="${countMember.count}" hidden>
 						</c:forEach>
 						<div class="chart-div">
-							<canvas id="myChart" style="width:1000;height:500;"></canvas>
+							<canvas id="myChart" style="width: 1000; height: 500;"></canvas>
 						</div>
 
 						<script>
 							// 길이 값 불러오기 
 							let monthLeg = $("input[name='getMonth']").length;
 							let countLeg = $("input[name='countMem']").length;
-				
-							
+
 							let monthArr = [];
 							let countArr = [];
-							for(let i=0; i < monthLeg; i++ ){
-							  let temp = $(".getMonth"+(i+1)+"").val();
-							  let temp1 = $(".getCountMem"+(i+1)+"").val();
-							  monthArr [i] = temp;
-							  countArr [i] = temp1;
-							} 
-					
-							 
-							/* 	let yearArr = [];
-								let monthArr = [];
-								
-								$(document).ready(function(){
-										for(let i=0; i < count; i++){
-											let temp = $(".statistics-contents-div > .signupDate"+(i+1)+"").val();
-											console.log(temp);
-											yearArr [i] = temp.substr(0,4);
-											monthArr[i] = temp.substr(5,2);
+							for (let i = 0; i < monthLeg; i++) {
+								let temp = $(".getMonth" + (i + 1) + "").val();
+								let temp1 = $(".getCountMem" + (i + 1) + "")
+										.val();
+								monthArr[i] = temp;
+								countArr[i] = temp1;
+							}
 
-										}			
-										
-										console.log(yearArr);
-										console.log(monthArr);
-										
-										 
-									
-								});*/
-							/* 'January', 'February', 'March',
-							'April', 'May', 'June', 'July','Agust','September','October','Nomember','December' */
-							// chart 부분
 							const labels = monthArr;
 							const data = {
 								labels : labels,
@@ -268,66 +247,43 @@
 
 					</div>
 				</div>
-				
+
 				<!-- 판매 통계 페이지 -->
-				
+
 				<div class="sell-Statistics-page">
 					<div class="sell-Statistics-top-div">판매 통계</div>
-					<div class="sell-statistics-contents-div">
-						<!-- monthList 뽑아오기 -->
-						<c:forEach var="monthList" items="${monthList}"
-							varStatus="getMonth">
-							<input type="text" name="getMonth"
-								class="getMonth${getMonth.count}" value="${monthList.month}" hidden>
-						</c:forEach>
-						<!-- month에 따른 가입자 수 뽑아오기 -->
-						<c:forEach var="countMember" items="${countMember}"
-							varStatus="countMem">
-							<input type="text" name="countMem"
-								class="getCountMem${countMem.count}"
-								value="${countMember.count}" hidden>
-						</c:forEach>
+					<div class="sell-Statistics-contents-div">
+						1.등록된상품수 count 2. 판매중인 상품수 3. 구매중 (예약중)인 상품수 4. 거래완료된 상품수 5. 가장
+						비싼가격의 상품수 6. 가장 싼가격의 상품수 7. 가장 많은상품을 올린 사람과 상품개수
+					
+							1.등록된상품수 count
+							<c:forEach var="countItems" items="${countItems}">
+							${countItems.count}
+							</c:forEach>
+							
+							2. 판매중인 상품수
+							
 						<div class="chart-div">
-							<canvas id="myChart" style="width:1000;height:500;"></canvas>
+							
+							
+							<canvas id="itemCount"></canvas>
 						</div>
 
 						<script>
 							// 길이 값 불러오기 
 							let monthLeg = $("input[name='getMonth']").length;
 							let countLeg = $("input[name='countMem']").length;
-				
-							
+
 							let monthArr = [];
 							let countArr = [];
-							for(let i=0; i < monthLeg; i++ ){
-							  let temp = $(".getMonth"+(i+1)+"").val();
-							  let temp1 = $(".getCountMem"+(i+1)+"").val();
-							  monthArr [i] = temp;
-							  countArr [i] = temp1;
-							} 
-					
-							 
-							/* 	let yearArr = [];
-								let monthArr = [];
-								
-								$(document).ready(function(){
-										for(let i=0; i < count; i++){
-											let temp = $(".statistics-contents-div > .signupDate"+(i+1)+"").val();
-											console.log(temp);
-											yearArr [i] = temp.substr(0,4);
-											monthArr[i] = temp.substr(5,2);
+							for (let i = 0; i < monthLeg; i++) {
+								let temp = $(".getMonth" + (i + 1) + "").val();
+								let temp1 = $(".getCountMem" + (i + 1) + "")
+										.val();
+								monthArr[i] = temp;
+								countArr[i] = temp1;
+							}
 
-										}			
-										
-										console.log(yearArr);
-										console.log(monthArr);
-										
-										 
-									
-								});*/
-							/* 'January', 'February', 'March',
-							'April', 'May', 'June', 'July','Agust','September','October','Nomember','December' */
-							// chart 부분
 							const labels = monthArr;
 							const data = {
 								labels : labels,
@@ -344,7 +300,7 @@
 								options : {/* responsive:false */}
 							};
 							const myChart = new Chart(document
-									.getElementById('myChart'), config);
+									.getElementById('itemCount'), config);
 						</script>
 
 
@@ -403,7 +359,6 @@
 			$(".sell-Statistics-page").css("display", "block");
 
 		})
-
 
 		// checkbox 스크립트
 		$("#chkBoardAll").on("click", function() {

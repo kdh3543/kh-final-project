@@ -53,7 +53,7 @@
 				<div class="div-wrap">
 					<div class="nav_div">
 						<div class="logo">
-							<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 						</div>
 						
 						

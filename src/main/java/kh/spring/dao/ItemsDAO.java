@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.dto.ItemGraphDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
 
@@ -163,7 +164,7 @@ public class ItemsDAO {
 
 
 	
-//	detail 페이지 우측 하단 정보
+	//	detail 페이지 우측 하단 정보
 	// 해당 아이디의 판매상품 개수 불러오기
 		public int ItemsCount(int iseq) {
 			return mybatis.selectOne("Items.ItemsCount",iseq);
@@ -187,7 +188,10 @@ public class ItemsDAO {
 		return mybatis.selectList("Items.sellCountAll");
 	}
 
-	
+	// 관리자 아이템 카운트
+	public List<ItemGraphDTO> countItems(){
+		return mybatis.selectList("Items.countItems");
+	}
 
 
 

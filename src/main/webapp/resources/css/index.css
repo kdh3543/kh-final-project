@@ -22,7 +22,7 @@ header {
 header .header_Container {
 	display: flex;
 	justify-content: flex-end;
-	height: 10%;
+	height: 30%;
 }
 
 header .header-list-after-login {
@@ -105,7 +105,7 @@ header .header_list li:nth-child(2) a {
 header .div-wrap {
 	display: flex;
 	justify-content: center;
-	height: 90%;
+	height: 60%;
 }
 
 header .nav_div {
@@ -461,9 +461,6 @@ footer .footer-box {
 	height: auto;
 	position: fixed;
 	right: calc(50% - 47%);
-	z-index: 20;
-	top: 370px;
-	position: fixed;
 }
 
 .sidebar-div {

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.BoardDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.SearchKeywordDTO;
 import kh.spring.service.BoardService;
 import kh.spring.service.CommentService;
+import kh.spring.service.SearchService;
 
 @Controller
 @RequestMapping("/board/")
@@ -26,6 +28,9 @@ public class BoardController {
 	
 	@Autowired
 	public CommentService cservice;	
+	
+	@Autowired
+	public SearchService sservice;
 	
 	@Autowired
 	private HttpSession session;
@@ -46,6 +51,12 @@ public class BoardController {
 		}
 		
 		model.addAttribute("list", list);
+		
+		//인기검색어 넘겨주기 hot search =hs
+
+	      List<SearchKeywordDTO> hslist = sservice.selectByHot();
+	      model.addAttribute("hslist",hslist);
+	      
 		return "board/boardList";
 	}
 	

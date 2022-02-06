@@ -40,6 +40,7 @@ main {
 .div-wrap2 {
 	display: flex;
 	align-items: center;
+
 }
 
 .rightList .btn-sell, .btn-myshop, .btn-talk {
