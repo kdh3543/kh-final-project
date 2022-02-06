@@ -29,6 +29,7 @@
 			<link href="/css/board/boardList.css" rel="stylesheet">
 			<!-- JS -->
 			<script src="/js/boardDetail.js"></script>
+  			<script src="/js/paginga.jquery.js"></script>
 
 </head>
 
@@ -293,80 +294,91 @@
 						</script>
 
 	<main>
-		<div class="contents-box" id="contents-box">
-			<div class="contents-top-div">
-				<h1 class="h3 mb-3 fw-normal">동네(ex 회현동)</h1>
-				<button class="btn btn-primary" id="toWrite">새 글 등록</button>
-			</div>
-			
-			<div class="subject-menu">
-				<button class="btn btn-primary search" type="button" id="question">동네질문</button>
-				<button class="btn btn-primary search" type="button" id="incident">동네사건사고</button>
-				<button class="btn btn-primary search" type="button" id="restaurant">동네맛집</button>
-				<button class="btn btn-primary search" type="button" id="news">동네소식</button>
-				<button class="btn btn-primary search" type="button" id="lost">분실/실종센터</button>
-				<button class="btn btn-primary search" type="button" id="cat">고양이</button>
-				<button class="btn btn-primary search" type="button" id="dog">강아지</button>
-				<button class="btn btn-primary search" type="button" id="others">기타</button>
-			</div>
-			<c:forEach var="dto" items="${list}" varStatus="status">
-				<div class="contents">
-					<div class="contents-title">${dto.subject}</div>
-					<div class="contents-div">
-						<div class="contents-div-contents">
-							<a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}"
-								style="color: black; text-decoration: none">${dto.contents}</a>
-						</div>
-					</div>
-					<script>
-						/* 글자수 넘쳤을 때 */
-						let div${ status.count } = $(".contents-a${status.count}").html();
-						if (div${ status.count }.length > 100) {
-							$(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
-						}
+      <div class="contents-box" id="contents-box">
+         <div class="contents-top-div">
+            <h1 class="h3 mb-3 fw-normal">커뮤니티</h1>
+            <button class="btn btn-primary" id="toWrite">새 글 등록</button>
+         </div>
+         <div class="subject-menu">
+            <button class="btn btn-primary search" type="button" id="question">동네질문</button>
+            <button class="btn btn-primary search" type="button" id="incident">동네사건사고</button>
+            <button class="btn btn-primary search" type="button" id="restaurant">동네맛집</button>
+            <button class="btn btn-primary search" type="button" id="news">동네소식</button>
+            <button class="btn btn-primary search" type="button" id="lost">분실/실종센터</button>
+            <button class="btn btn-primary search" type="button" id="cat">고양이</button>
+            <button class="btn btn-primary search" type="button" id="dog">강아지</button>
+            <button class="btn btn-primary search" type="button" id="others">기타</button>
+         </div>
+         <div class="paginate">
+            <div class="items">
+               <c:forEach var="dto" items="${list}" varStatus="status">
+                  <div class="contents">
+                     <div class="contents-title">${dto.subject}</div>
+                     <div class="contents-div">
+                        <div class="contents-div-contents">
+                           <a class="contents-a${status.count}" href="toDetail?seq=${dto.board_seq}"
+                              style="color: black; text-decoration: none">${dto.contents}</a>
+                        </div>
+                     </div>
+                     <script>
+                        /* 글자수 넘쳤을 때 */
+                        let div${ status.count } = $(".contents-a${status.count}").html();
+                        if (div${ status.count }.length > 100) {
+                           $(".contents-a${status.count}").html(div${ status.count }.substring(0, 170) + "...");
+                        }
 
-					</script>
-					<div class="contents-container">
-						<div class="contents-div-writer">${dto.writer} ·</div>
-						<div class="contents-div-location"> 위치 ·</div>
-						<div class="contents-div-writedate"> ${dto.parsed_date}</div>
-					</div>
-					<div class="form-floating">
-						<div class="floating-likes" id="like">
-							<c:choose>
-								<c:when test="${loginID != null}">
-									<c:choose>
-										<c:when test="${dto.user_id == loginID}">
-											<a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
-												style="color: #24a6a4; text-decoration: none"> <i
-													class="fas fa-heart"></i>좋아요 <span
-													class="likeCount">${dto.like_count}</span></a>
-										</c:when>
-										<c:otherwise>
-											<a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
-												style="color: black; text-decoration: none"> <i
-													class="fas fa-heart"></i>좋아요 <span
-													class="likeCount">${dto.like_count}</span></a>
-										</c:otherwise>
-									</c:choose>
-								</c:when>
-								<c:otherwise>
-									<a class="like-unclickable"><i class="fas fa-heart"></i>좋아요
-										<span>${dto.like_count}</span></a>
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<div class="floating-comments">
-							<a href="toDetail?seq=${dto.board_seq}" style="color: black; text-decoration: none"><i
-									class="fas fa-comment"></i> 댓글
-								${dto.comment_count}</a>
-						</div>
-					</div>
-				</div>
-			</c:forEach>
+                     </script>
+                     <div class="contents-container">
+                        <div class="contents-div-writer">${dto.writer} ·</div>
+                        <div class="contents-div-location"> 위치 ·</div>
+                        <div class="contents-div-writedate"> ${dto.parsed_date}</div>
+                     </div>
+                     <div class="form-floating">
+                        <div class="floating-likes" id="like">
+                           <c:choose>
+                              <c:when test="${loginID != null}">
+                                 <c:choose>
+                                    <c:when test="${dto.user_id == loginID}">
+                                       <a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
+                                          style="color: #24a6a4; text-decoration: none"> <i
+                                             class="fas fa-heart"></i>좋아요 <span
+                                             class="likeCount">${dto.like_count}</span></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                       <a href="#" board_seq="${dto.board_seq}" class="btnLike disliked"
+                                          style="color: black; text-decoration: none"> <i
+                                             class="fas fa-heart"></i>좋아요 <span
+                                             class="likeCount">${dto.like_count}</span></a>
+                                    </c:otherwise>
+                                 </c:choose>
+                              </c:when>
+                              <c:otherwise>
+                                 <a class="like-unclickable"><i class="fas fa-heart"></i>좋아요
+                                    <span>${dto.like_count}</span></a>
+                              </c:otherwise>
+                           </c:choose>
+                        </div>
+                        <div class="floating-comments">
+                           <a href="toDetail?seq=${dto.board_seq}"
+                              style="color: black; text-decoration: none"><i class="fas fa-comment"></i> 댓글
+                              ${dto.comment_count}</a>
+                        </div>
+                     </div>
+                  </div>
+               </c:forEach>
+            </div>
 
-		</div>
-	</main>
+            <div class="pager">
+               <div class="firstPage">&laquo;</div>
+               <div class="previousPage">&lsaquo;</div>
+               <div class="pageNumbers"></div>
+               <div class="nextPage">&rsaquo;</div>
+               <div class="lastPage">&raquo;</div>
+            </div>
+         </div>
+      </div>
+   </main>
+
 	<footer>
 		<div class="footer-box">
 			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
@@ -459,6 +471,12 @@
 			console.log(subject);
 			location.href = "boardSearch?subject=" + subject;
 		})
+		    $(".paginate").paginga({
+         page: 1,
+         maxPageNumbers: false,
+         itemsPerPage: 5
+      });
+
 	</script>
 </body>
 

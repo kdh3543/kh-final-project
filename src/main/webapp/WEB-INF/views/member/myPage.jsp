@@ -195,7 +195,7 @@ img {
 				</div>
 		</header>
 	</form>
-		<!-- 검색어 전체 삭제 -->
+	<!-- 검색어 전체 삭제 -->
 	<script>
 								
 									$("#delBtn").on("click", function() {
@@ -306,7 +306,7 @@ img {
 							
 							
 						</script>
-	
+
 
 	<main>
 		<div class="mypage-container">
@@ -331,7 +331,7 @@ img {
 							<div>상점방문수: ${dto.view_count}</div>
 							<div>상품판매 : ${sellCount}건</div>
 							<div></div>
-							
+
 						</div>
 						<div class="right-introduce">
 							소개글
@@ -370,8 +370,7 @@ img {
 					<div class="tab-pane fade show active" id="nav-profile"
 						role="tabpanel" aria-labelledby="nav-profile-tab">
 						<div class="profile-top">회원정보수정</div>
-						<form action="/member/updateInfo" method="post"
-							enctype=multipart/form-data>
+						<form action="/member/updateInfo" method="post" enctype=multipart/form-data>
 							<div class="profile-content">
 								<div class="profile-img">
 									<label for="imgfile" class="del-button img-up"> <input
@@ -455,100 +454,87 @@ img {
 											<td>
 										</tr>
 									</table>
+								</div>
+							</div>
 						</form>
 
+					</div>
 
+
+
+				<!-- 판매내역-->
+				<div class="tab-pane fade" id="nav-sell" role="tabpanel"
+					aria-labelledby="nav-sell-tab">
+					<div class="sell-top" id="sellCount">판매내역 : ${sellCount} 건</div>
+					<div class="sell-section">
+						<table>
+							<tr>
+								<th>사진</th>
+								<th>거래상태</th>
+								<th>상품명</th>
+								<th>가격</th>
+								<th>찜 수</th>
+								<th>댓글 수</th>
+								<th>최근 수정일</th>
+								<th>기능</th>
+							</tr>
+							<!-- 해당 회원의 상품리스트 뽑아준다. -->
+
+
+
+							<c:forEach var="i" items="${ilist}" varStatus="statusI">
+								<c:forEach var="f" items="${flist}" varStatus="statusF">
+
+									<c:if test="${statusI.index eq statusF.index }">
+
+
+										<tr>
+											<td id="target" style="display: none;">${i.iseq}</td>
+											<td><a href="/items/itemsDetail?iseq=${i.iseq}"><img
+													src="${f.sysName} " class="d-block w-100" alt="..."
+													style="max-width: 100px; max-height: 100px;"></a></td>
+
+											<td><select class="sellBoxes">
+
+													<option value="Y"
+														<c:if test ="${i.deal eq 'Y' }">selected</c:if>>판매중</option>
+													<option value="R"
+														<c:if test ="${i.deal eq 'R' }">selected </c:if>>예약중</option>
+													<option value="N"
+														<c:if test ="${i.deal eq 'N' }">selected </c:if>>판매완료</option>
+
+											</select></td>
+											<!-- onchange="alert(this.value)" -->
+											<td id="targetName">${i.name }</td>
+											<td>${i.price }</td>
+											<td>${i.like_cnt }</td>
+											<td>문의수들어갈자리</td>
+											<td>${i.detailDate}</td>
+
+											<td><a href="/items/itemsModify?iseq=${i.iseq}">
+													<button type="button" class=" btn btn-lg btn-light">수정</button>
+											</a>
+
+
+												<button type="button"
+													class=" btn btn-lg btn-light deleteBtn">삭제</button> </a></td>
+
+
+										</tr>
+
+
+									</c:if>
+								</c:forEach>
+							</c:forEach>
+
+							<!-- 해당 회원의 상품리스트 뽑아준다. -->
+						</table>
 					</div>
 				</div>
-		</div>
-		<!-- 판매내역-->
-		<div class="tab-pane fade" id="nav-sell" role="tabpanel"
-			aria-labelledby="nav-sell-tab">
-			<div class="sell-top" id="sellCount">판매내역 : ${sellCount} 건</div>
-			<div class="sell-section">
-				<table>
-					<tr>
-						<th>사진</th>
-						<th>거래상태</th>
-						<th>상품명</th>
-						<th>가격</th>
-						<th>찜 수</th>
-						<th>댓글 수</th>
-						<th>최근 수정일</th>
-						<th>기능</th>
-					</tr>
-					<!-- 해당 회원의 상품리스트 뽑아준다. -->
-					<tr>
-						<td><i class="fas fa-camera fa-3x"></i></td>
-						<td><select>
-								<option>판매중</option>
-								<option>예약중</option>
-								<option>삭제</option>
-								<option>판매완료</option>
-						</select></td>
-						<td>더미데이터입니다</td>
-						<td>더미데이터입니다</td>
-						<td>더미데이터입니다</td>
-						<td>더미데이터입니다</td>
-						<td>더미데이터입니다</td>
-					</tr>
 
 
-
-					<c:forEach var="i" items="${ilist}" varStatus="statusI">
-						<c:forEach var="f" items="${flist}" varStatus="statusF">
-
-							<c:if test="${statusI.index eq statusF.index }">
-
-
-								<tr>
-									<td id="target" style="display: none;">${i.iseq}</td>
-									<td><a href="/items/itemsDetail?iseq=${i.iseq}"><img src="${f.sysName} " class="d-block w-100"
-										alt="..." style="max-width: 100px; max-height: 100px;"></a></td>
-
-									<td><select class="sellBoxes">
-
-											<option value="Y"
-												<c:if test ="${i.deal eq 'Y' }">selected</c:if>>판매중</option>
-											<option value="R"
-												<c:if test ="${i.deal eq 'R' }">selected </c:if>>예약중</option>
-											<option value="N"
-												<c:if test ="${i.deal eq 'N' }">selected </c:if>>판매완료</option>
-
-									</select></td>
-									<!-- onchange="alert(this.value)" -->
-									<td id="targetName">${i.name }</td>
-									<td>${i.price }</td>
-									<td>${i.like_cnt }</td>
-									<td>문의수들어갈자리</td>
-									<td>${i.detailDate}</td>
-									
-									<td>
-									<a href="/items/itemsModify?iseq=${i.iseq}">
-									<button	type="button" class=" btn btn-lg btn-light">수정하기</button></a>
-									
-									
-									<button	type="button" class=" btn btn-lg btn-light deleteBtn">삭제하기</button></a>
-									
-									
-									</td>
-
-
-								</tr>
-
-
-							</c:if>
-						</c:forEach>
-					</c:forEach>
-
-					<!-- 해당 회원의 상품리스트 뽑아준다. -->
-				</table>
-			</div>
-		</div>
-		
-		
-		<!-- 삭제하기 Script -->
-		<script>
+				<!-- 삭제하기 Script -->
+				<script>
 		$(document)
 		.ready(
 				function() {
@@ -595,9 +581,9 @@ img {
 				
 		
 		</script>
-		<!-- 상품 삭제하기 script -->
+				<!-- 상품 삭제하기 script -->
 
-		<script>
+				<script>
 			$(document)
 					.ready(
 							function() {
@@ -706,63 +692,62 @@ img {
 							});
 		</script>
 
-		<!-- 구매내역 -->
-		<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
-			aria-labelledby="nav-purchase-tab">
-			<div class="purchase-top" id="buyCount">구매내역 ${buyCount}건</div>
-			<div class="purchase-section">
+				<!-- 구매내역 -->
+				<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+					aria-labelledby="nav-purchase-tab">
+					<div class="purchase-top" id="buyCount">구매내역 ${buyCount}건</div>
+					<div class="purchase-section">
 
 
-				<table>
-					<tr>
-						<th>사진</th>
-						<th>거래상태</th>
-						<th>상품명</th>
-						<th>가격(안전결제수수료 미포함)</th>
-						<th>거래확정!</th>
-						<th>기능</th>
-					</tr>
-					
-					<c:forEach var="i" items="${buyIlist}" varStatus="statusI">
-						<c:forEach var="f" items="${buyFlist}" varStatus="statusF">
-							<c:if test="${i.iseq == f.parentSeq}">
-								<tr>
-									<td><a href=/items/itemsDetail?iseq=${i.iseq}><img
-											src="${f.sysName}"></a></td>
-									<c:if test="${i.deal2 =='R'}">
-									<td>구매중</td>
-									</c:if>		
-									<c:if test="${i.deal2 =='Y'}">
-									<td>구매완료</td>
-									</c:if>		
-									<td>구매중</td>
-									<td>${i.name}</td>
-									<td>${i.price}원</td>
-									<td style="display: none;">${i.iseq}</td>
-									<th><c:choose>
-											<c:when test="${i.deal2 == 'Y'}">
-												<button class=" btn btn-lg btn-light " id=""
-													style="background-color: rgb(220,20,60)">구매확정</button>
-											</c:when>
-											<c:otherwise>
-												<button class="btn btn-lg btn-light buyOk" id="">구매확정</button>
-												<button class="btn btn-lg btn-light buyCancel" id="">구매취소</button>
+						<table>
+							<tr>
+								<th>사진</th>
+								<th>거래상태</th>
+								<th>상품명</th>
+								<th>가격(안전결제수수료 미포함)</th>
+								<th>거래확정</th>
+							</tr>
 
-											</c:otherwise>
-										</c:choose> <!-- <button class=" btn btn-lg btn-light" id="readReviewBtn" hidden>거래완료</button> -->
-									</th>
+							<c:forEach var="i" items="${buyIlist}" varStatus="statusI">
+								<c:forEach var="f" items="${buyFlist}" varStatus="statusF">
+									<c:if test="${i.iseq == f.parentSeq}">
+										<tr>
+											<td><a href=/items/itemsDetail?iseq=${i.iseq}><img
+													src="${f.sysName}"></a></td>
+											<c:if test="${i.deal2 =='R'}">
+												<td>구매중</td>
+											</c:if>
+											<c:if test="${i.deal2 =='Y'}">
+												<td>구매완료</td>
+											</c:if>
+											<td>${i.name}</td>
+											<td>${i.price}원</td>
+											<td style="display: none;">${i.iseq}</td>
+											<th><c:choose>
+													<c:when test="${i.deal2 == 'Y'}">
+														<button class=" btn btn-lg btn-light "
+															id="otherConfirmBtn">구매확정</button>
+													</c:when>
+													<c:otherwise>
+														<button class="btn btn-lg btn-light buyOk" id="confirmBtn">구매확정</button>
+														<button class="btn btn-lg btn-light buyCancel"
+															id="cancleBtn">구매취소</button>
 
-								</tr>
-							</c:if>
+													</c:otherwise>
+												</c:choose> <!-- <button class=" btn btn-lg btn-light" id="readReviewBtn" hidden>거래완료</button> -->
+											</th>
 
-						</c:forEach>
-					</c:forEach>
+										</tr>
+									</c:if>
 
-				</table>
-			</div>
-		</div>
+								</c:forEach>
+							</c:forEach>
 
-		<script>
+						</table>
+					</div>
+				</div>
+
+				<script>
 		
 	
 			
@@ -875,59 +860,59 @@ img {
 		</script>
 
 
-		<!-- 찜 내역 -->
-		<div class="tab-pane fade" id="nav-like" role="tabpanel"
-			aria-labelledby="nav-like-tab">
-			<div class="like-top" id="like_count">찜 내역 : ${wCount}</div>
-			<c:forEach var="wl" items="${wlist}" varStatus="statusWL">
-				<c:forEach var="li" items="${likeImg}" varStatus="statusLI">
+				<!-- 찜 내역 -->
+				<div class="tab-pane fade" id="nav-like" role="tabpanel"
+					aria-labelledby="nav-like-tab">
+					<div class="like-top" id="like_count">찜 내역 : ${wCount}</div>
+					<c:forEach var="wl" items="${wlist}" varStatus="statusWL">
+						<c:forEach var="li" items="${likeImg}" varStatus="statusLI">
 
 
-					<c:if test="${wl.iseq == li.parentSeq}">
-						<!-- 수정중 -->
+							<c:if test="${wl.iseq == li.parentSeq}">
+								<!-- 수정중 -->
 
-						<%-- <a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}"> --%>
+								<%-- <a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}"> --%>
 
-						<div class="like-section">
+								<div class="like-section">
 
-							<div class="like-left">
-								<a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
-									<img src="${li.sysName}"
-									style="width: 236.26px; height: 101.9px">
-								</a>
-							</div>
-
-
-							<div class="like-middle">
-								<div class="like-title">상품명:${wl.name }</div>
-
-								<div class="like-seller">판매자:${wl.sellerID }</div>
-
-								<div class="like-price">가격:${wl.price }</div>
-							</div>
+									<div class="like-left">
+										<a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
+											<img src="${li.sysName}"
+											style="width: 236.26px; height: 101.9px">
+										</a>
+									</div>
 
 
-							<div class="like-right">
+									<div class="like-middle">
+										<div class="like-title">상품명:${wl.name }</div>
 
-								<a href="javascript:void(0);" id="${wl.sellerID}"
-									class="dellist on"> <input type=hidden id="iseq"
-									value="${wl.iseq}"> <input type=button value="X"
-									class="deleteXL" style="background-color: #24a6a4"> <%-- <a href="#" id="${wl.sellerID}" class="dellist on">
+										<div class="like-seller">판매자:${wl.sellerID }</div>
+
+										<div class="like-price">가격:${wl.price }</div>
+									</div>
+
+
+									<div class="like-right">
+
+										<a href="javascript:void(0);" id="${wl.sellerID}"
+											class="dellist on"> <input type=hidden id="iseq"
+											value="${wl.iseq}"> <input type=button value="X"
+											class="deleteXL" style="background-color: #24a6a4"> <%-- <a href="#" id="${wl.sellerID}" class="dellist on">
 							 <input	type=hidden id="iseq" value="${wl.iseq }"> 
 							 <input	type=button value="X" class="deleteXL"
 								style="background-color: #24a6a4"> --%>
 
-								</a>
-							</div>
-						</div>
-						<!-- </a> -->
-					</c:if>
+										</a>
+									</div>
+								</div>
+								<!-- </a> -->
+							</c:if>
 
-				</c:forEach>
-			</c:forEach>
+						</c:forEach>
+					</c:forEach>
 
 
-			<script>
+					<script>
 				$("#rmvStyle").removeAttr('style');
 
 				//찜 해제
@@ -988,36 +973,36 @@ img {
 								})
 			</script>
 
-		</div>
+				</div>
 
 
 
 
 
-<!-- 팔로워  -->
-      <div class="tab-pane fade" id="nav-following" role="tabpanel"
-         aria-labelledby="nav-following-tab">
-         <div class="following-top">팔로워 수: ${fCount}</div>
-         <c:forEach var="f" items="${followlist}">
-            <div class="following-section">
-               <div class="follower-left">
-                  <img src="${f.profile_image}" style="width: 100%; height: 100%">
-               </div>
-               <div class="following-middle">${f.name }</div>
-               <div class="following-right">
-               
-                     <a href="#" fid="${f.id}" class=" btnFollow followed"> <input
-                        type=button  value="팔로우" class="unfollow"
-                        style="background-color: #24a6a4">
-                     </a>
+				<!-- 팔로워  -->
+				<div class="tab-pane fade" id="nav-following" role="tabpanel"
+					aria-labelledby="nav-following-tab">
+					<div class="following-top">팔로워 수: ${fCount}</div>
+					<c:forEach var="f" items="${followlist}">
+						<div class="following-section">
+							<div class="follower-left">
+								<img src="${f.profile_image}" style="width: 100%; height: 100%">
+							</div>
+							<div class="following-middle">${f.name }</div>
+							<div class="following-right">
 
-               </div>
-            </div>
-         </c:forEach>
-      </div>
-      
-      <!-- 팔로워에 대한 스크립트 -->
-      <script>
+								<a href="#" fid="${f.id}" class=" btnFollow followed"> <input
+									type=button value="팔로우" class="unfollow"
+									style="background-color: #24a6a4">
+								</a>
+
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+
+				<!-- 팔로워에 대한 스크립트 -->
+				<script>
       
       /* 수정중 */
       
@@ -1067,28 +1052,28 @@ img {
               })
       
       </script>
-      
-      <!-- 팔로우 -->
-      <div class="tab-pane fade" id="nav-follower" role="tabpanel"
-         aria-labelledby="nav-follower-tab">
-         <div class="follower-top">팔로우 수 : ${followedCount }</div>
-         <c:forEach var="j" items="${followedList }">
-            <div class="follower-section">
-               <div class="follower-left">
-                  <img src="${j.profile_image}" style="width: 100%; height: 100%">
-               </div>
-               <div class="follower-middle">${j.name }</div>
-               <div class="follower-right">
-                  <a href="#" jid="${j.id}" class="jbtnFollow unfollowed"> <input
-                     type=button value="언팔로우" class="junfollow"
-                     style="background-color: #ef4444">
-                  </a>
-               </div>
-            </div>
-         </c:forEach>
-      </div>
-      
-      <script>
+
+				<!-- 팔로우 -->
+				<div class="tab-pane fade" id="nav-follower" role="tabpanel"
+					aria-labelledby="nav-follower-tab">
+					<div class="follower-top">팔로우 수 : ${followedCount }</div>
+					<c:forEach var="j" items="${followedList }">
+						<div class="follower-section">
+							<div class="follower-left">
+								<img src="${j.profile_image}" style="width: 100%; height: 100%">
+							</div>
+							<div class="follower-middle">${j.name }</div>
+							<div class="follower-right">
+								<a href="#" jid="${j.id}" class="jbtnFollow unfollowed"> <input
+									type=button value="언팔로우" class="junfollow"
+									style="background-color: #ef4444">
+								</a>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+
+				<script>
     //내가 팔로우한 사람들 목록
       $(".jbtnFollow").on(
             "click",
@@ -1133,12 +1118,9 @@ img {
       
       
       </script>
-      
-      
-       
-
-		
-
+      		</div>
+			</section>
+		</div>
 
 	</main>
 	<!-- footer -->
