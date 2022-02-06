@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.ChatContentsDTO;
 import kh.spring.dto.ChatRoomDTO;
-import kh.spring.dto.FilesDTO;
 import kh.spring.service.ChatContentsService;
 import kh.spring.service.ChatRoomService;
 import kh.spring.service.FilesService;
@@ -26,7 +25,7 @@ import kh.spring.utils.DateParseUtils;
 public class ChatController {
 
 	@Autowired
-	private MemberService service;
+	private MemberService mService;
 	@Autowired
 	private ChatContentsService cService;
 	@Autowired
@@ -56,6 +55,8 @@ public class ChatController {
 		List<ChatRoomDTO> list = crService.selectByBothId(dto);
 		List<ChatContentsDTO> cList = cService.selectByRoomID(roomId);
 		// list로부터 producId를 가져와 그 productId에 해당하는 마지막 메세지를 list에 세팅
+		System.out.println("list사이즈는: "+list.size());
+		System.out.println("cList사이즈는 : "+ cList.size());
 		for(int i =0; i<list.size();i++) {
 			if(cService.selectLastDate(list.get(i).getRoomId())==null) {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(time));				
@@ -81,12 +82,7 @@ public class ChatController {
 	//상품 상세페이지에서 연락하기 눌렀을 때
 	@RequestMapping("talk")
 	public  String talk(String productName, int productId, int roomId,Model model) {
-		//챗봇에 대한 룸 정보 불러오기
-		//		int chatBotRoomId = 0;
-		//		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
-		//		model.addAttribute("chatBot",chatBot);
-		//		System.out.println(chatBot.get(0).getRoomId());
-
+		
 		//채팅방에 대한 룸 정보 가져오기
 		System.out.println(productId);
 		String userId = (String)session.getAttribute("loginID");
@@ -116,7 +112,7 @@ public class ChatController {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
 			}	
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
-
+			
 			// chat 마지막 채팅글 세팅
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 
@@ -136,7 +132,8 @@ public class ChatController {
 	@RequestMapping("directTalk")
 	public String directTalk(Model model) {
 		String id = (String)session.getAttribute("loginID");
-
+		
+		
 		//채팅방에 대한 룸 정보 가져오기
 		ChatRoomDTO dto = new ChatRoomDTO();
 		dto.setBuyerId(id);
@@ -155,13 +152,19 @@ public class ChatController {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(time));
 			}else {
 				list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
+				
 			}
-			System.out.println("현재시간은: "+list.get(i).getUpdateTime());
+			
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
-
+			
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
+			
+			list.get(i).setMyProfile(mService.selectProfile(crService.selectBuyerId(list.get(i).getRoomId())));
+			list.get(i).setOtherProfile(mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
 		}
-
+		
+		
+		
 		int roomId = 0;
 		model.addAttribute("roomId",roomId);
 		model.addAttribute("list",list);

@@ -15,6 +15,8 @@ public class ChatRoomDTO {
 	private String lastMessage;
 	private String latestDate;
 	private String chatImg;
+	private String myProfile;
+	private String otherProfile;
 	
 	public ChatRoomDTO() {}
 
@@ -125,6 +127,22 @@ public class ChatRoomDTO {
 	
 	public String getChatImg() {
 		return chatImg;
+	}
+	
+	public void setMyProfile(String myProfile) {
+		this.myProfile = myProfile;
+	}
+	
+	public String getMyProfile() {
+		return myProfile;
+	}
+	
+	public void setOtherProfile(String otherProfile) {
+		this.otherProfile = otherProfile;
+	}
+	
+	public String getOtherProfile() {
+		return otherProfile;
 	}
 	
 }

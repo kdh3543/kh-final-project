@@ -40,5 +40,10 @@
  	<select id="keyCount" resultType="boolean">
  		select count(*) from chatroom where (buyerId = #{buyerId} or sellerId = #{sellerId}) and roomId = #{roomId}
  	</select>
- 	
+ 	<select id="selectBuyerId" resultType="String">
+ 		select buyerId from chatroom where roomid = #{value}
+ 	</select>
+ 	<select id="selectSellerId" resultType="String">
+ 		select sellerId from chatroom where roomid = #{value}
+ 	</select>
  </mapper>

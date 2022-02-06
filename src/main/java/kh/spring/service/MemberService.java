@@ -4,11 +4,6 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -173,14 +168,20 @@ public class MemberService {
 	public MemberDTO selectByIseq(int iseq) {
 		return mdao.selectByIseq(iseq);
 	}
+	
 	//storeLIst
-	public List<JoinDTO> selectAllStoreList(String keyword) {
-		return mdao.selectAllStoreList(keyword);
+	   public List<JoinDTO> selectAllStoreList(String keyword) {
+	      return mdao.selectAllStoreList(keyword);
 
-	}
+	   }
 
-	public int addViewCount(String id) {
-		return mdao.addViewCount(id);
-	}
+	   public int addViewCount(String id) {
+	      return mdao.addViewCount(id);
+	   }
+	   
+	  //김동현 93 프로필 이미지 가져오기
+	   public String selectProfile(String id) {
+		   return mdao.selectProfile(id);
+	   }
 
 }

@@ -127,6 +127,7 @@ public class MemberDAO {
 	public MemberDTO selectByIseq(int iseq) {
 		return mybatis.selectOne("Member.selectByIseq",iseq);
 	}
+
 	public List<JoinDTO> selectAllStoreList(String keyword) {
 		return mybatis.selectList("Member.selectAllStoreList",keyword);
 
@@ -137,5 +138,10 @@ public class MemberDAO {
 
 	}
 
+	//김동현 93 프로필 이미지 가져오기
+	public String selectProfile(String id) {
+		return mybatis.selectOne("Member.selectProfile",id);
+	}
+	
 
 }
