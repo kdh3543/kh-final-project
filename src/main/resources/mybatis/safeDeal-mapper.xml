@@ -20,9 +20,11 @@
   
   INSERT INTO SAFEDEAL VALUES(SAFEDEAL_SEQ.NEXTVAL,#{buyer},#{seller},#{items_no},#{cash},default);
   
-	UPDATE MEMBER SET CASH= CASH-#{cash}-2500   WHERE ID =#{buyer};
-	
-	UPDATE ITEMS SET DEAL2 ='R' WHERE ISEQ = #{items_no};  
+   UPDATE MEMBER SET CASH= CASH-#{cash}-2500   WHERE ID =#{buyer};
+   
+   UPDATE ITEMS SET DEAL2 ='R',DEAL='R' WHERE ISEQ = #{items_no};
+   
+   INSERT INTO ALERT VALUES(ALERT_SEQ.NEXTVAL,#{buyer},#{seller},#{items_no});
   
   end
   }
@@ -42,12 +44,12 @@
   begin
   
   
-  	update member set cash= cash+#{cash} where id = #{seller};
-  	
-  	 UPDATE ITEMS SET DEAL2 ='Y' , BUYERID=#{buyer}  WHERE ISEQ=#{items_no};
-  	 
-  	 end
-  	 }
+     update member set cash= cash+#{cash} where id = #{seller};
+     
+      UPDATE ITEMS SET DEAL2 ='Y',DEAL ='N' , BUYERID=#{buyer}  WHERE ISEQ=#{items_no};
+      
+      end
+      }
   </update>
 
   
@@ -57,11 +59,17 @@
    
   BEGIN
   
-	UPDATE MEMBER SET CASH= CASH+#{cash}+2500 WHERE ID = #{buyer};
-	
-	UPDATE ITEMS SET DEAL2 ='N' , BUYERID=DEFAULT  WHERE ISEQ=#{items_no};
-	
-	DELETE FROM SAFEDEAL WHERE ITEMS_NO = #{items_no};
+   UPDATE MEMBER SET CASH= CASH+#{cash}+2500 WHERE ID = #{buyer};
+   
+   UPDATE ITEMS SET DEAL2 ='N' ,DEAL ='Y', BUYERID=DEFAULT  WHERE ISEQ=#{items_no};
+   
+   
+   
+     DELETE FROM ALERT WHERE ITEMS_NO=#{items_no};
+    
+     DELETE FROM SAFEDEAL WHERE ITEMS_NO = #{items_no};
+   
+   
   
   
    END;

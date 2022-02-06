@@ -212,7 +212,7 @@ img {
 										</tr>
 										<tr>
 											<td>잔여포인트</td>
-											<td><input type="text" class="" id="" name=cash
+											<td><input type="text" class="" id="remainPoint" name=cash
 												value="${dto.cash}" disabled></td>
 										</tr>
 										<tr>
@@ -597,7 +597,7 @@ img {
 							let iseq = $(this).closest("tr").find(
 									'td:nth-child(6)').text();
 							
-						 
+							/* remainPoint */
 						
 							
 							$.ajax({
@@ -610,6 +610,7 @@ img {
 								console.log(resp);
 								
 								$("#buyCount").text("구매내역 : " +${buyCount-1}+"건");
+								$("#remainPoint").text(${dto.cash});
 								
 
 							})

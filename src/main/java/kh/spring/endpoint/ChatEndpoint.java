@@ -150,7 +150,7 @@ public class ChatEndpoint{
 
 
 	@OnClose
-	public void onClose(Session session) throws IOException {
+	public void onClose(Session session){
 
 //				String userId = (String)this.hSession.getAttribute("loginID");
 //				

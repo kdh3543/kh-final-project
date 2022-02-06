@@ -95,6 +95,10 @@ public class SafeDealController {
 			 SafeDealDTO sddto = sdservice.selectAllDealOkBySeq(iseq); 
 			
 			 System.out.println(" dealCancel 의 iseq 는 ? :"+sddto.getItems_no());
+			 System.out.println("환불 해야할 금액은 ? " +sddto.getCash());
+			 System.out.println("환불 해야할 금액은 ? " +sddto.getCash());
+			 System.out.println("환불 해야할 금액은 ? " +sddto.getCash());
+			 System.out.println("환불 해야할 금액은 ? " +sddto.getCash());
 			 int sdresult = sdservice.dealCancel(sddto);
 			 
 			 
