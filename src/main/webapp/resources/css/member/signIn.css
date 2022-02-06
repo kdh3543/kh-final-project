@@ -12,7 +12,7 @@ body{
 
 main{
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 .form-signin {
   width: 80%;
@@ -56,19 +56,25 @@ main{
 .buttons {
   display: flex;
   justify-content: space-evenly;
+  height:60px;
 }
 #signIn{
   background-color: #24a6a4 !important;
   width: 35%;
-  height: 50%;
+  height:100%;
 }
 
 #findMyInfo{
   border: 1px solid #24a6a4;
   background-color: #fff;
   width: 65%;
-  height: 50%;
+  height: 100%;
+}
+#kakaoBtn{
+	width:100%;
+	height:auto;
 }
 #kakoLogin{
   background-color: #f8d200 !important;
 }
+

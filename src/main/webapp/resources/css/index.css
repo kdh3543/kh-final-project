@@ -22,11 +22,7 @@ header {
 header .header_Container {
 	display: flex;
 	justify-content: flex-end;
-}
-
-header .header_Container {
-	display: flex;
-	justify-content: flex-end;
+	height: 30%;
 }
 
 header .header-list-after-login {
@@ -38,7 +34,6 @@ header .header-list-after-login {
 header .header-list-after-login li {
 	padding: 12px 12px;
 }
-
 
 header .header-list-after-login li:nth-child(1) {
 	text-decoration: none;
@@ -55,11 +50,11 @@ header .header-list-after-login li:nth-child(2) {
 }
 
 header .header-list-after-login li:nth-child(3) {
-	line-height:20px;
+	line-height: 20px;
 }
 
 header .header-list-after-login li:nth-child(4) {
-	line-height:20px;
+	line-height: 20px;
 }
 
 header .header-list-after-login li:nth-child(3) a {
@@ -110,6 +105,7 @@ header .header_list li:nth-child(2) a {
 header .div-wrap {
 	display: flex;
 	justify-content: center;
+	height: 60%;
 }
 
 header .nav_div {
@@ -118,8 +114,15 @@ header .nav_div {
 	justify-content: space-between;
 	align-items: center;
 }
-
-header .logo {
+header a {
+	width: 60%;
+	height: 100%;
+}
+header .logoImg {
+	width: 60%;
+	height: 100%;
+}
+/* header .logo {
 	font-family: 'SBAggroB';
 	font-size: 35px;
 	color: #fff;
@@ -129,7 +132,7 @@ header .logo {
 header .logo a {
 	text-decoration: none;
 	color: #fff;
-}
+} */
 /* 검색어 부분 */
 .searchContainer {
 	display: flex;
@@ -185,12 +188,13 @@ header .logo a {
 	border-radius: 10px 10px 10px 10px;
 	border: none;
 }
+
 .tab-content>.active {
-	background-color:#fff;
+	background-color: #fff;
 }
 
-.form-control{
-	font-size:13px !important;
+.form-control {
+	font-size: 13px !important;
 }
 /* 검색어 드랍다운 */
 #recent {
@@ -259,8 +263,9 @@ header .logo a {
 	width: 100%;
 	height: 50px;
 }
-.search-dropdown{
-	background-color:#fff;
+
+.search-dropdown {
+	background-color: #fff;
 }
 /* 검색어 - 인기검색어 */
 .hotkeyword-title {
@@ -413,10 +418,10 @@ section article .article_title {
 	text-align: right;
 	color: #aaa69d;
 }
-.imgBox a .detail-container .exarea{
+
+.imgBox a .detail-container .exarea {
 	text-align: center;
 	color: #aaa69d;
-	
 }
 
 .detail-container {
@@ -456,9 +461,6 @@ footer .footer-box {
 	height: auto;
 	position: fixed;
 	right: calc(50% - 47%);
-	z-index: 20;
-	top: 370px;
-	position: fixed;
 }
 
 .sidebar-div {

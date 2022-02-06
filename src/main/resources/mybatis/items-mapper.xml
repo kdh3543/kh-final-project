@@ -223,5 +223,7 @@
       ITEMS_QNA_SEQ
    </select>
 
-
+	<select id="countItems" resultType="kh.spring.dto.ItemGraphDTO">
+		SELECT COUNT(*) COUNT FROM ITEMS
+	</select>
 </mapper>

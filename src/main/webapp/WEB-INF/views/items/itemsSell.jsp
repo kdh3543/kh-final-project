@@ -53,7 +53,7 @@
 				<div class="div-wrap">
 					<div class="nav_div">
 						<div class="logo">
-							<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 						</div>
 						
 						
@@ -162,7 +162,7 @@
 												<label for="btnAtt"> <img
 													src="/imgs/inputIMG.png">
 												</label> <input type=file class="btn btn-primary" name=file
-													id="btnAtt" multiple style="display: none;">
+													id="btnAtt" multiple style="display: none;" required>
 
 											</div> 
 											
@@ -244,6 +244,7 @@
       var div = document.createElement('div')
       div.setAttribute('style', div_style)
       
+      
       var btn = document.createElement('input')
       btn.setAttribute('type', 'button')
       btn.setAttribute('value', 'x')
@@ -289,8 +290,8 @@
 									</tr>
 									<tr>
 										<td>카테고리</td>
-										<td><select name="category">
-												<option>카테고리 설정</option>
+										<td><select name="category" required>
+												<option disabled>카테고리 설정</option>
 												<option value="여성의류">여성의류</option>
 												<option value="남성의류">남성의류</option>
 												<option value="신발">신발</option>
@@ -309,7 +310,7 @@
 										<td>
 										
 										<input type="text"
-											placeholder="주소" id="input-address" name="exarea">
+											placeholder="주소" id="input-address" name="exarea" required>
 											<button type="button" id="findAddress">주소검색</button>
 											
 
@@ -317,35 +318,35 @@
 									</tr>
 									<tr>
 										<td>상품 상태</td>
-										<td><input type="radio" name="condition" value="상">상
+										<td><input type="radio" name="condition" value="상" required>상
 											<input type="radio" name="condition" value="중">중 <input
 											type="radio" name="condition" value="하">하</td>
 									</tr>
 									<tr>
 										<td>교환여부</td>
-										<td><input type="radio" name="refundable" value="불가능">불가능
+										<td><input type="radio" name="refundable" value="불가능" required>불가능
 											<input type="radio" name="refundable" value="가능">가능</td>
 									</tr>
 									<tr>
 										<td>가격</td>
-										<td><input type="text" placeholder="숫자만 입력하세요"
-											name="price"> 원</td>
+										<td><input type="number" placeholder="숫자만 입력하세요"
+											name="price" required> 원</td>
 									</tr>
 
 									<tr>
 										<td>상품 소개</td>
 										<td><textarea rows="5" cols="55"
-												placeholder="상품설명을 입력해주세요." name="info"></textarea></td>
+												placeholder="상품설명을 입력해주세요." name="info" required></textarea></td>
 									</tr>
 									<tr>
 										<td>연관태그</td>
 										<td><input type="text" placeholder="연관태그를 입력하세요."
-											class="inputTag" name="tag"></td>
+											class="inputTag" name="tag" required></td>
 									</tr>
 									<tr>
 										<td>수량</td>
 										<td><input type="number" placeholder="수량을 입력하세요"
-											class="inputNumber" name="cnt"> 개</td>
+											class="inputNumber" name="cnt" value=1 disabled> 개</td>
 									</tr>
 
 

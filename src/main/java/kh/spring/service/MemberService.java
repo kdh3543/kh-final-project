@@ -75,34 +75,34 @@ public class MemberService {
 	}
 	//회원 정보 수정
 	public int modify(MemberDTO dto,MultipartFile file) throws Exception{
-		
-		
+
+
 		if(!file.isEmpty()) { //  업로드 된 파일 중 첫번째 파일이 비어있지 않다면,
 
-		String realPath = session.getServletContext().getRealPath("");
-		File realPathFile = new File(realPath);
-		if(!realPathFile.exists()) {
-			realPathFile.mkdir();
-		}
-		String oriName = file.getOriginalFilename();
-		String sysName = "/signup/"+UUID.randomUUID()+"_"+ oriName;
+			String realPath = session.getServletContext().getRealPath("");
+			File realPathFile = new File(realPath);
+			if(!realPathFile.exists()) {
+				realPathFile.mkdir();
+			}
+			String oriName = file.getOriginalFilename();
+			String sysName = "/signup/"+UUID.randomUUID()+"_"+ oriName;
 
-		file.transferTo(new File(realPath+"/"+sysName));
-		dto.setProfile_image(sysName);
+			file.transferTo(new File(realPath+"/"+sysName));
+			dto.setProfile_image(sysName);
 		}
-		
+
 		System.out.println(dto.getProfile_image()+"사진 정보수정완료");
-		
+
 		//비번 수정 안했을때 암호화 x 
 		if(dto.getPw().length()<16) {
 			String encPw = EncryptionUtils.getSHA512(dto.getPw());
 			dto.setPw(encPw);
-			
+
 		}
-		
-		
-		
-		
+
+
+
+
 		return mdao.modify(dto);
 	}
 	//가입 날짜
@@ -147,24 +147,24 @@ public class MemberService {
 	public int deleteBySeq(int seq) {
 		return mdao.deleteBySeq(seq);
 	}
-	
+
 	// 관리자 계정에서 Id 조회
 	public MemberDTO findIdBySeq(int seq) {
 		return mdao.findIdBySeq(seq);
 	}
-	
+
 	// 관리자 계정에서 가입 자 수 구하기
 	public List<GraphDTO> countMember() {
 		return mdao.countMember();
 	}
-	
+
 	// 관리자 계정에서 가입 월일 구하기
 	public  List<GraphDTO> groupByMonth() {
 		return mdao.groupByMonth();
 	}
 
 	//detail 에서 보여줄 오른쪽하단 상점정보
-	
+
 	public MemberDTO selectByIseq(int iseq) {
 		return mdao.selectByIseq(iseq);
 	}
@@ -183,6 +183,5 @@ public class MemberService {
 	   public String selectProfile(String id) {
 		   return mdao.selectProfile(id);
 	   }
-	
 
 }

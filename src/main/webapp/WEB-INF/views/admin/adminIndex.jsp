@@ -69,7 +69,7 @@
 					<button type="button" class="control-btn">회원관리</button>
 					<button type="button" class="question-btn">게시글 관리</button>
 					<button type="button" class="report-btn">신고 관리</button>
-					<button type="button" class="sell-statics-btn">회원통계</button>
+					<button type="button" class="mem-statics-btn">회원통계</button>
 					<button type="button" class="sell-statics-btn">판매통계</button>
 				</div>
 			</div>
@@ -196,7 +196,8 @@
 						<c:forEach var="monthList" items="${monthList}"
 							varStatus="getMonth">
 							<input type="text" name="getMonth"
-								class="getMonth${getMonth.count}" value="${monthList.month}" hidden>
+								class="getMonth${getMonth.count}" value="${monthList.month}"
+								hidden>
 						</c:forEach>
 						<!-- month에 따른 가입자 수 뽑아오기 -->
 						<c:forEach var="countMember" items="${countMember}"
@@ -206,46 +207,24 @@
 								value="${countMember.count}" hidden>
 						</c:forEach>
 						<div class="chart-div">
-							<canvas id="myChart" style="width:1000;height:500;"></canvas>
+							<canvas id="myChart" style="width: 1000; height: 500;"></canvas>
 						</div>
 
 						<script>
 							// 길이 값 불러오기 
 							let monthLeg = $("input[name='getMonth']").length;
 							let countLeg = $("input[name='countMem']").length;
-				
-							
+
 							let monthArr = [];
 							let countArr = [];
-							for(let i=0; i < monthLeg; i++ ){
-							  let temp = $(".getMonth"+(i+1)+"").val();
-							  let temp1 = $(".getCountMem"+(i+1)+"").val();
-							  monthArr [i] = temp;
-							  countArr [i] = temp1;
-							} 
-					
-							 
-							/* 	let yearArr = [];
-								let monthArr = [];
-								
-								$(document).ready(function(){
-										for(let i=0; i < count; i++){
-											let temp = $(".statistics-contents-div > .signupDate"+(i+1)+"").val();
-											console.log(temp);
-											yearArr [i] = temp.substr(0,4);
-											monthArr[i] = temp.substr(5,2);
+							for (let i = 0; i < monthLeg; i++) {
+								let temp = $(".getMonth" + (i + 1) + "").val();
+								let temp1 = $(".getCountMem" + (i + 1) + "")
+										.val();
+								monthArr[i] = temp;
+								countArr[i] = temp1;
+							}
 
-										}			
-										
-										console.log(yearArr);
-										console.log(monthArr);
-										
-										 
-									
-								});*/
-							/* 'January', 'February', 'March',
-							'April', 'May', 'June', 'July','Agust','September','October','Nomember','December' */
-							// chart 부분
 							const labels = monthArr;
 							const data = {
 								labels : labels,
@@ -263,6 +242,65 @@
 							};
 							const myChart = new Chart(document
 									.getElementById('myChart'), config);
+						</script>
+
+
+					</div>
+				</div>
+
+				<!-- 판매 통계 페이지 -->
+
+				<div class="sell-Statistics-page">
+					<div class="sell-Statistics-top-div">판매 통계</div>
+					<div class="sell-Statistics-contents-div">
+						1.등록된상품수 count 2. 판매중인 상품수 3. 구매중 (예약중)인 상품수 4. 거래완료된 상품수 5. 가장
+						비싼가격의 상품수 6. 가장 싼가격의 상품수 7. 가장 많은상품을 올린 사람과 상품개수
+					
+							1.등록된상품수 count
+							<c:forEach var="countItems" items="${countItems}">
+							${countItems.count}
+							</c:forEach>
+							
+							2. 판매중인 상품수
+							
+						<div class="chart-div">
+							
+							
+							<canvas id="itemCount"></canvas>
+						</div>
+
+						<script>
+							// 길이 값 불러오기 
+							let monthLeg = $("input[name='getMonth']").length;
+							let countLeg = $("input[name='countMem']").length;
+
+							let monthArr = [];
+							let countArr = [];
+							for (let i = 0; i < monthLeg; i++) {
+								let temp = $(".getMonth" + (i + 1) + "").val();
+								let temp1 = $(".getCountMem" + (i + 1) + "")
+										.val();
+								monthArr[i] = temp;
+								countArr[i] = temp1;
+							}
+
+							const labels = monthArr;
+							const data = {
+								labels : labels,
+								datasets : [ {
+									label : '회원가입 월별 추이',
+									backgroundColor : 'rgb(255, 99, 132)',
+									borderColor : 'rgb(255, 99, 132)',
+									data : countArr,
+								} ]
+							};
+							const config = {
+								type : 'line',
+								data : data,
+								options : {/* responsive:false */}
+							};
+							const myChart = new Chart(document
+									.getElementById('itemCount'), config);
 						</script>
 
 
@@ -289,24 +327,36 @@
 			$(".question-page").css("display", "none");
 			$(".report-page").css("display", "none");
 			$(".statistics-page").css("display", "none");
+			$(".sell-Statistics-page").css("display", "none");
 		})
 		$(".question-btn").on("click", function() {
 			$(".control-page").css("display", "none");
 			$(".report-page").css("display", "none");
 			$(".question-page").css("display", "block");
 			$(".statistics-page").css("display", "none");
+			$(".sell-Statistics-page").css("display", "none");
 		});
 		$(".report-btn").on("click", function() {
 			$(".control-page").css("display", "none");
 			$(".question-page").css("display", "none");
 			$(".report-page").css("display", "block");
 			$(".statistics-page").css("display", "none");
-		})
-		$(".sell-statics-btn").on("click", function() {
+			$(".sell-Statistics-page").css("display", "none");
+		});
+		$(".mem-statics-btn").on("click", function() {
 			$(".control-page").css("display", "none");
 			$(".question-page").css("display", "none");
 			$(".report-page").css("display", "none");
 			$(".statistics-page").css("display", "block");
+			$(".sell-Statistics-page").css("display", "none");
+
+		});
+		$(".sell-statics-btn").on("click", function() {
+			$(".control-page").css("display", "none");
+			$(".question-page").css("display", "none");
+			$(".report-page").css("display", "none");
+			$(".statistics-page").css("display", "none");
+			$(".sell-Statistics-page").css("display", "block");
 
 		})
 

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kh.spring.dto.BoardDTO;
 import kh.spring.dto.GraphDTO;
+import kh.spring.dto.ItemGraphDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.service.BoardService;
+import kh.spring.service.ItemsService;
 import kh.spring.service.MemberService;
 
 @Controller
@@ -27,6 +29,8 @@ public class AdminController {
 	@Autowired
 	public BoardService bservice;
 	
+	@Autowired
+	public ItemsService iservice;
 	
 	@Autowired
 	private HttpSession session;
@@ -42,6 +46,7 @@ public class AdminController {
 		// 게시물 관리 부분 호출
 		List<BoardDTO> blist = bservice.selectAll();
 		model.addAttribute("blist", blist);
+		
 		// 월일 호출 
 		List<GraphDTO> monthList = mservice.groupByMonth();
 		model.addAttribute("monthList",monthList);
@@ -50,9 +55,16 @@ public class AdminController {
 		List<GraphDTO> countMember = mservice.countMember();
 		model.addAttribute("countMember",countMember);
 			
-		System.out.println(monthList.get(0));
-		System.out.println(countMember);
-	
+		//1.등록된상품수 count 
+		List<ItemGraphDTO> countItems = iservice.countItems();
+		model.addAttribute("countItems",countItems);
+		System.out.println(countItems);
+		//2. 판매중인 상품수 
+		//3. 구매중 (예약중)인 상품수 
+		//4. 거래완료된 상품수 
+		//5. 가장 비싼가격의 상품수 
+		//6. 가장 싼가격의 상품수 
+		//7. 가장 많은상품을 올린 사람과 상품개수
 		return "/admin/adminIndex";
 		
 		
