@@ -27,66 +27,13 @@
 	crossorigin="anonymous"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/index.css">
-
-<style>
-.article_title {
-	font-size: 30px;
-	font-family: "OTWelcomeRA";
-	font-weight: 800;
-	padding: 8px 12px;
-}
-
-.main-container p {
-	font-size: 30px;
-	font-family: "OTWelcomeRA";
-	font-weight: 800;
-	padding: 8px 12px;
-}
-
-.main-container {
-	width: 80%;
-	height: 1000px;
-}
-
-.main-container .title {
-	font-size: 30px;
-}
-
-.contents {
-	width: 100%;
-	height: 100px;
-	border: 1px solid black;
-	margin-top: 5%;
-}
-
-.contents-list {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-}
-
-.contents-list .left-list img {
-	border: 1px solid black;
-	width: 100px;
-	height: 100px;
-}
-
-.right-list {
-	width: 100%;
-	height: 100%;
-	justify-content: center;
-	display: flex;
-	flex-direction: column;
-	padding-left: 3%;
-}
-</style>
+<link rel="stylesheet" href="/css//header_searchBar.css">
+<link rel="stylesheet" href="/css/storeList.css">
+<link rel="stylesheet" href="/css/footer.css">
 </head>
 
 <body>
-
-	<!-- form 태그 추가 button type=submit 변경 -->
+<!-- form 태그 추가 button type=submit 변경 -->
 	<form action="/items/searchByInput" name=inputForm method="post"
 		onsubmit="return frmSubmit()">
 		<!--  Header -->
@@ -101,9 +48,22 @@
 							<li>${loginID}</li>
 							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
-							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
+
+						</ul>
+					</c:when>
+
+					<c:when test="${Admin != null}">
+						<!----- admin 로그인 되었을 때,  ----->
+						<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
+							<li>${Admin}</li>
+							<!-- 수정중 -->
+							<li><a href="/admin/adminIndex">관리페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
 						</ul>
 					</c:when>
@@ -118,7 +78,7 @@
 			<div class="div-wrap">
 				<div class="nav_div">
 					<div class="logo">
-						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+						<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 					</div>
 
 
@@ -339,6 +299,7 @@
 
 
 
+
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
@@ -514,7 +475,7 @@
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>

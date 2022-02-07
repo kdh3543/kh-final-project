@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Admin">
+
+	<select id="countUploadItems" resultType="kh.spring.dto.CountUploadItemsDTO">
+
+		SELECT COUNT(*)AS COUNT,SUBSTR(WRITE_DATE,1,9) AS WRITE_DATE FROM ITEMS
+		GROUP BY SUBSTR(WRITE_DATE,1,9)
+
+	</select>
+
+	<select id="countSell" resultType="int">
+		SELECT COUNT(*)AS COUNT FROM ITEMS WHERE DEAL ='Y'
+	</select>
+	<select id="countBuy" resultType="int">
+		SELECT COUNT(*)AS COUNT FROM ITEMS WHERE DEAL2 ='R' OR DEAL2='Y'
+	</select>
+	<select id="bestSeller" resultType="kh.spring.dto.BestSellerDTO">
+		SELECT SELLERID ,COUNT(*)AS COUNT FROM ITEMS GROUP BY SELLERID ORDER BY
+		COUNT DESC
+	</select>
+	<select id="bestBuyer" resultType="kh.spring.dto.BestBuyerDTO">
+		SELECT BUYERID,COUNT(*)AS COUNT FROM ITEMS GROUP BY BUYERID HAVING BUYERID
+		IS NOT NULL ORDER BY COUNT DESC
+	</select>
+
+<!-- mybatis 에서 case when 사용시 묶어야함. -->
+	<select id="ItemsPriceRange" resultType="kh.spring.dto.PriceRangeDTO">
+		SELECT ISEQ,NAME,PRICE,SELLERID,
+		(CASE WHEN PRICE <![CDATA[<]]>'1000' THEN '1원이상'
+		WHEN PRICE <![CDATA[>=]]>'1000' AND PRICE <![CDATA[<]]>'10000' THEN '1천원이상'
+		WHEN PRICE <![CDATA[>=]]>'10000' AND PRICE <![CDATA[<]]>'100000' THEN '1만원이상'
+		ELSE '10만원이상'
+		END) AS PRICE_RANGE
+		FROM ITEMS ORDER BY PRICE
+
+	</select>
+	
+	<!-- 유형별 신고수 -->
+	
+	
+	<select id="ItemsReport" resultType="kh.spring.dto.ItemsReportDTO">
+	
+	SELECT * FROM ITEMS I INNER JOIN REPORT R ON (I.ISEQ =R.ISEQ)
+	
+	</select>
+	
+	<select id="ItemsReportCount" resultType="kh.spring.dto.ItemsReportCountDTO">
+	
+	SELECT ISEQ,COUNT(ISEQ)AS COUNT FROM REPORT GROUP BY ISEQ
+	
+	</select>
+	
+	
+
+
+
+</mapper>
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

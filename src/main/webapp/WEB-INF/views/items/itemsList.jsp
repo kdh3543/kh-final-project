@@ -27,29 +27,45 @@
 	crossorigin="anonymous"></script>
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
-<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/header_searchBar.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/items/itemsList.css">
 
 </head>
 
 <body>
 	
-<!-- form 태그 추가 button type=submit 변경 -->
-	<form action="/items/searchByInput" name =inputForm method="post" onsubmit="return frmSubmit()">
+
+
+	<!-- form 태그 추가 button type=submit 변경 -->
+	<form action="/items/searchByInput" name=inputForm method="post"
+		onsubmit="return frmSubmit()">
 		<!--  Header -->
 		<header>
 			<div class="header_Container">
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li>  <img src="${dto.profile_image}" style ="max-width:30px; max-height:30px;"></li>
-															
 							<li>${loginID}</li>
-<!-- 수정중 -->
+							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
-							<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
-							
-							
+
+
+						</ul>
+					</c:when>
+
+					<c:when test="${Admin != null}">
+						<!----- admin 로그인 되었을 때,  ----->
+						<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
+							<li>${Admin}</li>
+							<!-- 수정중 -->
+							<li><a href="/admin/adminIndex">관리페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
 						</ul>
 					</c:when>
 					<c:otherwise>
@@ -63,15 +79,15 @@
 			<div class="div-wrap">
 				<div class="nav_div">
 					<div class="logo">
-						<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+						<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 					</div>
-					
-					
+
+
 					<div class="searchBar">
 						<div class="input-group mb-3">
 
-	
-	<!-- 검색창 관련 -->
+
+							<!-- 검색창 관련 -->
 							<div class="btn-group ">
 								<input type="text" name="keyword" class="form-control"
 									placeholder="@상점명 또는 물품명 등을 검색해 보세요!"
@@ -85,9 +101,9 @@
 									<i class="fas fa-search fa-2x"></i>
 								</button>
 								<!--  돋보기 끝-->
-								
+
 								<input type=hidden name="user_id" value="${loginID}">
-								
+
 
 								<!-- 최신검색어-->
 								<!--  수정 -->
@@ -95,79 +111,75 @@
 								<div class="dropdown-menu" id=recent>
 									<!-- <a class="dropdown-item" href="/"
 										style="text-align: center"> -->
-										<div class="list-search-div">
 									<div class="list-search-div">
-									<a class="dropdown-item" id="search-dropdown" href="javascript:void(0);"
-										style="text-align: center">
-											<nav>
-												<div class="nav nav-tabs" id="nav-tab" role="tablist">
-													
-													<button class="nav-link active" id="nav-home-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-home"
-														type="button" role="tab" aria-controls="nav-home"
-														aria-selected="true">최근검색어</button>
-														
-														
-													<button class="nav-link" id="nav-profile-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-profile"
-														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어</button>
+										<div class="list-search-div">
+											<a class="dropdown-item" id="search-dropdown"
+												href="javascript:void(0);" style="text-align: center">
+												<nav class="top-nav">
+													<div class="nav nav-tabs" id="nav-tab1" role="tablist">
 
-												</div>
-											</nav>
-											<!-- 최근검색어 -->
-											<div class="tab-content" id="nav-tabContent">
-												<div class="tab-pane fade show active" id="nav-home"
-													role="tabpanel" aria-labelledby="nav-home-tab">
+														<button class="nav-link active" id="nav-search-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-search"
+															type="button" role="tab" aria-controls="nav-search"
+															aria-selected="true">최근검색어</button>
 
-													<!-- 내용 채워넣기 -->
-													<div id=text>
-													
-													<button type=button id=delBtn class="dropdown-item"
-														style="display: inline"><b><h5>검색어 전체삭제</h5></b></button>												
+
+														<button class="nav-link" id="nav-hotkeyword-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-hotkeyword"
+															type="button" role="tab" aria-controls="nav-hotkeyword"
+															aria-selected="false">인기검색어</button>
+
 													</div>
-																	
-														
-												</div>
-												<!--  인기검색어-->
-												  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-												
-												  </div>
-													
-												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">
-													<div class="hotkeyword-title">인기검색어 순위</div>
-													<div class=hotkeyword-contents>
-													
-													
-													<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
-														
-														<div>
-															<span class="hotkeyword-num">${statusHS.count}.</span>
-															<span class="hotkeyword-word">${hs.keyword}</span>
+												</nav> <!-- 최근검색어 -->
+												<div class="tab-content" id="nav-tabContent">
+													<div class="tab-pane fade show active" id="nav-home"
+														role="tabpanel" aria-labelledby="nav-home-tab">
+
+														<!-- 내용 채워넣기 -->
+														<div id=text>
+
+															<button type=button id=delBtn class="dropdown-item"
+																style="display: inline">
+																<b><h5>검색어 전체삭제</h5></b>
+															</button>
 														</div>
-														
-														
-														</c:forEach>
+
+
+													</div>
+													<!--  인기검색어-->
+										
+													<div class="tab-pane fade" id="nav-hotkeyword" role="tabpanel"
+														aria-labelledby="nav-hotkeyword-tab">
+														<div class="hotkeyword-title">인기검색어 순위</div>
+														<div class=hotkeyword-contents>
+
+
+															<c:forEach var="hs" items="${hslist}"
+																varStatus="statusHS">
+
+																<div>
+																	<span class="hotkeyword-num">${statusHS.count}.</span>
+																	<span class="hotkeyword-word">${hs.keyword}</span>
+																</div>
+
+
+															</c:forEach>
+														</div>
 													</div>
 												</div>
-
-											</div>
 											</a>
 										</div>
+									</div>
 								</div>
-							</div>
-							</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
 		</header>
 	</form>
-
-
-
-<!-- 검색어 전체 삭제 -->
-								<script>
+	<!-- 검색어 전체 삭제 -->
+	<script>
 								
 									$("#delBtn").on("click", function() {
 										$.ajax({
@@ -178,10 +190,10 @@
 										})
 									})
 								</script>
-								
-								<!-- 검색어 하나 눌렀을때 검색되게 -->
 
-								<script>
+	<!-- 검색어 하나 눌렀을때 검색되게 -->
+
+	<script>
 									$('#text').on("click",	".delBtnOne",function() {
 										/*버튼 X 제거하고 값 추출  */
 														var str = $(this).parent().text().slice(0, -1);
@@ -194,9 +206,9 @@
 																	})
 																})
 								</script>
-								<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
+	<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 
-						<script>
+	<script>
 						// 검색버튼 눌렀을 때, 
 							$(function() {
 
@@ -260,9 +272,9 @@
 							})
 			
 						</script>
-						
-						<!-- 검색시 공백 막기-->
-							<script>
+
+	<!-- 검색시 공백 막기-->
+	<script>
 						
 						function frmSubmit() {
 							let searchValue = $("#search").val();
@@ -277,11 +289,6 @@
 							
 							
 						</script>
-
-							
-
-
-
 
 	<main>
 		<div class="index-container">
@@ -317,7 +324,7 @@
 						</a> | <a href="/items/myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
 						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
-							class="fas fa-comment fa-2x"></i> 00톡
+							class="fas fa-comment fa-2x"></i> 유즈톡
 						</a> | <a href="/board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
@@ -359,8 +366,9 @@
 												<div class="detail-container">
 													<div class="title">${i.name}</div>
 													<div class="price">${i.price}원</div>
+													<div class="exarea">위치 : ${i.exarea}</div>
 													<div class="date">${i.detailDate}</div>
-													<div class="exarea">${i.exarea}</div>
+													
 
 													<%-- <div class="title">${flist.oriname}</div> --%>
 												</div>
@@ -386,8 +394,9 @@
 												<div class="detail-container">
 													<div class="title">${i.name}</div>
 													<div class="price">${i.price}원</div>
+													<div class="exarea">위치 : ${i.exarea}</div>
 													<div class="date">${i.detailDate}</div>
-													<div class="exarea">${i.exarea}</div>
+													
 													
 													<%-- <div class="title">${flist.oriname}</div> --%>
 												</div>
@@ -405,22 +414,28 @@
 
 			</div>
 		</div>
-		<div class="d-none d-lg-block" id="sideBar">
+	<div class="d-none d-lg-block" id="sideBar">
 			<div class="sidebar-div">
-				<a href="#">
+			<c:choose>
+				<c:when test="${loginID != null}">
+					<a href="#">
 					<button class="btn btn-outline-secondary" type="button"
 						id="likeProductBtn">
-						찜한상품<br> <i class="fas fa-heart">개수</i>
+						찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
+					</button>
+				</a>
+				</c:when>
+				<c:otherwise>
+					<a href="#">
+					<button class="btn btn-outline-secondary" type="button"
+						id="likeProductBtn">
+						<p>찜한상품<br>0</p>
 					</button>
 
 				</a>
-				<div class="sidebar-resently-div">
-					<div class="sidebar-title-div">최근 본 상품</div>
-					<div class="sidebar-product-div">
-						<img src="/imgs/comingSoon.png"> <img src="/imgs/comingSoon.png">
-					</div>
-
-				</div>
+				</c:otherwise>
+			</c:choose>
+				
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
@@ -429,7 +444,7 @@
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
@@ -451,6 +466,12 @@
 			}
 
 		})
+		
+		$("#likeBtnAfterLogin").on("click", function() {
+				
+			location.href="/items/myPage?"
+
+		});
 	</script>
 </body>
 

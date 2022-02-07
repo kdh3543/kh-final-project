@@ -56,7 +56,7 @@
 		<div class="div-wrap">
 			<div class="nav_div">
 				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+					<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 				</div>
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 					<div class="control-top-div">회원관리</div>
 					<div class="control-contents-div">
 						<table>
-							<tr>
+							<tr style="background: lightgray;">
 								<th><input type="checkbox" id="checkAll">
 								<th>번호
 								<th>아이디
@@ -154,7 +154,7 @@
 						</script>
 
 						<table id="boardListTable">
-							<tr>
+							<tr style="background: lightgray;">
 								<th><input type="checkbox" id="chkBoardAll">
 								<th>글번호
 								<th>글주제
@@ -185,7 +185,57 @@
 
 				<!-- 신고 페이지 -->
 				<div class="report-page">
-					<div class="report-top-div">신고 페이지</div>
+					<div class="report-top-div">신고 관리</div>
+					<div class="report-contents-div">
+						<!-- 신고관리 시작 -->
+						<!-- //1-신고 LIST -->
+						<div class="contentsList1">신고 상세 리스트</div>
+
+						<table class="listTable1">
+							<tr style="background: lightgray;">
+								<th>상품번호
+								<th>상품명
+								<th>상품가격
+								<th>상품판매자
+								<th>상품신고자
+								<th>상품신고사유
+								<th>상품등록일
+								<th>상품신고일
+							</tr>
+
+							<c:forEach var="ipr" items="${ItemsReport}" varStatus="status">
+								<tr>
+									<td>${ipr.iseq}</td>
+									<td>${ipr.name}</td>
+									<td>${ipr.price}</td>
+									<td>${ipr.sellerID}</td>
+									<td>${ipr.buyerid_1}</td>
+									<td>${ipr.reason}</td>
+									<td>${ipr.report_date}</td>
+								</tr>
+
+							</c:forEach>
+						</table>
+
+						<!-- //2-신고개수 (상품iseq / count) --LIST -->
+						<div class="contentsList2">상품 신고 리스트</div>
+						<table class="listTable2">
+							<tr style="background: lightgray;">
+								<th>상품번호
+								<th>신고횟수
+							</tr>
+
+							<c:forEach var="ipr" items="${ItemsReportCount}"
+								varStatus="status">
+								<tr>
+									<td>${ipr.iseq}</td>
+									<td>${ipr.count}</td>
+								</tr>
+
+							</c:forEach>
+						</table>
+
+					</div>
 				</div>
 
 				<!-- 회원통계 페이지 -->
@@ -207,7 +257,7 @@
 								value="${countMember.count}" hidden>
 						</c:forEach>
 						<div class="chart-div">
-							<canvas id="myChart" style="width: 1000; height: 500;"></canvas>
+							<canvas id="myChart"></canvas>
 						</div>
 
 						<script>
@@ -253,58 +303,126 @@
 				<div class="sell-Statistics-page">
 					<div class="sell-Statistics-top-div">판매 통계</div>
 					<div class="sell-Statistics-contents-div">
-						1.등록된상품수 count 2. 판매중인 상품수 3. 구매중 (예약중)인 상품수 4. 거래완료된 상품수 5. 가장
-						비싼가격의 상품수 6. 가장 싼가격의 상품수 7. 가장 많은상품을 올린 사람과 상품개수
-					
-							1.등록된상품수 count
-							<c:forEach var="countItems" items="${countItems}">
-							${countItems.count}
+
+						<!-- //1.등록된 상품수 -->
+						<div class="sellList1">전체 등록된 상품 수</div>
+						<table class="sellListTable1">
+							<tr>
+								<th>상품 수
+								<th>등록날짜
+							</tr>
+
+							<c:set var="doneLoop" value="false" />
+							<c:forEach var="ipr" items="${countUploadItems}"
+								varStatus="status">
+								<c:if test="${not doneLoop}">
+									<c:if test="${status.count == 10}">
+										<c:set var="doneLoop" value="true" />
+									</c:if>
+
+									<tr>
+										<td>${ipr.count}</td>
+										<td>${ipr.write_date}</td>
+									</tr>
+								</c:if>
+
 							</c:forEach>
-							
-							2. 판매중인 상품수
-							
-						<div class="chart-div">
-							
-							
-							<canvas id="itemCount"></canvas>
+						</table>
+
+
+						<!-- //2. 판매중인 상품수 -->
+						<div class="sellList2">현재 판매중인 상품 수</div>
+
+						<table class="sellListTable2">
+							<tr>
+								<th>상품 수
+							</tr>
+							<tr>
+								<td>${countSell}개</td>
+							</tr>
+
+						</table>
+
+
+						<!-- //3. 구매중 (예약중)인 OR 거래완료된 상품수-->
+						<div class="sellList3">거래 진행 중인 상품 수</div>
+
+						<table class="sellListTable3">
+							<tr>
+								<th>상품 수
+							</tr>
+							<tr>
+								<td>${countBuy}개</td>
+							</tr>
+
+						</table>
+						<div class="list-div">
+							<div class="list-left-div">
+								<!--    //4.  가장 많은상품을 올린 사람과 상품개수 List -->
+								<div class="sellList4">최다 등록 판매자 및 상품 수</div>
+								<table class="sellListTable4">
+									<tr>
+										<th>순위
+										<th>판매자명
+										<th>등록 상품 수
+									</tr>
+
+									<c:forEach var="ipr" items="${bestSeller}" varStatus="status">
+
+										<tr>
+											<td>${status.count }
+											<td>${ipr.sellerid}</td>
+											<td>${ipr.count}</td>
+										</tr>
+
+									</c:forEach>
+								</table>
+							</div>
+							<div class="list-right-div">
+								<!-- //5  가장 많은상품을 구매한 사람과 상품개수 List  -->
+								<div class="sellList5">가장 많은상품을 구매한 사람 순위</div>
+								<table class="sellListTable5">
+									<tr>
+										<th>순위
+										<th>구매자명
+										<th>구매 수
+									</tr>
+
+									<c:forEach var="ipr" items="${bestSeller}" varStatus="status">
+
+										<tr>
+											<td>${status.count}</td>
+											<td>${ipr.sellerid}</td>
+											<td>${ipr.count}</td>
+										</tr>
+
+									</c:forEach>
+								</table>
+							</div>
 						</div>
+						
+						<!-- //6. 가격대별 상품수 4그룹으로 나뉨 1원이상/1천원이상/1만원이상/10만원이상 + 반복문 제어 연습 -->
+						 <div class="sellList6">가격대별 상품 수 </div>
+							<table class="sellListTable6">
+							<tr>
+								<th>상품번호
+								<th>상품명
+								<th>상품가격
+								<th>상품판매자
+								<th>상품가격대
+							</tr>
 
-						<script>
-							// 길이 값 불러오기 
-							let monthLeg = $("input[name='getMonth']").length;
-							let countLeg = $("input[name='countMem']").length;
-
-							let monthArr = [];
-							let countArr = [];
-							for (let i = 0; i < monthLeg; i++) {
-								let temp = $(".getMonth" + (i + 1) + "").val();
-								let temp1 = $(".getCountMem" + (i + 1) + "")
-										.val();
-								monthArr[i] = temp;
-								countArr[i] = temp1;
-							}
-
-							const labels = monthArr;
-							const data = {
-								labels : labels,
-								datasets : [ {
-									label : '회원가입 월별 추이',
-									backgroundColor : 'rgb(255, 99, 132)',
-									borderColor : 'rgb(255, 99, 132)',
-									data : countArr,
-								} ]
-							};
-							const config = {
-								type : 'line',
-								data : data,
-								options : {/* responsive:false */}
-							};
-							const myChart = new Chart(document
-									.getElementById('itemCount'), config);
-						</script>
-
-
-					</div>
+							<c:forEach var="ipr" items="${ItemsPriceRange}"
+								varStatus="status">
+									<tr>
+										<td>${ipr.iseq}</td>
+										<td>${ipr.name}</td>
+										<td>${ipr.price}</td>
+										<td>${ipr.sellerID}</td>
+										<td>${ipr.price_range}</td>
+									</tr>
+							</c:forEach>
+						</table>
 				</div>
 			</div>
 		</div>

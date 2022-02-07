@@ -38,32 +38,37 @@
 </head>
 <body>
 
+	
 	<c:choose>
 		<c:when test="${loginID !=null}">
 			<header>
-
-
-
 				<div class="header_Container">
-					<ul class="header_list">
-						<li><a href="signIn">${loginID }</a></li>
-						<li><a href="join">회원가입</a></li>
-					</ul>
+					<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
+							<li>${loginID}</li>
+							<!-- 수정중 -->
+							<li><a href="/items/myPage?">마이페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+
+						</ul>
 				</div>
 				<div class="div-wrap">
 					<div class="nav_div">
 						<div class="logo">
-							<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 						</div>
+						
+						
+						
 					</div>
 				</div>
 				<div class="div-wrap3"></div>
 			</header>
 
 		</c:when>
-
-		<c:otherwise>
-		</c:otherwise>
 	</c:choose>
 
 	<main>
@@ -449,9 +454,9 @@
 
 								<div class="add-btns-div">
 									<input type="submit" class="btn btn-outline-secondary"
-										id="productAddBtn">수정하기
-									<a href="/items/myPage"><button
-											class="btn btn-outline-secondary" id="resetBtn" type="button">돌아가기</button></a>
+										id="productAddBtn" value="수정하기">
+									<a href="/items/myPage">
+									<button class="btn btn-outline-secondary" id="resetBtn" type="button">돌아가기</button></a>
 								</div>
 							</div>
 						</form>
@@ -510,7 +515,7 @@
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>

@@ -11,45 +11,48 @@ import kh.spring.dto.SearchKeywordDTO;
 
 @Service
 public class SearchService {
-	
+
 	@Autowired
 	public SearchKeywordDAO sdao;
-	
-	
-public List<SearchKeywordDTO> selectAll(String id){
-		
+
+
+	public List<SearchKeywordDTO> selectAll(String id){
+
 		return sdao.selectAll(id);
 	}
 
-public int insert (SearchKeywordDTO dto) {
-	
-	return sdao.insert(dto);
-	
-	 
-}
+	public int insert (SearchKeywordDTO dto) {
 
-public int deleteAll () {
-	
-	return sdao.deleteAll();
-}
+		return sdao.insert(dto);
 
-public int deleteByKeyword(String keyword) {
-	
-	
-	return sdao.deleteByKeyword(keyword);
-}
 
-public List<SearchKeywordDTO>selectByHot(){
+	}
+	public int insertHot(SearchKeywordDTO dto) {
+		return sdao.insertHot(dto);
+	}
 	
-	return sdao.selectByHot();
-}
+	public int deleteAll () {
 
-// 최근검색어 중복되는지 확인
+		return sdao.deleteAll();
+	}
 
-public int searchExistCount(String keyword) {
-	
-	return sdao.searchExistCount(keyword);
+	public int deleteByKeyword(String keyword) {
 
-}
+
+		return sdao.deleteByKeyword(keyword);
+	}
+
+	public List<SearchKeywordDTO>selectByHot(){
+
+		return sdao.selectByHot();
+	}
+
+	// 최근검색어 중복되는지 확인
+
+	public int searchExistCount(String keyword) {
+
+		return sdao.searchExistCount(keyword);
+
+	}
 
 }

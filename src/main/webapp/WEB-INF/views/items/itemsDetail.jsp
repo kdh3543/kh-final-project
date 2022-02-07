@@ -777,7 +777,7 @@
 											</c:forEach>
 										</div>
 									</form>
-								<script>
+									<script>
 								$(document).ready(function(){
 									$('.write-textarea').on('keyup',function(){
 										$("#write_cnt").html("("+$(this).val().length+" /100)");
@@ -789,16 +789,20 @@
 									});
 								});
 								</script>
-									<div>
-										<c:forEach var="q" items="${qlist}" varStatus="status">
-										${q.writer}
-										${q.contents}
-										${q.parsed_date}
-										<c:if test="${q.writer == loginID}">
+
+									<c:forEach var="q" items="${qlist}" varStatus="status">
+										<div class="questionList">
+
+											<div class="listWriter">${q.writer}</div>
+
+											<div class="listContents">${q.contents}</div>
+
+											<div class="listDate">${q.parsed_date}</div>
+											<c:if test="${q.writer == loginID}">
 												<div class="btn-group">
 													<button type="button" class="btn btn-secondary-light"
 														data-bs-toggle="dropdown" aria-expanded="false">
-														<i class="fas fa-ellipsis-v fa-2x"></i>
+														<i class="fas fa-ellipsis-v fa-1x"></i>
 													</button>
 													<ul class="dropdown-menu">
 
@@ -812,8 +816,9 @@
 													</ul>
 												</div>
 											</c:if>
-										</c:forEach>
-									</div>
+
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 
@@ -919,6 +924,8 @@
 	         });
       
    });
+								</script>
+								<script>	
 								
 								
 								 $("#followBtn").on("click",function(){
@@ -935,7 +942,9 @@
 									 if(confirm(followInnerVal+" 하시겠습니까?")){
 										 
 										 let sellerID = $("#mdtoid").val();
+										 console.log(sellerID);
 										 let followingID = $("#loginid").val();
+										 console.log(followingID);
 										 
 										 
 										 $.ajax({
@@ -967,13 +976,13 @@
 											varStatus="statusDF">
 
 											<c:if test="${di.iseq eq df.parentSeq }">
-												<c:if test="${statusDI.index <2}">
+												<c:if test="${statusDI.index <3}">
 
 
 													<a style="text-decoration: none;' "
 														href="/items/itemsDetail?iseq=${di.iseq}"><img
 														src="${df.sysName}"
-														style="min-width: 150px; min-height: 100px;"></a>
+														style="min-width: 100px; min-height: 100px;"></a>
 												&nbsp;
 												</c:if>
 
@@ -985,10 +994,15 @@
 
 								</div>
 								<br>
+	
 								<div class="more-btn-div">
+								<a href="/items/otherPage?id=${mdto.id}">
 									<button type="button" class="moreBtn">${detailICount}개의
 										상품 더보기 ></button>
+										</a>
+										
 								</div>
+								
 								<!-- <div class="shop-info-review">
 									<div class="review-title-div">상점후기</div>
 									<div class="review-title-contents">
@@ -1027,7 +1041,7 @@
 	<!-- <!— footer —> -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>

@@ -40,21 +40,56 @@
 </head>
 
 <body>
-	<header>
-		<div class="header_Container">
-			<ul class="header_list">
-				<li><a href="signIn">로그인</a></li>
-				<li><a href="join">회원가입</a></li>
-			</ul>
-		</div>
-		<div class="div-wrap">
-			<div class="nav_div">
-				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+		<c:choose>
+		<c:when test="${loginID !=null}">
+			<header>
+				<div class="header_Container">
+					<c:choose>
+						<c:when test="${loginID != null}">
+							<ul class="header-list-after-login">
+								<li>${loginID}</li>
+		
+								<li><a href="/items/myPage?">마이페이지</a></li>
+								<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+
+							</ul>
+						</c:when>
+
+						<c:when test="${Admin != null}">
+							<!----- admin 로그인 되었을 때,  ----->
+							<ul class="header-list-after-login">
+								<li><img src="${dto.profile_image}"
+									style="max-width: 30px; max-height: 30px;"></li>
+
+								<li>${Admin}</li>
+								<!-- 수정중 -->
+								<li><a href="/admin/adminIndex">관리페이지</a></li>
+								<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<ul class="header_list">
+								<li><a href="signIn">로그인</a></li>
+								<li><a href="join">회원가입</a></li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 				</div>
-			</div>
-		</div>
-	</header>
+				<div class="div-wrap">
+					<div class="nav_div">
+						<div class="logo">
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+						</div>
+					</div>
+				</div>
+
+			</header>
+
+		</c:when>
+	</c:choose>
+
 
 	<main>
 		<div class="contents-box">
@@ -79,7 +114,7 @@
 	</main>
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>

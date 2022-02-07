@@ -44,9 +44,6 @@
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
-
 							<li>${loginID}</li>
 							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
@@ -116,18 +113,18 @@
 										<div class="list-search-div">
 											<a class="dropdown-item" id="search-dropdown"
 												href="javascript:void(0);" style="text-align: center">
-												<nav>
-													<div class="nav nav-tabs" id="nav-tab" role="tablist">
+												<nav class="top-nav">
+													<div class="nav nav-tabs" id="nav-tab1" role="tablist">
 
-														<button class="nav-link active" id="nav-home-tab"
-															data-bs-toggle="tab" data-bs-target="#nav-home"
-															type="button" role="tab" aria-controls="nav-home"
+														<button class="nav-link active" id="nav-search-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-search"
+															type="button" role="tab" aria-controls="nav-search"
 															aria-selected="true">최근검색어</button>
 
 
-														<button class="nav-link" id="nav-profile-tab"
-															data-bs-toggle="tab" data-bs-target="#nav-profile"
-															type="button" role="tab" aria-controls="nav-profile"
+														<button class="nav-link" id="nav-hotkeyword-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-hotkeyword"
+															type="button" role="tab" aria-controls="nav-hotkeyword"
 															aria-selected="false">인기검색어</button>
 
 													</div>
@@ -141,18 +138,16 @@
 
 															<button type=button id=delBtn class="dropdown-item"
 																style="display: inline">
-																<b><h5>검색어 전체삭제</h5></b>
+																<b><h6>검색어 전체삭제</h6></b>
 															</button>
 														</div>
 
 
 													</div>
 													<!--  인기검색어-->
-													<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-														aria-labelledby="nav-contact-tab"></div>
-
-													<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-														aria-labelledby="nav-profile-tab">
+										
+													<div class="tab-pane fade" id="nav-hotkeyword" role="tabpanel"
+														aria-labelledby="nav-hotkeyword-tab">
 														<div class="hotkeyword-title">인기검색어 순위</div>
 														<div class=hotkeyword-contents>
 
@@ -169,7 +164,6 @@
 															</c:forEach>
 														</div>
 													</div>
-
 												</div>
 											</a>
 										</div>
@@ -179,6 +173,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		</header>
 	</form>
 		<!-- 검색어 전체 삭제 -->
@@ -329,8 +324,8 @@
 
                      </script>
                      <div class="contents-container">
-                        <div class="contents-div-writer">${dto.writer} ·</div>
-                        <div class="contents-div-location"> 위치 ·</div>
+                        <div class="contents-div-writer">${dto.writer} </div>
+                        <div class="contents-div-location"> </div>
                         <div class="contents-div-writedate"> ${dto.parsed_date}</div>
                      </div>
                      <div class="form-floating">
@@ -381,7 +376,7 @@
 
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>

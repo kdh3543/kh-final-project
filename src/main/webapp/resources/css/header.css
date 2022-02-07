@@ -70,3 +70,35 @@ header .logoImg {
 	width: 60%;
 	height: 100%;
 }
+
+/* 로그인 후 */
+header .header-list-after-login {
+	list-style: none;
+	display: flex;
+	padding-left: 0;
+}
+
+header .header-list-after-login li {
+	padding: 12px 12px;
+}
+
+header .header-list-after-login li:nth-child(1) {
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 15px;
+}
+
+header .header-list-after-login li:nth-child(2) a{
+	text-decoration: none;
+	color: whitesmoke;
+	font-family: 'OTWelcomeRA';
+	font-size: 15px;
+}
+
+header .header-list-after-login li:nth-child(3) a{
+	text-decoration: none;
+	color:  #f8d200;
+	font-family: 'OTWelcomeRA';
+	font-size: 15px;
+}

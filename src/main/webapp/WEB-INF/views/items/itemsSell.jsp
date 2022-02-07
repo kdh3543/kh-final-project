@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/css/header.css">
 <link rel="stylesheet" href="/css/footer.css">
 <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/items/itemsSell.css">
+<link rel="stylesheet" href="/css/items/itemsSell.css">
 <!-- 주소 API -->
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -41,26 +41,48 @@
 	<c:choose>
 		<c:when test="${loginID !=null}">
 			<header>
-
-
-
 				<div class="header_Container">
-					<ul class="header_list">
-						<li><a href="signIn">로그인</a></li>
-						<li><a href="join">회원가입</a></li>
-					</ul>
+					<c:choose>
+						<c:when test="${loginID != null}">
+							<ul class="header-list-after-login">
+								<li>${loginID}</li>
+								<!-- 수정중 -->
+								<li><a href="/items/myPage?">마이페이지</a></li>
+								<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+
+							</ul>
+						</c:when>
+
+						<c:when test="${Admin != null}">
+							<!----- admin 로그인 되었을 때,  ----->
+							<ul class="header-list-after-login">
+								<li><img src="${dto.profile_image}"
+									style="max-width: 30px; max-height: 30px;"></li>
+
+								<li>${Admin}</li>
+								<!-- 수정중 -->
+								<li><a href="/admin/adminIndex">관리페이지</a></li>
+								<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<ul class="header_list">
+								<li><a href="signIn">로그인</a></li>
+								<li><a href="join">회원가입</a></li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="div-wrap">
 					<div class="nav_div">
 						<div class="logo">
 							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 						</div>
-						
-						
-						
 					</div>
 				</div>
-				<div class="div-wrap3"></div>
+
 			</header>
 
 		</c:when>
@@ -78,39 +100,36 @@
 						</button>
 						<ul class="dropdown-menu">
 
+							
 							<!-- Dropdown menu links -->
-							<li>
-								<h6 class="dropdown-header">전체 카테고리</h6>
-							</li>
-							<li><a class="dropdown-item" href="#" id="c01">여성의류</a>
-								<div class="c01-content">
-									<a class="dropdown-item" href="#">여성 상의</a> <a
-										class="dropdown-item" href="#">여성 하의</a>
-								</div></li>
-							<li><a class="dropdown-item" href="#" id="c02">남성의류</a>
-								<div class="c02-content">
-									<a class="dropdown-item" href="#">남성 상의</a> <a
-										class="dropdown-item" href="#">남성 하의</a>
-								</div></li>
-							<li><a class="dropdown-item" href="#" id="c03">신발</a>
-								<div class="c03-content">
-									<a class="dropdown-item" href="#">운동화</a> <a
-										class="dropdown-item" href="#">슬리퍼</a>
-								</div></li>
-							<li><a class="dropdown-item" href="#" id="c04">가방</a></li>
-							<li><a class="dropdown-item" href="#" id="c05">시계/쥬얼리</a></li>
-							<li><a class="dropdown-item" href="#" id="c06">패션악세서리</a></li>
-							<li><a class="dropdown-item" href="#" id="c07">디지털/가전</a></li>
-							<li><a class="dropdown-item" href="#" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="#" id="c09">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="#" id="c10">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="#" id="c11">스타굿즈</a></li>
-							<li><a class="dropdown-item" href="#" id="c12">키덜트</a></li>
+							<li><h6 class="dropdown-header">전체 카테고리</h6></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
 						</ul>
 					</div>
 					<div class="rightList">
 
-					<a href="/items/itemsSell" class="btn-sell"> <i
+						<a href="/items/itemsSell" class="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="myPage" class="btn-myshop"> <i
 							class="fas fa-store fa-2x"></i> 내상점
@@ -159,17 +178,11 @@
 										<!-- 파일 넘기기 / 파일 미리보기  -->
 										<td>
 											<div id='att_zone'>
-												<label for="btnAtt"> <img
-													src="/imgs/inputIMG.png">
+												<label for="btnAtt"> <img src="/imgs/inputIMG.png">
 												</label> <input type=file class="btn btn-primary" name=file
 													id="btnAtt" multiple style="display: none;" required>
 
-											</div> 
-											
-	
-											
-<!--미리보기 script -->											
- <script>
+											</div> <!--미리보기 script --> <script>
 ( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
   imageView = function imageView(att_zone, btn){
 
@@ -307,25 +320,25 @@
 									</tr>
 									<tr>
 										<td>거래지역</td>
-										<td>
-										
-										<input type="text"
-											placeholder="주소" id="input-address" name="exarea" required>
-											<button type="button" id="findAddress">주소검색</button>
-											
+										<td><input type="text" placeholder="주소"
+											id="input-address" name="exarea" required>
+											<button type="btn btn-outline-secondary" id="findAddress">주소검색</button>
+
 
 										</td>
 									</tr>
 									<tr>
 										<td>상품 상태</td>
-										<td><input type="radio" name="condition" value="상" required>상
-											<input type="radio" name="condition" value="중">중 <input
-											type="radio" name="condition" value="하">하</td>
+										<td><input type="radio" name="condition" value="상"
+											required>상 <input type="radio" name="condition"
+											value="중">중 <input type="radio" name="condition"
+											value="하">하</td>
 									</tr>
 									<tr>
 										<td>교환여부</td>
-										<td><input type="radio" name="refundable" value="불가능" required>불가능
-											<input type="radio" name="refundable" value="가능">가능</td>
+										<td><input type="radio" name="refundable" value="불가능"
+											required>불가능 <input type="radio" name="refundable"
+											value="가능">가능</td>
 									</tr>
 									<tr>
 										<td>가격</td>
@@ -362,10 +375,10 @@
 								<!-- 좋아요 개수 -->
 								<input type="hidden" name="like_cnt" value=0>
 								<!-- 사진 저장  -->
-								
-									<!-- 조회수-->
-									
-									<input type="hidden" name= "view_cnt" value=0> 
+
+								<!-- 조회수-->
+
+								<input type="hidden" name="view_cnt" value=0>
 
 
 
@@ -418,15 +431,15 @@
 						</div>
 					</div> -->
 					<!-- 구매내역 -->
-				<!-- 	<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+					<!-- 	<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
 						aria-labelledby="nav-purchase-tab">페이지3</div>
 				</div> -->
-			</div>
+				</div>
 	</main>
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
@@ -442,7 +455,7 @@
 		}
 	
 	</script>
-	
+
 
 </body>
 </html>

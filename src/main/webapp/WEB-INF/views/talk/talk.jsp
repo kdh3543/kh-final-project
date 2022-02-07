@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>00톡</title>
+        <title>유즈톡</title>
         <!-- fontawesome-->
         <script src="https://kit.fontawesome.com/7d7ec2f3ed.js" crossorigin="anonymous"></script>
         <!-- Jquery-->
@@ -29,10 +29,7 @@
 
 
     </head>
-    <script>
-      let test;
-
-    </script>
+ 
 
     <body>
       <header>
@@ -40,9 +37,7 @@
           <c:choose>
             <c:when test="${loginID != null}">
               <ul class="header-list-after-login">
-                <li>이미지 부분 : ${dto.profile_image}</li>
-                <li>${loginID}님안녕하세요</li>
-
+                <li>${loginID}</li>
                 <li><a href="/items/myPage">마이페이지</a></li>
                 <li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
@@ -51,14 +46,13 @@
           </c:choose>
         </div>
         <div class="div-wrap">
-          <div class="nav_div">
-            <div class="logo">
-              <i class="fas fa-seedling"></i> <a href="/">00마켓</a>
-            </div>
-
-
-
-          </div>
+					<div class="nav_div">
+						<div class="logo">
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+						</div>
+					</div>
+				</div>
+       
       </header>
       <main>
         <div class="talk-container">
