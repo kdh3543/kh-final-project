@@ -330,7 +330,16 @@
 							<div></div>
 							
 						</div>
-						
+						<div class="right-info">
+							<label>
+								<div> address1 : ${dto.address1}</div>
+							</label>
+							 <div> address2 :  ${dto.address2}</div> 
+							<div>prefer_location: ${dto.prefer_location}</div>
+							<div>phone : ${dto.phone }</div>
+							<div>name : ${dto.name }</div>
+							
+						</div>
 						
 						<div class="right-introduce">
 							소개글
@@ -410,7 +419,7 @@
 									<td>${i.name}</td>
 									<td>${i.price}</td>
 									<td>${i.like_cnt}</td>
-									<td><a href="/items/otherPage?id=${i.buyerID}">${i.buyerID}</a></td>
+									<td>문의수들어갈자리</td>
 									<td>${i.detailDate}</td>
 									<%-- <td><a href="/items/itemsModify?iseq=${i.iseq}"><button
 												type="button" class=" btn btn-lg btn-light">수정하기</button></a></td> --%>

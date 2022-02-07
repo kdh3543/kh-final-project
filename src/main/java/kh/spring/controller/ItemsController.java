@@ -895,7 +895,96 @@ public class ItemsController {
 	}
 	
 	
+	@RequestMapping("reserveOtherPage")
+	public String reserveOtherPage(String id,Model model) {
+		
+		
+		MemberDTO dto = mservice.select(id);
+	    //가입한지 몇일 째인지 확인
+	    int signDate = mservice.signDate(id);
+	    model.addAttribute("signDate",signDate);
+	    model.addAttribute("dto", dto);
+	    
+	  //해당 id 의 상품목록들 가져오기
+	    List<ItemsDTO> ilist = iservice.selectMineById(id);
+	    //해당 상품목록의 사진들도 가져오기
+	    List<FilesDTO> flist = fservice.selectMineById(id);
+
+	    //찜 목록 가져오기
+	    List<ItemsDTO> wishlist = new ArrayList<ItemsDTO>();
+	    
+	    
+	    
+	    
+	    //iseq 값 가져옴 여러개나옴 이 값은 ITEMSDTO 와 연관
+	    wishlist = wlservice.mywishList(id);
+	    
+
+	    //마이페이지-찜목록 사진 출력
+	    List<FilesDTO> likeImg = fservice.selectLikeImg(id);
+	    
+	    
+	    model.addAttribute("wlist",wishlist);
+	    //찜 개수 가져오기
+	    int wishlistCount = wlservice.wishlistCount(id);
+	    model.addAttribute("wCount",wishlistCount);
+	    model.addAttribute("likeImg",likeImg);
+	    
+	    
+	  //상점방문수 추가 otherpage 왔을때 추가
+	    
+	  		int result = mservice.addViewCount(id);
+	  		
+	  	//판매내역 건수 보내기
+
+	  	    int sellCount = iservice.sellCount(id);
+
+	  	    model.addAttribute("ilist",ilist);
+	  	    model.addAttribute("flist",flist);
+	  	    model.addAttribute("sellCount",sellCount);
+	  	    
+	  	    
+	  	    //구매내역 건수 보내기
+	  	    
+	  	    //구매내역 보내기
+	  	    
+	  	    List<ItemsDTO> buyIlist = iservice.buyIList(id);
+	  	    List<FilesDTO> buyFlist = fservice.buyFList(id);
+	  	    int buyCount = iservice.buyCount(id);
+	  	    
+	  	    
+	  	    model.addAttribute("buyIlist",buyIlist);
+	  	    model.addAttribute("buyFlist",buyFlist);
+	  	    
+	  	    model.addAttribute("buyCount",buyCount);
+	  	    
+	  	    
+	  	    
+	  	//   팔로워 리스트
+	  	      List<MemberDTO> followlist =new ArrayList<MemberDTO>();
+	  	      followlist = fwservice.selectfollowing(id);            
+	  	      model.addAttribute("followlist",followlist);
+	  	      
+	  	    //내가 팔로워 한 수 가져오기
+	  	      int followingCount = fwservice.followingCount(id);
+	  	      
+	  	      model.addAttribute("fCount",followingCount);
+	  	      
+	  	    //팔로우 목록
+	  	      List<MemberDTO> followedList = new ArrayList<MemberDTO>();
+	  	      followedList = fwservice.selectfollowed(id);
+	  	      model.addAttribute("followedList",followedList);
+	  	      //팔로우 수 가져오기
+	  	      int followedCount = fwservice.followedCount(id);
+	  	      model.addAttribute("followedCount",followedCount);
+	  		
+		   
+	  		
+		
+		
 	
+		return "/member/reserveOtherPage";
+	}
 	
 	
 	
