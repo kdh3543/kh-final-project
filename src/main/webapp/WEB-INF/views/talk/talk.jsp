@@ -76,7 +76,7 @@
 
                 <a class="talk-list-btn" pid="${list.roomId}"
                   href="/chat/moveChatRoom?sellerId=${list.sellerId}&productId=${list.productId}&productName=${list.productName}&roomId=${list.roomId}&sysName=${list.chatImg}">
-                  
+
                   <c:choose>
                     <c:when test="${list.sellerId eq id}">
                       <div class="talk-list-left">
@@ -277,25 +277,25 @@
                   <button type="button">전송불가</button>
                 </div>
                 <script>
-                  
-                  
+
+
                   $(document).ready(function () {
                     $("input:radio[name='selectQuestion']").click(function () {
-                      if($(this).val()=='q1'){
+                      if ($(this).val() == 'q1') {
                         let chatLeftDiv = $("<div>");
                         chatLeftDiv.addClass("left-line");
                         let chatLine = $("<div>");
                         chatLine.addClass("line");
 
-                        chatLine.append("구매방법<br>")  
-                        chatLine.append("1. 바로구매"+"<br>");
-                        chatLine.append("원하는 상품 페이지에서 '바로구매' 버튼 클릭 후 계좌이체를 통해 결제가 가능합니다."+"<br>");
-                        chatLine.append("2. 연락하기를 통한 거래"+"<br>");
+                        chatLine.append("구매방법<br>")
+                        chatLine.append("1. 바로구매" + "<br>");
+                        chatLine.append("원하는 상품 페이지에서 '바로구매' 버튼 클릭 후 계좌이체를 통해 결제가 가능합니다." + "<br>");
+                        chatLine.append("2. 연락하기를 통한 거래" + "<br>");
                         chatLine.append("원하는 상품 페이지에서 '연락하기' 버튼 클릭 후 판매자와 연락한 후에 직거래로 거래하시면 됩니다.");
-                        
+
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
-                      }else if($(this).val()=='q2'){
+                      } else if ($(this).val() == 'q2') {
                         let chatLeftDiv = $("<div>");
                         chatLeftDiv.addClass("left-line");
                         let chatLine = $("<div>");
@@ -306,7 +306,7 @@
 
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
-                      }else if($(this).val()=='q3'){
+                      } else if ($(this).val() == 'q3') {
                         let chatLeftDiv = $("<div>");
                         chatLeftDiv.addClass("left-line");
                         let chatLine = $("<div>");
@@ -319,7 +319,7 @@
                         chatLine.append("메인페이지에서 검색어 앞에 @를 붙여서 검색하면 해당 검색어가 포함된 상점들 리스트가 나옵니다.");
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
-                      }else if($(this).val()=='q4'){
+                      } else if ($(this).val() == 'q4') {
                         let chatLeftDiv = $("<div>");
                         chatLeftDiv.addClass("left-line");
                         let chatLine = $("<div>");
@@ -327,10 +327,10 @@
 
                         chatLine.append("팔로잉 방법<br>");
                         chatLine.append("내가 자주 이용하거나 마음에 든 상점이 있으면 '팔로잉' 버튼을 누르시면 해당 상점에 대한 팔로잉을 할 수 있으며 좀 더 쉽게 상점을 찾을 수 있습니다.");
-                        
+
                         chatLeftDiv.append(chatLine);
                         $(".right-middle").append(chatLeftDiv);
-                      }else if($(this).val()=='q5'){
+                      } else if ($(this).val() == 'q5') {
                         let chatLeftDiv = $("<div>");
                         chatLeftDiv.addClass("left-line");
                         let chatLine = $("<div>");
@@ -428,7 +428,7 @@
       </footer>
 
       <script>
-        let ws = new WebSocket("ws://13.125.170.128//chatProgram");
+        let ws = new WebSocket("ws://13.125.170.128///chatProgram");
         let chatMessage = $("#message");
         let rightMiddle = $(".right-middle");
         let rightBottom = $(".right-bottom");
@@ -455,7 +455,7 @@
         let talkName = $("<div>");
         talkConverse.addClass("talk-last-conversation");
         ws.onmessage = function (e) {
-          let alpha = e.data;
+
           console.log(e.data);
           let time = new Date();
           let hours = time.getHours();
@@ -584,21 +584,39 @@
           let roomId = urlParams.get('roomId');
           if (roomId == 0) {
             roomId = $("#roomId").val();
-            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+            let arrayData = {
+              text: text, hiddenSellerId: hiddenSellerId.val(),
+              hiddenProductName: hiddenProductName.val(),
+              hiddenProductId: hiddenProductId.val(), roomId: roomId
+            };
+            ws.send(JSON.stringify(arrayData));
           } else {
-            ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+            let arrayData = {
+              text: text, hiddenSellerId: hiddenSellerId.val(),
+              hiddenProductName: hiddenProductName.val(),
+              hiddenProductId: hiddenProductId.val(), roomId: roomId
+            };
+            ws.send(JSON.stringify(arrayData));
           }
+
+
+          // if (roomId == 0) {
+          //   roomId = $("#roomId").val();
+          //   ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+          // } else {
+          //   ws.send(text + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+          // }
 
           rightMiddle.stop().animate({
             scrollTop: rightMiddle[0].scrollHeight
           }, 1000);
         });
 
-        
+
 
         //전송하기 버튼 엔터를 눌렀을 때
         rightBottom.on("keypress", function (e) {
-          
+
 
           if (e.keyCode == 13 && e.shiftKey == false) {
             if (chatMessage.html() == "") {
@@ -623,12 +641,24 @@
             // chatData.productId = productId.val();
             // chatData.roomId = roomId;
             // chatList.push(chatData);
-            
-            let arrayData = {text:text,hiddenSellerId:hiddenSellerId.val(),
-              hiddenProductName:hiddenProductName.val(),
-            hiddenProductId:hiddenProductId.val(),roomId:roomId};
-            
-            ws.send(JSON.stringify(arrayData));
+
+            if (roomId == 0) {
+              roomId = $("#roomId").val();
+              let arrayData = {
+                text: text, hiddenSellerId: hiddenSellerId.val(),
+                hiddenProductName: hiddenProductName.val(),
+                hiddenProductId: hiddenProductId.val(), roomId: roomId
+              };
+              ws.send(JSON.stringify(arrayData));
+            } else {
+              let arrayData = {
+                text: text, hiddenSellerId: hiddenSellerId.val(),
+                hiddenProductName: hiddenProductName.val(),
+                hiddenProductId: hiddenProductId.val(), roomId: roomId
+              };
+              ws.send(JSON.stringify(arrayData));
+            }
+
 
             // if (roomId == 0) {
             //   roomId = $("#roomId").val();
@@ -648,7 +678,7 @@
           }
         });
 
-        
+
       </script>
     </body>
 

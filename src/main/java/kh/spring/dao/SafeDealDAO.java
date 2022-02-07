@@ -54,6 +54,8 @@ public class SafeDealDAO {
 
 	}
 	
-	
+	public boolean selectCount(SafeDealDTO sddto) {
+		return mybatis.selectOne("SafeDeal.selectCount",sddto);
+	}
 
 }

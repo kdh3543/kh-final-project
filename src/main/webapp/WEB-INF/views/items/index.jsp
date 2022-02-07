@@ -338,7 +338,10 @@
 						<a href="/items/itemsSell" class="btn-sell" id="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="/items/myPage" class="btn-myshop" id="btn-myshop">
-							<i class="fas fa-store fa-2x"></i> 내상점
+							<i class="fas fa-store fa-2x"></i> 내상점 newalert : ${alertCount}
+							
+							
+							
 						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
 							<i class="fas fa-comment fa-2x"></i> 유즈톡
 						</a> | <a href="/board/boardList" class="btn-talk"> <i
@@ -501,6 +504,7 @@
 				return false;
 			}
 
+
 		});
 		
 		$("#likeBtnAfterLogin").on("click", function() {
@@ -508,6 +512,7 @@
 			location.href="/items/myPage?"
 
 		});
+
 	</script>
 </body>
 

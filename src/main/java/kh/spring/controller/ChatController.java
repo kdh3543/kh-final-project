@@ -66,6 +66,9 @@ public class ChatController {
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
 			
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
+			
+			list.get(i).setOtherProfile(mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
+			System.out.println("프로필 이미지 이름은: "+mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
 		}
 
 		model.addAttribute("list",list);
@@ -115,7 +118,9 @@ public class ChatController {
 			
 			// chat 마지막 채팅글 세팅
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
-
+			
+			list.get(i).setOtherProfile(mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
+			System.out.println("프로필 이미지 이름은: "+mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
 		}
 
 		model.addAttribute("productName",productName);
@@ -160,7 +165,9 @@ public class ChatController {
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
 			
 			list.get(i).setMyProfile(mService.selectProfile(crService.selectBuyerId(list.get(i).getRoomId())));
+			
 			list.get(i).setOtherProfile(mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
+			System.out.println("프로필 이미지 이름은: "+mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
 		}
 		
 		
@@ -199,6 +206,9 @@ public class ChatController {
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
 
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
+			
+			list.get(i).setOtherProfile(mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
+			System.out.println("프로필 이미지 이름은: "+mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
 		}
 
 		model.addAttribute("roomId",roomId);
@@ -236,6 +246,9 @@ public class ChatController {
 			list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
 
 			list.get(i).setLastMessage(cService.selectLastTalk(list.get(i).getRoomId()));
+			
+			list.get(i).setOtherProfile(mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
+			System.out.println("프로필 이미지 이름은: "+mService.selectProfile(crService.selectSellerId(list.get(i).getRoomId())));
 		}
 
 		model.addAttribute("roomId",roomId);

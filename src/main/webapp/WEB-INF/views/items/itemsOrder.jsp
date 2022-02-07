@@ -102,6 +102,16 @@
 				
 					$("#cashInput").val(price);
 				}
+
+
+				// let price = ${ilist[0].price+2500};
+				// let cash = ${mdto.cash};
+				// if(price>cash){
+				// 	alert("잔액이 부족합니다");
+				// }else{
+				
+				// 	$("#cashInput").val(price);
+				// }
 				
 				
 			})
@@ -151,11 +161,11 @@
 					<form action="/safeDeal/insert"  method="post"
 				onsubmit="return frmSubmit()">
 				<div class="button-div">
-					<input type="hidden" name=buyer value="${loginID}"> <input
-						type="hidden" name=seller value="${ilist[0].sellerID}"> <input
-						type="hidden" name=items_no value="${ilist[0].iseq}"> <input
+					<input type="hidden" name=buyer value="${loginID}" id="buyerId"> <input
+						type="hidden" name=seller value="${ilist[0].sellerID}" id="sellerId"> <input
+						type="hidden" name=items_no value="${ilist[0].iseq}" id="itemSeq"> <input
 						type="hidden" name=cash value="${ilist[0].price}">
-						 <input type="submit" id="pay" value="결제하기">
+						<input type="submit" id="pay" value="결제하기">
 				</div>
 
 			</form>
@@ -163,21 +173,20 @@
 				
 			</div>
 
-		
-
 		</div>
 
 		<script>
-		
-		
-		
+
 		function frmSubmit() {
 			let cashInput = $("#cashInput").val();
 			let itemPrice = ${ilist[0].price+2500};
 			console.log(itemPrice);
 			
 			if(cashInput ==itemPrice){
+				let buyItemArr = {buyerId:buyerId, sellerId:sellerId, itemSeq:itemSeq};
+				ws.send(JSON.stringify(buyItemArr));
 				return true;
+				
 			}else {
 				alert("결제금액을 확인해주세요");
 				return false;
@@ -191,8 +200,7 @@
 			} */
 			
 			}
-		
-		
+
 		</script>
 	</main>
 	<footer>
