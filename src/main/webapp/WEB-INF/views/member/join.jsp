@@ -69,17 +69,12 @@ input[type=password] {
 				<div class="join-title">회원가입</div>
 				<hr>
 				<div class="mb-3">
-					<label for="imgfile" class="del-button img-up"> <input
-<<<<<<< HEAD
-						type="file" id=imgfile name="file"
-						accept=".jpg, .png, .jpeg, .gif" style="display: none;" > <img
-						src="/imgs/회원가입2 (2).png" id="profile"> 프로필 사진 등록
-=======
-						type="file" id=imgfile name="file" required
+					<label for="imgfile" class="del-button img-up"> 
+					<input type="file" id=imgfile name="file" required
 						accept=".jpg, .png, .jpeg, .gif" style="display: none;"> <img
 						src="/imgs/회원가입2 (2).png" id="profile"> 프로필 사진 등록 
 						<a class="esential-a">*필수항목</a>
->>>>>>> ae0bafb24b538d8b63799d35ce314dc6a7ca9270
+
 					</label>
 				</div>
 
