@@ -41,13 +41,24 @@ public class FollowingDAO {
       return mybatis.delete("follow.unfollow", map);
    }
    
+   // 내가 상대방을 팔로우했을때
    public int follow(String sellerID, String followingID) {
-       System.out.println("DAO도착3"+sellerID+" : "+followingID);
+       System.out.println("FollowingDAO : follow 잘 도착 ->"+sellerID+" : "+followingID);
       Map<String,String> map = new HashMap<String,String>();
          map.put("sellerID", sellerID);
          map.put("followingID", followingID);   
       return mybatis.insert("follow.follow", map);
    }
+   // 팔로우한 상대의 myFollower 업데이트
+   public int updateFollowing(String sellerID, String followingID) {
+		System.out.println("FollowingDAO : updateFollowing 도착");
+		System.out.println("정보 : " + sellerID + " , " +followingID);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("sellerID", sellerID);
+		map.put("followingID", followingID);	
+		return mybatis.update("follow.updateFollowing",map);
+	}
+	   
 
    public List<MemberDTO> selectFollowing(String id) {
          System.out.println(id+"selectfollowingDAO잘도착했습니다.");
@@ -92,7 +103,15 @@ public List<FollowDTO> followCountAll() {
     return mybatis.selectList("follow.followCountAll");
 
 }
-   
+public int delFollowingUpdate(String sellerID, String followingID) {
+	System.out.println("FollowingDAO : delFollowingUpdate 잘 도착");
+	System.out.println("sellerID : "+sellerID + " , folowingID : " + followingID);
+	Map<String,String> map = new HashMap<String,String>();
+	map.put("sellerID",sellerID);
+	map.put("followingID",followingID);
+	return mybatis.update("follow.delFollowingUpdate",map);
+}
+
    
 //   public List<FollowDTO> selectSid(String id){
 //      return mybatis.selectList("follow.followid",id);

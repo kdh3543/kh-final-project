@@ -738,7 +738,7 @@ public class ItemsController {
 		
 		
 		
-	//   팔로워 리스트
+		// 팔로워 리스트
 	      List<MemberDTO> followlist =new ArrayList<MemberDTO>();
 	      followlist = fwservice.selectfollowing(id);            
 	      model.addAttribute("followlist",followlist);

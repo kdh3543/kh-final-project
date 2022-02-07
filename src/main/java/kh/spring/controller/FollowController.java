@@ -80,11 +80,13 @@ public class FollowController {
    if(result>0) {
 	   //DB에서 삭제
 	   int  resp = fwservice.unfollow(sellerID,followingID);
+	   fwservice.delFollowingUpdate(sellerID,followingID);
 	   return String.valueOf(resp);
 
    }else {
 	   //DB에 입력
 	    int resp = fwservice.follow(sellerID,followingID)+1;
+	    fwservice.updateFollowing(sellerID,followingID);
 	    return String.valueOf(resp);
    }
 	   

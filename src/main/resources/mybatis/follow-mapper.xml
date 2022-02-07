@@ -7,7 +7,6 @@
    <select resultType="int" id="followCheck">
    select count(*) from follow where sellerID =#{followingID} and followingID =#{sellerID}
    </select>
-
    <!-- 팔로우 정보확인 -->
 
 
@@ -15,20 +14,27 @@
    select count(*) from follow where sellerID =#{followedID} and followingID =#{sellerID}
    </select>
 
+	<!-- 내가 팔로우 한 사람 삭제 -->
    <delete id="unfollow">
    delete from follow where sellerID=#{followingID} and followingID=#{sellerID}
    </delete>
-
-   <!-- 내가 팔로우 한 사람 삭제 -->
-
+	<!-- 삭제한 사람 myfollwer 업데이트 -->
+	<update id="delFollowingUpdate">
+	update follow set myfollower=0 where sellerID=#{sellerID} and followingID=#{followingID}
+	</update>
 
    <delete id="unfollowed">
    delete from follow where sellerID=#{followedID} and followingID=#{sellerID}
    </delete>
 
+	<!-- 내가 팔로우 했을때 -->
    <insert id="follow">
-   insert into follow values(#{followingID},#{sellerID})
+   insert into follow values(#{followingID},#{sellerID},0,1)
    </insert>
+	<!-- 팔로우한 상대 myfollower 업데이트 -->
+   <update id="updateFollowing" parameterType="map">
+   update follow set myfollower=1 where sellerID= #{sellerID} and followingID= #{followingID}
+   </update>
 
    <!-- <select id ="followid"> -->
 

@@ -111,8 +111,7 @@
 	<select id="selectByIseq" resultType="kh.spring.dto.MemberDTO">
 		SELECT * FROM MEMBER WHERE
 		ID in (select sellerid from items where iseq =#{value})
-	</select>
-	
+	</select>	
 	<select id="selectAllStoreList"
       resultType="kh.spring.dto.JoinDTO">
       SELECT *
@@ -139,34 +138,6 @@
       ID =#{value}
 
    </update>
-
-	<select id="selectAllStoreList"
-		resultType="kh.spring.dto.JoinDTO">
-		SELECT *
-		FROM
-		((SELECT SC.SELLERID, M.*
-		FROM MEMBER M
-		LEFT OUTER JOIN
-		(SELECT SELLERID,COUNT(SELLERID) AS SELLCOUNTALL FROM ITEMS GROUP BY
-		SELLERID) SC
-		ON(M.ID=SC.SELLERID)) MSC
-		LEFT OUTER JOIN
-		(SELECT SELLERID,COUNT(FOLLOWINGID) AS FOLLOWCOUNTALL FROM FOLLOW GROUP BY
-		SELLERID) FC
-		ON (MSC.SELLERID = FC.SELLERID))WHERE ID LIKE '%'||#{value}||'%' OR Name
-		LIKE '%'||#{items}||'%'
-
-	</select>
-
-	<!-- 조회수 추가할 정보 -->
-	<update id="addViewCount">
-
-		UPDATE MEMBER SET VIEW_COUNT = VIEW_COUNT + 1
-		WHERE
-		ID =#{value}
-
-	</update>
-
 
 	<!-- 김동현93 프로필 이미지 가져오기 -->
 	<select id="selectProfile" resultType="String">
