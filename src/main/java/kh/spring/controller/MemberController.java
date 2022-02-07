@@ -1,5 +1,8 @@
 package kh.spring.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -92,15 +95,21 @@ public class MemberController {
 	}
 
 	//로그인 기능
+	@ResponseBody
 	@RequestMapping(value="login")
-	public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model) {
+	public String login(String logid, String logpw ,String remember_userID,HttpServletResponse response,HttpServletRequest request,Model model)throws IOException {
+		
+
 		logpw = EncryptionUtils.getSHA512(logpw);
 		int result = mservice.login(logid,logpw);
 		System.out.println("로그인 기억 안하면 null 이옵니다 ." +remember_userID);
-		Cookie cookie = new Cookie("logid", logid); //쿠키 생성
+		
+		//쿠키 생성
+		Cookie cookie = new Cookie("logid", logid);
 		cookie.setDomain("localhost");
 		cookie.setPath("/signIn");
-
+		
+		// alert 띄우기
 		if(remember_userID !=null) {
 			// 체크박스 체크 된 경우
 			response.addCookie(cookie); // 쿠키 저장
@@ -112,42 +121,44 @@ public class MemberController {
 		}
 
 		//로그인 성공 시
-		if(result > 0) {
-			
-			// 관리자 ID 넣어야만 관리자로 인식 가능
-			
-			if(logid.contains("Admin")) {
-				session.setAttribute("Admin",logid);
-				
-				String id = (String)session.getAttribute("Admin");
+	      if(result > 0) {
+	         
+	         // 관리자 ID 넣어야만 관리자로 인식 가능
+	         
+	         if(logid.contains("Admin")) {
+	            session.setAttribute("Admin",logid);
+	            
+	            String id = (String)session.getAttribute("Admin");
 
-				MemberDTO dto = mservice.select(id);
+	            MemberDTO dto = mservice.select(id);
 
-				model.addAttribute("dto", dto);
+	            model.addAttribute("dto", dto);
 
-				return "forward:/items/";
-				
-			}else {
-				session.setAttribute("loginID", logid);
-				
-				String id = (String)session.getAttribute("loginID");
+	         }else {
+	            session.setAttribute("loginID", logid);
+	            
+	            String id = (String)session.getAttribute("loginID");
 
-				MemberDTO dto = mservice.select(id);
+	            MemberDTO dto = mservice.select(id);
 
-				model.addAttribute("dto", dto);
+	            model.addAttribute("dto", dto);
 
-				return "forward:/items/";
-				
-			}
-			
-			
+	            
+	         }
+	         
+	         
 
-		}else {
-			return "redirect:/signIn";
-		}
+	      }else {
+	         response.setContentType("text/html; charset=euc-kr");
+	         PrintWriter out = response.getWriter();
+	         out.print("<script>alert('로그인에 실패했습니다.');location.href='/signIn'</script>");
+	         out.flush();
+	         
+	      }
+	      return "forward:/items/";
 
 
-	}
+	   }
    //로그아웃 기능
    @RequestMapping("logout")
    public String logout() {

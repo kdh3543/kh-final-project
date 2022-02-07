@@ -40,10 +40,9 @@
 			<c:choose>
 				<c:when test="${loginID != null}">
 					<ul class="header-list-after-login">
-						<li>이미지 부분 : ${dto.profile_image}</li>
-						<li>${loginID}님안녕하세요</li>
+						<li>${dto.profile_image}</li>
+						<li>${loginID}</li>
 						<li><a href="/myPage">마이페이지</a></li>
-						<li><a href="/member/leave" id="leavebtn">회원 탈퇴</a></li>
 						<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 					</ul>
 				</c:when>
@@ -61,23 +60,222 @@
 		<div class="div-wrap">
 			<div class="nav_div">
 				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+					<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 				</div>
+
 				<div class="searchBar">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control"
-							placeholder="상점명, 물품명 등을 검색해 보세요!"
-							aria-label="Recipient's username"
-							aria-describedby="button-addon2">
-						<button class="btn btn-outline-secondary" type="button"
-							id="button-addon2">
-							<i class="fas fa-search fa-2x"></i>
-						</button>
+
+
+						<!-- 검색창 관련 -->
+						<div class="btn-group ">
+							<input type="text" name="keyword" class="form-control"
+								placeholder="@상점명 또는 물품명 등을 검색해 보세요!"
+								aria-label="Recipient's username"
+								aria-describedby="button-addon2" id="search"
+								data-bs-toggle="dropdown" aria-expanded="false">
+
+							<!-- 돋보기-->
+							<button class="btn btn-outline-secondary" type="submit"
+								id="button-addon2">
+								<i class="fas fa-search fa-2x"></i>
+							</button>
+							<!--  돋보기 끝-->
+
+							<input type=hidden name="user_id" value="${loginID}">
+
+
+							<!-- 최신검색어-->
+							<!--  수정 -->
+
+							<div class="dropdown-menu" id=recent>
+								<!-- <a class="dropdown-item" href="/"
+										style="text-align: center"> -->
+								<div class="list-search-div">
+									<div class="list-search-div">
+										<a class="dropdown-item" id="search-dropdown"
+											href="javascript:void(0);" style="text-align: center">
+											<nav>
+												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+													<button class="nav-link active" id="nav-home-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-home"
+														type="button" role="tab" aria-controls="nav-home"
+														aria-selected="true">최근검색어</button>
+
+
+													<button class="nav-link" id="nav-profile-tab"
+														data-bs-toggle="tab" data-bs-target="#nav-profile"
+														type="button" role="tab" aria-controls="nav-profile"
+														aria-selected="false">인기검색어</button>
+
+												</div>
+											</nav> <!-- 최근검색어 -->
+											<div class="tab-content" id="nav-tabContent">
+												<div class="tab-pane fade show active" id="nav-home"
+													role="tabpanel" aria-labelledby="nav-home-tab">
+
+													<!-- 내용 채워넣기 -->
+													<div id=text>
+
+														<button type=button id=delBtn class="dropdown-item"
+															style="display: inline">
+															<b><h5>검색어 전체삭제</h5></b>
+														</button>
+													</div>
+
+
+												</div>
+												<!--  인기검색어-->
+												<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+													aria-labelledby="nav-contact-tab"></div>
+
+												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+													aria-labelledby="nav-profile-tab">
+													<div class="hotkeyword-title">인기검색어 순위</div>
+													<div class=hotkeyword-contents>
+
+
+														<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
+
+															<div>
+																<span class="hotkeyword-num">${statusHS.count}.</span> <span
+																	class="hotkeyword-word">${hs.keyword}</span>
+															</div>
+
+
+														</c:forEach>
+													</div>
+												</div>
+
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</header>
+	</form>
+
+
+
+	<!-- 검색어 전체 삭제 -->
+	<script>
+								
+									$("#delBtn").on("click", function() {
+										$.ajax({
+											url : "/items/deleteAll",
+										}).done(function(resp) {
+											console.log(resp);
+											$("#text").empty();
+										})
+									})
+								</script>
+
+	<!-- 검색어 하나 눌렀을때 검색되게 -->
+
+	<script>
+									$('#text').on("click",	".delBtnOne",function() {
+										/*버튼 X 제거하고 값 추출  */
+														var str = $(this).parent().text().slice(0, -1);
+														$(this).parent().remove();
+
+														$.ajax({
+															url : "/items/deleteByKeyword?keyword="+ str
+																	}).done(function(resp) {
+																		
+																	})
+																})
+								</script>
+	<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
+
+	<script>
+						// 검색버튼 눌렀을 때, 
+							$(function() {
+
+								$("#search").one("click", function() {
+
+									$.ajax({
+										url : "/items/listing",
+										datatype : "json"
+									}).done(function(resp) {
+
+										resp = JSON.parse(resp);
+
+										for (let i = 0; i < 5; i++) {
+											let text = $("#text");
+
+											let line = $("<div>");
+											line.addClass("line");
+
+										
+											 let textLine= $("<div>");
+											
+
+											textLine.append(resp[i].keyword);
+
+											textLine.addClass("textLine");
+
+											let delButton = $("<button>");
+											delButton.addClass("delBtnOne");
+											delButton.text("X");
+											delButton.css("float", "right");
+
+											textLine.append(text.val());
+											textLine.append(delButton);
+										
+
+											line.append(textLine);
+
+											$("#text").append(line);
+
+										}
+
+									})
+								})
+							})
+							/*드랍다운 꺼지는 것 방지 */
+							$("#recent").on('click', function (e) {
+					                             e.stopPropagation();
+					                           });
+					// 삭제할 때, 
+							$('#text').on("click",".delBtnOne",function() {
+								/*버튼 X 제거하고 값 추출  */
+								var str = $(this).parent().text().slice(0, -1);
+								$(this).parent().remove();
+								$.ajax({
+								url : "/items/deleteByKeyword?keyword="+ str
+								}).done(function(resp) {
+
+
+								})
+
+							})
+			
+						</script>
+
+	<!-- 검색시 공백 막기-->
+	<script>
+						
+						function frmSubmit() {
+							let searchValue = $("#search").val();
+							console.log(searchValue);
+							if(searchValue ==null || searchValue == "" ){
+								alert("상품명 또는 @상점명을 검색하세요")
+								return false;
+								
+							}
+							
+							}
+							
+							
+						</script>
+
+
+
 	<main>
 		<div class="detail-top-div">
 			<div class="detail-left">
@@ -444,14 +642,14 @@
 		<script>
 		
 		/* 만약에 deal2 or buyerID != 면 거래중 상품 표시 */
-		  window.onload=function(){
+		  $(document).ready(function(){
 			if(${ilist[0].deal2 != 'N' }){
 				$("#btn-buy").text("거래중");
 				
 			}
 			  
 			  
-		  }
+		  });
 		      
 
         <!-- 바로구매 버튼을 눌렀을 때의 script -->
@@ -572,13 +770,25 @@
 												name="contents" id="contents"></textarea>
 										</div>
 										<div class="write-bottom-div">
-											<div>1/100</div>
+											<div id="write_cnt">(0/100)</div>
 											<button type="submit" class="writeBtn" id="writeBtn">등록</button>
 											<c:forEach var="i" items="${ilist}" varStatus="status">
 												<input type="hidden" name="iseq" value="${i.iseq}">
 											</c:forEach>
 										</div>
 									</form>
+								<script>
+								$(document).ready(function(){
+									$('.write-textarea').on('keyup',function(){
+										$("#write_cnt").html("("+$(this).val().length+" /100)");
+										
+										if($(this).val().length > 100){
+											$(this).val($(this).val().substring(0,100));
+											$("#write_cnt").html("(100/100)");
+										}
+									});
+								});
+								</script>
 									<div>
 										<c:forEach var="q" items="${qlist}" varStatus="status">
 										${q.writer}
@@ -692,7 +902,7 @@
 								<script>
 								/*수정중  */
 								   
-   window.onload=function(){
+   $(document).ready(function(){
       let sellerID = $("#mdtoid").val();
 		 let followingID = $("#loginid").val();
 	   $.ajax({
@@ -708,7 +918,7 @@
 	            }
 	         });
       
-   }
+   });
 								
 								
 								 $("#followBtn").on("click",function(){

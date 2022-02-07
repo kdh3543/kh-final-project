@@ -23,6 +23,7 @@ import kh.spring.dto.JoinDTO;
 import kh.spring.dto.MemberDTO;
 import kh.spring.dto.ReportDTO;
 import kh.spring.dto.SearchKeywordDTO;
+import kh.spring.service.AlertService;
 import kh.spring.service.FilesService;
 import kh.spring.service.FollowingService;
 import kh.spring.service.ItemsService;
@@ -61,10 +62,8 @@ public class ItemsController {
 	@Autowired
 	public ReportService rservice;
 	
-
-
-
-
+	@Autowired
+	public AlertService aservice;
 
 	@RequestMapping("")	
 	public String home( Model model) {
@@ -90,7 +89,16 @@ public class ItemsController {
 		
 		//검색기록을 위한 아이디 넘기기
 		String id =(String)session.getAttribute("loginID");
+		
+		
+		//alert
+		System.out.println("id는 : "+id);
 		if(id != null) {
+			
+			//${alertCount}
+		int alertCount = aservice.selectCount(id);	
+				
+		model.addAttribute("alertCount",alertCount);
 		model.addAttribute("loginID",id);
 		//헤더 부분 프로필 넘기기
 		
@@ -660,7 +668,6 @@ public class ItemsController {
 
 		return "/items/itemsOrder";
 	}
-
 
 	//메인화면 홈-상품전체 끌고오기
 
