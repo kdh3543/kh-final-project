@@ -124,6 +124,7 @@ input[type=password] {
 	</footer>
 
 	<script>
+		
         $("#findMyInfo").on("click",function(){
             location.href="findInfo";
         });
@@ -145,7 +146,24 @@ input[type=password] {
             	 $(".loginForm").submit();
              }
         });
-       
+       // 엔터쳤을때, 
+       $("#floatingPassword").on("keyup",function(){
+    	   if(window.event.keyCode==13){
+    		   if($("#floatingInput").val() == ""){
+                	alert("아이디를 입력하세요.");
+                	return false;
+                }
+           	 
+                if($("#floatingPassword").val() == ""){
+                	alert("비밀번호를 입력하세요.");
+                	return false;
+                }
+                
+                if(!$("#floatingInput").val() == "" && !$("#floatingPassword").val() == ""){
+               	 $(".loginForm").submit();
+                }
+    	   }
+       })
    
       
 </script>

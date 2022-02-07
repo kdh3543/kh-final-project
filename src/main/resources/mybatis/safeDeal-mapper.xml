@@ -22,7 +22,7 @@
   
    UPDATE MEMBER SET CASH= CASH-#{cash}-2500   WHERE ID =#{buyer};
    
-   UPDATE ITEMS SET DEAL2 ='R',DEAL='R' WHERE ISEQ = #{items_no};
+   UPDATE ITEMS SET DEAL2 ='R',DEAL='R',BUYERID=#{buyer} WHERE ISEQ = #{items_no};
    
    INSERT INTO ALERT VALUES(ALERT_SEQ.NEXTVAL,#{buyer},#{seller},#{items_no});
 

@@ -137,9 +137,9 @@
 														<!-- 내용 채워넣기 -->
 														<div id=text></div>
 														<button type=button id=delBtn class="dropdown-item"
-																style="display: inline">
-																<b><h6>검색어 전체삭제</h6></b>
-															</button>
+															style="display: inline">
+															<b><h6>검색어 전체삭제</h6></b>
+														</button>
 
 
 													</div>
@@ -338,10 +338,18 @@
 						<a href="/items/itemsSell" class="btn-sell" id="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
 						</a> | <a href="/items/myPage" class="btn-myshop" id="btn-myshop">
-							<i class="fas fa-store fa-2x"></i> 내상점 newalert : ${alertCount}
+							<i class="fas fa-store fa-2x"></i> 내상점 
+							<c:choose>
+							<c:when test="${alertCount > 0}">
+								<span class="badge bg-secondary" style="color: #fff; background: red !important;">${alertCount}</span>
+							</c:when>
+						<%-- 	<c:otherwise>
+								<span class="badge bg-secondary" style="color: #fff; background: red !important;">0</span>
+							</c:otherwise> --%>
+							</c:choose>
 							
-							
-							
+
+
 						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
 							<i class="fas fa-comment fa-2x"></i> 유즈톡
 						</a> | <a href="/board/boardList" class="btn-talk"> <i
@@ -420,33 +428,33 @@
 						<!-- imgBox 1 구간 -->
 
 
-								<div class="imgBox  col-sm-3">
-						
-                              <div class="items">
-                                 <c:forEach var="i" items="${ilist}">
-                                    <c:forEach var="f" items="${flist}">
-                                    
-                                          <c:if test="${f.parentSeq == i.iseq}">
-                                             <div>
-                                             <a href="/items/itemsDetail?iseq=${i.iseq}">
-                                                <div class="detail-img">
-                                                   <img src="${f.sysName}" style="width: 100%; height: 100%;">
-                                                </div>
-                                                <div class="detail-container">
-                                                   <div class="title">${i.name}</div>
-                                                   <div class="price">${i.price}원</div>
-                                                   <div class="date">${i.detailDate}</div>
+						<div class="imgBox  col-sm-3">
 
-                                                </div>
-                                             </a>
-                                          </div>
-                                          </c:if>
-                                       
-                                    </c:forEach>
-                                 </c:forEach>
-                           
-                           </div>
-                        </div>
+							<div class="items">
+								<c:forEach var="i" items="${ilist}">
+									<c:forEach var="f" items="${flist}">
+
+										<c:if test="${f.parentSeq == i.iseq}">
+											<div>
+												<a href="/items/itemsDetail?iseq=${i.iseq}">
+													<div class="detail-img">
+														<img src="${f.sysName}" style="width: 100%; height: 100%;">
+													</div>
+													<div class="detail-container">
+														<div class="title">${i.name}</div>
+														<div class="price">${i.price}원</div>
+														<div class="date">${i.detailDate}</div>
+
+													</div>
+												</a>
+											</div>
+										</c:if>
+
+									</c:forEach>
+								</c:forEach>
+
+							</div>
+						</div>
 
 					</article>
 				</section>
@@ -455,26 +463,28 @@
 		</div>
 		<div class="d-none d-lg-block" id="sideBar">
 			<div class="sidebar-div">
-			<c:choose>
-				<c:when test="${loginID != null}">
-					<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeBtnAfterLogin">
-						찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
-					</button>
-				</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeProductBtn">
-						<p>찜한상품<br>0</p>
-					</button>
+				<c:choose>
+					<c:when test="${loginID != null}">
+						<a href="#">
+							<button class="btn btn-outline-secondary" type="button"
+								id="likeBtnAfterLogin">
+								찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
+							</button>
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#">
+							<button class="btn btn-outline-secondary" type="button"
+								id="likeProductBtn">
+								<p>
+									찜한상품<br>0
+								</p>
+							</button>
 
-				</a>
-				</c:otherwise>
-			</c:choose>
-				
+						</a>
+					</c:otherwise>
+				</c:choose>
+
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
