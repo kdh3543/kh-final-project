@@ -43,12 +43,14 @@ public class ChatController {
 	@RequestMapping("moveChatRoom")
 	public String moveChatRoom(String sellerId, int productId, String productName, int roomId, String sysName, Model model) {
 		System.out.println("넘어온 이미지 이름은: "+sysName);
+		
 		//챗봇에 대한 룸 정보 불러오기
 		int chatBotRoomId = 0;
 		List<ChatRoomDTO> chatBot = crService.selectByRoomId(chatBotRoomId);
 		model.addAttribute("chatBot",chatBot);
 
 		String id = (String)session.getAttribute("loginID");
+		System.out.println("들어온 id는 :" + id);
 		ChatRoomDTO dto = new ChatRoomDTO();
 		dto.setBuyerId(id);
 		dto.setSellerId(id);
@@ -94,7 +96,9 @@ public class ChatController {
 		crdto.setBuyerId(userId);
 		crdto.setProductId(productId);
 		boolean existRoomId = crService.selectByProductId(crdto);
-
+		
+		System.out.println("들어온 id는 :" + userId);
+		
 		//채팅방이 없을 때 채팅방 생성
 		if(!existRoomId) {
 			crdto.setSellerId(sellerId);
@@ -138,7 +142,7 @@ public class ChatController {
 	public String directTalk(Model model) {
 		String id = (String)session.getAttribute("loginID");
 		
-		
+		System.out.println("들어온 id는 :" + id);
 		//채팅방에 대한 룸 정보 가져오기
 		ChatRoomDTO dto = new ChatRoomDTO();
 		dto.setBuyerId(id);
@@ -183,6 +187,7 @@ public class ChatController {
 	@RequestMapping("toChatBot")
 	public String toChatBot(int roomId,Model model) {
 		String id = (String)session.getAttribute("loginID");
+		
 		//채팅방에 대한 룸 정보 가져오기
 		ChatRoomDTO dto = new ChatRoomDTO();
 		dto.setBuyerId(id);

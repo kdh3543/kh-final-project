@@ -64,14 +64,14 @@ input[type=password] {
 	</header>
 	<main>
 		<form action="/member/signup" method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return frmSubmit()">
 			<div class="join-wrap">
 				<div class="join-title">회원가입</div>
 				<hr>
 				<div class="mb-3">
 					<label for="imgfile" class="del-button img-up"> <input
 						type="file" id=imgfile name="file"
-						accept=".jpg, .png, .jpeg, .gif" style="display: none;"> <img
+						accept=".jpg, .png, .jpeg, .gif" style="display: none;" > <img
 						src="/imgs/회원가입2 (2).png" id="profile"> 프로필 사진 등록
 					</label>
 				</div>
@@ -243,7 +243,33 @@ $(document).ready(function(){
 		$('#profile').attr('src',tmppath);
 	});
 });
+    
+    //ajax form 시 아이디 중복검증
      
+    //ajax
+     function frmSubmit() {
+    	
+    	/* if($("#inputId").val()=="ranhwi"){
+    		alert("아이디가 있습다");
+    		return false;
+    		
+    	}
+    	return true; */
+   
+         $.ajax({
+             url:"/member/idCheck",
+             data:{id:$("#inputId").val()}
+          }).done(function(resp){
+        	  console.log(resp);
+              if(resp == "1"){   
+                 alert("이미 사용중인 아이디입니다.");
+                   return false;
+              }else{
+                 return true;
+              }
+          });
+
+         } 
 
     
 </script>

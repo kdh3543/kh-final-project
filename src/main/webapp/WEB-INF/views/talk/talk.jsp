@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>유즈톡</title>
+        <title>00톡</title>
         <!-- fontawesome-->
         <script src="https://kit.fontawesome.com/7d7ec2f3ed.js" crossorigin="anonymous"></script>
         <!-- Jquery-->
@@ -29,7 +29,10 @@
 
 
     </head>
- 
+    <script>
+      let test;
+
+    </script>
 
     <body>
       <header>
@@ -37,7 +40,9 @@
           <c:choose>
             <c:when test="${loginID != null}">
               <ul class="header-list-after-login">
-                <li>${loginID}</li>
+                <li>이미지 부분 : ${dto.profile_image}</li>
+                <li>${loginID}님안녕하세요</li>
+
                 <li><a href="/items/myPage">마이페이지</a></li>
                 <li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
@@ -46,13 +51,14 @@
           </c:choose>
         </div>
         <div class="div-wrap">
-					<div class="nav_div">
-						<div class="logo">
-							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
-						</div>
-					</div>
-				</div>
-       
+          <div class="nav_div">
+            <div class="logo">
+              <i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+            </div>
+
+
+
+          </div>
       </header>
       <main>
         <div class="talk-container">
@@ -65,8 +71,8 @@
                   <i class="fas fa-camera fa-2x"></i>
                 </div>
                 <div class="talk-list-right">
-                  <div class="talk-name">관리자 챗봇입니다.</div>
-                  <div class="talk-last-conversation">관리자 챗봇</div>
+                  <div class="talk-name">유즈톡 챗봇입니다.</div>
+                  <div class="talk-last-conversation">문의사항 자동 답변 시스템</div>
                 </div>
               </a>
             </div>
@@ -95,7 +101,8 @@
 
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId"
                             class="hiddenRoomId${delCount.count}" pid=${list.productId}>
-                          <input type=hidden value="${list.productId }" id="hiddenProductId">
+                          <input type=hidden value="${list.productId }" id="hiddenProductId"
+                          class="hiddenProductId${delCount.count}">
                           <input type=hidden value="${list.sellerId}" id="hiddenSellerId"
                             class="hiddenSellerId${delCount.count}">
                           <input type=hidden value="${list.productName}" id="hiddenProductName"
@@ -122,7 +129,8 @@
 
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId"
                             class="hiddenRoomId${delCount.count}" pid=${list.productId}>
-                          <input type=hidden value="${list.productId }" id="hiddenProductId">
+                          <input type=hidden value="${list.productId }" id="hiddenProductId"
+                          class="hiddenProductId${delCount.count}">
                           <input type=hidden value="${list.sellerId}" id="hiddenSellerId"
                             class="hiddenSellerId${delCount.count}">
                           <input type=hidden value="${list.productName}" id="hiddenProductName"
@@ -161,27 +169,39 @@
 
                 test = $("#chatDelBtn${delCount.count}").val()
                 $("#chatDelBtn${delCount.count}").on("click", function () {
-
-                  if (confirm("정말 채팅방을 나가시겠습니까?")) {
-
-                    let hiddenSellerId = $(".hiddenSellerId${delCount.count}");
+                  let hiddenSellerId = $(".hiddenSellerId${delCount.count}");
                     let hiddenRoomId = $("#hiddenRoomId");
-                    let hiddenProductId = $("#hiddenProductId");
+                    let hiddenProductId = $(".hiddenProductId${delCount.count}");
                     let hiddenProductName = $(".hiddenProductName${delCount.count}");
                     let productId = $("#productId");
                     let hiddenBuyerId = $(".hiddenBuyerId${delCount.count}");
                     let hiddenId = $("#hiddenId").val();
-
                     let url = window.location.href;
-
                     let urlParams = new URLSearchParams(url);
-
                     let roomId = urlParams.get('roomId');
+
+                    console.log(hiddenProductId.val()+ " : "+hiddenProductName.val()+" : "+hiddenSellerId.val()+" : "+roomId+"입니다.");
+                  if (confirm("정말 채팅방을 나가시겠습니까?")) {
+
+                    
+                    
+                    let text = "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다.";
+                    
                     if (roomId == 0) {
                       roomId = $("#roomId").val();
-                      ws.send("상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다." + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+                      let arrayData = {
+                        text: text, hiddenSellerId: hiddenSellerId.val(),
+                        hiddenProductName: hiddenProductName.val(),
+                        hiddenProductId: hiddenProductId.val(), roomId: roomId
+                      };
+                      ws.send(JSON.stringify(arrayData));
                     } else {
-                      ws.send("상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다." + '<br>' + hiddenSellerId.val() + '<br>' + hiddenProductName.val() + '<br>' + productId.val() + '<br>' + roomId);
+                      let arrayData = {
+                        text: text, hiddenSellerId: hiddenSellerId.val(),
+                        hiddenProductName: hiddenProductName.val(),
+                        hiddenProductId: hiddenProductId.val(), roomId: roomId
+                      };
+                      ws.send(JSON.stringify(arrayData));
                     }
 
                     alert("채팅방 내용이 모두 삭제되었습니다.");
@@ -213,7 +233,7 @@
                     <!-- <div class="title-img">
                       <i class="fas fa-camera fa-2x"></i>
                     </div> -->
-                    <div class="title-name">00톡 첫페이지입니다</div>
+                    <div class="title-name">유즈톡 첫페이지입니다</div>
                   </div>
                   <div class="right-title-right">
                     <div class="title-alarms"></div>
@@ -222,7 +242,7 @@
                 <div class="right-middle">
                   <div class="initial-page">
                     <div class="initial-page-line">
-                      00톡 첫페이지입니다.<br> 판매자 및 구매자와 연락하고 싶으시면<br> 왼쪽 채팅방을 클릭한
+                      유즈톡 첫페이지입니다.<br> 판매자 및 구매자와 연락하고 싶으시면<br> 왼쪽 채팅방을 클릭한
                       뒤<br> 채팅을 시작해주세요
                     </div>
                   </div>
@@ -252,7 +272,7 @@
                   <div class="right-middle-title">챗봇</div>
                   <div class="right-line">
                     <div class="line">
-                      챗봇 페이지입니다.
+                      유즈톡 챗봇 입니다.
                     </div>
                   </div>
                   <div class="right-line">
@@ -428,7 +448,7 @@
       </footer>
 
       <script>
-        let ws = new WebSocket("ws://13.125.170.128///chatProgram");
+        let ws = new WebSocket("ws://localhost/chatProgram");
         let chatMessage = $("#message");
         let rightMiddle = $(".right-middle");
         let rightBottom = $(".right-bottom");
@@ -443,9 +463,6 @@
 
         rightMiddle.scrollTop(rightMiddle[0].scrollHeight);
 
-        // 메세지 읽음 카운터
-        // let readCount = 1;
-
         // 메세지를 받았을 때
         let anker = $("<a>");
         let talkList = $("<div>");
@@ -456,6 +473,8 @@
         talkConverse.addClass("talk-last-conversation");
         ws.onmessage = function (e) {
 
+
+          let alpha = e.data;
           console.log(e.data);
           let time = new Date();
           let hours = time.getHours();
@@ -474,6 +493,35 @@
 
           if (message == "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다.") {
             chatMessage.attr("contenteditable", "false");
+            let leftLine = $("<div>");
+              leftLine.addClass("left-line");
+              let chatTime = $("<div>");
+              chatTime.addClass("chatTime");
+              let chatRead = $("<div>");
+              chatRead.addClass("chatRead");
+              let time = $("<div>");
+              time.addClass("time");
+              // chatRead.append(1);
+              chatTime.append(chatRead);
+              chatTime.append(time);
+
+              let line = $("<div>");
+              line.addClass("line");
+              line.append(message);
+              leftLine.append(line);
+              if (hours < 10 && minutes >= 10) {
+                time.append("0" + hours + ":" + minutes);
+              } else if (minutes < 10 && hours >= 10) {
+                time.append(hours + ":0" + minutes);
+              } else if (hours < 10 && minutes < 10) {
+                time.append("0" + hours + ":0" + minutes);
+              } else {
+                time.append(hours + ":" + minutes);
+              }
+              leftLine.append(chatTime);
+              rightMiddle.append(leftLine);
+
+            
             console.log("확인완료");
             document.onkeydown = function (e) {
               if (e.keyCode == 116) {
@@ -489,10 +537,10 @@
             window.onpopstate = function (event) {
               history.go(1);
             };
-            $(".talk-list-btn[pid=" + jsonRoomId + "]").on("click", function () {
-              alert("삭제된 채팅방입니다.");
-              return false;
-            })
+            // $(".talk-list-btn[pid=" + jsonRoomId + "]").on("click", function () {
+            //   alert("삭제된 채팅방입니다.");
+            //   location.href = "/chat/delSuccess?roomId=0";
+            // })
           }
           let url = window.location.href;
           console.log(url);
