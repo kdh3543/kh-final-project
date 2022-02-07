@@ -985,22 +985,44 @@ img {
 					aria-labelledby="nav-following-tab">
 					<div class="following-top">팔로워 수: ${fCount}</div>
 					<c:forEach var="f" items="${followlist}">
-						<div class="following-section">
+					<c:choose>
+					<c:when test="${f.myfollower==1&&f.imfollowing==1 }">
+					<div class="following-section">
 							<div class="follower-left">
 								<img src="${f.profile_image}" style="width: 100%; height: 100%">
 							</div>
 							<div class="following-middle">${f.name }</div>
 							<div class="following-right">
 
-								<a href="#" fid="${f.id}" class=" btnFollow followed"> <input
+								<a href="#" fid="${f.id}" class="btnFollow unfollow"> <input
+									type=button value="언팔로우" class="unfollow"
+									style="background-color: #ef4444">
+								</a>
+
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+					<div class="following-section">
+							<div class="follower-left">
+								<img src="${f.profile_image}" style="width: 100%; height: 100%">
+							</div>
+							<div class="following-middle">${f.name }</div>
+							<div class="following-right">
+
+								<a href="#" fid="${f.id}" class="btnFollow followed"> <input
 									type=button value="팔로우" class="unfollow"
 									style="background-color: #24a6a4">
 								</a>
 
 							</div>
 						</div>
+						</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</div>
+									
+						
 
 				<!-- 팔로워에 대한 스크립트 -->
 				<script>
@@ -1057,7 +1079,7 @@ img {
 				<!-- 팔로우 -->
 				<div class="tab-pane fade" id="nav-follower" role="tabpanel"
 					aria-labelledby="nav-follower-tab">
-					<div class="follower-top">팔로우 수 : ${followedCount }</div>
+					<div class="follower-top" id="followCnt">팔로우 수 : ${followedCount }</div>
 					<c:forEach var="j" items="${followedList }">
 						<div class="follower-section">
 							<div class="follower-left">
@@ -1081,25 +1103,27 @@ img {
             function() {
                if ($(this).hasClass('unfollowed')) {
                   $.ajax({
-                    url : "/follow/followed",
+                    url : "/follow/unfollowed",
                      context : this,
                      data : {
                         sellerID : $(this).attr("jid")
                      },
                      success : function(resp) {
-                        $(this).children('input.junfollow').val(
-                              "팔로우");
-                        $(this).children('input.junfollow').css(
-                              "background-color", "#24a6a4");
-                       $(this).removeClass('unfollowed');
-                        $(this).addClass('follow');
+                    	 let followCnt = document
+							.getElementById("followCnt");
+                    	 followCnt.innerHTML = ("팔로우 수 : " + resp);
+                    	 $(this)
+							.closest(
+									".follower-section")
+							.remove();
+                    	 
                      }
                   })
                }
 
               else if ($(this).hasClass('follow')) {
                   $.ajax({
-                     url : "/follow/followed",
+                     url : "/follow/unfollowed",
                      context : this,
                      data : {
                         sellerID : $(this).attr("jid")

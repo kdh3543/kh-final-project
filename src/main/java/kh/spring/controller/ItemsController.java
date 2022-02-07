@@ -749,6 +749,7 @@ public class ItemsController {
 	      List<MemberDTO> followlist =new ArrayList<MemberDTO>();
 	      followlist = fwservice.selectfollowing(id);            
 	      model.addAttribute("followlist",followlist);
+	      System.out.println(followlist);
 	      
 	    //내가 팔로워 한 수 가져오기
 	      int followingCount = fwservice.followingCount(id);

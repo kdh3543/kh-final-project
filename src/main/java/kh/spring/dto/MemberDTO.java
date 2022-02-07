@@ -19,30 +19,19 @@ public class MemberDTO {
 	private String login_check;
 	private String kakao;
 	private int view_count;
+	private int myfollower;
+	private int imfollowing;
+	
 	public MemberDTO() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public MemberDTO(int seq, String id, String pw, String name, String phone, String email, String zipcode,
-			String address1, String address2, Timestamp signup_date, String prefer_location, String profile_image,
-			int cash, String login_check, String kakao, int view_count) {
-		super();
-		this.seq = seq;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.zipcode = zipcode;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.signup_date = signup_date;
-		this.prefer_location = prefer_location;
-		this.profile_image = profile_image;
-		this.cash = cash;
-		this.login_check = login_check;
-		this.kakao = kakao;
-		this.view_count = view_count;
+	@Override
+	public String toString() {
+		return "MemberDTO [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone
+				+ ", email=" + email + ", zipcode=" + zipcode + ", address1=" + address1 + ", address2=" + address2
+				+ ", signup_date=" + signup_date + ", prefer_location=" + prefer_location + ", profile_image="
+				+ profile_image + ", cash=" + cash + ", login_check=" + login_check + ", kakao=" + kakao
+				+ ", view_count=" + view_count + ", myfollower=" + myfollower + ", imfollowing=" + imfollowing + "]";
 	}
 	public int getSeq() {
 		return seq;
@@ -140,7 +129,18 @@ public class MemberDTO {
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
 	}
-	
+	public int getMyfollower() {
+		return myfollower;
+	}
+	public void setMyfollower(int myfollower) {
+		this.myfollower = myfollower;
+	}
+	public int getImfollowing() {
+		return imfollowing;
+	}
+	public void setImfollowing(int imfollowing) {
+		this.imfollowing = imfollowing;
+	}
 	
 	
 }

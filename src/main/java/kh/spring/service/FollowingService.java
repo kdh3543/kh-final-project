@@ -23,6 +23,10 @@ public class FollowingService {
            
          return fwdao.followCheck(sellerID,followingID);
       }
+      public int followCheck1(String sellerID, String followingID){
+          
+          return fwdao.followCheck1(sellerID,followingID);
+       }
       //팔로우 목록 체크
       public int followedCheck(String sellerID, String followedID){
             System.out.println("서비스도착"+sellerID+" : "+followedID);
@@ -39,10 +43,20 @@ public class FollowingService {
 	   System.out.println("Following 서비스 : follow 잘 도착");
       return fwdao.follow(sellerID, followingID);
    }
+   // 내가 팔로잉 했을때
+   public int follow1(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : follow 잘 도착");
+      return fwdao.follow1(sellerID, followingID);
+   }
    //팔로잉한 상대의 myfollower 업데이트
    public int updateFollowing(String sellerID, String followingID) {
 	   System.out.println("Following 서비스 : updateFollowing 잘도착");
 		return fwdao.updateFollowing(sellerID,followingID);		
+	}
+   //팔로잉한 상대의 myfollower 업데이트
+   public int updateFollowing1(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : updateFollowing 잘도착");
+		return fwdao.updateFollowing1(sellerID,followingID);		
 	}
    //내가 팔로우 사람들
    public List<MemberDTO> selectfollowing(String id) {
@@ -84,6 +98,35 @@ public class FollowingService {
    //storelist 뿌려줄 팔로워수
 public List<FollowDTO> followCountAll() {
     return fwdao.followCountAll();
+}
+//updateunFollowing
+public int updateunFollowing(String sellerID, String followingID) {
+	return fwdao.updateunFollowing(sellerID, followingID);
+	
+}
+public int delFollowedUpdate(String followedID, String sellerID) {
+	
+	return fwdao.delFollowedUpdate(followedID,sellerID);
+}
+public int updateFollowed(String followedID, String sellerID) {
+	
+	return fwdao.updateFollowed(followedID,sellerID);
+}
+public int followedCheck1(String followedID, String sellerID) {
+	
+	return fwdao.followedCheck1(followedID,sellerID);
+}
+public int updateFollowed1(String followedID, String sellerID) {
+	return fwdao.updateFollowed1(followedID,sellerID);
+	
+}
+public int followed1(String followedID, String sellerID) {
+	return fwdao.followed1(sellerID, followedID);
+	
+}
+public int unfollowed1(String followedID, String sellerID) {
+	
+	return fwdao.unfollowed1(sellerID,followedID);
 }
 
 

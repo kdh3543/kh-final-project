@@ -24,6 +24,13 @@ public class FollowingDAO {
          map.put("followingID", followingID);   
       return mybatis.selectOne("follow.followCheck", map);
    }
+   public int followCheck1(String sellerID , String followingID) {
+	      
+       Map<String,String> map = new HashMap<String,String>();
+         map.put("sellerID", sellerID);
+         map.put("followingID", followingID);   
+      return mybatis.selectOne("follow.followCheck1", map);
+   }
    // 팔로우 체크
    public int followedCheck(String sellerID , String followedID) {
        System.out.println("DAO도착1"+sellerID+" : "+followedID);
@@ -49,6 +56,14 @@ public class FollowingDAO {
          map.put("followingID", followingID);   
       return mybatis.insert("follow.follow", map);
    }
+   // 내가 상대방을 팔로우했을때
+   public int follow1(String sellerID, String followingID) {
+       System.out.println("FollowingDAO : follow 잘 도착 ->"+sellerID+" : "+followingID);
+      Map<String,String> map = new HashMap<String,String>();
+         map.put("sellerID", sellerID);
+         map.put("followingID", followingID);   
+      return mybatis.insert("follow.follow1", map);
+   }
    // 팔로우한 상대의 myFollower 업데이트
    public int updateFollowing(String sellerID, String followingID) {
 		System.out.println("FollowingDAO : updateFollowing 도착");
@@ -57,6 +72,15 @@ public class FollowingDAO {
 		map.put("sellerID", sellerID);
 		map.put("followingID", followingID);	
 		return mybatis.update("follow.updateFollowing",map);
+	}
+   // 팔로우한 상대의 myFollower 업데이트
+   public int updateFollowing1(String sellerID, String followingID) {
+		System.out.println("FollowingDAO : updateFollowing 도착");
+		System.out.println("정보 : " + sellerID + " , " +followingID);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("sellerID", sellerID);
+		map.put("followingID", followingID);	
+		return mybatis.update("follow.updateFollowing1",map);
 	}
 	   
 
@@ -110,6 +134,49 @@ public int delFollowingUpdate(String sellerID, String followingID) {
 	map.put("sellerID",sellerID);
 	map.put("followingID",followingID);
 	return mybatis.update("follow.delFollowingUpdate",map);
+}
+public int updateunFollowing(String sellerID, String followingID) {
+	Map<String,String> map = new HashMap<String,String>();
+	map.put("sellerID",sellerID);
+	map.put("followingID",followingID);
+	return mybatis.update("follow.updateunFollowing",map);
+}
+public int delFollowedUpdate(String followedID, String sellerID) {
+	 Map<String,String> map = new HashMap<String,String>();
+     map.put("sellerID", sellerID);
+     map.put("followedID", followedID);
+	return mybatis.update("follow.delFollowedUpdate",map);
+}
+public int updateFollowed(String followedID, String sellerID) {
+	 Map<String,String> map = new HashMap<String,String>();
+     map.put("sellerID", sellerID);
+     map.put("followedID", followedID);
+     return mybatis.update("follow.updateFollowed",map);
+}
+public int followedCheck1(String followedID, String sellerID) {
+	
+	 Map<String,String> map = new HashMap<String,String>();
+     map.put("sellerID", sellerID);
+     map.put("followedID", followedID);   
+  return mybatis.selectOne("follow.followedCheck1", map);
+}
+public int updateFollowed1(String followedID, String sellerID) {
+	Map<String,String> map = new HashMap<String,String>();
+    map.put("sellerID", sellerID);
+    map.put("followedID", followedID);
+    return mybatis.update("follow.updateFollowed1",map);
+}
+public int followed1(String sellerID, String followedID) {
+	 Map<String,String> map = new HashMap<String,String>();
+     map.put("sellerID", sellerID);
+     map.put("followedID", followedID);   
+  return mybatis.insert("follow.followed1", map);
+}
+public int unfollowed1(String sellerID, String followedID) {
+	 Map<String,String> map = new HashMap<String,String>();
+     map.put("sellerID", sellerID);
+     map.put("followedID", followedID);   
+  return mybatis.delete("follow.unfollowed1", map);
 }
 
    
