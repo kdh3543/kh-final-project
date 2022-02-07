@@ -68,8 +68,8 @@
 					</c:when>
 					<c:otherwise>
 						<ul class="header_list">
-							<li><a href="signIn">로그인</a></li>
-							<li><a href="join">회원가입</a></li>
+							<li><a href="/signIn">로그인</a></li>
+							<li><a href="/join">회원가입</a></li>
 						</ul>
 					</c:otherwise>
 				</c:choose>

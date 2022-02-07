@@ -301,8 +301,7 @@
 						<!-- <div class="img-Container"> -->
 						<!-- 수정중 -->
 
-						<img src="${dto.profile_image}"
-							style="width: 400px; height: 300px;">
+						<img src="${dto.profile_image}">
 						<!-- <button class="btn btn-lg btn-light" id="myShopBtn">내 상점
 								관리</button> -->
 						<!-- </div> -->
@@ -460,7 +459,7 @@
 									<th>상품명</th>
 									<th>가격</th>
 									<th>찜 수</th>
-									<th>댓글 수</th>
+									<th>구매자 아이디</th>
 									<th>최근 수정일</th>
 									<th>기능</th>
 								</tr>
@@ -494,18 +493,14 @@
 												<td id="targetName">${i.name }</td>
 												<td>${i.price }</td>
 												<td>${i.like_cnt }</td>
-												<td>문의수들어갈자리</td>
+												<td><a href="/items/reserveOtherPage?id=${i.buyerID}">${i.buyerID}</a></td>
 												<td>${i.detailDate}</td>
 
 												<td><a href="/items/itemsModify?iseq=${i.iseq}">
 														<button type="button" class=" btn btn-lg btn-light">수정</button>
 												</a>
-
-
 													<button type="button"
 														class=" btn btn-lg btn-light deleteBtn">삭제</button> </a></td>
-
-
 											</tr>
 
 
@@ -679,172 +674,171 @@
 		</script>
 
 					<!-- 구매내역 -->
-					<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
-						aria-labelledby="nav-purchase-tab">
-						<div class="purchase-top" id="buyCount">구매내역 : ${buyCount}건</div>
-						<div class="purchase-section">
+      <div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+         aria-labelledby="nav-purchase-tab">
+         <div class="purchase-top" id="buyCount">구매내역 ${buyCount}건</div>
+         <div class="purchase-section">
 
 
-							<table>
-								<tr>
-									<th>사진</th>
-									<th>거래상태</th>
-									<th>상품명</th>
-									<th>가격(안전결제수수료 미포함)</th>
-									<th>거래확정</th>
-								</tr>
+            <table>
+               <tr>
+                  <th>사진</th>
+                  <th>거래상태</th>
+                  <th>상품명</th>
+                  <th>가격(안전결제수수료 미포함)</th>
+                  <th>거래확정!</th>
+                  <th>기능</th>
+               </tr>
+               
+               <c:forEach var="i" items="${buyIlist}" varStatus="statusI">
+                  <c:forEach var="f" items="${buyFlist}" varStatus="statusF">
+                     <c:if test="${i.iseq == f.parentSeq}">
+                        <tr>
+                           <td><a href=/items/itemsDetail?iseq=${i.iseq}><img
+                                 src="${f.sysName}"></a></td>
+                           <c:if test="${i.deal2 =='R'}">
+                           <td>구매중</td>
+                           </c:if>      
+                           <c:if test="${i.deal2 =='Y'}">
+                           <td>구매완료</td>
+                           </c:if>      
+                           <td>구매중</td>
+                           <td>${i.name}</td>
+                           <td>${i.price}원</td>
+                           <td style="display: none;">${i.iseq}</td>
+                           <th><c:choose>
+                                 <c:when test="${i.deal2 == 'Y'}">
+                                    <button class=" btn btn-lg btn-light " id=""
+                                       style="background-color: rgb(220,20,60)">구매확정</button>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <button class="btn btn-lg btn-light buyOk" id="">구매확정</button>
+                                    <button class="btn btn-lg btn-light buyCancel" id="">구매취소</button>
 
-								<c:forEach var="i" items="${buyIlist}" varStatus="statusI">
-									<c:forEach var="f" items="${buyFlist}" varStatus="statusF">
-										<c:if test="${i.iseq == f.parentSeq}">
-											<tr>
-												<td><a href=/items/itemsDetail?iseq=${i.iseq}><img
-														src="${f.sysName}"></a></td>
-												<c:if test="${i.deal2 =='R'}">
-													<td>구매중</td>
-												</c:if>
-												<c:if test="${i.deal2 =='Y'}">
-													<td>구매완료</td>
-												</c:if>
-												<td>${i.name}</td>
-												<td>${i.price}원</td>
-												<td style="display: none;">${i.iseq}</td>
-												<th><c:choose>
-														<c:when test="${i.deal2 == 'Y'}">
-															<button class=" btn btn-lg btn-light "
-																id="otherConfirmBtn">구매확정</button>
-														</c:when>
-														<c:otherwise>
-															<button class="btn btn-lg btn-light buyOk"
-																id="confirmBtn">구매확정</button>
-															<button class="btn btn-lg btn-light buyCancel"
-																id="cancleBtn">구매취소</button>
+                                 </c:otherwise>
+                              </c:choose> <!-- <button class=" btn btn-lg btn-light" id="readReviewBtn" hidden>거래완료</button> -->
+                           </th>
 
-														</c:otherwise>
-													</c:choose> <!-- <button class=" btn btn-lg btn-light" id="readReviewBtn" hidden>거래완료</button> -->
-												</th>
+                        </tr>
+                     </c:if>
 
-											</tr>
-										</c:if>
+                  </c:forEach>
+               </c:forEach>
 
-									</c:forEach>
-								</c:forEach>
+            </table>
+         </div>
+      </div>
 
-							</table>
-						</div>
-					</div>
+      <script>
+      
+   
+         
+         $(".buyOk").on(
+               "click",
+               function() {
 
-					<script>
-		
-	
-			
-			$(".buyOk").on(
-					"click",
-					function() {
+                  console.log($(this).text());
+                  /*iseq 찾기  */
+                  console.log("해당 iseq 는 ? : "
+                        + $(this).closest("tr").find('td:nth-child(5)')
+                              .text());
 
-						console.log($(this).text());
-						/*iseq 찾기  */
-						console.log("해당 iseq 는 ? : "
-								+ $(this).closest("tr").find('td:nth-child(5)')
-										.text());
+                  if (confirm("구매확정시 되돌릴 수 없습니다. 해당 구매를 확정하시겠습니까?")) {
+                     $(this).css("background-color", "rgb(220,20,60)");
+                     $(this).next().css("display", "none");
+                     /* $(this).css("disabled","true"); */
+                     
+   
+                     let iseq = $(this).closest("tr").find(
+                           'td:nth-child(6)').text();
+                     console.log($(this));
+                     
+                     
 
-						if (confirm("구매확정시 되돌릴 수 없습니다. 해당 구매를 확정하시겠습니까?")) {
-							$(this).css("background-color", "rgb(220,20,60)");
-							$(this).next().css("display", "none");
-							/* $(this).css("disabled","true"); */
-							
-	
-							let iseq = $(this).closest("tr").find(
-									'td:nth-child(6)').text();
-							console.log($(this));
-							
-							
+                     $.ajax({
+                        url : "/safeDeal/dealOk",
+                        data : {
+                           iseq : iseq
+                        },
+                        context : this,
+                     }).done(function(resp) {
+                        console.log("확정완료");
+                         $(this).attr("disabled","true"); 
 
-							$.ajax({
-								url : "/safeDeal/dealOk",
-								data : {
-									iseq : iseq
-								},
-								context : this,
-							}).done(function(resp) {
-								console.log("확정완료");
-								 $(this).attr("disabled","true"); 
+                     })
+                     
+                  }
+                  
 
-							})
-							
-						}
-						
+               })
 
-					})
+         /* 판매자에게 돈들어가기 , deal2 Y 변경 ,  */
 
-			/* 판매자에게 돈들어가기 , deal2 Y 변경 ,  */
+         $(".buyCancel").on(
+               "click",
+               function() {
 
-			$(".buyCancel").on(
-					"click",
-					function() {
+                  console.log($(this).text());
+                  /*이름 찾기  */
+                  console.log($(this).closest("tr").find(
+                        'td:nth-child(6)').text());
+                  
+                  
+                  
+                  if (confirm("구매취소시 되돌릴 수 없습니다. 해당 구매를 취소하시겠습니까?")) {
 
-						console.log($(this).text());
-						/*이름 찾기  */
-						console.log($(this).closest("tr").find(
-								'td:nth-child(6)').text());
-						
-						
-						
-						if (confirm("구매취소시 되돌릴 수 없습니다. 해당 구매를 취소하시겠습니까?")) {
+                     /* 취소시 tr 영역 통째로 날림 */
 
-							/* 취소시 tr 영역 통째로 날림 */
+                     $(this).closest("tr").remove();
+                     
 
-							$(this).closest("tr").remove();
-							
+                     let iseq = $(this).closest("tr").find(
+                           'td:nth-child(6)').text();
+                     
+                   
+                  
+                     
+                     $.ajax({
+                        url : "/safeDeal/dealCancel",
+                        data : {
+                           iseq : iseq
+                        }
+                     }).done(function(resp) {
+                        console.log("취소완료");
+                        console.log(resp);
+                        
+                        $("#buyCount").text("구매내역 : " +${buyCount-1}+"건");
+                        
 
-							let iseq = $(this).closest("tr").find(
-									'td:nth-child(6)').text();
-							
-							/* remainPoint */
-						
-							
-							$.ajax({
-								url : "/safeDeal/dealCancel",
-								data : {
-									iseq : iseq
-								}
-							}).done(function(resp) {
-								console.log("취소완료");
-								console.log(resp);
-								
-								$("#buyCount").text("구매내역 : " +${buyCount-1}+"건");
-								$("#remainPoint").text(${dto.cash});
-								
+                     })
+                  }
+                  
+                  
+                  
+                  
+                  
 
-							})
-						}
-						
-						
-						
-						
-						
+                  /* 구매내역 건수 줄이기 + 환불 + db삭제 */
 
-						/* 구매내역 건수 줄이기 + 환불 + db삭제 */
+                  /* $.ajax({
+                     
+                     url : "/safeDeal/cancel",
+                     data : { iseq : }
+                     
+                  })
+                   */
 
-						/* $.ajax({
-							
-							url : "/safeDeal/cancel",
-							data : { iseq : }
-							
-						})
-						 */
+               })
 
-					})
+         $("#btn-talk").on(
+               "click",
+               function() {
+                  location.href = "/chat/talk?productName="
+                        + hiddenProduct + "&productId="
+                        + hiddenProductId + "&roomId=" + roomId;
+               })
 
-			$("#btn-talk").on(
-					"click",
-					function() {
-						location.href = "/chat/talk?productName="
-								+ hiddenProduct + "&productId="
-								+ hiddenProductId + "&roomId=" + roomId;
-					})
-
-			/* $("#btn-like").css("background-color","blue"); */
+         /* $("#btn-like").css("background-color","blue"); */
 		</script>
 
 

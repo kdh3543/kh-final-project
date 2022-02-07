@@ -981,9 +981,7 @@
 
 													<a style="text-decoration: none;' "
 														href="/items/itemsDetail?iseq=${di.iseq}"><img
-														src="${df.sysName}"
-														style="min-width: 100px; min-height: 100px;"></a>
-												&nbsp;
+														src="${df.sysName}"></a>
 												</c:if>
 
 
