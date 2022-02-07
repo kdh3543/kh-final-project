@@ -7,6 +7,10 @@ html, body {
 	height: 100%;
 	box-sizing: border-box;
 }
+
+p {
+	margin: 0px;
+}
 /* header */
 header {
 	width: 100%;
@@ -40,26 +44,23 @@ header .header-list-after-login li:nth-child(1) {
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
 	font-size: 15px;
+	line-height: 27px;
 }
 
-header .header-list-after-login li:nth-child(2) {
+header .header-list-after-login li:nth-child(2)  a {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
 	font-size: 15px;
 }
 
-header .header-list-after-login li:nth-child(3) {
-	line-height: 20px;
-}
-
-header .header-list-after-login li:nth-child(4) {
+header .header-list-after-login li:nth-child(3)  a {
 	line-height: 20px;
 }
 
 header .header-list-after-login li:nth-child(3) a {
 	text-decoration: none;
-	color: whitesmoke;
+	color: #f8d200;
 	font-family: 'OTWelcomeRA';
 	font-size: 15px;
 }
@@ -71,13 +72,6 @@ header .header-list-after-login li:nth-child(3) a {
 	font-size: 20px;
 }
  */
-header .header-list-after-login li:nth-child(4) a {
-	text-decoration: none;
-	color: #f8d200;
-	font-family: 'OTWelcomeRA';
-	font-size: 15px;
-}
-
 header .header_list {
 	list-style: none;
 	display: flex;
@@ -114,10 +108,12 @@ header .nav_div {
 	justify-content: space-between;
 	align-items: center;
 }
+
 header a {
 	width: 60%;
 	height: 100%;
 }
+
 header .logoImg {
 	width: 60%;
 	height: 100%;
@@ -399,8 +395,35 @@ section article .article_title {
 	flex-direction: row;
 }
 
-.imgBox a {
-	width: 18%;
+.paginate {
+	display: flex;
+	justify-content: space-evenly;
+	padding-bottom: 1%;
+	flex-wrap: wrap;
+	height: auto;
+	width: 100%;
+	margin: auto;
+	flex-direction: column;
+}
+
+.items {
+	display: flex;
+	justify-content: space-evenly;
+	padding-bottom: 1%;
+	flex-wrap: wrap;
+	height: auto;
+	width: 100%;
+	margin: auto;
+	flex-direction: row;
+}
+
+.items>div {
+	width: 22%;
+	margin: 1% 1% 1%;
+}
+
+.items>div a {
+	width: 100%;
 	border: 1px solid #dfe6e9;
 	display: flex;
 	flex-direction: column;
@@ -433,6 +456,22 @@ section article .article_title {
 	width: 100%;
 	height: 100%;
 }
+/* pager */
+.pager {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.pager div {
+	font-size: 20px;
+}
+
+.pager .pageNumbers a {
+	margin-left: 10px;
+	margin-right: 10px;
+}
 
 /* footer */
 footer {
@@ -461,6 +500,7 @@ footer .footer-box {
 	height: auto;
 	position: fixed;
 	right: calc(50% - 47%);
+	top: 350px;
 }
 
 .sidebar-div {
@@ -481,6 +521,8 @@ footer .footer-box {
 	width: 100%;
 	height: 100%;
 	cursor: pointer;
+	color: black;
+	border: none;
 }
 
 #likeProductBtn {

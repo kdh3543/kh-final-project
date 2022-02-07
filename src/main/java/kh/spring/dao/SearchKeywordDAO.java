@@ -11,34 +11,37 @@ import kh.spring.dto.SearchKeywordDTO;
 
 @Repository
 public class SearchKeywordDAO {
-	
+
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
-	
-	
+
+
+
 	public List<SearchKeywordDTO> selectAll(String id){
-		
+
 		return mybatis.selectList("Search.selectAll",id);
 	}
-	
 
-	
+
+
 	public int insert (SearchKeywordDTO dto) {
-		
+
 		return mybatis.insert("Search.insert",dto);
-		
-		 
+
+
+	}
+	public int insertHot(SearchKeywordDTO dto) {
+		return mybatis.insert("Search.insertHot",dto);
 	}
 
 	public int deleteAll () {
-		
+
 		return mybatis.delete("Search.deleteAll");
 	}
-	
+
 	public int deleteByKeyword(String keyword) {
-		
-		
+
+
 		return mybatis.delete("Search.deleteByKeyword",keyword);
 	}
 
@@ -53,9 +56,9 @@ public class SearchKeywordDAO {
 
 	public int searchExistCount(String keyword) {
 		return mybatis.selectOne("Search.searchExistCount",keyword);
-		
+
 	}
 
-	
+
 
 }

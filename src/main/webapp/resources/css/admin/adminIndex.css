@@ -187,7 +187,7 @@ p {
 }
 
 .question-page .question-contents-div table tr th:nth-child(1) {
-	width: 1%;
+	width: 2%;
 }
 
 .question-page .question-contents-div table tr th:nth-child(2) {
@@ -260,10 +260,61 @@ p {
 
 .report-page .report-contents-div {
 	width: 90%;
-	height: 90%;
+	height: auto;
 	margin: auto;
 	text-align: center;
-	line-height: 100px;
+	overflow-y: auto;
+	padding: 2%;
+}
+
+.contentsList1 {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	text-align: left;
+	align-items: center;
+	font-weight: 700;
+}
+
+.listTable1 {
+	width: 100%;
+	height: auto;
+	font-size: 13px;
+}
+
+.listTable1 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+}
+
+.listTable1 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+}
+
+.contentsList2 {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	text-align: left;
+	align-items: center;
+	font-weight: 700;
+}
+
+.listTable2 {
+	width: 100%;
+	height: auto;
+	font-size: 13px;
+}
+
+.listTable2 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+}
+
+.listTable2 td:first-child {
+	height: 50px;
+	border-right: 1px solid gray;
 }
 
 /* 회원 통계 */
@@ -272,6 +323,7 @@ p {
 	width: 100%;
 	height: 100%;
 }
+
 .statistics-page .statistics-top-div {
 	width: 90%;
 	height: 10%;
@@ -289,16 +341,19 @@ p {
 	margin: auto;
 	overflow: auto;
 }
-.chart-div{
-	width:100%;
-	height:100%;
+
+.chart-div {
+	width: 100%;
+	height: 100%;
+	padding: 5%;
 }
 /* 판매 통계 */
-.sell-Statistics-page{
+.sell-Statistics-page {
 	display: none;
 	width: 100%;
 	height: 100%;
 }
+
 .sell-Statistics-page .sell-Statistics-top-div {
 	width: 90%;
 	height: 10%;
@@ -309,9 +364,141 @@ p {
 	align-items: flex-end;
 	margin: auto;
 }
-.sell-Statistics-page .sell-Statistics-contents-div{
-	width: 100%;
+
+.sell-Statistics-page .sell-Statistics-contents-div {
+	width: 90%;
 	height: 90%;
 	margin: auto;
 	overflow: auto;
+	padding: 2%;
+}
+
+.sellList1, .sellList2, .sellList3, .sellList4, .sellList5, .sellList6 {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	text-align: left;
+	align-items: center;
+	font-weight: 700;
+}
+
+.sellListTable1 {
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
+
+.sellListTable1 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	background-color: lightgray;
+}
+
+.sellListTable1 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+
+.sellListTable2 {
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
+
+.sellListTable2 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	background-color: lightgray;
+}
+
+.sellListTable2 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+
+.sellListTable3 {
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
+
+.sellListTable3 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	background-color: lightgray;
+}
+
+.sellListTable3 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+
+.list-div {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.list-left-div, .list-right-div {
+	width: 48%;
+	height: auto;
+}
+
+.list-left-div .sellListTable4 {
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
+
+.sellListTable4 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	background-color: lightgray;
+}
+
+.sellListTable4 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+.list-right-div .sellListTable5{
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
+
+.sellListTable5 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	background-color: lightgray;
+}
+
+.sellListTable5 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+
+.sellListTable6 {
+	width: 100%;
+	height: auto;
+	font-size: 14px;
+}
+
+
+.sellListTable6 th {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	background-color: lightgray;
+}
+
+.sellListTable6 tr {
+	height: 50px;
+	border-bottom: 1px solid gray;
+	text-align: center;
 }

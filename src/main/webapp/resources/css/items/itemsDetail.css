@@ -50,8 +50,9 @@ main {
 #carouselExampleIndicators {
 	width: 100%;
 }
-.carousel-indicators [data-bs-target]{
-	background-color:black;
+
+.carousel-indicators [data-bs-target] {
+	background-color: black;
 }
 
 .detail-right {
@@ -96,25 +97,29 @@ main {
 	font-size: 15px;
 	color: gray;
 }
-/* 신고하기 */ 
+/* 신고하기 */
 #reportBtn {
 	background-color: #fff !important;
 	border: none;
 	color: black;
 }
-.form-check{
-	text-align:left;
-	width:100%;
+
+.form-check {
+	text-align: left;
+	width: 100%;
 }
-.reasonInput{
+
+.reasonInput {
 	width: 70%;
-    height: 100%;
+	height: 100%;
 }
-#reportSubmitBtn{
+
+#reportSubmitBtn {
 	background-color: #24a6a4;
 	color: #fff;
 	border: none;
 }
+
 .detail-right .product-detail div {
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -227,7 +232,9 @@ main {
 	color: #fff;
 	width: 250px;
 }
-
+#nav-profile-tab{
+	width:30% !important;
+}
 .tab-content {
 	height: 90%;
 }
@@ -238,7 +245,7 @@ main {
 
 .tab-content>.active {
 	display: block;
-	height: 600px;
+	height: auto;
 	padding: 1%;
 	padding-top: 3%;
 }
@@ -267,7 +274,8 @@ main {
 .product-section1 .product-info-contents {
 	padding-top: 2%;
 	width: 100%;
-	height: auto;
+	height: 300px;
+    overflow-y: auto;
 }
 
 .product-section1 .product-middle {
@@ -299,15 +307,16 @@ main {
 	font-family: 'OTWelcomeRA';
 	font-size: 25px;
 	border-bottom: 1px solid #dfe6e9;
-	width: 100%;
-	height: 50px;
-	padding-top: 2%;
+    width: 100%;
+    height: 70px;
+    padding-top: 2%;
+    margin-bottom: 20px;
 }
 
 .product-question {
 	border: 1px solid #dfe6e9;
 	width: 95%;
-	height: 180px;
+	height: auto;
 }
 
 .write-div {
@@ -345,14 +354,24 @@ main {
 	color: #fff;
 	font-size: 13px;
 }
-/* 
-.product-section1 .product-info {
-	width: 70%;
+/*  상품문의 */
+.questionList {
+	height: 100px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding:1%;
 }
 
-.product-section1 .shop-info {
-	width: 30%;
-} */
+.listWriter {
+	width: 20%;
+	margin-left: 5%;
+}
+.listContents{
+	    width: 60%;
+	    overflow-y:auto;
+}
 /* 상점정보 */
 .product-section2 {
 	display: flex;
@@ -413,7 +432,7 @@ main {
 	background-color: #fff;
 	width: 90%;
 	height: 30px;
-	color: gray;
+	color: #fff;
 	font-size: 13px;
 }
 
@@ -427,12 +446,13 @@ main {
 	width: 100%;
 	height: 120px;
 	display: flex;
-	padding: 5%;
+	margin-top: 5%;
+	justify-content: center;
 }
 
 .shop-info-images img {
 	border: 1px solid gray;
-	width: 50%;
+	width: 100%;
 	height: 100%;
 	margin: 1%;
 }
@@ -446,7 +466,7 @@ main {
 
 .moreBtn {
 	background-color: #fff;
-	width: 90%;
+	width: auto;
 	height: 100%;
 	color: gray;
 	font-size: 13px;

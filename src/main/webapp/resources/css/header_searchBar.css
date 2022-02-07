@@ -37,7 +37,7 @@ header .header-list-after-login li:nth-child(1) {
 	font-size: 15px;
 }
 
-header .header-list-after-login li:nth-child(2) {
+header .header-list-after-login li:nth-child(2) a {
 	text-decoration: none;
 	color: whitesmoke;
 	font-family: 'OTWelcomeRA';
@@ -46,17 +46,11 @@ header .header-list-after-login li:nth-child(2) {
 
 header .header-list-after-login li:nth-child(3) a {
 	text-decoration: none;
-	color: whitesmoke;
-	font-family: 'OTWelcomeRA';
-	font-size: 15px;
-}
-
-header .header-list-after-login li:nth-child(4) a {
-	text-decoration: none;
 	color: #f8d200;
 	font-family: 'OTWelcomeRA';
 	font-size: 15px;
 }
+
 /* 로그인 전 */
 header .header_list li {
 	padding: 12px 12px;
@@ -99,6 +93,7 @@ header .logoImg {
 	width: 60%;
 	height: 100%;
 }
+
 .searchContainer{
     display: flex;
     justify-content: center;
@@ -129,8 +124,8 @@ header .logoImg {
 	display: flex;
 }
 
-.searchBar div:first-child {
-	width: 90%;
+.searchBar .btn-group  {
+	width: 90% !important;
 	height: 60px;
 }
 
@@ -152,7 +147,7 @@ header .logoImg {
 }
 
 .tab-content>.active {
-	background-color: #fff;
+	background-color: #fff !important;
 }
 
 .form-control {
@@ -193,18 +188,23 @@ header .logoImg {
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid gray;
+	height:60px;
 }
-#nav-home {
+.top-nav{
+	padding:0px;
+}
+#nav-search {
 	width: 100%;
 	height: 100%;
 }
 
-#nav-tab {
-	width: 100%;
+#nav-tab1 {
+	width: 100% !important;
 }
 
-#nav-home-tab {
+#nav-search-tab {
 	width: 50%;
+	height:60px;
 }
 
 .nav-link {
@@ -217,8 +217,9 @@ header .logoImg {
 	border-color: #24a6a4
 }
 
-#nav-profile-tab {
+#nav-hotkeyword-tab {
 	width: 50%;
+	height:60px;
 }
 
 #delBtn {

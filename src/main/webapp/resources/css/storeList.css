@@ -10,6 +10,11 @@ html, body {
 	box-sizing: border-box;
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
 /* 메인  */
 main {
 	height: auto;
@@ -23,7 +28,7 @@ main {
 
 .main-container {
 	width: 80%;
-	height: 1000px;
+	height: auto;
 }
 
 .main-container .title {
@@ -32,16 +37,22 @@ main {
 
 .contents {
 	width: 100%;
-	height: 100px;
-	border: 1px solid black;
+	height: auto;
 	margin-top: 5%;
 }
-
+.contents a{
+	color: gray;
+}
+.contents a:hover{
+	
+	color:black !important;
+}
 .contents-list {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: row;
+	border: 1px solid gray;
 }
 
 .contents-list .left-list img {
@@ -52,9 +63,117 @@ main {
 
 .right-list {
 	width: 100%;
-	height: 100%;
+	height: auto;
 	justify-content: center;
 	display: flex;
 	flex-direction: column;
 	padding-left: 3%;
+}
+
+.index-container {
+	width: 80%;
+	height: auto;
+}
+
+.div-wrap2 {
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
+	width: 100%;
+	justify-content: flex-start;
+	margin: auto;
+	margin-left: 2%;
+}
+
+.div-wrap2 .rightList {
+	line-height: 40px;
+}
+
+.rightList .btn-sell, .btn-myshop, .btn-talk {
+	font-family: 'OTWelcomeRA';
+	font-size: 14px;
+	font-weight: 500;
+	color: rgb(33, 33, 33);
+	padding-right: 15px;
+	padding-left: 10px;
+	text-decoration: none;
+}
+
+.middle-div {
+	width: 80%;
+	height: auto;
+	padding: 3%;
+}
+
+.article_title {
+	font-size: 20px;
+}
+
+/* 사이드바 */
+#sideBar {
+	width: 20%;
+	height: auto;
+	position: fixed;
+	right: calc(50% - 47%);
+}
+
+.sidebar-div {
+	display: flex;
+	flex-direction: column;
+	width: 120px;
+	height: auto;
+	border: 1px solid #24a6a4;
+}
+
+.sidebar-div a {
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid #24a6a4;
+}
+
+.sidebar-div a button {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+#likeProductBtn {
+	border: none;
+	color: black;
+}
+
+#upTopBtn {
+	background-color: #24a6a4;
+	color: #fff;
+	border: none;
+}
+/* 사이드바 - 최근 본 상품 */
+.sidebar-resently-div {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.sidebar-title-div {
+	width: 100%;
+	text-align: center;
+}
+
+.sidebar-product-div {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.sidebar-product-div img {
+	border: 1px solid black;
+	width: 100px;
+	height: 100px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

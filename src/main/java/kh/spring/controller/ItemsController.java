@@ -62,10 +62,6 @@ public class ItemsController {
 	public ReportService rservice;
 	
 
-
-
-
-
 	@RequestMapping("")	
 	public String home( Model model) {
 		
@@ -81,7 +77,6 @@ public class ItemsController {
 		model.addAttribute("flist",flist);
 
 		
-
 		//인기검색어 넘겨주기 hot search =hs
 
 		List<SearchKeywordDTO> hslist = sservice.selectByHot();
@@ -90,18 +85,23 @@ public class ItemsController {
 		
 		//검색기록을 위한 아이디 넘기기
 		String id =(String)session.getAttribute("loginID");
-		if(id != null) {
-		model.addAttribute("loginID",id);
-		//헤더 부분 프로필 넘기기
 		
+		if(id != null) {
+		
+		model.addAttribute("loginID",id);
+		
+		//헤더 부분 프로필 넘기기	
 		MemberDTO dto = mservice.select(id);
-
 		model.addAttribute("dto",dto);
 		System.out.println("메인이미지는 ?  : "+dto.getProfile_image());
-		 
+		
+		//찜 개수 가져오기
+			int wishlistCount = wlservice.wishlistCount(id);
+			model.addAttribute("wCount",wishlistCount);
 		
 		}
 		
+	
 
 		return "/items/index";
 	}
@@ -471,7 +471,7 @@ public class ItemsController {
 
 	@RequestMapping("searchByInput")	
 	public String input(SearchKeywordDTO dto,Model model) {
-
+		
 
 		//최근검색어 목록에 값 저장 회원일 경우만
 
@@ -480,14 +480,18 @@ public class ItemsController {
 			String keyword = dto.getKeyword();
 
 			int existCount = sservice.searchExistCount(keyword);
-
+			
 			System.out.println("existCOunt : "+ existCount );
 			if(existCount ==0) {
 				//넣는작업
 				sservice.insert(dto);
 
 
-			}
+			}else{
+	            sservice.insertHot(dto);
+
+	            
+	         }
 
 		}
 		
@@ -496,11 +500,15 @@ public class ItemsController {
 		//검색내용
 		 String keyword = dto.getKeyword().trim(); 
 		 
-		 
-		String id = (String)session.getAttribute("loginID");
+		 String id =(String)session.getAttribute("loginID");
+			
+	
 		
 		if(id !=null ) {
 			model.addAttribute("loginID",id);
+			//찜 개수 가져오기
+			int wishlistCount = wlservice.wishlistCount(id);
+			model.addAttribute("wCount",wishlistCount);
 			
 		}
 	
@@ -508,6 +516,10 @@ public class ItemsController {
 		//인기검색어 넘겨주기 hot search =hs
 
 		List<SearchKeywordDTO> hslist = sservice.selectByHot();
+		System.out.println(hslist.get(0).getKeyword());
+		System.out.println(hslist.get(0).getUser_id());
+		System.out.println(hslist.get(1).getKeyword());
+		System.out.println(hslist.get(0).getUser_id());
 		model.addAttribute("hslist",hslist);
 		
 
@@ -566,7 +578,15 @@ public class ItemsController {
 		//session
 
 		String id = (String)session.getAttribute("loginID");
-
+		
+		if(id != null) {
+			
+			
+			//찜 개수 가져오기
+			int wishlistCount = wlservice.wishlistCount(id);
+			model.addAttribute("wCount",wishlistCount);
+			
+			}
 
 
 		model.addAttribute("CIlist",CLlist);
