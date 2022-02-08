@@ -54,25 +54,27 @@ input[type=password] {
 			</ul>
 		</div>
 		<div class="div-wrap">
-					<div class="nav_div">
-						<div class="logo">
-							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
-						</div>
-					</div>
+			<div class="nav_div">
+				<div class="logo">
+					<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
 				</div>
+			</div>
+		</div>
 		<div class="div-wrap3"></div>
 	</header>
 	<main>
 		<form action="/member/signup" method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" onsubmit="return frmSubmit()">
 			<div class="join-wrap">
 				<div class="join-title">회원가입</div>
 				<hr>
 				<div class="mb-3">
-					<label for="imgfile" class="del-button img-up"> <input
-						type="file" id=imgfile name="file"
+					<label for="imgfile" class="del-button img-up"> 
+					<input type="file" id=imgfile name="file" required
 						accept=".jpg, .png, .jpeg, .gif" style="display: none;"> <img
-						src="/imgs/회원가입2 (2).png" id="profile"> 프로필 사진 등록
+						src="/imgs/회원가입2 (2).png" id="profile"> 프로필 사진 등록 
+						<a class="esential-a">*필수항목</a>
+
 					</label>
 				</div>
 
@@ -105,14 +107,14 @@ input[type=password] {
 						placeholder="이름을 입력하세요" pattern="^[가-힣]{2,5}$" required>
 				</div>
 
-			
+
 				<div class="addressDiv mb-3">
 					<label for="inputAddress1" class="form-label">주소</label> <input
 						type="text" class="form-control mb-2" id="inputAddress1"
 						name="address1" placeholder="" required>
 					<button type="button" class="btn btn-primary mb-1" id="findAddress">주소찾기</button>
 				</div>
-					<div class="mb-3">
+				<div class="mb-3">
 					<label for="inputZipcode" class="form-label">우편번호</label> <input
 						type="text" class="form-control" id="inputZipcode" name="zipcode"
 						placeholder="우편번호를 검색하세요." required>
@@ -137,7 +139,8 @@ input[type=password] {
 				<div class="mb-3">
 					<label for="deallocation" class="form-label">거래희망지역</label> <input
 						type="text" class="form-control" id="location"
-						name="prefer_location" placeholder="선호하는 거래 지역이 있다면 선택해주세요">
+						name="prefer_location" placeholder="선호하는 거래 지역이 있다면 선택해주세요"
+						required>
 				</div>
 				<hr class="mb-4">
 				<div class="custom-control custom-checkbox">
@@ -169,8 +172,8 @@ input[type=password] {
         new daum.Postcode({
             oncomplete: function(data) {
                 document.getElementById('inputZipcode').value = data.zonecode;
-                	document.getElementById("inputAddress1").value = data.roadAddress;
-                	 document.getElementById("inputAddress1").value = data.jibunAddress;
+                   document.getElementById("inputAddress1").value = data.roadAddress;
+                    document.getElementById("inputAddress1").value = data.jibunAddress;
             }  
         }).open();
     }
@@ -186,14 +189,14 @@ input[type=password] {
                    
                    return false;
                 }else{
-                	  $("#checkid").css("color","blue");
+                     $("#checkid").css("color","blue");
                       $("#checkid").text("사용가능한 ID형식 입니다.");
                 }
            $.ajax({
               url:"/member/idCheck",
               data:{id:$("#inputId").val()}
            }).done(function(resp){
-        	   console.log(resp);
+              console.log(resp);
               if(resp == "1"){
                  $("#checkid").css("color","pink");
                  $("#checkid").text("이미 사용중인 ID 입니다.");
@@ -215,10 +218,10 @@ input[type=password] {
             $("#checkpw").css("color","green");
             $("#checkpw").text("비밀번호가 일치합니다");
          }else if($("#inputPw").val()==""){
-        	 $("#checkpw").css("color","red");
+            $("#checkpw").css("color","red");
              $("#checkpw").text("비밀번호를 입력해주세요");
          }else if($("#inputPwAgain").val()==""){
-        	 $("#checkpw").css("color","red");
+            $("#checkpw").css("color","red");
              $("#checkpw").text("비밀번호확인을 입력해주세요");
          }
          else{
@@ -238,13 +241,36 @@ input[type=password] {
       
       //이미지 삽입 후 바뀜
 $(document).ready(function(){
-	$("#imgfile").change(function(event){
-		var tmppath=URL.createObjectURL(event.target.files[0]);
-		$('#profile').attr('src',tmppath);
-	});
+   $("#imgfile").change(function(event){
+      var tmppath=URL.createObjectURL(event.target.files[0]);
+      $('#profile').attr('src',tmppath);
+   });
 });
-     
 
+    
+    //ajax form 시 아이디 중복검증
+  
+     //ajax
+     function frmSubmit() {
+    	 $.ajax({
+             url:"/member/idCheck",
+             data:{id:$("#inputId").val()}
+          }).done(function(resp){
+             console.log(resp);
+             if(resp == "1"){	
+                alert("이미 사용중인 아이디입니다.");
+               	return false;
+             }else{
+                return true;
+             }
+          });
+
+
+         }
+     // 뒤로가기 버튼
+     $("#backBtn").on("click",function(){
+    	window.history.back(); 
+     });
     
 </script>
 </body>

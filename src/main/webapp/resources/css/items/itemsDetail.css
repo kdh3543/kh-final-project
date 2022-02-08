@@ -232,9 +232,11 @@ main {
 	color: #fff;
 	width: 250px;
 }
-#nav-profile-tab{
-	width:30% !important;
+
+#nav-profile-tab {
+	width: 30% !important;
 }
+
 .tab-content {
 	height: 90%;
 }
@@ -259,7 +261,7 @@ main {
 /* 상품 정보 */
 .product-section1 {
 	display: flex;
-	width: 70%;
+	width: 65%;
 	flex-direction: column;
 }
 
@@ -275,7 +277,7 @@ main {
 	padding-top: 2%;
 	width: 100%;
 	height: 300px;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
 .product-section1 .product-middle {
@@ -307,10 +309,10 @@ main {
 	font-family: 'OTWelcomeRA';
 	font-size: 25px;
 	border-bottom: 1px solid #dfe6e9;
-    width: 100%;
-    height: 70px;
-    padding-top: 2%;
-    margin-bottom: 20px;
+	width: 100%;
+	height: 70px;
+	padding-top: 2%;
+	margin-bottom: 20px;
 }
 
 .product-question {
@@ -361,21 +363,22 @@ main {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding:1%;
+	padding: 1%;
 }
 
 .listWriter {
 	width: 20%;
 	margin-left: 5%;
 }
-.listContents{
-	    width: 60%;
-	    overflow-y:auto;
+
+.listContents {
+	width: 60%;
+	overflow-y: auto;
 }
 /* 상점정보 */
 .product-section2 {
 	display: flex;
-	width: 30%;
+	width: 35%;
 	flex-direction: column;
 	border-left: 1px solid #dfe6e9;
 	padding: 2%;
@@ -447,13 +450,13 @@ main {
 	height: 120px;
 	display: flex;
 	margin-top: 5%;
-	justify-content: center;
+	justify-content: space-evenly;
 }
 
 .shop-info-images img {
 	border: 1px solid gray;
-	width: 100%;
-	height: 100%;
+	width: 100px;
+	height: 100px;
 	margin: 1%;
 }
 

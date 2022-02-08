@@ -290,7 +290,7 @@
 
                 <img src="${dto.profile_image}" style="width: 400px; height: 300px;">
                 <!-- <button class="btn btn-lg btn-light" id="myShopBtn">내 상점
-								관리</button> -->
+               관리</button> -->
                 <!-- </div> -->
               </div>
               <div class="right-Container">
@@ -411,8 +411,6 @@
 
               </div>
 
-
-
               <!-- 판매내역-->
               <div class="tab-pane fade" id="nav-sell" role="tabpanel" aria-labelledby="nav-sell-tab">
                 <div class="sell-top" id="sellCount">판매내역 : ${sellCount} 건</div>
@@ -470,6 +468,7 @@
                         </tr>
 
 
+
                         </c:if>
                       </c:forEach>
                     </c:forEach>
@@ -523,7 +522,6 @@
 					})
 					
 				})
-
 
 
 
@@ -782,28 +780,29 @@
 
 
 
-						/* 구매내역 건수 줄이기 + 환불 + db삭제 */
 
-						/* $.ajax({
-							
-							url : "/safeDeal/cancel",
-							data : { iseq : }
-							
-						})
-						 */
-
-					})
-
-                $("#btn-talk").on(
-                  "click",
-                  function () {
-                    location.href = "/chat/talk?productName="
-                      + hiddenProduct + "&productId="
-                      + hiddenProductId + "&roomId=" + roomId;
+                  /* $.ajax({
+                     
+                     url : "/safeDeal/cancel",
+                     data : { iseq : }
+                     
                   })
+                   */
+
+               })
+
+         $("#btn-talk").on(
+               "click",
+               function() {
+                  location.href = "/chat/talk?productName="
+                        + hiddenProduct + "&productId="
+                        + hiddenProductId + "&roomId=" + roomId;
+               })
+
 
                 /* $("#btn-like").css("background-color","blue"); */
               </script>
+
 
 
               <!-- 찜 내역 -->

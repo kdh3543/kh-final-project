@@ -48,6 +48,11 @@ main {
 
 .top-Container .left-Container {
 	height: 100%;
+	width:30%;
+}
+.top-Container .left-Container img {
+	height: 100%;
+	width:100%;
 }
 
 .img-Container i {
@@ -489,6 +494,7 @@ nav {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding-left:5%;
 }
 
 .like-right {

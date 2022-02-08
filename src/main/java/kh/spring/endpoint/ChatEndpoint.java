@@ -95,6 +95,7 @@ public class ChatEndpoint{
 		ccdto.setProductId(productId);
 
 		ccdto.setRoomId(roomId);
+		
 		ccdao.insertRoomId(ccdto);
 		obj.addProperty("id", userId);
 		obj.addProperty("message", chatMessage);
