@@ -47,15 +47,14 @@ main {
 }
 
 .top-Container .left-Container {
-	width:30%;
+	width: 30%;
 	height: 100%;
 }
 
 .top-Container .left-Container img {
-	width:100%;
+	width: 100%;
 	height: 100%;
 }
-
 
 .img-Container i {
 	border: 1px solid black;
@@ -616,4 +615,21 @@ nav {
 	font-family: 'OTWelcomeRA';
 	width: 120px;
 	height: 100%;
+}
+
+/* reserveOtherPage */
+.purchaseInfo {
+	width: 100%;
+	height: 150px;
+	border: 1px solid gray;
+	margin-top: 15px;
+	padding: 2%;
+}
+
+.purchaseInfo table {
+	width: 100%;
+	height: 100%;
+}
+.purchaseInfo table tr:nth-child(1){
+	border-bottom:1px solid gray;
 }

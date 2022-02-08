@@ -33,24 +33,26 @@
       </style>
 </head>
 <body>
-    <header>
-        <div class="header_Container">
-            <ul class="header_list">
-                <li><a href="signIn">로그인</a></li>
-                <li><a href="join">회원가입</a></li>
-            </ul>
-        </div>
-        <div class="div-wrap">
-            <div class="nav_div">
-                <div class="logo">
-                    <i class="fas fa-seedling"></i>
-                    <a href="/">00마켓</a>
-                </div>
-            </div>
-        </div>
-        <div class="div-wrap3">
-        </div>
-    </header>
+   <header>
+		<c:choose>
+			<c:when test="${loginID == null && Admin == null}">
+				<div class="header_Container">
+
+					<ul class="header_list">
+						<li><a href="signIn">로그인</a></li>
+						<li><a href="join">회원가입</a></li>
+					</ul>
+				</div>
+				<div class="div-wrap">
+					<div class="nav_div">
+						<div class="logo">
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+						</div>
+					</div>
+				</div>
+			</c:when>
+		</c:choose>
+	</header>
     <main>
     <form action="/member/updatePw" method="get" >
         <div class="join-wrap">

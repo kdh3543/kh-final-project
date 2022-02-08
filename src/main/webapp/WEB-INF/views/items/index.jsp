@@ -292,9 +292,6 @@
 
 
 
-
-
-
 	<main>
 		<div class="index-container">
 			<!-- 네비바 -->
@@ -343,22 +340,16 @@
 							<c:when test="${alertCount > 0}">
 								<span class="badge bg-secondary" style="color: #fff; background: red !important;">${alertCount}</span>
 							</c:when>
-						<%-- 	<c:otherwise>
-								<span class="badge bg-secondary" style="color: #fff; background: red !important;">0</span>
-							</c:otherwise> --%>
 							</c:choose>
-							
-
-
 						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
 							<i class="fas fa-comment fa-2x"></i> 유즈톡
-						</a> | <a href="/board/boardList" class="btn-talk"> <i
+						</a> | <a href="/board/boardList" class="btn-board"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
 
 					</div>
-
+					
 
 					<script>
 					
@@ -465,7 +456,7 @@
 			<div class="sidebar-div">
 				<c:choose>
 					<c:when test="${loginID != null}">
-						<a href="#">
+						<a href="/member/mypage?">
 							<button class="btn btn-outline-secondary" type="button"
 								id="likeBtnAfterLogin">
 								찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>

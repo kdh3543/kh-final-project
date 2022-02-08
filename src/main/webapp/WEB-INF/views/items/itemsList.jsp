@@ -34,7 +34,7 @@
 </head>
 
 <body>
-	
+
 
 
 	<!-- form 태그 추가 button type=submit 변경 -->
@@ -147,9 +147,9 @@
 
 													</div>
 													<!--  인기검색어-->
-										
-													<div class="tab-pane fade" id="nav-hotkeyword" role="tabpanel"
-														aria-labelledby="nav-hotkeyword-tab">
+
+													<div class="tab-pane fade" id="nav-hotkeyword"
+														role="tabpanel" aria-labelledby="nav-hotkeyword-tab">
 														<div class="hotkeyword-title">인기검색어 순위</div>
 														<div class=hotkeyword-contents>
 
@@ -304,138 +304,185 @@
 
 							<!-- Dropdown menu links -->
 							<li><h6 class="dropdown-header">전체 카테고리</h6></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
-							<li><a class="dropdown-item" href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=여성의류" id="c01">여성의류</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=남성의류" id="c02">남성의류</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=신발" id="c03">신발</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=가방" id="c04">가방</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=시계/쥬얼리" id="c05">시계/쥬얼리</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=패션악세서리" id="c06">패션악세서리</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=디지털/가전" id="c07">디지털/가전</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=스포츠/레저" id="c08">스포츠/레저</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=차량/오토바이" id="c09">차량/오토바이</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=스타굿즈" id="c11">스타굿즈</a></li>
+							<li><a class="dropdown-item"
+								href="/items/searchByCategory?category=키덜트" id="c12">키덜트</a></li>
 						</ul>
 					</div>
 					<div class="rightList">
 
-						<a href="/items/itemsSell" class="btn-sell"> <i
+						<a href="/items/itemsSell" class="btn-sell" id="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="/items/myPage" class="btn-myshop"> <i
-							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
-							class="fas fa-comment fa-2x"></i> 유즈톡
-						</a> | <a href="/board/boardList" class="btn-talk"> <i
+						</a> | <a href="/items/myPage" class="btn-myshop" id="btn-myshop">
+							<i class="fas fa-store fa-2x"></i> 내상점 <c:choose>
+								<c:when test="${alertCount > 0}">
+									<span class="badge bg-secondary"
+										style="color: #fff; background: red !important;">${alertCount}</span>
+								</c:when>
+							</c:choose>
+						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
+							<i class="fas fa-comment fa-2x"></i> 유즈톡
+						</a> | <a href="/board/boardList" class="btn-board"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
 
 					</div>
-				</div>
-			</div>
-			<div class="middle-div">
-				<section>
+
+
+					<script>
 					
-					<article>
-					<c:if test="${!empty category}"	>			
-
-						<p class="article_title">카테고리 : "${category}"  검색결과</p>
+					$("#btn-sell").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
 						
-						</c:if>
+					})
+					$("#btn-myshop").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
 						
-						<c:if test="${!empty keyword}"	>			
-
-						<p class="article_title">상품명 : "${keyword}"  검색결과</p>
+					})
+					$("#btn-talk").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
 						
-						</c:if>
-						
-						<div class="imgBox  col-sm-3">
-
-							<!--상품 반복 시작      카테고리 일 경우 -->
-
-
-								<c:forEach var="i" items="${CIlist}">
-									<c:forEach var="f" items="${CFlist}">
-
-										<c:if test="${f.parentSeq == i.iseq}">
-
-											<a href="/items/itemsDetail?iseq=${i.iseq}">
-												<div class="detail-img">
-													<img src="${f.sysName}" style="width: 100%; height: 100%;">
-												</div>
-												<div class="detail-container">
-													<div class="title">${i.name}</div>
-													<div class="price">${i.price}원</div>
-													<div class="exarea">위치 : ${i.exarea}</div>
-													<div class="date">${i.detailDate}</div>
-													
-
-													<%-- <div class="title">${flist.oriname}</div> --%>
-												</div>
-											</a>
-
-										</c:if>
-
-									</c:forEach>
-
-								</c:forEach>
-								
-											<!--상품 반복 시작    이름검색 일 경우 -->
-							
-							<c:forEach var="i" items="${NIlist}">
-									<c:forEach var="f" items="${NFlist}">
-
-										<c:if test="${f.parentSeq == i.iseq}">
-
-											<a href="/items/itemsDetail?iseq=${i.iseq}">
-												<div class="detail-img">
-													<img src="${f.sysName}" style="width: 100%; height: 100%;">
-												</div>
-												<div class="detail-container">
-													<div class="title">${i.name}</div>
-													<div class="price">${i.price}원</div>
-													<div class="exarea">위치 : ${i.exarea}</div>
-													<div class="date">${i.detailDate}</div>
-													
-													
-													<%-- <div class="title">${flist.oriname}</div> --%>
-												</div>
-											</a>
-
-										</c:if>
-
-									</c:forEach>
-
-								</c:forEach>
-						</div>
-						
-					</article>
-				</section>
-
+					})
+					
+					
+					
+					</script>
 			</div>
 		</div>
-	<div class="d-none d-lg-block" id="sideBar">
-			<div class="sidebar-div">
-			<c:choose>
-				<c:when test="${loginID != null}">
-					<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeProductBtn">
-						찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
-					</button>
-				</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeProductBtn">
-						<p>찜한상품<br>0</p>
-					</button>
+		<div class="middle-div">
+			<section>
 
-				</a>
-				</c:otherwise>
-			</c:choose>
-				
+				<article>
+					<c:if test="${!empty category}">
+
+						<p class="article_title">카테고리 : "${category}" 검색결과</p>
+
+					</c:if>
+
+					<c:if test="${!empty keyword}">
+
+						<p class="article_title">상품명 : "${keyword}" 검색결과</p>
+
+					</c:if>
+
+					<div class="imgBox  col-sm-3">
+
+						<!--상품 반복 시작      카테고리 일 경우 -->
+
+
+						<c:forEach var="i" items="${CIlist}">
+							<c:forEach var="f" items="${CFlist}">
+
+								<c:if test="${f.parentSeq == i.iseq}">
+
+									<a href="/items/itemsDetail?iseq=${i.iseq}">
+										<div class="detail-img">
+											<img src="${f.sysName}" style="width: 100%; height: 100%;">
+										</div>
+										<div class="detail-container">
+											<div class="title">${i.name}</div>
+											<div class="price">${i.price}원</div>
+											<div class="exarea">위치 : ${i.exarea}</div>
+											<div class="date">${i.detailDate}</div>
+
+
+											<%-- <div class="title">${flist.oriname}</div> --%>
+										</div>
+									</a>
+
+								</c:if>
+
+							</c:forEach>
+
+						</c:forEach>
+
+						<!--상품 반복 시작    이름검색 일 경우 -->
+
+						<c:forEach var="i" items="${NIlist}">
+							<c:forEach var="f" items="${NFlist}">
+
+								<c:if test="${f.parentSeq == i.iseq}">
+
+									<a href="/items/itemsDetail?iseq=${i.iseq}">
+										<div class="detail-img">
+											<img src="${f.sysName}" style="width: 100%; height: 100%;">
+										</div>
+										<div class="detail-container">
+											<div class="title">${i.name}</div>
+											<div class="price">${i.price}원</div>
+											<div class="exarea">위치 : ${i.exarea}</div>
+											<div class="date">${i.detailDate}</div>
+
+
+											<%-- <div class="title">${flist.oriname}</div> --%>
+										</div>
+									</a>
+
+								</c:if>
+
+							</c:forEach>
+
+						</c:forEach>
+					</div>
+
+				</article>
+			</section>
+
+		</div>
+		</div>
+		<div class="d-none d-lg-block" id="sideBar">
+			<div class="sidebar-div">
+				<c:choose>
+					<c:when test="${loginID != null}">
+						<a href="/member/mypage?">
+							<button class="btn btn-outline-secondary" type="button"
+								id="likeProductBtn">
+								찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
+							</button>
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#">
+							<button class="btn btn-outline-secondary" type="button"
+								id="likeProductBtn">
+								<p>
+									찜한상품<br>0
+								</p>
+							</button>
+
+						</a>
+					</c:otherwise>
+				</c:choose>
+
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>

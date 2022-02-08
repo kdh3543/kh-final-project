@@ -53,6 +53,7 @@ header .header-list-after-login li:nth-child(3) a {
 </head>
 
 <body>
+<!--  Header -->
 	<!-- form 태그 추가 button type=submit 변경 -->
 	<form action="/items/searchByInput" name=inputForm method="post"
 		onsubmit="return frmSubmit()">
@@ -86,8 +87,8 @@ header .header-list-after-login li:nth-child(3) a {
 					</c:when>
 					<c:otherwise>
 						<ul class="header_list">
-							<li><a href="signIn">로그인</a></li>
-							<li><a href="join">회원가입</a></li>
+							<li><a href="/signIn">로그인</a></li>
+							<li><a href="/join">회원가입</a></li>
 						</ul>
 					</c:otherwise>
 				</c:choose>
@@ -131,18 +132,18 @@ header .header-list-after-login li:nth-child(3) a {
 										<div class="list-search-div">
 											<a class="dropdown-item" id="search-dropdown"
 												href="javascript:void(0);" style="text-align: center">
-												<nav>
-													<div class="nav nav-tabs" id="nav-tab" role="tablist">
+												<nav class="top-nav">
+													<div class="nav nav-tabs" id="nav-tab1" role="tablist">
 
-														<button class="nav-link active" id="nav-home-tab"
-															data-bs-toggle="tab" data-bs-target="#nav-home"
-															type="button" role="tab" aria-controls="nav-home"
+														<button class="nav-link active" id="nav-search-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-search"
+															type="button" role="tab" aria-controls="nav-search"
 															aria-selected="true">최근검색어</button>
 
 
-														<button class="nav-link" id="nav-profile-tab"
-															data-bs-toggle="tab" data-bs-target="#nav-profile"
-															type="button" role="tab" aria-controls="nav-profile"
+														<button class="nav-link" id="nav-hotkeyword-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-hotkeyword"
+															type="button" role="tab" aria-controls="nav-hotkeyword"
 															aria-selected="false">인기검색어</button>
 
 													</div>
@@ -156,18 +157,16 @@ header .header-list-after-login li:nth-child(3) a {
 
 															<button type=button id=delBtn class="dropdown-item"
 																style="display: inline">
-																<b><h5>검색어 전체삭제</h5></b>
+																<b><h6>검색어 전체삭제</h6></b>
 															</button>
 														</div>
 
 
 													</div>
 													<!--  인기검색어-->
-													<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-														aria-labelledby="nav-contact-tab"></div>
-
-													<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-														aria-labelledby="nav-profile-tab">
+										
+													<div class="tab-pane fade" id="nav-hotkeyword" role="tabpanel"
+														aria-labelledby="nav-hotkeyword-tab">
 														<div class="hotkeyword-title">인기검색어 순위</div>
 														<div class=hotkeyword-contents>
 
@@ -184,7 +183,6 @@ header .header-list-after-login li:nth-child(3) a {
 															</c:forEach>
 														</div>
 													</div>
-
 												</div>
 											</a>
 										</div>
@@ -194,12 +192,10 @@ header .header-list-after-login li:nth-child(3) a {
 						</div>
 					</div>
 				</div>
+			</div>
 		</header>
 	</form>
-
-
-
-	<!-- 검색어 전체 삭제 -->
+		<!-- 검색어 전체 삭제 -->
 	<script>
 								
 									$("#delBtn").on("click", function() {
@@ -310,9 +306,6 @@ header .header-list-after-login li:nth-child(3) a {
 							
 							
 						</script>
-
-
-
 
 
 	<main>

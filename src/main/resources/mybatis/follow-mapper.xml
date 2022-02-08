@@ -86,8 +86,7 @@
    <insert id="followed1">
    insert into follow values(#{followedID},#{sellerID},1,1)
    </insert>
-
-   <!-- 내가 팔로우 한 사람 목록 -->
+<!-- 내가 팔로우 한 사람 목록 -->
 
 
    <select resultType="kh.spring.dto.MemberDTO" id="selectFollowing">

@@ -194,6 +194,17 @@ nav {
     border: 1px solid #24a6a4;
     width:80px;
 }
+/* 상품등록 - 상품상태 */
+.contents-table tr:nth-child(5) td input {
+	margin-right:10px;
+}
+/* 상품등록 - 교환여부 */
+.contents-table tr:nth-child(6) td input {
+	margin-right:10px;
+}
+.contents-table tr:nth-child(6) td input:nth-child(2) {
+	margin-left:10px;
+}
 /* 상품등록 - 가격 */
 .contents-table tr:nth-child(7) td input[type=text] {
 	width: 40%;

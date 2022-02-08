@@ -158,7 +158,9 @@ public class MemberController {
          
          response.setContentType("text/html; charset=utf-8");
          PrintWriter out = response.getWriter();
+
          out.print("<script>alert('로그인에 실패했습니다. !'); location.href='/signIn';</script>");
+
          out.flush();//출력버퍼를 비우는 코드
          out.close();
 

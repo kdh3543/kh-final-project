@@ -64,7 +64,7 @@ input[type=password] {
 	</header>
 	<main>
 		<form action="/member/signup" method="post"
-			enctype="multipart/form-data" onsubmit="return frmSubmit()">
+			enctype="multipart/form-data">
 			<div class="join-wrap">
 				<div class="join-title">회원가입</div>
 				<hr>
@@ -245,33 +245,44 @@ $(document).ready(function(){
       var tmppath=URL.createObjectURL(event.target.files[0]);
       $('#profile').attr('src',tmppath);
    });
-});
-
-    
-    //ajax form 시 아이디 중복검증
-  
-     //ajax
-     function frmSubmit() {
-    	 $.ajax({
-             url:"/member/idCheck",
-             data:{id:$("#inputId").val()}
-          }).done(function(resp){
-             console.log(resp);
-             if(resp == "1"){	
-                alert("이미 사용중인 아이디입니다.");
-               	return false;
-             }else{
-                return true;
-             }
-          });
-
-
-         }
+})
      // 뒤로가기 버튼
      $("#backBtn").on("click",function(){
     	window.history.back(); 
      });
     
+	// 아이디 검사
+    $("#joinBtn").on("click",function(){
+        let id = $("#checkid").text();
+        if(id=="사용 가능한 ID 입니다."){
+           return true;
+        }else{
+           alert("사용불가능한 아이디입니다.");
+           return false;
+        }
+     });
+	// 사진 업로드 
+	$(".form-control").on("click",function(){
+        var imgfile = $('#imgfile').val();
+         var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+
+         if($('#imgfile').val() == "") {
+            alert("프로필사진은 필수입니다");
+             $("#imgfile").focus();
+             return false;
+         }
+
+         if(imgfile != "" && imgfile != null) {
+            
+             
+             if(!imgfile.match(fileForm)) {
+                alert("이미지 파일만 업로드 가능");
+                 return false;
+             }
+         }
+
+     });
+     
 </script>
 </body>
 </html>

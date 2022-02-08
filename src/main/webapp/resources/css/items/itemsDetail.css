@@ -230,13 +230,18 @@ main {
 .nav-tabs .nav-link.active {
 	background-color: #24a6a4;
 	color: #fff;
-	width: 250px;
+	width: 50%;
+}
+#nav-home-tab{
+	width: 50% !important;
 }
 
 #nav-profile-tab {
-	width: 30% !important;
+	width: 50% !important;
 }
-
+#nav-info-tab{
+	width:30%;
+}
 .tab-content {
 	height: 90%;
 }

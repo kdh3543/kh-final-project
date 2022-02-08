@@ -42,9 +42,6 @@
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
-
 							<li>${loginID}</li>
 							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
@@ -340,18 +337,52 @@
 					</div>
 					<div class="rightList">
 
-						<a href="/items/itemsSell" class="btn-sell"> <i
+						<a href="/items/itemsSell" class="btn-sell" id="btn-sell"> <i
 							class="fas fa-dollar-sign fa-2x"></i> 판매하기
-						</a> | <a href="/items/myPage" class="btn-myshop"> <i
-							class="fas fa-store fa-2x"></i> 내상점
-						</a> | <a href="/chat/directTalk" class="btn-talk"> <i
-							class="fas fa-comment fa-2x"></i> 00톡
-						</a> | <a href="/board/boardList" class="btn-talk"> <i
+						</a> | <a href="/items/myPage" class="btn-myshop" id="btn-myshop">
+							<i class="fas fa-store fa-2x"></i> 내상점 
+							<c:choose>
+							<c:when test="${alertCount > 0}">
+								<span class="badge bg-secondary" style="color: #fff; background: red !important;">${alertCount}</span>
+							</c:when>
+							</c:choose>
+						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
+							<i class="fas fa-comment fa-2x"></i> 유즈톡
+						</a> | <a href="/board/boardList" class="btn-board"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
 
 
 					</div>
+					
+
+					<script>
+					
+					$("#btn-sell").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					$("#btn-myshop").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					$("#btn-talk").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					
+					
+					
+					</script>
 				</div>
 			</div>
 
@@ -453,20 +484,27 @@
 		</div>
 		<div class="d-none d-lg-block" id="sideBar">
 			<div class="sidebar-div">
-				<a href="#">
-					<button class="btn btn-outline-secondary" type="button"
-						id="likeProductBtn">
-						찜한상품<br> <i class="fas fa-heart">개수</i>
-					</button>
+				<c:choose>
+					<c:when test="${loginID != null}">
+						<a href="#">
+							<button class="btn btn-outline-secondary" type="button"
+								id="likeBtnAfterLogin">찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
+							</button>
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#">
+							<button class="btn btn-outline-secondary" type="button"
+								id="likeProductBtn">
+								<p>
+									찜한상품<br>0
+								</p>
+							</button>
 
-				</a>
-				<div class="sidebar-resently-div">
-					<div class="sidebar-title-div">최근 본 상품</div>
-					<div class="sidebar-product-div">
-						<img src="/imgs/comingSoon.png"> <img src="/imgs/comingSoon.png">
-					</div>
+						</a>
+					</c:otherwise>
+				</c:choose>
 
-				</div>
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
@@ -496,7 +534,13 @@
 				return false;
 			}
 
-		})
+		});
+		
+		$("#likeBtnAfterLogin").on("click", function() {
+				
+			location.href="/items/myPage?"
+
+		});
 	</script>
 </body>
 

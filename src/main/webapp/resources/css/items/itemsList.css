@@ -89,7 +89,7 @@ main {
 	line-height: 40px;
 }
 
-.rightList .btn-sell, .btn-myshop, .btn-talk {
+.rightList .btn-sell, .btn-myshop, .btn-talk, .btn-board {
 	font-family: 'OTWelcomeRA';
 	font-size: 14px;
 	font-weight: 500;

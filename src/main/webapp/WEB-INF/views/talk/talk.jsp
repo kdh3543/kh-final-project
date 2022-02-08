@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>00톡</title>
+        <title>유즈톡</title>
         <!-- fontawesome-->
         <script src="https://kit.fontawesome.com/7d7ec2f3ed.js" crossorigin="anonymous"></script>
         <!-- Jquery-->
@@ -32,50 +32,29 @@
 
 
     <body>
-      <header>
+       <header>
         <div class="header_Container">
-				<c:choose>
-					<c:when test="${loginID != null}">
-						<ul class="header-list-after-login">
-							<li>${loginID}</li>
-							<!-- 수정중 -->
-							<li><a href="/items/myPage?">마이페이지</a></li>
-							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
+          <c:choose>
+            <c:when test="${loginID != null}">
+              <ul class="header-list-after-login">
+                <li>${loginID}</li>
+                <li><a href="/items/myPage">마이페이지</a></li>
+                <li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
-						</ul>
-					</c:when>
-
-					<c:when test="${Admin != null}">
-						<!----- admin 로그인 되었을 때,  ----->
-						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
-
-							<li>${Admin}</li>
-							<!-- 수정중 -->
-							<li><a href="/admin/adminIndex">관리페이지</a></li>
-							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
-
-						</ul>
-					</c:when>
-					<c:otherwise>
-						<ul class="header_list">
-							<li><a href="signIn">로그인</a></li>
-							<li><a href="join">회원가입</a></li>
-						</ul>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<div class="div-wrap">
-				<div class="nav_div">
-					<div class="logo">
-						<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+              </ul>
+            </c:when>
+          </c:choose>
+        </div>
+        <div class="div-wrap">
+					<div class="nav_div">
+						<div class="logo">
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+						</div>
 					</div>
+				</div>
+       
 
-
-
-          </div>
       </header>
       <main>
         <div class="talk-container">
@@ -85,7 +64,9 @@
             <div class="talk-list">
               <a class="talk-list-btn" href="/chat/toChatBot?roomId=-1">
                 <div class="talk-list-left">
-                  <img src="/imgs/sideLogo2.png">
+
+                 <img src="/imgs/adminImg.png">
+
                 </div>
                 <div class="talk-list-right" >
                   <div class="talk-name">유즈톡 챗봇입니다.</div>
@@ -465,9 +446,10 @@
       </footer>
 
       <script>
+
         // let ws = new WebSocket("ws://localhost/chatProgram");
         let ws = new WebSocket("ws://13.125.170.128/chatProgram");
-        
+
         let chatMessage = $("#message");
         let rightMiddle = $(".right-middle");
         let rightBottom = $(".right-bottom");
@@ -492,7 +474,7 @@
         talkConverse.addClass("talk-last-conversation");
         ws.onmessage = function (e) {
 
-
+		
           let alpha = e.data;
           console.log(e.data);
           let time = new Date();
@@ -506,12 +488,23 @@
           let productName = jsonObject.productName;
           let jsonProductId = jsonObject.productId;
           let jsonRoomId = jsonObject.roomId;
+          
+          //글자수 넘쳤을 때
+          if(message.length>15){
+            let shortMessage = message.substring(0,15);
+            $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(shortMessage);
+          }else{
+            $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
+          }
 
+		
           $("#hiddenRoomId[pid=" + jsonProductId + "]").val(jsonRoomId);
-          $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
+
+          //$(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
           $("#hiddenProductId[pid="+jsonRoomId+"]").val(jsonProductId);
           $("#hiddenProductName[pid="+jsonRoomId+"]").val(productName);
           $("#hiddenSellerId[pid="+jsonRoomId+"]").val(sellerId);
+
 
           if (message == "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다.") {
 
@@ -639,6 +632,9 @@
           rightMiddle.stop().animate({
             scrollTop: rightMiddle[0].scrollHeight
           }, 1000);
+          
+          
+    
         }
 
         //전송하기 버튼을 클릭했을 때
@@ -751,7 +747,7 @@
 
           }
         });
-
+    
 
       </script>
     </body>
