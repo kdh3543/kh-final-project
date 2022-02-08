@@ -28,8 +28,8 @@ public class MemberDAO {
 	}
 	//로그인 기능
 	public int login(String logid, String logpw) {
-
-		Map<String,String> map = new HashMap<>();
+		//수정
+		Map<String,String> map = new HashMap<String, String>();
 		map.put("id", logid);
 		map.put("pw", logpw);   
 
@@ -68,14 +68,16 @@ public class MemberDAO {
 	}
 	//id찾기
 	public MemberDTO selectID(String email,String phone) {
-		Map<String,String> map = new HashMap<>();
+		//수정
+		Map<String,String> map = new HashMap<String, String>();
 		map.put("email", email);
 		map.put("phone", phone);
 		return mybatis.selectOne("Member.selectID",map);
 	}
 	//아이디 존재여부확인
 	public int selectIDexist(String email,String phone) {
-		Map<String,String> map = new HashMap<>();
+		//수정
+		Map<String,String> map = new HashMap<String, String>();
 		map.put("email", email);
 		map.put("phone", phone);
 		return mybatis.selectOne("Member.selectIDexist",map);
@@ -84,14 +86,15 @@ public class MemberDAO {
 	public int AccountExist(String inputID,String inputEmail) {
 		System.out.println(inputID+"dao");
 		System.out.println(inputEmail+"dao");
-		Map<String,String> map = new HashMap<>();
+		Map<String,String> map = new HashMap<String, String>();
 		map.put("inputID", inputID);
 		map.put("inputEmail", inputEmail);
 		return mybatis.selectOne("Member.AccountExist",map);
 	}
 	//비밀번호 변경
 	public int updatePw(String pw,String id) {
-		Map<String,String> map = new HashMap<>();
+		//수정
+		Map<String,String> map = new HashMap<String, String>();
 		System.out.println("암호화된 pw>?"+pw);
 		map.put("pw", pw);
 		map.put("id",id);

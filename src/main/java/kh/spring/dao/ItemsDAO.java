@@ -49,8 +49,8 @@ public class ItemsDAO {
 	}
 
 	public List<ItemsDTO> selectByName(List<String> targetList, int iseq) {
-
-		HashMap<String, Object> map = new HashMap<>();
+		//수정
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("targetList", targetList);
 		map.put("iseq", iseq);
 
@@ -59,8 +59,8 @@ public class ItemsDAO {
 	}
 
 	public List<ItemsDTO> selectNameToSeq(List<ItemsDTO> rilist) {
-
-		HashMap<String, Object> map = new HashMap<>();
+		//수정
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("rilist", rilist);
 		
 		return mybatis.selectList("Items.selectNameToSeq", map);
@@ -78,7 +78,7 @@ public class ItemsDAO {
 
 	public int updateProc(String deal, int iseq) {
 
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("iseq", iseq);
 		map.put("deal", deal);
 		return mybatis.update("Items.updateProc", map);
