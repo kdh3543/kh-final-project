@@ -163,11 +163,11 @@ public class ChatEndpoint{
 //					crdao.deleteByRoomId(roomId);
 //					System.out.println("삭제 완료!!");
 //				}
-		System.out.println("user 전의 사이즈는 : "+users.size());
+		System.out.println("user 끝나기 전의 사이즈는 : "+users.size());
 		//		clients.remove(session);
 //		System.out.println("나가는 id는 "+(String)hSession.getAttribute("loginID"));
-		users.remove((String)hSession.getAttribute("loginID"));
-
 		
+		users.remove((String)hSession.getAttribute("loginID"));
+		System.out.println("user 끝난 후의 사이즈는 : "+users.size());
 	}
 }
