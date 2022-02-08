@@ -335,7 +335,7 @@
                                  <c:choose>
                                     <c:when test="${dto.user_id == loginID}">
                                        <a href="#" board_seq="${dto.board_seq}" class="btnLike liked"
-                                          style="color: #24a6a4; text-decoration: none"> <i
+                                          style="text-decoration: none"> <i
                                              class="fas fa-heart"></i>좋아요 <span
                                              class="likeCount">${dto.like_count}</span></a>
                                     </c:when>
@@ -451,7 +451,7 @@
 					},
 					success: function (likeCount) {
 						$(this).children('span.likeCount').html(likeCount);
-						$(this).css("color", "#24a6a4");
+						$(this).css("color", "#f8d200");
 						$(this).removeClass('disliked');
 						$(this).addClass('liked');
 					}

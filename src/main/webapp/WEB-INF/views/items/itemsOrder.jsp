@@ -36,24 +36,28 @@
 </head>
 </head>
 <body>
-	<header>
-		<div class="header_Container">
-			<ul class="header_list">
-				<li><a href="signIn">로그인</a></li>
-				<li><a href="join">회원가입</a></li>
-			</ul>
-		</div>
-		<div class="div-wrap">
-			<div class="nav_div">
-				<div class="logo">
-					<i class="fas fa-seedling"></i> <a href="/">00마켓</a>
+	  <header>
+        <div class="header_Container">
+          <c:choose>
+            <c:when test="${loginID != null}">
+              <ul class="header-list-after-login">
+                <li>${loginID}</li>
+                <li><a href="/items/myPage">마이페이지</a></li>
+                <li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+              </ul>
+            </c:when>
+          </c:choose>
+        </div>
+        <div class="div-wrap">
+					<div class="nav_div">
+						<div class="logo">
+							<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</header>
-
-
-
+       
+      </header>
 
 
 
@@ -70,8 +74,7 @@
 			<div class="items-div">
 				<div class="img-container">
 
-					<img src="${fdto.sysName}"
-						style="min-width: 200px; min-height: 200px;">
+					<img src="${fdto.sysName}">
 				</div>
 				<div class="items-contents">
 

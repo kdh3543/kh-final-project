@@ -141,6 +141,36 @@
 
 
 					</div>
+					
+					<script>
+					
+					$("#btn-sell").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					$("#btn-myshop").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					$("#btn-talk").on("click",function(){
+						if(${loginID==null}){
+							alert("로그인 후 이용가능합니다.");
+							return false;
+						}
+						
+					})
+					
+					
+					
+					</script>
+
+					
 				</div>
 			</div>
 			<div class="contents-div">

@@ -288,7 +288,7 @@
                 <!-- <div class="img-Container"> -->
                 <!-- 수정중 -->
 
-                <img src="${dto.profile_image}" style="width: 400px; height: 300px;">
+                <img src="${dto.profile_image}">
                 <!-- <button class="btn btn-lg btn-light" id="myShopBtn">내 상점
                관리</button> -->
                 <!-- </div> -->
@@ -422,7 +422,7 @@
                       <th>상품명</th>
                       <th>가격</th>
                       <th>찜 수</th>
-                      <th>댓글 수</th>
+                      <th>구매자 아이디</th>
                       <th>최근 수정일</th>
                       <th>기능</th>
                     </tr>
@@ -439,7 +439,7 @@
                           <tr>
                             <td id="target" style="display: none;">${i.iseq}</td>
                             <td><a href="/items/itemsDetail?iseq=${i.iseq}"><img src="${f.sysName} "
-                                  class="d-block w-100" alt="..." style="max-width: 100px; max-height: 100px;"></a></td>
+                                  class="targetImg" alt="..."></a></td>
 
                             <td><select class="sellBoxes">
 
@@ -453,7 +453,7 @@
                         <td id="targetName">${i.name }</td>
                         <td>${i.price }</td>
                         <td>${i.like_cnt }</td>
-                        <td>문의수들어갈자리</td>
+                       <td><a href="/items/reserveOtherPage?id=${i.buyerID}">${i.buyerID}</a></td>
                         <td>${i.detailDate}</td>
 
                         <td><a href="/items/itemsModify?iseq=${i.iseq}">
@@ -705,7 +705,7 @@
                         .text());
 
                     if (confirm("구매확정시 되돌릴 수 없습니다. 해당 구매를 확정하시겠습니까?")) {
-                      $(this).css("background-color", "rgb(220,20,60)");
+                      $(this).css({"background-color" : "#f8d200","border" : "none"});
                       $(this).next().css("display", "none");
                       /* $(this).css("disabled","true"); */
 
@@ -927,13 +927,13 @@
                     <c:when test="${f.myfollower==1&&f.imfollowing==1 }">
                       <div class="following-section">
                         <div class="follower-left">
-                          <img src="${f.profile_image}" style="width: 90px; height: 90px">
+                          <img src="${f.profile_image}">
                         </div>
                         <div class="following-middle">${f.name }</div>
                         <div class="following-right">
                           <a href="#" fid="${f.id}" class="btnFollow unfollow">
                             <input type=button value="언팔로우" class="unfollow btn-lg btn-light"
-                              style="background-color: #ef4444">
+                              style="background-color: #f8d200;font-size:15px;">
                           </a>
                         </div>
                       </div>
@@ -941,7 +941,7 @@
                     <c:otherwise>
                       <div class="following-section">
                         <div class="follower-left">
-                          <img src="${f.profile_image}" style="width: 90px; height: 90px">
+                          <img src="${f.profile_image}">
                         </div>
                         <div class="following-middle">${f.name }</div>
                         <div class="following-right">
@@ -977,7 +977,7 @@
                           $(this).children('input.unfollow').val(
                             "언팔로우");
                           $(this).children('input.unfollow').css(
-                            "background-color", "#ef4444");
+                            "background-color", "#f8d200");
                           $(this).removeClass('followed');
                           $(this).addClass('unfollow');
 
@@ -996,7 +996,7 @@
                           $(this).children('input.unfollow').val(
                             "팔로우");
                           $(this).children('input.unfollow').css(
-                            "background-color", "#24a6a4");
+                            "background-color", "#f8d200");
                           $(this).removeClass('unfollow');
                           $(this).addClass('followed');
                         }
@@ -1012,13 +1012,13 @@
                 <c:forEach var="j" items="${followedList }">
                   <div class="follower-section">
                     <div class="follower-left">
-                      <img src="${j.profile_image}" style="width: 90px; height: 90px">
+                      <img src="${j.profile_image}" >
                     </div>
                     <div class="follower-middle">${j.name }</div>
                     <div class="follower-right">
                       <a href="#" jid="${j.id}" class="jbtnFollow unfollowed">
                         <input type=button value="언팔로우" class="junfollow btn-lg btn-light"
-                          style="background-color: #ef4444">
+                          style="background-color: #f8d200;font-size:15px;">
                       </a>
                     </div>
                   </div>
@@ -1060,7 +1060,7 @@
                           $(this).children('input.junfollow').val(
                             "언팔로우");
                           $(this).children('input.junfollow').css(
-                            "background-color", "#ef4444");
+                            "background-color", "#f8d200");
                           $(this).removeClass('follow');
                           $(this).addClass('unfollowed');
                         }

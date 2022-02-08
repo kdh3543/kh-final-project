@@ -176,6 +176,12 @@ main {
 	text-decoration:none;
 	color:#f8d200;
 }
+.liked {
+	color:#f8d200;
+}
+.liked:hover {
+	color:black;
+}
 
 .floating-comments i {
 	padding-right: 10px;

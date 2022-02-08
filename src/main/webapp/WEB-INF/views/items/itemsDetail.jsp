@@ -34,130 +34,147 @@
 <link rel="stylesheet" href="/css/items/itemsDetail.css">
 </head>
 <body>
-	<!--  Header -->
-	<header>
-		<div class="header_Container">
-			<c:choose>
-				<c:when test="${loginID != null}">
-					<ul class="header-list-after-login">
-						<li>${dto.profile_image}</li>
-						<li>${loginID}</li>
-						<li><a href="/myPage">마이페이지</a></li>
-						<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
-					</ul>
-				</c:when>
-				<c:otherwise>
-					<ul class="header_list">
-						<li><a href="signIn">로그인</a></li>
-						<li><a href="join">회원가입</a></li>
-					</ul>
-				</c:otherwise>
-			</c:choose>
-		</div>
+	
+	<!-- form 태그 추가 button type=submit 변경 -->
+	<form action="/items/searchByInput" name=inputForm method="post"
+		onsubmit="return frmSubmit()">
+		<!--  Header -->
+		<header>
+			<div class="header_Container">
+				<c:choose>
+					<c:when test="${loginID != null}">
+						<ul class="header-list-after-login">
+							<li>${loginID}</li>
+							<!-- 수정중 -->
+							<li><a href="/items/myPage?">마이페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
 
+						</ul>
+					</c:when>
 
-		<div class="div-wrap">
-			<div class="nav_div">
-				<div class="logo">
-					<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
-				</div>
+					<c:when test="${Admin != null}">
+						<!----- admin 로그인 되었을 때,  ----->
+						<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
 
-				<div class="searchBar">
-					<div class="input-group mb-3">
+							<li>${Admin}</li>
+							<!-- 수정중 -->
+							<li><a href="/admin/adminIndex">관리페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="header_list">
+							<li><a href="signIn">로그인</a></li>
+							<li><a href="join">회원가입</a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="div-wrap">
+				<div class="nav_div">
+					<div class="logo">
+						<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+					</div>
 
 
-						<!-- 검색창 관련 -->
-						<div class="btn-group ">
-							<input type="text" name="keyword" class="form-control"
-								placeholder="@상점명 또는 물품명 등을 검색해 보세요!"
-								aria-label="Recipient's username"
-								aria-describedby="button-addon2" id="search"
-								data-bs-toggle="dropdown" aria-expanded="false">
-
-							<!-- 돋보기-->
-							<button class="btn btn-outline-secondary" type="submit"
-								id="button-addon2">
-								<i class="fas fa-search fa-2x"></i>
-							</button>
-							<!--  돋보기 끝-->
-
-							<input type=hidden name="user_id" value="${loginID}">
+					<div class="searchBar">
+						<div class="input-group mb-3">
 
 
-							<!-- 최신검색어-->
-							<!--  수정 -->
+							<!-- 검색창 관련 -->
+							<div class="btn-group ">
+								<input type="text" name="keyword" class="form-control"
+									placeholder="@상점명 또는 물품명 등을 검색해 보세요!"
+									aria-label="Recipient's username"
+									aria-describedby="button-addon2" id="search"
+									data-bs-toggle="dropdown" aria-expanded="false">
 
-							<div class="dropdown-menu" id=recent>
-								<!-- <a class="dropdown-item" href="/"
+								<!-- 돋보기-->
+								<button class="btn btn-outline-secondary" type="submit"
+									id="button-addon2">
+									<i class="fas fa-search fa-2x"></i>
+								</button>
+								<!--  돋보기 끝-->
+
+								<input type=hidden name="user_id" value="${loginID}">
+
+
+								<!-- 최신검색어-->
+								<!--  수정 -->
+
+								<div class="dropdown-menu" id=recent>
+									<!-- <a class="dropdown-item" href="/"
 										style="text-align: center"> -->
-								<div class="list-search-div">
 									<div class="list-search-div">
-										<a class="dropdown-item" id="search-dropdown"
-											href="javascript:void(0);" style="text-align: center">
-											<nav>
-												<div class="nav nav-tabs" id="nav-tab" role="tablist">
+										<div class="list-search-div">
+											<a class="dropdown-item" id="search-dropdown"
+												href="javascript:void(0);" style="text-align: center">
+												<nav>
+													<div class="nav nav-tabs" id="nav-tab" role="tablist">
 
-													<button class="nav-link active" id="nav-home-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-home"
-														type="button" role="tab" aria-controls="nav-home"
-														aria-selected="true">최근검색어</button>
+														<button class="nav-link active" id="nav-home-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-home"
+															type="button" role="tab" aria-controls="nav-home"
+															aria-selected="true">최근검색어</button>
 
 
-													<button class="nav-link" id="nav-profile-tab"
-														data-bs-toggle="tab" data-bs-target="#nav-profile"
-														type="button" role="tab" aria-controls="nav-profile"
-														aria-selected="false">인기검색어</button>
+														<button class="nav-link" id="nav-profile-tab"
+															data-bs-toggle="tab" data-bs-target="#nav-profile"
+															type="button" role="tab" aria-controls="nav-profile"
+															aria-selected="false">인기검색어</button>
 
-												</div>
-											</nav> <!-- 최근검색어 -->
-											<div class="tab-content" id="nav-tabContent">
-												<div class="tab-pane fade show active" id="nav-home"
-													role="tabpanel" aria-labelledby="nav-home-tab">
+													</div>
+												</nav> <!-- 최근검색어 -->
+												<div class="tab-content" id="nav-tabContent">
+													<div class="tab-pane fade show active" id="nav-home"
+														role="tabpanel" aria-labelledby="nav-home-tab">
 
-													<!-- 내용 채워넣기 -->
-													<div id=text>
-
+														<!-- 내용 채워넣기 -->
+														<div id=text></div>
 														<button type=button id=delBtn class="dropdown-item"
 															style="display: inline">
-															<b><h5>검색어 전체삭제</h5></b>
+															<b><h6>검색어 전체삭제</h6></b>
 														</button>
+
+
+													</div>
+													<!--  인기검색어-->
+													<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+														aria-labelledby="nav-contact-tab"></div>
+
+													<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+														aria-labelledby="nav-profile-tab">
+														<div class="hotkeyword-title">인기검색어 순위</div>
+														<div class=hotkeyword-contents>
+
+
+															<c:forEach var="hs" items="${hslist}"
+																varStatus="statusHS">
+
+																<div>
+																	<span class="hotkeyword-num">${statusHS.count}.</span>
+																	<span class="hotkeyword-word">${hs.keyword}</span>
+																</div>
+
+
+															</c:forEach>
+														</div>
 													</div>
 
-
 												</div>
-												<!--  인기검색어-->
-												<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-													aria-labelledby="nav-contact-tab"></div>
-
-												<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-													aria-labelledby="nav-profile-tab">
-													<div class="hotkeyword-title">인기검색어 순위</div>
-													<div class=hotkeyword-contents>
-
-
-														<c:forEach var="hs" items="${hslist}" varStatus="statusHS">
-
-															<div>
-																<span class="hotkeyword-num">${statusHS.count}.</span> <span
-																	class="hotkeyword-word">${hs.keyword}</span>
-															</div>
-
-
-														</c:forEach>
-													</div>
-												</div>
-
-											</div>
-										</a>
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-	</header>
+		</header>
 	</form>
 
 
@@ -212,11 +229,8 @@
 											line.addClass("line");
 
 										
-											 let textLine= $("<div>");
-											
-
+											let textLine= $("<div>");
 											textLine.append(resp[i].keyword);
-
 											textLine.addClass("textLine");
 
 											let delButton = $("<button>");
@@ -241,6 +255,7 @@
 							$("#recent").on('click', function (e) {
 					                             e.stopPropagation();
 					                           });
+						
 					// 삭제할 때, 
 							$('#text').on("click",".delBtnOne",function() {
 								/*버튼 X 제거하고 값 추출  */
@@ -712,9 +727,9 @@
 			<div class="bottom-bottom">
 				<nav>
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">
-						<button class="nav-link active" id="nav-profile-tab"
-							data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
-							role="tab" aria-controls="nav-profile" aria-selected="true">상품정보</button>
+						<button class="nav-link active" id="nav-info-tab"
+							data-bs-toggle="tab" data-bs-target="#nav-info" type="button"
+							role="tab" aria-controls="nav-info" aria-selected="true">상품정보</button>
 						<!--  <button class="nav-link" id="nav-ask-tab" data-bs-toggle="tab" data-bs-target="#nav-ask"
                             type="button" role="tab" aria-controls="nav-ask" aria-selected="false">상품문의</button>
                         <button class="nav-link" id="nav-purchase-tab" data-bs-toggle="tab"
@@ -726,8 +741,8 @@
 					<!-- 상품정보 -->
 
 
-					<div class="tab-pane fade show active" id="nav-profile"
-						role="tabpanel" aria-labelledby="nav-profile-tab">
+					<div class="tab-pane fade show active" id="nav-info"
+						role="tabpanel" aria-labelledby="nav-info-tab">
 						<div class="product-section">
 
 
@@ -916,7 +931,7 @@
          }).done(function(resp){
 	            if(resp==1){
 	            	 $("#followInner").text("언팔로우");
-	            	 $("#followBtn").css("background-color","rgba(255, 99, 71, 0.2)");
+	            	 $("#followBtn").css({"background-color":"#f8d200","border":"none"});
 	            }else{
 	            	 $("#followInner").text("팔로우");
 	            	 $("#followBtn").css("background-color","#24a6a4");
@@ -953,7 +968,7 @@
 									         }).done(function(resp){
 									            if(resp==2){
 									            	 $("#followInner").text("언팔로우");
-									            	 $("#followBtn").css("background-color","rgba(255, 99, 71, 0.2)");
+									            	 $("#followBtn").css({"background-color":"#f8d200","border":"none"});
 									            }else{
 									            	 $("#followInner").text("팔로우");
 									            	 $("#followBtn").css("background-color","#24a6a4");

@@ -598,7 +598,7 @@ public class ItemsController {
 			int wishlistCount = wlservice.wishlistCount(id);
 			model.addAttribute("wCount",wishlistCount);
 			
-			}
+		}
 
 
 		model.addAttribute("CIlist",CLlist);

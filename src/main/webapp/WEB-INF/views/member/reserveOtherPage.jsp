@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내 상점</title>
+<title>판매자 정보 화면</title>
 <!-- fontawesome-->
 <script src="https://kit.fontawesome.com/7d7ec2f3ed.js"
 	crossorigin="anonymous"></script>
@@ -40,7 +40,7 @@
 </head>
 
 <body>
-<!-- form 태그 추가 button type=submit 변경 -->
+	<!-- form 태그 추가 button type=submit 변경 -->
 	<form action="/items/searchByInput" name=inputForm method="post"
 		onsubmit="return frmSubmit()">
 		<!--  Header -->
@@ -49,8 +49,6 @@
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
 
 							<li>${loginID}</li>
 							<!-- 수정중 -->
@@ -191,115 +189,106 @@
 
 	<!-- 검색어 전체 삭제 -->
 	<script>
-								
-									$("#delBtn").on("click", function() {
-										$.ajax({
-											url : "/items/deleteAll",
-										}).done(function(resp) {
-											console.log(resp);
-											$("#text").empty();
-										})
-									})
-								</script>
+		$("#delBtn").on("click", function() {
+			$.ajax({
+				url : "/items/deleteAll",
+			}).done(function(resp) {
+				console.log(resp);
+				$("#text").empty();
+			})
+		})
+	</script>
 
 	<!-- 검색어 하나 눌렀을때 검색되게 -->
 
 	<script>
-									$('#text').on("click",	".delBtnOne",function() {
-										/*버튼 X 제거하고 값 추출  */
-														var str = $(this).parent().text().slice(0, -1);
-														$(this).parent().remove();
+		$('#text').on("click", ".delBtnOne", function() {
+			/*버튼 X 제거하고 값 추출  */
+			var str = $(this).parent().text().slice(0, -1);
+			$(this).parent().remove();
 
-														$.ajax({
-															url : "/items/deleteByKeyword?keyword="+ str
-																	}).done(function(resp) {
-																		
-																	})
-																})
-								</script>
+			$.ajax({
+				url : "/items/deleteByKeyword?keyword=" + str
+			}).done(function(resp) {
+
+			})
+		})
+	</script>
 	<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
 
 	<script>
-						// 검색버튼 눌렀을 때, 
-							$(function() {
+		// 검색버튼 눌렀을 때, 
+		$(function() {
 
-								$("#search").one("click", function() {
+			$("#search").one("click", function() {
 
-									$.ajax({
-										url : "/items/listing",
-										datatype : "json"
-									}).done(function(resp) {
+				$.ajax({
+					url : "/items/listing",
+					datatype : "json"
+				}).done(function(resp) {
 
-										resp = JSON.parse(resp);
+					resp = JSON.parse(resp);
 
-										for (let i = 0; i < 5; i++) {
-											let text = $("#text");
+					for (let i = 0; i < 5; i++) {
+						let text = $("#text");
 
-											let line = $("<div>");
-											line.addClass("line");
+						let line = $("<div>");
+						line.addClass("line");
 
-										
-											 let textLine= $("<div>");
-											
+						let textLine = $("<div>");
 
-											textLine.append(resp[i].keyword);
+						textLine.append(resp[i].keyword);
 
-											textLine.addClass("textLine");
+						textLine.addClass("textLine");
 
-											let delButton = $("<button>");
-											delButton.addClass("delBtnOne");
-											delButton.text("X");
-											delButton.css("float", "right");
+						let delButton = $("<button>");
+						delButton.addClass("delBtnOne");
+						delButton.text("X");
+						delButton.css("float", "right");
 
-											textLine.append(text.val());
-											textLine.append(delButton);
-										
+						textLine.append(text.val());
+						textLine.append(delButton);
 
-											line.append(textLine);
+						line.append(textLine);
 
-											$("#text").append(line);
+						$("#text").append(line);
 
-										}
+					}
 
-									})
-								})
-							})
-							/*드랍다운 꺼지는 것 방지 */
-							$("#recent").on('click', function (e) {
-					                             e.stopPropagation();
-					                           });
-					// 삭제할 때, 
-							$('#text').on("click",".delBtnOne",function() {
-								/*버튼 X 제거하고 값 추출  */
-								var str = $(this).parent().text().slice(0, -1);
-								$(this).parent().remove();
-								$.ajax({
-								url : "/items/deleteByKeyword?keyword="+ str
-								}).done(function(resp) {
+				})
+			})
+		})
+		/*드랍다운 꺼지는 것 방지 */
+		$("#recent").on('click', function(e) {
+			e.stopPropagation();
+		});
+		// 삭제할 때, 
+		$('#text').on("click", ".delBtnOne", function() {
+			/*버튼 X 제거하고 값 추출  */
+			var str = $(this).parent().text().slice(0, -1);
+			$(this).parent().remove();
+			$.ajax({
+				url : "/items/deleteByKeyword?keyword=" + str
+			}).done(function(resp) {
 
+			})
 
-								})
-
-							})
-			
-						</script>
+		})
+	</script>
 
 	<!-- 검색시 공백 막기-->
 	<script>
-						
-						function frmSubmit() {
-							let searchValue = $("#search").val();
-							console.log(searchValue);
-							if(searchValue ==null || searchValue == "" ){
-								alert("상품명 또는 @상점명을 검색하세요")
-								return false;
-								
-							}
-							
-							}
-							
-							
-						</script>
+		function frmSubmit() {
+			let searchValue = $("#search").val();
+			console.log(searchValue);
+			if (searchValue == null || searchValue == "") {
+				alert("상품명 또는 @상점명을 검색하세요")
+				return false;
+
+			}
+
+		}
+	</script>
 
 
 
@@ -325,22 +314,11 @@
 							<label>
 								<div>상점오픈일 : ${signDate }일째 오픈중!</div>
 							</label>
-							 <div>상점방문수 : ${dto.view_count}회</div> 
+							<div>상점방문수 : ${dto.view_count}회</div>
 							<div>상품판매 : ${sellCount}건</div>
 							<div></div>
-							
+
 						</div>
-						<div class="right-info">
-							<label>
-								<div> address1 : ${dto.address1}</div>
-							</label>
-							 <div> address2 :  ${dto.address2}</div> 
-							<div>prefer_location: ${dto.prefer_location}</div>
-							<div>phone : ${dto.phone }</div>
-							<div>name : ${dto.name }</div>
-							
-						</div>
-						
 						<div class="right-introduce">
 							소개글
 							<textarea cols="30" rows="5" readonly> 새해복 많이 받으세요!</textarea>
@@ -349,12 +327,33 @@
 				</div>
 			</section>
 			<section class="section2">
+				<div class="purchaseInfo">
+					<div>판매자 정보</div>
+					<table>
+						<tr>
+							<th>이름
+							<th>핸드폰 번호
+							<th>주소
+							<th>상세주소
+							<th>거래선호지역
+						</tr>
+						<tr>
+							<td>${dto.name }</td>
+							<td>${dto.phone }</td>
+							<td>${dto.address1}</td>
+							<td>${dto.address2}</td>
+							<td>${dto.prefer_location}</td>
+						</tr>
+
+					</table>
+				</div>
+
 				<nav>
 					<div class="nav nav-tabs other" id="nav-tab" role="tablist">
-							
-						<button class="nav-link active" id="nav-sell-tab" data-bs-toggle="tab"
-							data-bs-target="#nav-sell" type="button" role="tab"
-							aria-controls="nav-sell" aria-selected="false">판매내역</button>
+
+						<button class="nav-link active" id="nav-sell-tab"
+							data-bs-toggle="tab" data-bs-target="#nav-sell" type="button"
+							role="tab" aria-controls="nav-sell" aria-selected="false">판매내역</button>
 						<button class="nav-link" id="nav-purchase-tab"
 							data-bs-toggle="tab" data-bs-target="#nav-purchase" type="button"
 							role="tab" aria-controls="nav-purchase" aria-selected="false">구매내역</button>
@@ -371,206 +370,197 @@
 						</button>
 					</div>
 				</nav>
-				
-				
+
+
 				<div class="tab-content" id="nav-tabContent">
-				
-		
-		<!-- 판매내역-->
-		<div class="tab-pane fade show active" id="nav-sell" role="tabpanel"
-			aria-labelledby="nav-sell-tab">
-			<div class="sell-top">판매내역 ${sellCount} 건</div>
-			<div class="sell-section">
-				<table>
-					<tr>
-						<th>사진</th>
-						<th>거래상태</th>
-						<th>상품명</th>
-						<th>가격</th>
-						<th>찜 수</th>
-						<th>댓글 수</th>
-						<th>최근 수정일</th>
-						<th>기능</th>
-					</tr>
-					<!-- 해당 회원의 상품리스트 뽑아준다. -->
-
-					<c:forEach var="i" items="${ilist}" varStatus="statusI">
-						<c:forEach var="f" items="${flist}" varStatus="statusF">
-
-							<c:if test="${statusI.index eq statusF.index }">
 
 
+					<!-- 판매내역-->
+					<div class="tab-pane fade show active" id="nav-sell"
+						role="tabpanel" aria-labelledby="nav-sell-tab">
+						<div class="sell-top">판매내역 ${sellCount} 건</div>
+						<div class="sell-section">
+							<table>
 								<tr>
-									<td id="target" style="display: none;">${i.iseq}</td>
-									<td><img src="${f.sysName} " class="d-block w-100"
-										alt="..." style="max-width: 100px; max-height: 100px;"></td>
+									<th>사진</th>
+									<th>거래상태</th>
+									<th>상품명</th>
+									<th>가격</th>
+									<th>찜 수</th>
+									<th>최근 수정일</th>
+									<th>기능</th>
+								</tr>
+								<!-- 해당 회원의 상품리스트 뽑아준다. -->
 
-									<td><select class="sellBoxes">
+								<c:forEach var="i" items="${ilist}" varStatus="statusI">
+									<c:forEach var="f" items="${flist}" varStatus="statusF">
 
-											<option value="Y"
-												<c:if test ="${i.deal eq 'Y' }">selected </c:if>disabled>판매중</option>
-											<option value="R"
-												<c:if test ="${i.deal eq 'R' }">selected </c:if>disabled>예약중</option>
-											<option value="N"
-												<c:if test ="${i.deal eq 'N' }">selected </c:if>disabled>판매완료</option>
+										<c:if test="${statusI.index eq statusF.index }">
 
-									</select></td>
-									<!-- onchange="alert(this.value)" -->
-									<td>${i.name}</td>
-									<td>${i.price}</td>
-									<td>${i.like_cnt}</td>
-									<td>문의수들어갈자리</td>
-									<td>${i.detailDate}</td>
-									<%-- <td><a href="/items/itemsModify?iseq=${i.iseq}"><button
+
+											<tr>
+												<td id="target" style="display: none;">${i.iseq}</td>
+												<td><img src="${f.sysName} " class="d-block w-100"
+													alt="..." style="max-width: 100px; max-height: 100px;"></td>
+
+												<td><select class="sellBoxes">
+
+														<option value="Y"
+															<c:if test ="${i.deal eq 'Y' }">selected </c:if> disabled>판매중</option>
+														<option value="R"
+															<c:if test ="${i.deal eq 'R' }">selected </c:if> disabled>예약중</option>
+														<option value="N"
+															<c:if test ="${i.deal eq 'N' }">selected </c:if> disabled>판매완료</option>
+
+												</select></td>
+												<!-- onchange="alert(this.value)" -->
+												<td>${i.name}</td>
+												<td>${i.price}</td>
+												<td>${i.like_cnt}</td>
+												<td>${i.detailDate}</td>
+												<%-- <td><a href="/items/itemsModify?iseq=${i.iseq}"><button
 												type="button" class=" btn btn-lg btn-light">수정하기</button></a></td> --%>
 
 
-								</tr>
+											</tr>
 
 
-							</c:if>
-						</c:forEach>
-					</c:forEach>
+										</c:if>
+									</c:forEach>
+								</c:forEach>
 
-					<!-- 해당 회원의 상품리스트 뽑아준다. -->
-				</table>
-			</div>
-		</div>
-
-		
-
-		<!-- 구매내역 -->
-		<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
-			aria-labelledby="nav-purchase-tab">
-			<div class="purchase-top" id="buyCount">구매내역 ${buyCount}건</div>
-			<div class="purchase-section">
-
-
-				<table>
-					<tr>
-						<th>사진</th>
-						<th>거래상태</th>
-						<th>상품명</th>
-						<th>가격(안전결제수수료 미포함)</th>
-						
-					</tr>
-					
-					<c:forEach var="i" items="${buyIlist}" varStatus="statusI">
-						<c:forEach var="f" items="${buyFlist}" varStatus="statusF">
-							<c:if test="${i.iseq == f.parentSeq}">
-								<tr>
-									<td><a href=/items/itemsDetail?iseq=${i.iseq}><img
-											src="${f.sysName}"></a></td>
-									<c:if test="${i.deal2 =='R'}">
-									<td>구매중</td>
-									</c:if>		
-									<c:if test="${i.deal2 =='Y'}">
-									<td>구매완료</td>
-									</c:if>
-									<td>${i.name}</td>
-									<td>${i.price}원</td>
-									<td style="display: none;">${i.iseq}</td>
-								
-
-								</tr>
-							</c:if>
-
-						</c:forEach>
-					</c:forEach>
-
-				</table>
-			</div>
-		</div>
-
-		
-
-
-
-		<!-- 찜 내역 -->
-		<div class="tab-pane fade" id="nav-like" role="tabpanel"
-			aria-labelledby="nav-like-tab">
-			<div class="like-top" id="like_count">찜 내역 : ${wCount}</div>
-			<c:forEach var="wl" items="${wlist}" varStatus="statusWL">
-				<c:forEach var="li" items="${likeImg}" varStatus="statusLI">
-
-
-					<c:if test="${wl.iseq == li.parentSeq}">
-						<!-- 수정중 -->
-
-						<%-- <a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}"> --%>
-
-						<div class="like-section">
-
-							<div class="like-left">
-								<a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
-									<img src="${li.sysName}"
-									style="width: 236.26px; height: 101.9px">
-								</a>
-							</div>
-
-
-							<div class="like-middle">
-								<div class="like-title">상품명:${wl.name }</div>
-
-								<div class="like-seller">판매자:${wl.sellerID }</div>
-
-								<div class="like-price">가격:${wl.price }</div>
-							</div>
-
-
-							
+								<!-- 해당 회원의 상품리스트 뽑아준다. -->
+							</table>
 						</div>
-						<!-- </a> -->
-					</c:if>
-
-				</c:forEach>
-			</c:forEach>
-		
-		</div>
+					</div>
 
 
 
+					<!-- 구매내역 -->
+					<div class="tab-pane fade" id="nav-purchase" role="tabpanel"
+						aria-labelledby="nav-purchase-tab">
+						<div class="purchase-top" id="buyCount">구매내역 ${buyCount}건</div>
+						<div class="purchase-section">
 
 
-<!-- 팔로워  -->
-      <div class="tab-pane fade" id="nav-following" role="tabpanel"
-         aria-labelledby="nav-following-tab">
-         <div class="following-top">팔로워 수: ${fCount}</div>
-         <c:forEach var="f" items="${followlist}">
-            <div class="following-section">
-               <div class="follower-left">
-                  <img src="${f.profile_image}" style="width: 100%; height: 100%">
-               </div>
-               <div class="following-middle">${f.name }</div>
-              
-            </div>
-         </c:forEach>
-      </div>
-      
-      <!-- 팔로워에 대한 스크립트 -->
-      
-      
-      <!-- 팔로우 -->
-      <div class="tab-pane fade" id="nav-follower" role="tabpanel"
-         aria-labelledby="nav-follower-tab">
-         <div class="follower-top">팔로우 수 : ${followedCount }</div>
-         <c:forEach var="j" items="${followedList }">
-            <div class="follower-section">
-               <div class="follower-left">
-                  <img src="${j.profile_image}" style="width: 100%; height: 100%">
-               </div>
-               <div class="follower-middle">${j.name }</div>
-              
-            </div>
-         </c:forEach>
-      </div>
-      
-    
-       
+							<table>
+								<tr>
+									<th>사진</th>
+									<th>거래상태</th>
+									<th>상품명</th>
+									<th>가격(안전결제수수료 미포함)</th>
 
-		
+								</tr>
+
+								<c:forEach var="i" items="${buyIlist}" varStatus="statusI">
+									<c:forEach var="f" items="${buyFlist}" varStatus="statusF">
+										<c:if test="${i.iseq == f.parentSeq}">
+											<tr>
+												<td><a href=/items/itemsDetail?iseq=${i.iseq}><img
+														src="${f.sysName}"></a></td>
+												<c:if test="${i.deal2 =='R'}">
+													<td>구매중</td>
+												</c:if>
+												<c:if test="${i.deal2 =='Y'}">
+													<td>구매완료</td>
+												</c:if>
+												<td>${i.name}</td>
+												<td>${i.price}원</td>
+												<td style="display: none;">${i.iseq}</td>
 
 
+											</tr>
+										</c:if>
+
+									</c:forEach>
+								</c:forEach>
+
+							</table>
+						</div>
+					</div>
+
+
+
+
+
+					<!-- 찜 내역 -->
+					<div class="tab-pane fade" id="nav-like" role="tabpanel"
+						aria-labelledby="nav-like-tab">
+						<div class="like-top" id="like_count">찜 내역 : ${wCount}</div>
+						<c:forEach var="wl" items="${wlist}" varStatus="statusWL">
+							<c:forEach var="li" items="${likeImg}" varStatus="statusLI">
+
+
+								<c:if test="${wl.iseq == li.parentSeq}">
+									<!-- 수정중 -->
+
+									<%-- <a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}"> --%>
+
+									<div class="like-section">
+
+										<div class="like-left">
+											<a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
+												<img src="${li.sysName}"
+												style="width: 236.26px; height: 101.9px">
+											</a>
+										</div>
+
+
+										<div class="like-middle">
+											<div class="like-title">상품명:${wl.name }</div>
+
+											<div class="like-seller">판매자:${wl.sellerID }</div>
+
+											<div class="like-price">가격:${wl.price }</div>
+										</div>
+
+
+
+									</div>
+									<!-- </a> -->
+								</c:if>
+
+							</c:forEach>
+						</c:forEach>
+
+					</div>
+
+
+
+
+
+					<!-- 팔로워  -->
+					<div class="tab-pane fade" id="nav-following" role="tabpanel"
+						aria-labelledby="nav-following-tab">
+						<div class="following-top">팔로워 수: ${fCount}</div>
+						<c:forEach var="f" items="${followlist}">
+							<div class="following-section">
+								<div class="follower-left">
+									<img src="${f.profile_image}" style="width: 100%; height: 100%">
+								</div>
+								<div class="following-middle">${f.name }</div>
+
+							</div>
+						</c:forEach>
+					</div>
+
+					<!-- 팔로워에 대한 스크립트 -->
+
+
+					<!-- 팔로우 -->
+					<div class="tab-pane fade" id="nav-follower" role="tabpanel"
+						aria-labelledby="nav-follower-tab">
+						<div class="follower-top">팔로우 수 : ${followedCount }</div>
+						<c:forEach var="j" items="${followedList }">
+							<div class="follower-section">
+								<div class="follower-left">
+									<img src="${j.profile_image}" style="width: 100%; height: 100%">
+								</div>
+								<div class="follower-middle">${j.name }</div>
+
+							</div>
+						</c:forEach>
+					</div>
 	</main>
 	<!-- footer -->
 	<footer>
@@ -618,7 +608,7 @@
 	<!--^^^  -->
 
 
-</div>
+	</div>
 
 </body>
 

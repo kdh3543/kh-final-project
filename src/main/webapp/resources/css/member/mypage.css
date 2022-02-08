@@ -191,6 +191,13 @@ nav {
 	padding: 3%;
 }
 
+.profile-content .profile-img img{
+	width:150px;
+	height:150px;
+	margin-right:15px;
+}
+
+
 .profile-img .profile-top-left {
 	width: 30%;
 }
@@ -236,7 +243,7 @@ nav {
 }
 
 .profile-content-section .profile-table tr td:nth-child(2) input {
-	width: 30%;
+	width: 50%;
 	height: 60%;
 }
 
@@ -388,7 +395,11 @@ nav {
 	background-color: #24a6a4;
 	color: #fff;
 }
-
+.targetImg{
+	width:150px;
+	height:150px;
+	
+}
 /* 구매내역 */
 .purchase-top {
 	height: 15%;
@@ -541,8 +552,8 @@ nav {
 }
 
 .following-section .follower-left img {
-	width: 80%;
-	height: 80%;
+	width: 60%;
+	height: 100%;
 }
 
 .following-section .following-left {
@@ -590,19 +601,21 @@ nav {
 .follower-section {
 	display: flex;
 	width: 100%;
-	height: 80px;
+	height: 100px;
 	padding: 1%;
 	border: 1px solid gray;
 	margin-top: 1%;
 }
 
 .follower-section .follower-left {
-	width: 20%;
+	width: 30%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 }
-
+.follower-section .follower-left img{
+	width:60%;
+	height:100%;
+}
 .follower-section .follower-middle {
 	width: 30%;
 	display: flex;

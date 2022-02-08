@@ -49,11 +49,7 @@
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
-
 							<li>${loginID}</li>
-							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
@@ -379,7 +375,7 @@
 						<th>상품명</th>
 						<th>가격</th>
 						<th>찜 수</th>
-						<th>댓글 수</th>
+						<th>구매자 아이디</th>
 						<th>최근 수정일</th>
 						<th>기능</th>
 					</tr>
