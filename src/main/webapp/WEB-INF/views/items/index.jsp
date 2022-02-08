@@ -7,7 +7,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>index</title>
+<title>Newsed</title>
 <!-- fontawesome-->
 <script src="https://kit.fontawesome.com/7d7ec2f3ed.js"
 	crossorigin="anonymous"></script>
@@ -35,7 +35,7 @@
 </head>
 
 <body>
-
+	
 	<!-- form 태그 추가 button type=submit 변경 -->
 	<form action="/items/searchByInput" name=inputForm method="post"
 		onsubmit="return frmSubmit()">
@@ -46,7 +46,6 @@
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
 							<li>${loginID}</li>
-							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
@@ -57,11 +56,7 @@
 					<c:when test="${Admin != null}">
 						<!----- admin 로그인 되었을 때,  ----->
 						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
-
 							<li>${Admin}</li>
-							<!-- 수정중 -->
 							<li><a href="/admin/adminIndex">관리페이지</a></li>
 							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
@@ -179,7 +174,8 @@
 	</form>
 
 
-
+	<!-- 검색어 관련 스크립트 -->
+	
 	<!-- 검색어 전체 삭제 -->
 	<script>
 								
@@ -208,8 +204,6 @@
 																	})
 																})
 								</script>
-	<!-- 	<button type=button style="float: right">인기검색어 보기</button> -->
-
 	<script>
 						// 검색버튼 눌렀을 때, 
 							$(function() {
@@ -353,6 +347,7 @@
 
 					<script>
 					
+					// ID 유효성 검사
 					$("#btn-sell").on("click",function(){
 						if(${loginID==null}){
 							alert("로그인 후 이용가능합니다.");
@@ -378,11 +373,6 @@
 					
 					
 					</script>
-
-
-
-
-
 
 				</div>
 			</div>
@@ -413,14 +403,12 @@
 						</button>
 					</div>
 					<article>
-
-						<!-- 상품-->
+					
+						<!-- 오늘의 상품 추천 구간 -->
+						
 						<p class="article_title">오늘의 상품추천</p>
 						<!-- imgBox 1 구간 -->
-
-
 						<div class="imgBox  col-sm-3">
-
 							<div class="items">
 								<c:forEach var="i" items="${ilist}">
 									<c:forEach var="f" items="${flist}">
@@ -456,7 +444,7 @@
 			<div class="sidebar-div">
 				<c:choose>
 					<c:when test="${loginID != null}">
-						<a href="/member/mypage?">
+						<a href="/items/myPage">
 							<button class="btn btn-outline-secondary" type="button"
 								id="likeBtnAfterLogin">
 								찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
@@ -490,6 +478,8 @@
 	</footer>
 
 	<script>
+	
+		// 로그아웃
 		$("#logoutbtn").on("click", function() {
 			if (confirm("정말 로그아웃하시겠습니까?")) {
 				location.href = "logout"
@@ -497,7 +487,9 @@
 				return false;
 			}
 
-		})
+		});
+
+		// 회원탈퇴 
 		$("#leavebtn").on("click", function() {
 			if (confirm("정말 회원을 탈퇴하시겠습니까?")) {
 				location.href = "leave"
@@ -508,11 +500,6 @@
 
 		});
 		
-		$("#likeBtnAfterLogin").on("click", function() {
-				
-			location.href="/items/myPage?"
-
-		});
 
 	</script>
 </body>

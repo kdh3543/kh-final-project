@@ -759,7 +759,7 @@
 										<div class="middle-category">
 											<div class="category-title">카테고리</div>
 											<div class="category-contents">
-												<a href="#">${i.category}</a>
+												${i.category}
 											</div>
 										</div>
 										<div class="middle-tag">

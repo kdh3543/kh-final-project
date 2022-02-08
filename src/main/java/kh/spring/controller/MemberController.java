@@ -59,15 +59,20 @@ public class MemberController {
    }
    //회원가입 정보 입력 
    @RequestMapping("signup")
-   public String signup(MemberDTO dto,MultipartFile file) {
+   public void signup(MemberDTO dto,MultipartFile file,HttpServletResponse response) {
       try {
 
          int result = mservice.insert(dto,file);
+         PrintWriter out = response.getWriter();
+         response.setContentType("text/html; charset=utf-8");
+         out.print("<script>alert('회원가입에 성공했습니다');location.href='/signIn';</script>");
+         out.flush();
+         out.close();
 
       } catch (Exception e) {
          e.printStackTrace();
       }
-      return "redirect:/signIn";
+     
 
    }
    //kakao 회원가입 
@@ -93,7 +98,7 @@ public class MemberController {
          e.printStackTrace();
       }
 
-      return "forward:/items/";
+      return "redirect:/items/";
    }
 
    //로그인 기능
@@ -109,7 +114,8 @@ public class MemberController {
       cookie.setPath("/signIn");
 
       // alert 띄우기
-      String msg = "";
+      response.setContentType("text/html; charset=utf-8");
+      PrintWriter out = response.getWriter();
       
       if(remember_userID !=null) {
          // 체크박스 체크 된 경우
@@ -148,24 +154,18 @@ public class MemberController {
 
             model.addAttribute("dto", dto);
             
-         
-            
-            
 
          }
 
       }else {
          
-         response.setContentType("text/html; charset=utf-8");
-         PrintWriter out = response.getWriter();
-
-         out.print("<script>alert('로그인에 실패했습니다. !'); location.href='/signIn';</script>");
-
-         out.flush();//출력버퍼를 비우는 코드
+ 
+         out.print("<script>alert('로그인에 실패했습니다!'); location.href='/signIn';</script>");
+         out.flush();
          out.close();
 
       }
-      
+  
       return "forward:/items/";
 
 

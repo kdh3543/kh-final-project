@@ -821,7 +821,7 @@
 
                           <div class="like-left">
                             <a id="rmvStyle" href="/items/itemsDetail?iseq=${wl.iseq}">
-                              <img src="${li.sysName}" style="width: 236.26px; height: 101.9px">
+                              <img src="${li.sysName}">
                             </a>
                           </div>
 

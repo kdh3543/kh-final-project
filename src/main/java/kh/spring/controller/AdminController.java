@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kh.spring.dto.BestBuyerDTO;
 import kh.spring.dto.BestSellerDTO;
@@ -139,11 +140,15 @@ public class AdminController {
 		
 		
 	}
+	
 	 @RequestMapping("leave")
-	   public String leave(String seqNum) {
+	 @ResponseBody
+	   public String leave(@RequestParam("seqNum")String seqNum) {
+		 System.out.println(seqNum);
 		 int seq = Integer.parseInt(seqNum);
-	     mservice.deleteBySeq(seq);
-	      return "redirect:/admin/adminIndex";
+	     int result = mservice.deleteBySeq(seq);
+	     System.out.println(result);
+	      return String.valueOf(result);
 	   }
 	 
 	 @RequestMapping("update")

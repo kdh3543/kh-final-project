@@ -39,13 +39,9 @@
 			<c:choose>
 				<c:when test="${Admin != null}">
 					<!----- admin 로그인 되었을 때,  ----->
-					<ul class="header_list">
-						<li><img src="${dto.profile_image}"
-							style="max-width: 30px; max-height: 30px;"></li>
-
+					<ul class="header_list">    
 						<li>${Admin}</li>
-						<!-- 수정중 -->
-						<!-- 	<li><a href="/admin/adminIndex">관리페이지</a></li> -->
+						<li><a href="/admin/adminIndex">관리페이지</a></li>
 						<li><a href="/member/logout" id="logoutbtn"
 							style="color: #f8d200; text-decoration: none;!important">로그아웃</a></li>
 
@@ -509,6 +505,7 @@
 							}
 
 						}).done(function(resp) {
+							console.log(resp);
 							if (resp > 0) {
 								alert("탈퇴가 완료 되었습니다.");
 							} else {
@@ -521,7 +518,9 @@
 
 			});
 		});
+		
 		// 회원 정보 수정 
+		
 		$(".updateBtn").on("click", function() {
 			console.log($("input[name='checkbox[]']:checked"));
 			if ($("input[name='checkbox[]']:checked").length > 1) {

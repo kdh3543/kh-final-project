@@ -103,7 +103,7 @@ input[type=password] {
 				</div>
 				<div class="form-group socialimage" id="kakaoBtn">
 					<a
-						href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://localhost:80/kakaologin&response_type=code">
+						href="https://kauth.kakao.com/oauth/authorize?client_id=e60a4b1af6b713f21e514a4af2e2bab4&redirect_uri=http://13.125.170.128:80/kakaologin&response_type=code">
 						<img id="socialimage" src="/imgs/kakao_login_large_wide.png"
 						width="100%" height="100%"/ >
 					</a>
