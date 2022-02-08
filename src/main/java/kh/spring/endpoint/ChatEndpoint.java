@@ -166,7 +166,7 @@ public class ChatEndpoint{
 		System.out.println("user 전의 사이즈는 : "+users.size());
 		//		clients.remove(session);
 //		System.out.println("나가는 id는 "+(String)hSession.getAttribute("loginID"));
-		users.remove(session.getId());
+		users.remove((String)hSession.getAttribute("loginID"));
 
 		
 	}

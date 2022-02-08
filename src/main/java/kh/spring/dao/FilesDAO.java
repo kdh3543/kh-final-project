@@ -36,8 +36,8 @@ public class FilesDAO {
 	
 
 	public List<FilesDTO> selectBySeqR(List<ItemsDTO> NameToSeq) {
-		
-		HashMap<String, Object> map = new HashMap<>();
+		// HashMap<String, Object> 수정
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("NameToSeq",NameToSeq);
 		
 		return mybatis.selectList("Files.NameToSeq",map);

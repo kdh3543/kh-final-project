@@ -27,7 +27,8 @@ public class ReportDAO {
 	}
 
 	public ReportDTO selectById(String id,int iseq) {
-		HashMap<String, Object> map = new HashMap<>();
+		//수정
+		HashMap<String, Object> map = new HashMap<String,Object>();
 		map.put("id", id);
 		map.put("iseq", iseq);
 		
