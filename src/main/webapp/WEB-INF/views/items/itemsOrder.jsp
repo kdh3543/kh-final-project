@@ -162,7 +162,7 @@
 				</div>
 				
 					<form action="/safeDeal/insert"  method="post"
-				onsubmit="return frmSubmit()">
+				>
 				<div class="button-div">
 					<input type="hidden" name=buyer value="${loginID}" id="buyerId"> <input
 						type="hidden" name=seller value="${ilist[0].sellerID}" id="sellerId"> <input
@@ -180,20 +180,23 @@
 
 		<script>
 
-		function frmSubmit() {
-			let cashInput = $("#cashInput").val();
-			let itemPrice = ${ilist[0].price+2500};
-			console.log(itemPrice);
-			
-			if(cashInput ==itemPrice){
-				let buyItemArr = {buyerId:buyerId, sellerId:sellerId, itemSeq:itemSeq};
-				ws.send(JSON.stringify(buyItemArr));
-				return true;
+		
+			$("#pay").on("click",function(){
+				let cashInput = $("#cashInput").val();
+				let itemPrice = ${ilist[0].price+2500};
+				console.log(itemPrice);
+				if(cashInput ==itemPrice){
+					let buyItemArr = {buyerId:buyerId, sellerId:sellerId, itemSeq:itemSeq};
+					ws.send(JSON.stringify(buyItemArr));
+					return true;
+					
+				}else {
+					alert("결제금액을 확인해주세요");
+					return false;
+					}
 				
-			}else {
-				alert("결제금액을 확인해주세요");
-				return false;
-				}
+			});
+				
 			
 			/* if(cashInput ==null || cashInput == "" || cashInputitemPrice){
 				alert("결제금액을 확인해주세요");

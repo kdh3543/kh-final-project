@@ -447,8 +447,8 @@
 
       <script>
 
-        // let ws = new WebSocket("ws://localhost/chatProgram");
-        let ws = new WebSocket("ws://13.125.170.128/chatProgram");
+        let ws = new WebSocket("ws://localhost/chatProgram");
+        // let ws = new WebSocket("ws://13.125.170.128/chatProgram"); 
 
         let chatMessage = $("#message");
         let rightMiddle = $(".right-middle");
@@ -473,7 +473,6 @@
         let talkName = $("<div>");
         talkConverse.addClass("talk-last-conversation");
         ws.onmessage = function (e) {
-
 		
           let alpha = e.data;
           console.log(e.data);
@@ -497,7 +496,7 @@
             $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
           }
 
-		
+          
           $("#hiddenRoomId[pid=" + jsonProductId + "]").val(jsonRoomId);
 
           //$(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
@@ -517,7 +516,7 @@
             chatRead.addClass("chatRead");
             let time = $("<div>");
             time.addClass("time");
-            // chatRead.append(1);
+            
             chatTime.append(chatRead);
             chatTime.append(time);
 

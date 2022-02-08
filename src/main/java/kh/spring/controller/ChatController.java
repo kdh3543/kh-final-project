@@ -61,8 +61,10 @@ public class ChatController {
       System.out.println("cList사이즈는 : "+ cList.size());
       for(int i =0; i<list.size();i++) {
          if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+        	 System.out.println("현재 1시각은: "+DateParseUtils.nowDate(time));
             list.get(i).setLatestDate(DateParseUtils.nowDate(time));            
          }else {      
+        	 System.out.println("현재 2시각은: "+cService.selectLastDate(list.get(i).getRoomId()));
             list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
          }
          list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
@@ -128,8 +130,10 @@ public class ChatController {
 
       for(int i =0; i<list.size();i++) {         
          if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+        	 System.out.println("현재 1시각은: "+DateParseUtils.nowDate(time));
             list.get(i).setLatestDate(DateParseUtils.nowDate(time));         
          }else {         
+        	 System.out.println("현재 2시각은: "+cService.selectLastDate(list.get(i).getRoomId()));
             list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
          }   
          list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
@@ -183,8 +187,10 @@ public class ChatController {
 
       for(int i =0; i<list.size();i++) {
          if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+        	 System.out.println("현재 1시각은: "+DateParseUtils.nowDate(time));
             list.get(i).setLatestDate(DateParseUtils.nowDate(time));
          }else {
+        	 System.out.println("현재 2시각은: "+cService.selectLastDate(list.get(i).getRoomId()));
             list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
             
          }
@@ -239,8 +245,10 @@ public class ChatController {
 
       for(int i =0; i<list.size();i++) {
          if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+        	 System.out.println("현재 1시각은: "+DateParseUtils.nowDate(time));
             list.get(i).setLatestDate(DateParseUtils.nowDate(time));
          }else {
+        	 System.out.println("현재 2시각은: "+cService.selectLastDate(list.get(i).getRoomId()));
             list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
          }
          System.out.println("현재시간은: "+list.get(i).getUpdateTime());
@@ -290,11 +298,13 @@ public class ChatController {
       List<ChatRoomDTO> list = crService.selectByBothId(dto);
       for(int i =0; i<list.size();i++) {
          if(cService.selectLastDate(list.get(i).getRoomId())==null) {
+        	 System.out.println("현재 1시각은: "+DateParseUtils.nowDate(time));
             list.get(i).setLatestDate(DateParseUtils.nowDate(time));
          }else {
+        	 System.out.println("현재 2시각은: "+cService.selectLastDate(list.get(i).getRoomId()));
             list.get(i).setLatestDate(DateParseUtils.nowDate(cService.selectLastDate(list.get(i).getRoomId())));
          }
-         System.out.println("현재시간은: "+list.get(i).getUpdateTime());
+         
          list.get(i).setChatImg(fService.selectBySeqOrder(list.get(i).getProductId()).getSysName());
 
          // chat 마지막 채팅글 세팅

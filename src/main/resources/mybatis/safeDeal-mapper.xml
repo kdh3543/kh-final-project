@@ -48,6 +48,8 @@
      
       UPDATE ITEMS SET DEAL2 ='Y',DEAL ='N' , BUYERID=#{buyer}  WHERE ISEQ=#{items_no};
       
+        DELETE FROM ALERT WHERE ITEMS_NO=#{items_no};
+      
       end
       }
   </update>

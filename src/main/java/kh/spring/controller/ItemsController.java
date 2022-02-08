@@ -528,10 +528,7 @@ public class ItemsController {
 		//인기검색어 넘겨주기 hot search =hs
 
 		List<SearchKeywordDTO> hslist = sservice.selectByHot();
-		System.out.println(hslist.get(0).getKeyword());
-		System.out.println(hslist.get(0).getUser_id());
-		System.out.println(hslist.get(1).getKeyword());
-		System.out.println(hslist.get(0).getUser_id());
+		
 		model.addAttribute("hslist",hslist);
 		
 
