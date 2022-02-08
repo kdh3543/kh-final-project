@@ -958,9 +958,7 @@
 									            	 $("#followInner").text("팔로우");
 									            	 $("#followBtn").css("background-color","#24a6a4");
 									            }
-									         });
-										 지지램지요
-										 ㅋㅋㅋㅋ 강사님 바로 연락해봄
+									         });								
 									 }
 										
 									 }
