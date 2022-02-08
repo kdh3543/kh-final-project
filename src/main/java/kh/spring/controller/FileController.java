@@ -37,12 +37,12 @@ public class FileController {
 		File target = new File(realPath+"/"+sysName);
 		//sysName 과 결합하여 대상 파일 객체 생성.
 		
-		
+
 		try(DataInputStream dis = new DataInputStream(new FileInputStream(target));
 				// 대상 파일에 대한 inputStream 개방
 				
 				DataOutputStream dos= new DataOutputStream(response.getOutputStream());){
-		
+			
 		
 		byte[] fileContents = new byte[(int)target.length()];
 		// 대상 파일 적재할 메모리 공간 확보
