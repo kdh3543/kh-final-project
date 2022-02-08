@@ -29,10 +29,7 @@
 
 
     </head>
-    <script>
-      let test;
 
-    </script>
 
     <body>
       <header>
@@ -448,7 +445,8 @@
       </footer>
 
       <script>
-        let ws = new WebSocket("ws://localhost/chatProgram");
+        let ws = new WebSocket("ws://13.125.170.128/chatProgram");
+
         let chatMessage = $("#message");
         let rightMiddle = $(".right-middle");
         let rightBottom = $(".right-bottom");

@@ -111,8 +111,7 @@
 	<select id="selectByIseq" resultType="kh.spring.dto.MemberDTO">
 		SELECT * FROM MEMBER WHERE
 		ID in (select sellerid from items where iseq =#{value})
-	</select>
-	
+	</select>	
 	<select id="selectAllStoreList"
       resultType="kh.spring.dto.JoinDTO">
       SELECT *

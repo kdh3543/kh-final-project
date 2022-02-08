@@ -7,29 +7,67 @@
    <select resultType="int" id="followCheck">
    select count(*) from follow where sellerID =#{followingID} and followingID =#{sellerID}
    </select>
-
+    <select resultType="int" id="followCheck1">
+   select count(*) from follow where sellerID =#{sellerID} and followingID =#{followingID}
+   </select>
    <!-- 팔로우 정보확인 -->
 
 
    <select resultType="int" id="followedCheck">
    select count(*) from follow where sellerID =#{followedID} and followingID =#{sellerID}
    </select>
+   
+    <select resultType="int" id="followedCheck1">
+   select count(*) from follow where sellerID =#{sellerID} and followingID =#{followedID}
+   </select>
 
+	<!-- 내가 팔로우 한 사람 삭제 -->
    <delete id="unfollow">
    delete from follow where sellerID=#{followingID} and followingID=#{sellerID}
    </delete>
-
-   <!-- 내가 팔로우 한 사람 삭제 -->
-
+	<!-- 삭제한 사람 myfollwer 업데이트 -->
+	<update id="delFollowingUpdate">
+	update follow set myfollower=0 where sellerID=#{sellerID} and followingID=#{followingID}
+	</update>
+	<update id="delFollowedUpdate">
+	update follow set myfollower=0 where sellerID=#{sellerID} and followingID=#{followedID}
+	</update>
 
    <delete id="unfollowed">
+   delete from follow where sellerID=#{sellerID} and followingID=#{followedID}
+   </delete>
+   <delete id="unfollowed1">
    delete from follow where sellerID=#{followedID} and followingID=#{sellerID}
    </delete>
+  
 
+	<!-- 내가 팔로우 했을때 -->
    <insert id="follow">
-   insert into follow values(#{followingID},#{sellerID})
+   insert into follow values(#{followingID},#{sellerID},0,1)
    </insert>
-
+     <insert id="follow1">
+   insert into follow values(#{followingID},#{sellerID},1,1)
+   </insert>
+	<!-- 팔로우한 상대 myfollower 업데이트 -->
+   <update id="updateFollowing" parameterType="map">
+   update follow set myfollower=1 where sellerID= #{sellerID} and followingID= #{followingID}
+   </update>
+   <!-- 위치가 잘 모르겠음 ;; -->
+    <update id="updateFollowed" parameterType="map">
+   update follow set myfollower=1 where sellerID=#{sellerID}  and followingID= #{followedID}
+   </update>
+   <update id="updateFollowed1" parameterType="map">
+   update follow set myfollower=1,imfollowing=1 where sellerID=#{followedID}  and followingID= #{sellerID}
+   </update>
+   <!-- 팔로우한 상대 myfollower 업데이트 -->
+   <update id="updateFollowing1" parameterType="map">
+   update follow set myfollower=1 ,imfollowing=1 where sellerID= #{sellerID} and followingID= #{followingID}
+   </update>
+   
+   <!-- 팔로우중인 상대 언팔로우 업데이트 -->
+   <update id="updateunFollowing">
+   update follow set myfollower=0 where sellerID=#{sellerID} and followingID= #{followingID}
+	</update>
    <!-- <select id ="followid"> -->
 
 
@@ -40,24 +78,27 @@
 
 
    <!-- 나를 팔로우 한 사람 다시 추가 -->
-
-
+	<!-- 마이페이지에서 팔로우버튼 눌럿을 떄 -->
    <insert id="followed">
-   insert into follow values(#{followedID},#{sellerID})
+   insert into follow values(#{followedID},#{sellerID},0,1)
+   </insert>
+   
+   <insert id="followed1">
+   insert into follow values(#{followedID},#{sellerID},1,1)
    </insert>
 
    <!-- 내가 팔로우 한 사람 목록 -->
 
 
    <select resultType="kh.spring.dto.MemberDTO" id="selectFollowing">
-   select id,name,phone,email,address1,profile_image from member join follow on member.id = follow.sellerid where follow.followingid in (select sellerid from follow where sellerid=#{id})
+   select id,name,phone,email,address1,profile_image,myfollower,imfollowing from member join follow on member.id = follow.sellerID where follow.sellerID in (select sellerid from follow where followingID=#{id})
    </select>
 
    <!-- 나를 팔로우 한 사람 목록 -->
 
 
    <select resultType="kh.spring.dto.MemberDTO" id="selectFollowed">
-   select id,name,phone,email,address1,profile_image from member join follow on member.id = follow.followingid where follow.followingid in (select followingid from follow where sellerid=#{id})
+   select id,name,phone,email,address1,profile_image,myfollower,imfollowing from member join follow on member.id = follow.followingid where follow.followingid in (select followingid from follow where sellerid=#{id})
    </select>
 
    <!-- 내가 팔로우 한 사람 수 -->
@@ -71,7 +112,7 @@
 
 
    <select resultType="int" id="followedCount">
-   select count(*) from member join follow on member.id = follow.followingid where follow.sellerid in (select followingid from follow where followingid= #{id})
+   select count(*) from member join follow on member.id = follow.followingid where follow.followingID in (select followingID from follow where sellerID= #{id})
    </select>
    
    <!-- storeList 뿌려줄 카운트-->

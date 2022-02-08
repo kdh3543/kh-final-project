@@ -23,6 +23,10 @@ public class FollowingService {
            
          return fwdao.followCheck(sellerID,followingID);
       }
+      public int followCheck1(String sellerID, String followingID){
+          
+          return fwdao.followCheck1(sellerID,followingID);
+       }
       //팔로우 목록 체크
       public int followedCheck(String sellerID, String followedID){
             System.out.println("서비스도착"+sellerID+" : "+followedID);
@@ -34,9 +38,26 @@ public class FollowingService {
       return fwdao.unfollow(sellerID,followingID);
    }
    
+   // 내가 팔로잉 했을때
    public int follow(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : follow 잘 도착");
       return fwdao.follow(sellerID, followingID);
    }
+   // 내가 팔로잉 했을때
+   public int follow1(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : follow 잘 도착");
+      return fwdao.follow1(sellerID, followingID);
+   }
+   //팔로잉한 상대의 myfollower 업데이트
+   public int updateFollowing(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : updateFollowing 잘도착");
+		return fwdao.updateFollowing(sellerID,followingID);		
+	}
+   //팔로잉한 상대의 myfollower 업데이트
+   public int updateFollowing1(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : updateFollowing 잘도착");
+		return fwdao.updateFollowing1(sellerID,followingID);		
+	}
    //내가 팔로우 사람들
    public List<MemberDTO> selectfollowing(String id) {
       System.out.println(id+"selectfollowingService잘도착했습니다.");
@@ -58,8 +79,14 @@ public class FollowingService {
    }
    //나를 팔로우 한 사람 삭제
    public int unfollowed(String sellerID, String followedID) {
+	   System.out.println("Following 서비스 : delFollowingUpdate 잘 도착!");
       return fwdao.unfollowed(sellerID,followedID);
    }
+   //삭제한 사람 myfollower 업데이트
+   public int delFollowingUpdate(String sellerID, String followingID) {
+	   System.out.println("Following 서비스 : delFollowingUpdate 잘 도착!");
+		return fwdao.delFollowingUpdate(sellerID,followingID);	
+	}
    //나를 팔로우 한 사람 다시 추가
    public int followed(String sellerID, String followedID) {
       return fwdao.followed(sellerID, followedID);
@@ -72,6 +99,37 @@ public class FollowingService {
 public List<FollowDTO> followCountAll() {
     return fwdao.followCountAll();
 }
+//updateunFollowing
+public int updateunFollowing(String sellerID, String followingID) {
+	return fwdao.updateunFollowing(sellerID, followingID);
+	
+}
+public int delFollowedUpdate(String followedID, String sellerID) {
+	
+	return fwdao.delFollowedUpdate(followedID,sellerID);
+}
+public int updateFollowed(String followedID, String sellerID) {
+	
+	return fwdao.updateFollowed(followedID,sellerID);
+}
+public int followedCheck1(String followedID, String sellerID) {
+	
+	return fwdao.followedCheck1(followedID,sellerID);
+}
+public int updateFollowed1(String followedID, String sellerID) {
+	return fwdao.updateFollowed1(followedID,sellerID);
+	
+}
+public int followed1(String followedID, String sellerID) {
+	return fwdao.followed1(sellerID, followedID);
+	
+}
+public int unfollowed1(String followedID, String sellerID) {
+	
+	return fwdao.unfollowed1(sellerID,followedID);
+}
+
+
    
 //   public List<followDTO> followSid(String id){
 //      return fwdao.selectSid(id);
