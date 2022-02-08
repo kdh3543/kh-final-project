@@ -91,15 +91,16 @@
 
 
    <select resultType="kh.spring.dto.MemberDTO" id="selectFollowing">
-   select id,name,phone,email,address1,profile_image,myfollower,imfollowing from member join follow on member.id = follow.sellerID where follow.sellerID in (select sellerid from follow where followingID=#{id})
+   select id,name,phone,email,address1,profile_image,myfollower,imfollowing from member join follow on member.id = follow.sellerID where follow.sellerID in (select sellerid from follow where followingID=#{id}) and followingID=#{id}
    </select>
 
    <!-- 나를 팔로우 한 사람 목록 -->
 
 
    <select resultType="kh.spring.dto.MemberDTO" id="selectFollowed">
-   select id,name,phone,email,address1,profile_image,myfollower,imfollowing from member join follow on member.id = follow.followingid where follow.followingid in (select followingid from follow where sellerid=#{id})
+   select id,name,phone,email,address1,profile_image,myfollower,imfollowing from member join follow on member.id = follow.followingid where follow.followingid in (select followingid from follow where sellerid=#{id}) and sellerid=#{id}
    </select>
+
 
    <!-- 내가 팔로우 한 사람 수 -->
 
