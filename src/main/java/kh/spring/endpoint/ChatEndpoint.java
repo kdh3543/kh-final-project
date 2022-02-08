@@ -124,6 +124,7 @@ public class ChatEndpoint{
 				
 				try {
 					if(crdao.keyCount(crdto)) {
+						System.out.println("보내는 key 값은: "+key);
 					users.get(key).getBasicRemote().sendText(obj.toString());
 					}
 				}catch(IOException e) {

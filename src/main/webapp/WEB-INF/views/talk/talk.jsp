@@ -465,7 +465,7 @@
       </footer>
 
       <script>
-       	/* let ws = new WebSocket("ws://localhost/chatProgram"); */ 
+        // let ws = new WebSocket("ws://localhost/chatProgram");
         let ws = new WebSocket("ws://13.125.170.128/chatProgram");
         
         let chatMessage = $("#message");
@@ -543,7 +543,6 @@
             }
             leftLine.append(chatTime);
             rightMiddle.append(leftLine);
-
 
             console.log("확인완료");
             document.onkeydown = function (e) {
