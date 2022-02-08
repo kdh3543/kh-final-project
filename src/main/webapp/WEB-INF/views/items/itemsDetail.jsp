@@ -958,8 +958,9 @@
 									            	 $("#followInner").text("팔로우");
 									            	 $("#followBtn").css("background-color","#24a6a4");
 									            }
-									         });
-										
+
+									         });								
+
 									 }
 										
 									 }
