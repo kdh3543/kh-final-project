@@ -34,24 +34,44 @@
     <body>
       <header>
         <div class="header_Container">
-          <c:choose>
-            <c:when test="${loginID != null}">
-              <ul class="header-list-after-login">
-                <li>이미지 부분 : ${dto.profile_image}</li>
-                <li>${loginID}님안녕하세요</li>
+				<c:choose>
+					<c:when test="${loginID != null}">
+						<ul class="header-list-after-login">
+							<li>${loginID}</li>
+							<!-- 수정중 -->
+							<li><a href="/items/myPage?">마이페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
-                <li><a href="/items/myPage">마이페이지</a></li>
-                <li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
 
-              </ul>
-            </c:when>
-          </c:choose>
-        </div>
-        <div class="div-wrap">
-          <div class="nav_div">
-            <div class="logo">
-              <i class="fas fa-seedling"></i> <a href="/">00마켓</a>
-            </div>
+						</ul>
+					</c:when>
+
+					<c:when test="${Admin != null}">
+						<!----- admin 로그인 되었을 때,  ----->
+						<ul class="header-list-after-login">
+							<li><img src="${dto.profile_image}"
+								style="max-width: 30px; max-height: 30px;"></li>
+
+							<li>${Admin}</li>
+							<!-- 수정중 -->
+							<li><a href="/admin/adminIndex">관리페이지</a></li>
+							<li><a href="/member/logout" id="logoutbtn">로그아웃</a></li>
+
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<ul class="header_list">
+							<li><a href="signIn">로그인</a></li>
+							<li><a href="join">회원가입</a></li>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="div-wrap">
+				<div class="nav_div">
+					<div class="logo">
+						<a href="/"><img src="/imgs/sideLogo2.png" class="logoImg"></a>
+					</div>
 
 
 
@@ -65,9 +85,9 @@
             <div class="talk-list">
               <a class="talk-list-btn" href="/chat/toChatBot?roomId=-1">
                 <div class="talk-list-left">
-                  <i class="fas fa-camera fa-2x"></i>
+                  <img src="/imgs/sideLogo2.png">
                 </div>
-                <div class="talk-list-right">
+                <div class="talk-list-right" >
                   <div class="talk-name">유즈톡 챗봇입니다.</div>
                   <div class="talk-last-conversation">문의사항 자동 답변 시스템</div>
                 </div>
@@ -99,11 +119,11 @@
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId"
                             class="hiddenRoomId${delCount.count}" pid=${list.productId}>
                           <input type=hidden value="${list.productId }" id="hiddenProductId"
-                          class="hiddenProductId${delCount.count}">
+                            class="hiddenProductId${delCount.count}" pid=${list.roomId}>
                           <input type=hidden value="${list.sellerId}" id="hiddenSellerId"
-                            class="hiddenSellerId${delCount.count}">
+                            class="hiddenSellerId${delCount.count}" pid=${list.roomId}>
                           <input type=hidden value="${list.productName}" id="hiddenProductName"
-                            class="hiddenProductName${delCount.count}">
+                            class="hiddenProductName${delCount.count}" pid=${list.roomId}>
                           <input type=hidden value="${list.buyerId}" id="hiddenBuyerId"
                             class="hiddenBuyerId${delCount.count}">
                           <input type=hidden value="${id}" id="hiddenId">
@@ -127,11 +147,11 @@
                           <input type=hidden value="${list.roomId }" id="hiddenRoomId"
                             class="hiddenRoomId${delCount.count}" pid=${list.productId}>
                           <input type=hidden value="${list.productId }" id="hiddenProductId"
-                          class="hiddenProductId${delCount.count}">
+                            class="hiddenProductId${delCount.count}" pid=${list.roomId}>
                           <input type=hidden value="${list.sellerId}" id="hiddenSellerId"
-                            class="hiddenSellerId${delCount.count}">
+                            class="hiddenSellerId${delCount.count}" pid=${list.roomId}>
                           <input type=hidden value="${list.productName}" id="hiddenProductName"
-                            class="hiddenProductName${delCount.count}">
+                            class="hiddenProductName${delCount.count}" pid=${list.roomId}>
                           <input type=hidden value="${list.buyerId}" id="hiddenBuyerId"
                             class="hiddenBuyerId${delCount.count}">
                           <input type=hidden value="${id}" id="hiddenId">
@@ -167,23 +187,23 @@
                 test = $("#chatDelBtn${delCount.count}").val()
                 $("#chatDelBtn${delCount.count}").on("click", function () {
                   let hiddenSellerId = $(".hiddenSellerId${delCount.count}");
-                    let hiddenRoomId = $("#hiddenRoomId");
-                    let hiddenProductId = $(".hiddenProductId${delCount.count}");
-                    let hiddenProductName = $(".hiddenProductName${delCount.count}");
-                    let productId = $("#productId");
-                    let hiddenBuyerId = $(".hiddenBuyerId${delCount.count}");
-                    let hiddenId = $("#hiddenId").val();
-                    let url = window.location.href;
-                    let urlParams = new URLSearchParams(url);
-                    let roomId = urlParams.get('roomId');
+                  let hiddenRoomId = $("#hiddenRoomId");
+                  let hiddenProductId = $(".hiddenProductId${delCount.count}");
+                  let hiddenProductName = $(".hiddenProductName${delCount.count}");
+                  let productId = $("#productId");
+                  let hiddenBuyerId = $(".hiddenBuyerId${delCount.count}");
+                  let hiddenId = $("#hiddenId").val();
+                  let url = window.location.href;
+                  let urlParams = new URLSearchParams(url);
+                  let roomId = urlParams.get('roomId');
 
-                    console.log(hiddenProductId.val()+ " : "+hiddenProductName.val()+" : "+hiddenSellerId.val()+" : "+roomId+"입니다.");
+                  console.log(hiddenProductId.val() + " : " + hiddenProductName.val() + " : " + hiddenSellerId.val() + " : " + roomId + "입니다.");
                   if (confirm("정말 채팅방을 나가시겠습니까?")) {
 
-                    
-                    
+
+
                     let text = "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다.";
-                    
+
                     if (roomId == 0) {
                       roomId = $("#roomId").val();
                       let arrayData = {
@@ -445,7 +465,7 @@
       </footer>
 
       <script>
-        let ws = new WebSocket("ws://13.125.170.128/chatProgram");
+        let ws = new WebSocket("ws://localhost/chatProgram");
 
         let chatMessage = $("#message");
         let rightMiddle = $(".right-middle");
@@ -488,38 +508,42 @@
 
           $("#hiddenRoomId[pid=" + jsonProductId + "]").val(jsonRoomId);
           $(".talk-last-conversation[pid=" + jsonRoomId + "]").html(message);
+          $("#hiddenProductId[pid="+jsonRoomId+"]").val(jsonProductId);
+          $("#hiddenProductName[pid="+jsonRoomId+"]").val(productName);
+          $("#hiddenSellerId[pid="+jsonRoomId+"]").val(sellerId);
 
           if (message == "상대방이 채팅방에서 나갔습니다. 더 이상 내용을 작성하실 수 없습니다.") {
+
             chatMessage.attr("contenteditable", "false");
             let leftLine = $("<div>");
-              leftLine.addClass("left-line");
-              let chatTime = $("<div>");
-              chatTime.addClass("chatTime");
-              let chatRead = $("<div>");
-              chatRead.addClass("chatRead");
-              let time = $("<div>");
-              time.addClass("time");
-              // chatRead.append(1);
-              chatTime.append(chatRead);
-              chatTime.append(time);
+            leftLine.addClass("left-line");
+            let chatTime = $("<div>");
+            chatTime.addClass("chatTime");
+            let chatRead = $("<div>");
+            chatRead.addClass("chatRead");
+            let time = $("<div>");
+            time.addClass("time");
+            // chatRead.append(1);
+            chatTime.append(chatRead);
+            chatTime.append(time);
 
-              let line = $("<div>");
-              line.addClass("line");
-              line.append(message);
-              leftLine.append(line);
-              if (hours < 10 && minutes >= 10) {
-                time.append("0" + hours + ":" + minutes);
-              } else if (minutes < 10 && hours >= 10) {
-                time.append(hours + ":0" + minutes);
-              } else if (hours < 10 && minutes < 10) {
-                time.append("0" + hours + ":0" + minutes);
-              } else {
-                time.append(hours + ":" + minutes);
-              }
-              leftLine.append(chatTime);
-              rightMiddle.append(leftLine);
+            let line = $("<div>");
+            line.addClass("line");
+            line.append(message);
+            leftLine.append(line);
+            if (hours < 10 && minutes >= 10) {
+              time.append("0" + hours + ":" + minutes);
+            } else if (minutes < 10 && hours >= 10) {
+              time.append(hours + ":0" + minutes);
+            } else if (hours < 10 && minutes < 10) {
+              time.append("0" + hours + ":0" + minutes);
+            } else {
+              time.append(hours + ":" + minutes);
+            }
+            leftLine.append(chatTime);
+            rightMiddle.append(leftLine);
 
-            
+
             console.log("확인완료");
             document.onkeydown = function (e) {
               if (e.keyCode == 116) {
@@ -539,74 +563,78 @@
             //   alert("삭제된 채팅방입니다.");
             //   location.href = "/chat/delSuccess?roomId=0";
             // })
-          }
-          let url = window.location.href;
-          console.log(url);
-          let urlParams = new URLSearchParams(url);
-          console.log(urlParams);
 
-          let roomId = urlParams.get('roomId');
 
-          if (roomId == jsonRoomId) {
-            if (userId == hiddenId) {
-              let rightLine = $("<div>");
-              rightLine.addClass("right-line");
-              let chatTime = $("<div>");
-              chatTime.addClass("chatTime");
-              let chatRead = $("<div>");
-              chatRead.addClass("chatRead");
-              let time = $("<div>");
-              time.addClass("time");
-              // chatRead.append(1);
-              chatTime.append(chatRead);
-              chatTime.append(time);
+          } else {
+            let url = window.location.href;
+            console.log(url);
+            let urlParams = new URLSearchParams(url);
+            console.log(urlParams);
 
-              let line = $("<div>");
-              line.addClass("line");
-              line.append(message);
-              if (hours < 10 && minutes >= 10) {
-                time.append("0" + hours + ":" + minutes);
-              } else if (minutes < 10 && hours >= 10) {
-                time.append(hours + ":0" + minutes);
-              } else if (hours < 10 && minutes < 10) {
-                time.append("0" + hours + ":0" + minutes);
+            let roomId = urlParams.get('roomId');
+
+            if (roomId == jsonRoomId) {
+              if (userId == hiddenId) {
+                let rightLine = $("<div>");
+                rightLine.addClass("right-line");
+                let chatTime = $("<div>");
+                chatTime.addClass("chatTime");
+                let chatRead = $("<div>");
+                chatRead.addClass("chatRead");
+                let time = $("<div>");
+                time.addClass("time");
+                // chatRead.append(1);
+                chatTime.append(chatRead);
+                chatTime.append(time);
+
+                let line = $("<div>");
+                line.addClass("line");
+                line.append(message);
+                if (hours < 10 && minutes >= 10) {
+                  time.append("0" + hours + ":" + minutes);
+                } else if (minutes < 10 && hours >= 10) {
+                  time.append(hours + ":0" + minutes);
+                } else if (hours < 10 && minutes < 10) {
+                  time.append("0" + hours + ":0" + minutes);
+                } else {
+                  time.append(hours + ":" + minutes);
+                }
+
+                rightLine.append(chatTime);
+                rightLine.append(line);
+                rightMiddle.append(rightLine);
               } else {
-                time.append(hours + ":" + minutes);
-              }
+                let leftLine = $("<div>");
+                leftLine.addClass("left-line");
+                let chatTime = $("<div>");
+                chatTime.addClass("chatTime");
+                let chatRead = $("<div>");
+                chatRead.addClass("chatRead");
+                let time = $("<div>");
+                time.addClass("time");
+                // chatRead.append(1);
+                chatTime.append(chatRead);
+                chatTime.append(time);
 
-              rightLine.append(chatTime);
-              rightLine.append(line);
-              rightMiddle.append(rightLine);
-            } else {
-              let leftLine = $("<div>");
-              leftLine.addClass("left-line");
-              let chatTime = $("<div>");
-              chatTime.addClass("chatTime");
-              let chatRead = $("<div>");
-              chatRead.addClass("chatRead");
-              let time = $("<div>");
-              time.addClass("time");
-              // chatRead.append(1);
-              chatTime.append(chatRead);
-              chatTime.append(time);
-
-              let line = $("<div>");
-              line.addClass("line");
-              line.append(message);
-              leftLine.append(line);
-              if (hours < 10 && minutes >= 10) {
-                time.append("0" + hours + ":" + minutes);
-              } else if (minutes < 10 && hours >= 10) {
-                time.append(hours + ":0" + minutes);
-              } else if (hours < 10 && minutes < 10) {
-                time.append("0" + hours + ":0" + minutes);
-              } else {
-                time.append(hours + ":" + minutes);
+                let line = $("<div>");
+                line.addClass("line");
+                line.append(message);
+                leftLine.append(line);
+                if (hours < 10 && minutes >= 10) {
+                  time.append("0" + hours + ":" + minutes);
+                } else if (minutes < 10 && hours >= 10) {
+                  time.append(hours + ":0" + minutes);
+                } else if (hours < 10 && minutes < 10) {
+                  time.append("0" + hours + ":0" + minutes);
+                } else {
+                  time.append(hours + ":" + minutes);
+                }
+                leftLine.append(chatTime);
+                rightMiddle.append(leftLine);
               }
-              leftLine.append(chatTime);
-              rightMiddle.append(leftLine);
             }
           }
+
 
           rightMiddle.stop().animate({
             scrollTop: rightMiddle[0].scrollHeight

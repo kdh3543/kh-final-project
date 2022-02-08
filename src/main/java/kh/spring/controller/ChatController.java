@@ -105,8 +105,10 @@ public class ChatController {
 			crdto.setProductName(productName);			
 			crService.insert(crdto);			
 		}		
-
-		List<ChatRoomDTO> list =  crService.selectByBuyerId(userId);
+		
+		crdto.setSellerId(userId);
+		List<ChatRoomDTO> list = crService.selectByBothId(crdto);
+		
 		ChatContentsDTO cdto = new ChatContentsDTO();
 		cdto.setBuyerId(userId);
 		cdto.setProductId(productId);
