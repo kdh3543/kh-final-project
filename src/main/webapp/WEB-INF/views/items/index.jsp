@@ -27,6 +27,7 @@
 	crossorigin="anonymous"></script>
 <script src="/js/paginga.jquery.js"></script>
 
+
 <!-- CSS -->
 <link rel="stylesheet" href="/css/font.css">
 <link rel="stylesheet" href="/css/index.css">
@@ -44,9 +45,6 @@
 				<c:choose>
 					<c:when test="${loginID != null}">
 						<ul class="header-list-after-login">
-							<li><img src="${dto.profile_image}"
-								style="max-width: 30px; max-height: 30px;"></li>
-
 							<li>${loginID}</li>
 							<!-- 수정중 -->
 							<li><a href="/items/myPage?">마이페이지</a></li>
@@ -137,13 +135,11 @@
 														role="tabpanel" aria-labelledby="nav-home-tab">
 
 														<!-- 내용 채워넣기 -->
-														<div id=text>
-
-															<button type=button id=delBtn class="dropdown-item"
+														<div id=text></div>
+														<button type=button id=delBtn class="dropdown-item"
 																style="display: inline">
-																<b><h5>검색어 전체삭제</h5></b>
+																<b><h6>검색어 전체삭제</h6></b>
 															</button>
-														</div>
 
 
 													</div>
@@ -234,11 +230,8 @@
 											line.addClass("line");
 
 										
-											 let textLine= $("<div>");
-											
-
+											let textLine= $("<div>");
 											textLine.append(resp[i].keyword);
-
 											textLine.addClass("textLine");
 
 											let delButton = $("<button>");
@@ -263,6 +256,7 @@
 							$("#recent").on('click', function (e) {
 					                             e.stopPropagation();
 					                           });
+						
 					// 삭제할 때, 
 							$('#text').on("click",".delBtnOne",function() {
 								/*버튼 X 제거하고 값 추출  */
@@ -349,7 +343,7 @@
 							
 							
 						</a> | <a href="/chat/directTalk" class="btn-talk" id="btn-talk">
-							<i class="fas fa-comment fa-2x"></i> 00톡
+							<i class="fas fa-comment fa-2x"></i> 유즈톡
 						</a> | <a href="/board/boardList" class="btn-talk"> <i
 							class="fas fa-edit fa-2x"></i>커뮤니티
 						</a>
@@ -399,13 +393,13 @@
 						data-bs-ride="carousel">
 						<div class="carousel-inner" style="height: auto;">
 							<div class="carousel-item active">
-								<img src="/imgs/welcome.png" class="d-block w-100" alt="...">
+								<img src="/imgs/banner2.gif" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="/imgs/welcome2.png" class="d-block w-100" alt="...">
+								<img src="/imgs/banner4.png" class="d-block w-100" alt="...">
 							</div>
 							<div class="carousel-item">
-								<img src="/imgs/welcome3.png" class="d-block w-100" alt="...">
+								<img src="/imgs/banner3.png" class="d-block w-100" alt="...">
 							</div>
 						</div>
 						<button class="carousel-control-prev" type="button"
@@ -427,27 +421,33 @@
 
 
 								<div class="imgBox  col-sm-3">
-									<!--상품 반복 시작 -->
-									<c:forEach var="i" items="${ilist}">
-										<c:forEach var="f" items="${flist}">
+						
+                              <div class="items">
+                                 <c:forEach var="i" items="${ilist}">
+                                    <c:forEach var="f" items="${flist}">
+                                    
+                                          <c:if test="${f.parentSeq == i.iseq}">
+                                             <div>
+                                             <a href="/items/itemsDetail?iseq=${i.iseq}">
+                                                <div class="detail-img">
+                                                   <img src="${f.sysName}" style="width: 100%; height: 100%;">
+                                                </div>
+                                                <div class="detail-container">
+                                                   <div class="title">${i.name}</div>
+                                                   <div class="price">${i.price}원</div>
+                                                   <div class="date">${i.detailDate}</div>
 
-											<c:if test="${f.parentSeq == i.iseq}">
+                                                </div>
+                                             </a>
+                                          </div>
+                                          </c:if>
+                                       
+                                    </c:forEach>
+                                 </c:forEach>
+                           
+                           </div>
+                        </div>
 
-												<a href="/items/itemsDetail?iseq=${i.iseq}">
-													<div class="detail-img">
-														<img src="${f.sysName}" style="width: 100%; height: 100%;">
-													</div>
-													<div class="detail-container">
-														<div class="title">${i.name}</div>
-														<div class="price">${i.price}원</div>
-														<div class="date">${i.detailDate}</div>
-														<%-- <div class="title">${flist.oriname}</div> --%>
-													</div>
-												</a>
-											</c:if>
-										</c:forEach>
-									</c:forEach>
-								</div>
 					</article>
 				</section>
 
@@ -455,20 +455,26 @@
 		</div>
 		<div class="d-none d-lg-block" id="sideBar">
 			<div class="sidebar-div">
-				<a href="#">
+			<c:choose>
+				<c:when test="${loginID != null}">
+					<a href="#">
+					<button class="btn btn-outline-secondary" type="button"
+						id="likeBtnAfterLogin">
+						찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
+					</button>
+				</a>
+				</c:when>
+				<c:otherwise>
+					<a href="#">
 					<button class="btn btn-outline-secondary" type="button"
 						id="likeProductBtn">
-						찜한상품<br> <i class="fas fa-heart">개수</i>
+						<p>찜한상품<br>0</p>
 					</button>
 
 				</a>
-				<div class="sidebar-resently-div">
-					<div class="sidebar-title-div">최근 본 상품</div>
-					<div class="sidebar-product-div">
-						<img src="/imgs/comingSoon.png"> <img src="/imgs/comingSoon.png">
-					</div>
-
-				</div>
+				</c:otherwise>
+			</c:choose>
+				
 				<a href="#"><button class="btn btn-outline-secondary"
 						id="upTopBtn" onclick="window.scrollTo(0,0)">Top</button></a>
 			</div>
@@ -477,7 +483,7 @@
 	<!-- footer -->
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
@@ -498,7 +504,14 @@
 				return false;
 			}
 
-		})
+
+		});
+		
+		$("#likeBtnAfterLogin").on("click", function() {
+				
+			location.href="/items/myPage?"
+
+		});
 
 	</script>
 </body>

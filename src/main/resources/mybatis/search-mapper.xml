@@ -29,6 +29,14 @@
    	}	
    </insert>
    
+   <insert id="insertHot">
+   
+      
+         INSERT INTO SEARCH_HOTKEYWORD VALUES(SEARCH_HOTKEYWORD_SEQ.NEXTVAL, #{keyword}, SYSDATE, #{user_id})
+      
+      
+   </insert>
+   
    <!-- 최근검색어에 중복된 값이 있는지 확인 -->
    
    <select id="searchExistCount" resultType="int">

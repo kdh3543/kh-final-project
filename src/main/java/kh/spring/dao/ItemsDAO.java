@@ -9,9 +9,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.spring.dto.BestBuyerDTO;
+import kh.spring.dto.BestSellerDTO;
+import kh.spring.dto.CountUploadItemsDTO;
 import kh.spring.dto.ItemGraphDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
+import kh.spring.dto.ItemsReportCountDTO;
+import kh.spring.dto.ItemsReportDTO;
+import kh.spring.dto.PriceRangeDTO;
 
 @Repository
 public class ItemsDAO {
@@ -181,10 +187,46 @@ public class ItemsDAO {
 		return mybatis.selectList("Items.sellCountAll");
 	}
 
-	// 관리자 아이템 카운트
-	public List<ItemGraphDTO> countItems(){
-		return mybatis.selectList("Items.countItems");
-	}
+	//관리자
+
+	   public List<CountUploadItemsDTO> countUploadItems() {
+	      return mybatis.selectList("Admin.countUploadItems");
+	   }
+
+	   public int countSell() {
+	      return mybatis.selectOne("Admin.countSell");
+
+	   }
+
+	   public int countBuy() {
+	      return mybatis.selectOne("Admin.countBuy");
+	   }
+
+	   public List<BestSellerDTO> bestSeller() {
+	      return mybatis.selectList("Admin.bestSeller");
+	   }
+
+	   public List<BestBuyerDTO> bestBuyer() {
+	      return mybatis.selectList("Admin.bestBuyer");
+	   }
+
+	   public List<PriceRangeDTO> ItemsPriceRange() {
+	      return mybatis.selectList("Admin.ItemsPriceRange");
+
+	   }
+
+	   public List<ItemsReportDTO> ItemsReport() {
+	      return mybatis.selectList("Admin.ItemsReport");
+
+	   }
+
+	   public List<ItemsReportCountDTO> ItemsReportCount() {
+	      return mybatis.selectList("Admin.ItemsReportCount");
+
+	   }
+	   
+	   
+
 
 
 

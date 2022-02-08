@@ -6,8 +6,9 @@ public class FollowDTO {
 	private int myfollower;
 	private int imfollowing;
 
-	public FollowDTO() {}
-
+	public FollowDTO() {
+		
+	}
 	public FollowDTO(String sellerID, String followingID, int myfollower, int imfollowing) {
 		this.sellerID = sellerID;
 		this.followingID = followingID;
@@ -39,6 +40,4 @@ public class FollowDTO {
 	public void setImfollowing(int imfollowing) {
 		this.imfollowing = imfollowing;
 	}
-
-
 }

@@ -7,10 +7,16 @@ import org.springframework.stereotype.Service;
 
 import kh.spring.dao.FilesDAO;
 import kh.spring.dao.ItemsDAO;
+import kh.spring.dto.BestBuyerDTO;
+import kh.spring.dto.BestSellerDTO;
 import kh.spring.dto.CommentDTO;
+import kh.spring.dto.CountUploadItemsDTO;
 import kh.spring.dto.ItemGraphDTO;
 import kh.spring.dto.ItemsDTO;
 import kh.spring.dto.ItemsQNADTO;
+import kh.spring.dto.ItemsReportCountDTO;
+import kh.spring.dto.ItemsReportDTO;
+import kh.spring.dto.PriceRangeDTO;
 import kh.spring.utils.DateParseUtils;
 
 @Service
@@ -158,10 +164,42 @@ public class ItemsService {
 		return list;
 	}
 	
-	// 관리자 아이템 카운트 
-	public List<ItemGraphDTO> countItems() {
-		return idao.countItems();
-	}
+	// 관리자
+	 public List<CountUploadItemsDTO> countUploadItems() {
+	      return idao.countUploadItems();
+	   }
+
+	   public int countSell() {
+	      return idao.countSell();   
+	   }
+
+	   public int countBuy() {
+	      return idao.countBuy();   
+	   }
+
+	   public List<BestSellerDTO> bestSeller() {
+	      return idao.bestSeller();   
+	   }
+
+	   public List<BestBuyerDTO> bestBuyer() {
+	      return idao.bestBuyer();   
+	   }
+
+	   public List<PriceRangeDTO> ItemsPriceRange() {
+	      return idao.ItemsPriceRange();   
+	      
+	   }
+
+	   public List<ItemsReportDTO> ItemsReport() {
+	      return idao.ItemsReport();   
+	      
+	   }
+
+	   public  List<ItemsReportCountDTO> ItemsReportCount() {
+	      return idao.ItemsReportCount();   
+
+	   }
+
 
 
 

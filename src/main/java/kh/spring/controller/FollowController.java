@@ -78,6 +78,9 @@ public class FollowController {
    public String detailFollow(String sellerID,String followingID ,Model model) {
 	   
    int result =fwservice.followCheck(sellerID, followingID);
+   System.out.println("팔로워 아이디" + followingID);
+   System.out.println("셀러 아이디" +sellerID);
+   System.out.println(result);
    
    if(result>0) {
 	   //DB에서 삭제

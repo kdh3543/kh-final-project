@@ -78,7 +78,7 @@ input[type=password] {
 
 	<main>
 		<div class="form-signin">
-			<form action="/member/login" method="post">
+			<form action="/member/login" method="post" class="loginForm">
 				<h1 class="h3 mb-3 fw-normal">로그인</h1>
 
 				<div class="form-floating">
@@ -97,7 +97,7 @@ input[type=password] {
 					</label>
 				</div>
 				<div class="buttons">
-					<button id="signIn" class=" btn btn-lg btn-light" type="submit">로그인</button>
+					<button id="signIn" class=" btn btn-lg btn-light" type="button">로그인</button>
 					<button id="findMyInfo" class=" btn btn-lg btn-light" type="button">아이디/비밀번호
 						찾기</button>
 				</div>
@@ -118,7 +118,7 @@ input[type=password] {
 	</main>
 	<footer>
 		<div class="footer-box">
-			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 베소현 </span><br> <span>CopyRight
+			<span>만든이들 : 곽서호, 김동현 92, 김동현 93, 김동휘, 박시현, 배소현 </span><br> <span>CopyRight
 				2022 @ ALL RIGHT RESERVED</span>
 		</div>
 	</footer>
@@ -128,7 +128,24 @@ input[type=password] {
             location.href="findInfo";
         });
         
-        
+        // 아이디랑 비밀번호 값 비어있는지 확인
+        $("#signIn").on("click",function(){
+        	
+        	 if($("#floatingInput").val() == ""){
+             	alert("아이디를 입력하세요.");
+             	return false;
+             }
+        	 
+             if($("#floatingPassword").val() == ""){
+             	alert("비밀번호를 입력하세요.");
+             	return false;
+             }
+             
+             if(!$("#floatingInput").val() == "" && !$("#floatingPassword").val() == ""){
+            	 $(".loginForm").submit();
+             }
+        });
+       
    
       
 </script>

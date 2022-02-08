@@ -188,6 +188,12 @@ nav {
 	margin-top: 10px;
 	width: 60%;
 }
+#findAddress{
+	background-color: #24a6a4;
+    color: #fff;
+    border: 1px solid #24a6a4;
+    width:80px;
+}
 /* 상품등록 - 가격 */
 .contents-table tr:nth-child(7) td input[type=text] {
 	width: 40%;
