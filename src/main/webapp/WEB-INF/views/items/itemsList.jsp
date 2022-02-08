@@ -463,7 +463,7 @@
 			<div class="sidebar-div">
 				<c:choose>
 					<c:when test="${loginID != null}">
-						<a href="/member/mypage?">
+						<a href="/items/myPage">
 							<button class="btn btn-outline-secondary" type="button"
 								id="likeProductBtn">
 								찜한상품<br> <i class="fas fa-heart"> ${wCount}</i>
@@ -514,11 +514,6 @@
 
 		})
 		
-		$("#likeBtnAfterLogin").on("click", function() {
-				
-			location.href="/items/myPage?"
-
-		});
 	</script>
 </body>
 

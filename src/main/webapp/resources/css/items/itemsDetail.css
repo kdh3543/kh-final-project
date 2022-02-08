@@ -417,6 +417,7 @@ main {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	margin-left:5%;
 }
 
 .info-right-div .right-div-title {
@@ -460,8 +461,8 @@ main {
 
 .shop-info-images img {
 	border: 1px solid gray;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	margin: 1%;
 }
 

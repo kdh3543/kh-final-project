@@ -702,6 +702,7 @@ public class ItemsController {
 	//마이페이지 이동기능
 	@RequestMapping("myPage")
 	public String mypage(Model model) {
+		
 		String id = (String)session.getAttribute("loginID");
 		MemberDTO dto = mservice.select(id);
 		//가입한지 몇일 째인지 확인
@@ -790,9 +791,6 @@ public class ItemsController {
 	      List<SearchKeywordDTO> hslist = sservice.selectByHot();
 	      model.addAttribute("hslist",hslist);
 			
-
-		
-		
 		
 		return "/member/myPage";
 
